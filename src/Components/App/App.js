@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
-import ChallengeRoute from "./../../Routes/ChallengeRoute/ChallengeRoute";
-import "./App.css";
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import './App.css';
+import ChallengeRoute from './../../Routes/ChallengeRoute/ChallengeRoute';
+import RegistrationRoute from '../../Routes/RegistrationRoute/RegistrationRoute';
+import LoginRoute from '../../Routes/LoginRoute/LoginRoute';
 
 class App extends Component {
   render() {
@@ -9,9 +11,10 @@ class App extends Component {
       <div className="App">
         <header>{/* ToDo */}</header>
         <main>
-          <p>test</p>
           <Switch>
-            <Route exact path={"/challenge"} component={ChallengeRoute} />
+            <Route exact path={'/challenge'} component={ChallengeRoute} />
+            <Route exact path={'/registration'} component={RegistrationRoute} />
+            <Route exact path={'/login'} component={LoginRoute} />
           </Switch>
         </main>
       </div>

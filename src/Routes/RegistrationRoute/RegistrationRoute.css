@@ -1,0 +1,26 @@
+.Registration {
+  text-align: center;
+}
+.reg-account {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px auto;
+  padding: 20px;
+  width: 50%;
+}
+.reg-input,
+.reg-select {
+  margin: 10px;
+}
+.reg-btn {
+  margin: 10px auto;
+  padding: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 15px;
+  font-weight: normal;
+}

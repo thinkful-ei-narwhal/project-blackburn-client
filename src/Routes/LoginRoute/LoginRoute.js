@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import './LoginRoute.module.css';
+import './LoginRoute.css';
+import LoginForm from '../../Components/Login Form/LoginForm';
 
 class LoginRoute extends Component {
   render() {
     return (
-      <div>
-        <p>TESTING</p>
+      <div className="Login">
+        <h2>Login:</h2>
+        <LoginForm />
       </div>
     );
   }
