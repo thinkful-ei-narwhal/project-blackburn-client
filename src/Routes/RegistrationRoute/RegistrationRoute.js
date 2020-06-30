@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './RegistrationRoute.css';
-import RegistrationForm from '../../Components/Registration Form/RegistrationForm';
+import RegistrationForm from '../../Components/RegistrationForm/RegistrationForm';
 
 class RegistrationRoute extends Component {
   render() {

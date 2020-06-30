@@ -8,6 +8,7 @@ class RegistrationForm extends Component {
     email: '',
     password: '',
     repassword: '',
+    avatar: '',
     step: 0,
     error: '',
   };
@@ -64,8 +65,8 @@ class RegistrationForm extends Component {
   renderAvatar = () => {
     return (
       <div className="reg-account">
-        <Label>Choose Avatar:</Label>
-        <select>
+        <Label htmlFor="avatar">Choose Avatar:</Label>
+        <select className="avatar">
           <option>Red Mage</option>
           <option>Blue Mage</option>
         </select>
