@@ -2,33 +2,30 @@ import React, { Component } from "react";
 import "./Word.module.css";
 
 class Word extends Component {
-  state = {
-    timeout: this.props.timeout,
-  };
-
-  countDown(state) {
-    const newTime = state.timeout - 1;
-    if (state.timeout === 0) {
-      //ToDo: player takes damage
-      this.props.removeWord(this.props.uniqueId);
-    } else {
-      this.setState({ timeout: newTime });
-    }
+  constructor(props) {
+    super(props);
+    this.state = { timer: this.props.timer / 1000 };
   }
 
-  componentDidMount() {
-    setInterval(() => this.countDown(this.state), 1000);
-  }
+  //errors wher rendering a countdown timer for separate word components
+  // countDown(state) {
+  //   if (state.timer > 0)
+  //     this.setState({ timer: this.state.timer - 1 });
+  // }
 
-  componentWillMount() {
-    clearInterval(this.interval);
-  }
+  // componentDidMount() {
+  //   setInterval(() => this.countDown(this.state), 1000);
+  // }
+
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
 
   render() {
     return (
       <div>
         <p>{this.props.word}</p>
-        <p>{this.state.timeout}</p>
+        {/* <p>{this.state.timer}</p> */}
       </div>
     );
   }

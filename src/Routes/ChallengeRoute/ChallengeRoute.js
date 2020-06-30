@@ -6,7 +6,6 @@ import Wpm from "./../../Components/Wpm/Wpm";
 import Word from "./../../Components/Word/Word";
 import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
-import uuid from "react-uuid";
 import "./ChallengeRoute.module.css";
 
 class ChallengeRoute extends Component {
@@ -22,47 +21,61 @@ class ChallengeRoute extends Component {
   //-Max words on screen
   //-Expiration times on the words themselves
 
-  //Note: can recycle this for when a player gets something right
-  removeWord(uniqueId, state) {
-    const newArray = state.words.filter(
-      (wordObj) => wordObj.uniqueId !== uniqueId
+  manageWords(addWordObj = null) {
+    //removes all words that are expired
+    const newWordArray = this.state.words.filter(
+      (wordObj) => wordObj.expired === false
     );
-    this.setState({ newArray });
+
+    //adds a new word if it's updated
+    if (addWordObj !== null) newWordArray.push(addWordObj);
+    this.setState({ words: newWordArray });
   }
 
-  generateWord(state, wordTimeout, maxWords) {
-    if (state.words.length < maxWords) {
-      const newWordArray = [...state.words];
-      const newWord = uniqueNamesGenerator({
+  generateWord(wordTimeout, maxWords) {
+    if (this.state.words.length < maxWords) {
+      const randomWord = uniqueNamesGenerator({
         dictionaries: [animals],
         length: 1,
       });
-      const uniqueId = uuid();
-      newWordArray.push({
-        uniqueId: uniqueId,
-        word: (
-          <Word
-            word={newWord}
-            timeout={wordTimeout}
-            removeWord={() => this.removeWord(state, uniqueId)}
-          />
-        ),
-      });
-      this.setState({ words: newWordArray });
+
+      const newWord = {
+        word: <Word word={randomWord} timer={wordTimeout} />,
+        expired: false,
+        timeout: setTimeout(() => {
+          newWord.expired = true;
+          this.manageWords();
+        }, wordTimeout),
+      };
+
+      this.manageWords(newWord);
     }
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const { typeInput } = event.target;
+    console.log("TESTING I DID SOMETHING ", typeInput.value);
+    //check the submitted word against all values in state
+    //flush
+    //score and remove if correct etc
+  }
+
   componentDidMount() {
-    setInterval(() => this.generateWord(this.state, 4, 5), 5000);
+    this.intervalGenerator = setInterval(
+      () => this.generateWord(5000, 5),
+      2000
+    );
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.intervalGenerator);
   }
 
   //todos:
   //Research how to make word components appear at different places on the screen
   //screen shake > part of typeHandler, if it's correct or incorrect
+  //controlled state on the typehandler
 
   render() {
     return (
@@ -78,13 +91,13 @@ class ChallengeRoute extends Component {
         </div>
         <span>Words Per Minute: </span>
         <Wpm wpm={10} />
+        <TypeHandler handleSubmit={this.handleSubmit} />
         <ul>
           {this.state.words.map((wordObj, index) => (
             <li key={index}>{wordObj.word}</li>
           ))}
         </ul>
         <GameplayScreen />
-        <TypeHandler />
       </div>
     );
   }

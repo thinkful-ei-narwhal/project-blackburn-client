@@ -4,9 +4,16 @@ import Button from "./../Button/Button";
 import "./TypeHandler.module.css";
 
 class TypeHandler extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: "" };
+  }
   //todos:
-  //handle inputs with a controlled state callback function that is passed in from challenge route
-  //compares the input with the state lists and triggers their correct function if they're correct
+  //On submit call the checker callback function
+
+  handleTypeChange(event) {
+    this.setState({ value: event.target.value });
+  }
 
   componentDidMount() {}
 
@@ -14,13 +21,20 @@ class TypeHandler extends Component {
     return (
       <div>
         {/* this form needs an onSubmit={} to call */}
-        <form className="spell-checker">
-          <label className="basic-label TranslateLabel" htmlFor="type-input">
-          </label>
+        <form
+          className="spell-checker"
+          onSubmit={(e) => this.props.handleSubmit(e)}
+        >
+          <label
+            className="basic-label TranslateLabel"
+            htmlFor="type-input"
+          ></label>
           <Input
             placeholder="Start Typing!"
             id="type-input"
-            name="type-input"
+            name="typeInput"
+            value={this.state.value}
+            onChange={(e) => this.handleTypeChange(e)}
           />
           <Button type="submit">Submit</Button>
         </form>
