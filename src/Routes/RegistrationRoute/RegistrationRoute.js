@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import './RegistrationRoute.module.css';
 
-class LoginForm extends Component {
+class RegistrationRoute extends Component {
   render() {
     return (
       <div>
@@ -10,4 +11,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default RegistrationRoute;
