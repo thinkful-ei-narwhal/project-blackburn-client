@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import ChallengeRoute from "./../../Routes/ChallengeRoute/ChallengeRoute";
+import Dashboard from '../Dashboard/Dashboard'
 import "./App.css";
 
 class App extends Component {
@@ -9,8 +10,8 @@ class App extends Component {
       <div className="App">
         <header>{/* ToDo */}</header>
         <main>
-          <p>test</p>
           <Switch>
+            <Route exact path={"/dashboard"} component={Dashboard} />
             <Route exact path={"/challenge"} component={ChallengeRoute} />
           </Switch>
         </main>
