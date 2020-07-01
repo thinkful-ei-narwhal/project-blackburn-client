@@ -31,13 +31,13 @@ export default class LineChart extends React.Component {
                 </VictoryChart>
                 <h3> Average Score </h3>
                 <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
-                        <VictoryLine 
-                        style={{
-                            data: { stroke: "#c43a31" },
-                            parent: { border: "1px solid #ccc"}
-                        }}
+                    <VictoryLine 
+                    style={{
+                        data: { stroke: "#c43a31" },
+                        parent: { border: "1px solid #ccc" }
+                    }}
                         data = {data1}
-                        />
+                    />
                 </VictoryChart>
             </>
         )
