@@ -8,7 +8,7 @@ class Score extends Component {
   componentDidMount() {}
 
   render() {
-    return <span>10</span>;
+    return <span>{this.props.score}</span>;
   }
 }
 
