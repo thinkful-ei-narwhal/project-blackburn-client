@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
-import { Input, Required, Label } from '../Form/Form';
+import { Input, Label } from '../Form/Form';
 
 class LoginForm extends Component {
   state = {

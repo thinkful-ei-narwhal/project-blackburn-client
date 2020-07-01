@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './SettingsRoute.css';
-import Settings from '../../Components/SettingsF/Settings';
+import Settings from '../../Components/Settings/Settings';
 
 class SettingsRoute extends Component {
   render() {
