@@ -1,39 +1,48 @@
-import React, { Component } from 'react'
-import { render } from '@testing-library/react'
+import React, { Component } from 'react';
+import { render } from '@testing-library/react';
+import TokenService from '../Services/token-service';
+import ApiService from '../Services/auth-api-service';
 
 const BlackBurnContext = React.createContext({
-    error: null,
-    setError: () => {},
-    clearError: () => {}
-})
+  user: {},
+  error: null,
+  setError: () => {},
+  clearError: () => {},
+  setUser: () => {},
+});
 
-export default BlackBurnContext
-
+export default BlackBurnContext;
 
 export class BlackburnProvider extends Component {
-    state = {
-        error: null
-    }
+  state = {
+    user: {},
+    error: null,
+  };
 
-    setError = error => {
-        console.error(error)
-        this.setState({ error })
-    }
+  setError = (error) => {
+    console.error(error);
+    this.setState({ error });
+  };
 
-    clearError = () => {
-        this.setState({ error: null })
-    }
-}
+  clearError = () => {
+    this.setState({ error: null });
+  };
 
-render() {
+  setUser = (user) => {
+    this.setState({ user });
+  };
+
+  render() {
     const value = {
-        error: this.state.error,
-        setError: this.setError,
-        clearError: this.clearError
-    }
-    return(
-        <BlackBurnContext.Provider value = {value}>
-            {this.props.children}
-        </BlackBurnContext.Provider>
-    )
+      error: this.state.error,
+      setError: this.setError,
+      clearError: this.clearError,
+      setUser: this.setUser,
+    };
+    return (
+      <BlackBurnContext.Provider value={value}>
+        {this.props.children}
+      </BlackBurnContext.Provider>
+    );
+  }
 }
