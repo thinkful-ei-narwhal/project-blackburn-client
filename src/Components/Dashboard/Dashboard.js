@@ -8,7 +8,7 @@ import './Dashboard.Module.css'
 export default class Dashboard extends React.Component {
 
     state = {
-        menuOpen: false,
+        menuOpen: true,
         showAnalytics: false,
         showLeaderboard: false,
         showSettings: false,
