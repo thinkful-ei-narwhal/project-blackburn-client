@@ -1,0 +1,43 @@
+.leaderboard {
+    margin-top: 25px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 0 0 100%;
+    border: 1px solid gray;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 0 0 100%;
+}
+
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 0 0 100%;
+    margin: 10px;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+
+    box-shadow: 2px 2px lightgray;
+
+}
+
+
+.avatar {
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 25px;
+    margin-right: 20px;
+    margin-left: 20px;
+
+}

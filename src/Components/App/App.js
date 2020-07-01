@@ -19,7 +19,8 @@ class App extends Component {
             <Route exact path={'/registration'} component={RegistrationRoute} />
             <Route exact path={'/login'} component={LoginRoute} />
             <Route exact path={'/settings'} component={SettingsRoute} />
-      <Route exact path={"/dashboard"} component={Dashboard} />
+            <Route exact path={"/dashboard"} component={Dashboard} />
+
           </Switch>
         </main>
       </div>
