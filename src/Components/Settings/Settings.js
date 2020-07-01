@@ -23,7 +23,6 @@ export default class Settings extends React.Component {
             {' '}
             <ul>
               <li>Username:</li>
-              <li>Email:</li>
               <li>Avatar:</li>
             </ul>
             <Button

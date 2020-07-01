@@ -22,9 +22,6 @@ class SettingsForm extends Component {
           )}
           <Label htmlFor="set-input username">Username:</Label>
           <Input className="set-input username" required />
-
-          <Label htmlFor="set-input email">Email:</Label>
-          <Input className="set-input email" required />
           <Label htmlFor="avatar">Avatar:</Label>
           <select className="avatar">
             <option>Red Mage</option>

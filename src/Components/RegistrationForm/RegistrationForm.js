@@ -19,11 +19,17 @@ class RegistrationForm extends Component {
     step++;
     this.setState({ step: step });
   };
+  handleBack = (e) => {
+    e.preventDefault();
+    let step = this.state.step;
+    step--;
+    this.setState({ step: step });
+  };
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('I am working');
   };
-  renderUsername = () => {
+  renderUserInfo = () => {
     return (
       <div className="reg-account">
         {this.state.error !== '' && (
@@ -35,11 +41,11 @@ class RegistrationForm extends Component {
           Create Username:
         </Label>
         <Input className="reg-input username" required />
-        <Label htmlFor="reg-input email">
-          <Required />
-          Enter Email:
-        </Label>
-        <Input className="reg-input email" required />
+        <Label htmlFor="avatar">Choose Avatar:</Label>
+        <select className="avatar">
+          <option>Red Mage</option>
+          <option>Blue Mage</option>
+        </select>
       </div>
     );
   };
@@ -62,37 +68,29 @@ class RegistrationForm extends Component {
       </div>
     );
   };
-  renderAvatar = () => {
-    return (
-      <div className="reg-account">
-        <Label htmlFor="avatar">Choose Avatar:</Label>
-        <select className="avatar">
-          <option>Red Mage</option>
-          <option>Blue Mage</option>
-        </select>
-      </div>
-    );
-  };
 
   render() {
     return (
       <div className="reg-container">
         <form className="reg-form" onSubmit={(e) => this.handleSubmit(e)}>
           {this.state.step === 0 ? (
-            <div>{this.renderUsername()}</div>
-          ) : this.state.step === 1 ? (
+            <div>{this.renderUserInfo()}</div>
+          ) : (
             <div>{this.renderPassword()}</div>
-          ) : (
-            <div>{this.renderAvatar()}</div>
           )}
-          {this.state.step === 2 ? (
-            <Button className="reg-btn" type="submit">
-              Create Account
-            </Button>
-          ) : (
+          {this.state.step === 0 ? (
             <Button className="reg-btn" onClick={(e) => this.handleClick(e)}>
               Next
             </Button>
+          ) : (
+            <div className="btn-container">
+              <Button className="reg-btn" onClick={(e) => this.handleBack(e)}>
+                Back
+              </Button>
+              <Button className="reg-btn" type="submit">
+                Create Account
+              </Button>
+            </div>
           )}
         </form>
       </div>
