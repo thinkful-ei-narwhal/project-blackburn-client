@@ -1,0 +1,65 @@
+.landing-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #D9C1AA;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.landing-page-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+
+.login-signup {
+    margin: 10px;
+    margin-top: 100px;
+    text-decoration: none;
+    border: 1px solid #302B28;
+    padding: 10px;
+
+    color: #302B28;
+    border-radius: 6px;
+}
+
+.login-signup:hover {
+    background-color: #AE9172;
+}
+
+.landing-page-h1 {
+    margin-top: 20px;
+}
+
+.more-info {
+    background-color:#AE9172;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.more-info:hover {
+    color: white;
+}
+
+.info-expanded {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1.5px solid #6A5046;
+    border-radius: 6px;
+    padding: 10px;
+    line-height: 2em;
+}
+
+.info {
+    display: none
+}
