@@ -6,7 +6,7 @@ import RegistrationRoute from '../../Routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../Routes/LoginRoute/LoginRoute';
 import SettingsRoute from '../../Routes/SettingsRoute/SettingsRoute';
 import Dashboard from '../Dashboard/Dashboard'
-import LandingPage from '../LandingPage/LandingPage';
+import LandingPageRoute from '../../Routes/LandingPage/LandingPageRoute';
 
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
         <header>{/* ToDo */}</header>
         <main>
           <Switch>
-            <Route exact path={'/'} component={LandingPage} />
+            <Route exact path={'/'} component={LandingPageRoute} />
             <Route exact path={'/challenge'} component={ChallengeRoute} />
             <Route exact path={'/registration'} component={RegistrationRoute} />
             <Route exact path={'/login'} component={LoginRoute} />
