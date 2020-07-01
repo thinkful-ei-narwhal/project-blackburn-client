@@ -12,30 +12,49 @@ import "./ChallengeRoute.module.css";
 class ChallengeRoute extends Component {
   state = {
     words: [],
-    playerHealth: 3,
+    playerHealth: 5,
     playerScore: 0,
+    playerBest: 0,
+    playerBestStored: 0,
+    typedWords: 0,
+    // wpmAvgs: [],
+    // wpmCalc: 0,
+    levelTimer: 60, //1 minute
+    levelTimerTotal: 120,
     initialized: false,
-    levelTimer: 60,
-    correctWordsSubmitted: 0,
   };
 
-  //-player's health based is a static 3 health
-
-  //-Derive from fetch story:
-  //>>>>>Which dictionaries
-
-  //-Derive from fetch difficulty:
-  //>>>>>Timer speed for generating words
-  //>>>>>Word length (need to figure out how this is done, if possible)
-  //>>>>>Max words on screen
-  //>>>>>Expiration timers on the words
-  //>>>>>Timer for when game finishes
-
   //smaller Todos:
-  //call win/fail state at end of timer
   //Research how to make word components appear at different places on the screen
   //screen shake > part of typeHandler, if it's correct or incorrect
   //need to get timers for each word appearing
+
+  //Todo get the WPM tracker working
+  // pushWpmValue(state) {
+  //   let typedWords = state.typedWords;
+  //   const wpmAvgs = state.wpmAvgs;
+  //   const currentWPM = typedWords / (state.levelTimerTotal / 60);
+  //   if (currentWPM !== wpmAvgs[wpmAvgs.length - 1]) {
+  //     wpmAvgs.push(currentWPM);
+  //   }
+  //   else {
+  //     wpmAvgs.push(0);
+  //   }
+
+  //   let totalWPM = 0;
+  //   for (let i = 0; i < wpmAvgs.length; i++) {
+  //     totalWPM += wpmAvgs[i];
+  //   }
+  //   const wpmCalc = totalWPM / wpmAvgs.length;
+
+  //   this.setState({ wpmAvgs, wpmCalc });
+  // }
+
+  // updateLevelTimer() {
+  //   let levelTimer = this.state.levelTimer;
+  //   levelTimer--;
+  //   this.setState({ levelTimer });
+  // }
 
   manageWords(addWordObj = null) {
     //removes all words that are expired
@@ -60,7 +79,7 @@ class ChallengeRoute extends Component {
         expired: false,
         timeout: setTimeout(() => {
           newWord.expired = true;
-          this.setState({ playerHealth: this.state.playerHealth - 1 });
+          this.setState({ playerHealth: this.state.playerHealth - 0.5 });
           this.manageWords();
         }, wordTimeout),
       };
@@ -77,11 +96,9 @@ class ChallengeRoute extends Component {
     const newWords = state.words;
     let playerHealth = state.playerHealth;
     let playerScore = state.playerScore;
-    let correctWordsSubmitted = state.correctWordsSubmitted;
-    //  wordsSubmitted++;
-    //  score = accuracy = -- or accuracy = ++;
-    //  accuracy influences SCORE, decriment when you get something wrong
-    //  timer for WPM,
+    let playerBest = state.playerBest;
+    let playerBestStored = state.playerBestStored;
+    let typedWords = state.typedWords;
 
     let takeDamage = true;
     newWords.forEach((wordObj) => {
@@ -89,11 +106,27 @@ class ChallengeRoute extends Component {
         takeDamage = false;
         wordObj.expired = true;
         playerScore += 10;
+        typedWords++;
+        clearTimeout(wordObj.timeout);
       }
       return;
     });
+
+    //if the player is incorrect he takes damage and losses score
     if (takeDamage) playerHealth--;
-    this.setState({ words: newWords, playerHealth, playerScore });
+    if (takeDamage) playerScore -= 5;
+
+    //handle player record calculation
+    if (playerBest <= playerScore) playerBest = playerScore; //css should turn green when it surpasses old score
+    if (playerBest > playerScore) playerBest = playerBestStored; //css should return to black if it dips back below old score
+
+    this.setState({
+      words: newWords,
+      playerHealth,
+      playerScore,
+      playerBest,
+      typedWords,
+    });
     this.manageWords();
   }
 
@@ -106,31 +139,42 @@ class ChallengeRoute extends Component {
     //So in componentDidMount we need:
     //>>story, difficulty, player's high score
 
+    this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
     this.intervalGenerator = setInterval(
       () => this.generateWord(20000, 5),
       2000
+    );
+    this.wpmAvgCalculator = setInterval(
+      () => this.pushWpmValue(this.state),
+      1000
     );
     this.setState({ initialized: true });
   }
 
   componentWillUnmount() {
     clearInterval(this.intervalGenerator);
+    clearInterval(this.levelTimeout);
+    clearInterval(this.wpmAvgCalculator);
   }
 
   renderGameplay() {
     return (
       <div>
+        <p>
+          Time Remaining:{" "}
+          {this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
+        </p>
         <Healthbar health={this.state.playerHealth} />
         <div>
           <span>Personal best: </span>
-          <Score score={10} />
+          <Score score={this.state.playerBest} />
         </div>
         <div>
           <span>Score: </span>
           <Score score={this.state.playerScore} />
         </div>
         <span>Words Per Minute: </span>
-        <Wpm wpm={10} />
+        <Wpm wpm={this.state.wpmCalc} />
         <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
         <ul>
           {this.state.words.map((wordObj, index) => (
