@@ -18,7 +18,7 @@ class SettingsForm extends Component {
       <div className="settings-container">
         <form className="set-form" onSubmit={(e) => this.handleSubmit(e)}>
           {this.state.error !== '' && (
-            <h3 className="error">{this.state.error}</h3>
+            <h4 className="error">{this.state.error}</h4>
           )}
           <Label htmlFor="set-input username">Username:</Label>
           <Input className="set-input username" required />

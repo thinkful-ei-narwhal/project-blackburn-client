@@ -17,7 +17,7 @@ export default class Settings extends React.Component {
   render() {
     return (
       <div className="accountInfo">
-        <h2>Account Info:</h2>
+        <h3>Account Info:</h3>
         {this.state.edit === false ? (
           <div className="list-container">
             {' '}
