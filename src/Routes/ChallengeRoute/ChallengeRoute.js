@@ -8,6 +8,7 @@ import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import ScoreboardApiService from "./../../Services/scoreboard-api-service";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
 import "./ChallengeRoute.module.css";
+import WinLosePage from "../../Components/WinLosePage/WinLosePage";
 
 class ChallengeRoute extends Component {
   state = {
@@ -140,6 +141,7 @@ class ChallengeRoute extends Component {
           ))}
         </ul>
         <GameplayScreen />
+        <WinLosePage />
       </div>
     );
   }
