@@ -1,0 +1,25 @@
+.Login {
+  text-align: center;
+}
+.log-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px auto;
+  padding: 20px;
+  width: 50%;
+}
+.log-btn {
+  margin: 10px auto;
+  padding: 5px;
+}
+.log-input {
+  margin: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 15px;
+  font-weight: normal;
+}

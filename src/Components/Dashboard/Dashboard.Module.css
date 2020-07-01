@@ -1,0 +1,110 @@
+.dashboard-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: lightgray;
+}
+
+.links {
+    text-decoration: none;
+    font-size: 14px;
+    color: #818181;
+    padding: 50px;
+}
+
+.links:hover {
+    text-decoration: none;
+    font-size: 14px;
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
+.links-selected {
+    text-decoration: none;
+    font-size: 14px;
+    color: #f1f1f1;
+    padding: 50px;
+}
+
+.dashboard-header-open {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    background-color: lightgray;
+
+    margin-left: 25%;
+}
+
+.title {
+    padding-left: 30px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav-open {
+    height: 100%;
+    width: 25%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sidenav-open a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #818181;
+}
+
+.navLinks a {   
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.x {
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 30%;
+}
