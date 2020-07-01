@@ -23,17 +23,18 @@ export class BlackburnProvider extends Component {
     clearError = () => {
         this.setState({ error: null })
     }
-}
 
-render() {
-    const value = {
-        error: this.state.error,
-        setError: this.setError,
-        clearError: this.clearError
+
+    render() {
+        const value = {
+            error: this.state.error,
+            setError: this.setError,
+            clearError: this.clearError
+        }
+        return(
+            <BlackBurnContext.Provider value = {value}>
+                {this.props.children}
+            </BlackBurnContext.Provider>
+        )
     }
-    return(
-        <BlackBurnContext.Provider value = {value}>
-            {this.props.children}
-        </BlackBurnContext.Provider>
-    )
 }
