@@ -44,6 +44,7 @@ class WinLosePage extends Component {
   };
 
   handleDashboardClick = () => {
+    this.postScore();
     this.setState({ isShow: false });
   };
 
@@ -57,7 +58,7 @@ class WinLosePage extends Component {
         <Link to="/dashboard">
           <Button
             className="btn results dashboard-btn"
-            onClick={this.handleWinLoseClick}
+            onClick={this.handleDashboardClick}
           >
             Dashboard
           </Button>
