@@ -17,18 +17,13 @@ class LoginForm extends Component {
     ApiService.postLogin({ username: username.value, password: password.value })
       .then((res) => {
         password.value = '';
-        TokenService.saveAuthToken(res.authToken);
-        const payload = TokenService.parseAuthToken();
-        this.context.setUser({
-          id: payload.user_id,
-          username: payload.username,
-          avatar: payload.avatar,
-        });
-        this.props.onLogin();
+        this.context.processLogin(res.authToken);
+        console.log(this.context);
+        this.props.history.push(`/dashboard`);
       })
       .catch((err) => {
         console.log(err);
-        this.setState({ error: err });
+        this.setState({ error: err.error });
       });
   };
   render() {
