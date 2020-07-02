@@ -6,11 +6,14 @@ import Wpm from "./../../Components/Wpm/Wpm";
 import Word from "./../../Components/Word/Word";
 import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import StoryApiService from "./../../Services/story-api-service";
+import BlackBurnContext from "../../Context/BlackburnContext";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
 import "./ChallengeRoute.module.css";
 import WinLosePage from "../../Components/WinLosePage/WinLosePage";
 
 class ChallengeRoute extends Component {
+  static contextType = BlackBurnContext;
+
   state = {
     words: [],
     playerHealth: 5,
@@ -20,20 +23,37 @@ class ChallengeRoute extends Component {
     typedWords: 0,
     levelTimer: 0,
     levelTimerTotal: 0,
+    isWin: null,
     initialized: false,
   };
 
   //Todos:
+  //Get data from context and clear on END
+  //Level, checkpoint, difficulty
+
+  //Data to context to get between levels
+  //  > playerBestScored
+  //  > playerScore
+
   //Get the values for level, checkpoint, and difficulty from context after the next route goes
   //Set score in black burn context so it persists between levels until you end win or lose
   //Set the win/lose pages to fire when timer runs out or health hits zero
   //get Best score working
-
-
   //Research how to make word components appear at different places on the screen
   //screen shake > part of typeHandler, if it's correct or incorrect
   //need to get timers for each word appearing
   //css
+
+  clearTimers() {
+    clearInterval(this.intervalGenerator);
+    clearInterval(this.levelTimeout);
+    clearInterval(this.wpmAvgCalculator);
+  }
+
+  setGameover(isWin) {
+    this.clearTimers();
+    this.setState({ isWin });
+  }
 
   updateLevelTimer() {
     let levelTimer = this.state.levelTimer;
@@ -99,7 +119,7 @@ class ChallengeRoute extends Component {
 
     //if the player is incorrect he takes damage and losses score
     if (takeDamage) playerHealth--;
-    if (takeDamage) playerScore -= 5;
+    if (takeDamage && playerScore > 0) playerScore -= 5;
 
     //handle player record calculation
     if (playerBest <= playerScore) playerBest = playerScore; //css should turn green when it surpasses old score
@@ -116,38 +136,42 @@ class ChallengeRoute extends Component {
   }
 
   componentDidMount() {
-    StoryApiService.getStoryCheckpointDifficulty(1, "easy", 1).then((res) => {
-      this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
-      this.intervalGenerator = setInterval(
-        () =>
-          this.generateWord(
-            res[0].word_expiration_timer * 100,
-            res[0].max_screen_words
-          ),
-        1000 //this value might have to become more interesting later
-      );
-      this.setState({
-        levelTimer: res[0].level_timer,
-        levelTimerTotal: res[0].level_timer,
-        initialized: true,
-      });
+    const contextObj = this.context.getCheckpointIds();
+    const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
+    this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
+    this.intervalGenerator = setInterval(
+      () =>
+        this.generateWord(
+          checkpointData.word_expiration_timer * 100,
+          checkpointData.max_screen_words
+        ),
+      1000 //this value might have to become more interesting later
+    );
+    this.setState({
+      levelTimer: checkpointData.level_timer,
+      levelTimerTotal: checkpointData.level_timer,
+      initialized: true,
     });
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalGenerator);
-    clearInterval(this.levelTimeout);
-    clearInterval(this.wpmAvgCalculator);
+    this.clearTimers();
   }
 
   renderGameplay() {
+    if (this.state.playerHealth <= 0 || this.state.levelTimer < 0) {
+      this.clearTimers();
+    }
+
     return (
       <div>
         <p>
           Time Remaining:{" "}
           {this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
         </p>
-        <Healthbar health={this.state.playerHealth} />
+        {this.state.isWin === null && (
+          <Healthbar health={this.state.playerHealth} />
+        )}
         <div>
           <span>Passing Score: </span>
           <Score score={this.state.passingScore} />
@@ -171,7 +195,10 @@ class ChallengeRoute extends Component {
           ))}
         </ul>
         <GameplayScreen />
-        <WinLosePage />
+
+        {/* Need to fill out the win/lose pages with different values */}
+        {this.state.playerHealth <= 0 && <WinLosePage win={true} />}
+        {this.state.levelTimer < 0 && <WinLosePage win={false} />}
       </div>
     );
   }

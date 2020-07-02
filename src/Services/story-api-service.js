@@ -19,7 +19,7 @@ const storyService = {
         : res.json();
     });
   },
-  getStory(story_id, difficulty_setting, checkpoint_id) {
+  getStory(story_id, difficulty_setting) {
     return fetch(`${config.API_ENDPOINT}/story/checkpoint/${story_id}?difficulty_setting=${difficulty_setting}` , {
       authorization: `Bearer ${TokenService.getAuthToken}`,
     })
