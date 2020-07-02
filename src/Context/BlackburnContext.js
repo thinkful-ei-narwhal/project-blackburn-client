@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import { render } from '@testing-library/react';
-import TokenService from '../Services/token-service';
-import ApiService from '../Services/auth-api-service';
+import React, { Component } from "react";
+import { render } from "@testing-library/react";
+import TokenService from "../Services/token-service";
+import ApiService from "../Services/auth-api-service";
 
 const BlackBurnContext = React.createContext({
   user: {},
   error: null,
   story_id: null,
-  checkpoint_id: [],
+  checkpoint_ids: null,
   difficulty_setting: null,
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   setStoryState: () => {},
-  setCheckpointIds: () => {}
+  setCheckpointIds: () => {},
+  getCheckpointIds: () => {},
 });
 
 export default BlackBurnContext;
@@ -26,7 +27,7 @@ export class BlackburnProvider extends Component {
       user: {},
       error: null,
       story_id: null,
-      checkpoint_id:[],
+      checkpoint_ids: null,
       difficulty_setting: null,
     };
     const payload = TokenService.parseAuthToken();
@@ -63,17 +64,24 @@ export class BlackburnProvider extends Component {
   };
 
   setStoryState = (story_id, difficulty_setting) => {
-      this.setState({
-          story_id: story_id,
-          difficulty_setting: difficulty_setting
-      })
-  }
+    this.setState({
+      story_id: story_id,
+      difficulty_setting: difficulty_setting,
+    });
+  };
 
-  setCheckpointIds = (checkpoint_id, currentIndex) => {
-      this.setState({
-          checkpoint_id: [...this.state.checkpoint_id, {checkpoint: checkpoint_id, currentIndex: currentIndex }]
-      })
-  }
+  setCheckpointIds = (checkpointArray, currentIndex) => {
+    this.setState({
+      checkpoint_ids: {
+        checkpointArray,
+        currentIndex,
+      },
+    });
+  };
+
+  getCheckpointIds = () => {
+    return this.state.checkpoint_ids;
+  };
 
   render() {
     const value = {
@@ -87,7 +95,8 @@ export class BlackburnProvider extends Component {
       setUser: this.setUser,
       processLogin: this.processLogin,
       setStoryState: this.setStoryState,
-      setCheckpointIds: this.setCheckpointIds
+      setCheckpointIds: this.setCheckpointIds,
+      getCheckpointIds: this.getCheckpointIds,
     };
     return (
       <BlackBurnContext.Provider value={value}>
