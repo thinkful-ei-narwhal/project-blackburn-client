@@ -4,7 +4,7 @@ import StoryApiService from '../../Services/story-api-service'
 import './Story.css'
 export default class Story extends Component {
 
-
+// CLICK START --> Render the First Checikpoint (the story page) 
     state = {
         story_text: '',
         story_art:'https://source.unsplash.com/random',
@@ -12,6 +12,10 @@ export default class Story extends Component {
     }
 
     componentDidMount() {
+        const story_id = this.props.story_id
+        const difficulty_setting = this.props.difficulty_setting
+        const checkpoint_id = this.props.checkpoint_id
+        console.log(checkpoint_id, difficulty_setting, story_id)
         StoryApiService.getStory(1, 'easy', 1)
         .then(res =>  {
             console.log(res)
