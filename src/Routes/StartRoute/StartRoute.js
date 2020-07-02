@@ -8,23 +8,28 @@ class StartRoute extends Component {
   //const stories = this.context.stories
   state = {
     story_id: "null",
-    difficulty: "",
-    stories: {},
+    difficulty_setting: "",
+    stories: [],
   };
 
   componentDidMount() {
-    let array = [];
     storyService.getAllStories().then((stories) => {
-      array.push(stories);
-      this.setState({ stories: array });
+      this.setState({ stories: stories });
     });
   }
 
-  handleInputSelect = (e) => {};
+  handleDifficulty = (e) => {
+    this.setState({ difficulty_setting: e.target.value });
+  };
+
+  handleInputSelect = (e) => {
+    this.setState({ story_id: e.target.value });
+  };
 
   handleStorySubmit = (e) => {
     e.preventDefault();
     console.log(e.target.value);
+    //grab checkpoint ID and pass to story component
   };
 
   renderStories() {
@@ -43,8 +48,10 @@ class StartRoute extends Component {
                 className="inputform"
                 type="radio"
                 name="story_select"
-                id={story.id}
-                value={story.story_name}
+                id={story.story_name}
+                value={story.id}
+                onChange={this.handleInputSelect}
+                selected={this.state.story_id === `${story.id}`}
               />
             </div>
           </label>
@@ -68,6 +75,7 @@ class StartRoute extends Component {
             className="select-difficulty"
             id="select_difficulty"
             defaultValue="medium"
+            onChange={this.handleDifficulty}
           >
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>

@@ -6,6 +6,7 @@ import RegistrationRoute from "../../Routes/RegistrationRoute/RegistrationRoute"
 import LoginRoute from "../../Routes/LoginRoute/LoginRoute";
 import Dashboard from "../Dashboard/Dashboard";
 import LandingPage from "../LandingPage/LandingPage";
+import StartRoute from "../../Routes/StartRoute/StartRoute";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route exact path={"/registration"} component={RegistrationRoute} />
             <Route exact path={"/login"} component={LoginRoute} />
             <Route exact path={"/dashboard"} component={Dashboard} />
+            <Route exact path={"/start"} component={StartRoute} />
           </Switch>
         </main>
       </div>
