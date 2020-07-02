@@ -5,14 +5,21 @@ import Start from '../Start/Start'
 import Analytics from '../Analytics/Analytics'
 import Settings from '../Settings/Settings'
 import './Dashboard.Module.css'
+import BlackBurnContext from '../../Context/BlackburnContext'
+import ScoreboardApiService from '../../Services/scoreboard-api-service'
 export default class Dashboard extends React.Component {
+
+    static contextType = BlackBurnContext
 
     state = {
         menuOpen: true,
         showAnalytics: false,
         showLeaderboard: false,
         showSettings: false,
-        showHome: true
+        showHome: true,
+        allScores: [],
+        myScores: [],
+        wpm: []
     }
 
     handleMenuButton = () => {
@@ -45,8 +52,25 @@ export default class Dashboard extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.log(this.context)
+        ScoreboardApiService.getAllScores('all')
+            .then(res => res.map(data => {
+                console.log(data)
+                return this.setState({
+                   allScores:  [...this.state.allScores, {username: data.username, score: data.score, storyId: data.story_id}]
+                })
+            }))
+        ScoreboardApiService.getMyScores(1, 'myscores')
+            .then(res => res.map(data => {
+                return this.setState({
+                    myScores: [...this.state.myScores, {score: data.score, wpm: data.wpm, date: data.date_created}]
+                })
+            }))
+    }
+
     render() {
-        console.log(this.state.showLeaderboard)
+        console.log(this.context)
         return (
             <>
                 <header className = {(this.state.menuOpen) ? 'dashboard-header-open' : 'dashboard-header'}>
@@ -68,10 +92,10 @@ export default class Dashboard extends React.Component {
                             ? <div> <Start /> </div>
                             : <div></div>}
                     {(this.state.showLeaderboard) 
-                            ? <div> <Leaderboard /> </div>
+                            ? <div> <Leaderboard allScores = {this.state.allScores}/> </div>
                             : <div></div>}
                     {(this.state.showAnalytics) 
-                            ? <div> <Analytics /> </div>
+                            ? <div> <Analytics myScores = {this.state.myScores}/> </div>
                             : <div></div>}
                     {(this.state.showSettings) 
                             ? <div> <Settings /> </div>
