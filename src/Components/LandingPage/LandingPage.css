@@ -42,6 +42,8 @@ svg {
     color: #D9C1AA;
     position: absolute;
     top: 52px;
+    font-size: 56px;
+    text-align: center;
 }
 
 .more-info {

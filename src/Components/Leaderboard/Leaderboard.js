@@ -1,6 +1,7 @@
 import React from 'react'
 import './Leaderboard.Module.css'
 import Button from '../Button/Button'
+import { Trail } from 'react-spring/renderprops'
 import { Input, Label } from '../Form/Form'
 export default class Leaderboard extends React.Component {
 
@@ -23,16 +24,19 @@ export default class Leaderboard extends React.Component {
         }
     }
 
+
     renderLeaderBoard = () => {
         if(this.state.overall) {
             return this.props.allScores.sort((a,b) => b - a).map((score, index) => {
                 return(
-                <li className = 'leaderboard-list' key = {index} > 
-                    <span className = 'username'> {index + 1} </span> 
-                    <div className = 'avatar'></div>
-                    <span className = 'username'> {score.username} </span> 
-                    <span className = 'score'> {score.score} </span> 
-                </li>
+                 <Trail items = {score} from = {{opacity: 0}} to = {{opacity: 1}}>   
+                  {score => props =>  <li className = 'leaderboard-list' key = {index} style = {props}> 
+                        <span className = 'username'> {index + 1} </span> 
+                        <div className = 'avatar'></div>
+                        <span className = 'username'> {score.username} </span> 
+                        <span className = 'score'> {score.score} </span> 
+                    </li>}
+                </Trail>
                 )
             })
         }

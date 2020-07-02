@@ -7,6 +7,7 @@ import LoginRoute from '../../Routes/LoginRoute/LoginRoute';
 import SettingsRoute from '../../Routes/SettingsRoute/SettingsRoute';
 import Dashboard from '../Dashboard/Dashboard'
 import LandingPage from '../LandingPage/LandingPage';
+import Story from '../Story/Story';
 
 
 class App extends Component {
@@ -22,7 +23,7 @@ class App extends Component {
             <Route exact path={'/login'} component={LoginRoute} />
             <Route exact path={'/settings'} component={SettingsRoute} />
             <Route exact path={"/dashboard"} component={Dashboard} />
-
+            <Route exact path={"/storypage"} component={Story} />
           </Switch>
         </main>
       </div>
