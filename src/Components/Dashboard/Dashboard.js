@@ -7,19 +7,31 @@ import Settings from '../Settings/Settings'
 import './Dashboard.Module.css'
 import BlackBurnContext from '../../Context/BlackburnContext'
 import ScoreboardApiService from '../../Services/scoreboard-api-service'
+
 export default class Dashboard extends React.Component {
+  state = {
+    menuOpen: true,
+    showAnalytics: false,
+    showLeaderboard: false,
+    showSettings: false,
+    showHome: true,
+  };
 
-    static contextType = BlackBurnContext
 
-    state = {
-        menuOpen: true,
-        showAnalytics: false,
-        showLeaderboard: false,
-        showSettings: false,
+  handleMenuButton = () => {
+    if (!this.state.menuOpen) {
+      this.setState({ menuOpen: true });
+    } else {
+      this.setState({ menuOpen: false });
+    }
+  };
+  handleShowHome = () => {
+    if (!this.state.showHome) {
+      this.setState({
         showHome: true,
-        allScores: [],
-        myScores: [],
-        wpm: []
+        showLeaderboard: false,
+        showAnalytics: false,
+        showSettings: false,
     }
 
     handleMenuButton = () => {
@@ -34,23 +46,39 @@ export default class Dashboard extends React.Component {
         if(!this.state.showHome) {
             this.setState({ showHome: true, showLeaderboard: false, showAnalytics: false, showSettings: false })
         }
+      });
     }
-    handleShowLeaderboard = () => {
-        if(!this.state.showLeaderboard) {
-            this.setState({ showHome: false, showLeaderboard: true, showAnalytics: false, showSettings: false })
-        }
-
+  };
+  handleShowLeaderboard = () => {
+    if (!this.state.showLeaderboard) {
+      this.setState({
+        showHome: false,
+        showLeaderboard: true,
+        showAnalytics: false,
+        showSettings: false,
+      });
     }
-    handleShowAnalytics = () => {
-        if(!this.state.showAnalytics) {
-            this.setState({  showHome: false, showLeaderboard: false, showAnalytics: true, showSettings: false })
-        }
+  };
+  handleShowAnalytics = () => {
+    if (!this.state.showAnalytics) {
+      this.setState({
+        showHome: false,
+        showLeaderboard: false,
+        showAnalytics: true,
+        showSettings: false,
+      });
     }
-    handleShowSettings = () => {
-        if(!this.state.showSettings) {
-            this.setState({ showHome: false, showLeaderboard: false, showAnalytics: false, showSettings: true })
-        }
+  };
+  handleShowSettings = () => {
+    if (!this.state.showSettings) {
+      this.setState({
+        showHome: false,
+        showLeaderboard: false,
+        showAnalytics: false,
+        showSettings: true,
+      });
     }
+  };
 
     componentDidMount() {
         console.log(this.context)
@@ -70,7 +98,6 @@ export default class Dashboard extends React.Component {
     }
 
     render() {
-        console.log(this.context)
         return (
             <>
                 <header className = {(this.state.menuOpen) ? 'dashboard-header-open' : 'dashboard-header'}>

@@ -1,48 +1,50 @@
-import React, { Component } from 'react'
-import { render } from '@testing-library/react'
-import ScoreboardApiService from '../Services/scoreboard-api-service'
+
+import React, { Component } from 'react';
+import { render } from '@testing-library/react';
+import TokenService from '../Services/token-service';
+import ApiService from '../Services/auth-api-service';
+
 const BlackBurnContext = React.createContext({
-    error: null,
-    setError: () => {},
-    clearError: () => {},
-    getAllScoresContext: () => {}
-})
+  user: {},
+  error: null,
+  setError: () => {},
+  clearError: () => {},
+  setUser: () => {},
+});
 
-export default BlackBurnContext
-
+export default BlackBurnContext;
 
 export class BlackburnProvider extends Component {
-    state = {
-        error: null,
-        data: []
-    }
 
-    setError = error => {
-        console.error(error)
-        this.setState({ error })
-    }
+  state = {
+    user: {},
+    error: null,
+  };
 
-    clearError = () => {
-        this.setState({ error: null })
-    }
+  setError = (error) => {
+    console.error(error);
+    this.setState({ error });
+  };
 
-    getAllScoresContext = () => {
-        return ScoreboardApiService.getAllScores('all')
-            .then(res => console.log(res))
-    }
+  clearError = () => {
+    this.setState({ error: null });
+  };
 
-    render() {
-        const value = {
-            error: this.state.error,
-            data: this.state.data,
-            setError: this.setError,
-            clearError: this.clearError,
-            getAllScoresContext: this.getAllScoresContext
-        }
-        return(
-            <BlackBurnContext.Provider value = {value}>
-                {this.props.children}
-            </BlackBurnContext.Provider>
-        )
-    }
+  setUser = (user) => {
+    this.setState({ user });
+  };
+
+  render() {
+    const value = {
+      error: this.state.error,
+      setError: this.setError,
+      clearError: this.clearError,
+      setUser: this.setUser,
+    };
+    return (
+      <BlackBurnContext.Provider value={value}>
+        {this.props.children}
+      </BlackBurnContext.Provider>
+    );
+  }
 }
