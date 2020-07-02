@@ -35,9 +35,8 @@ class RegistrationForm extends Component {
       password: this.state.password,
       avatar: this.state.avatar,
     };
-    console.log(user);
     ApiService.postUser(user)
-      .then((usert) => this.props.history.push(`/login`))
+      .then((user) => this.props.history.push(`/login`))
       .catch((err) => this.setState(err));
   };
   renderUserInfo = () => {
