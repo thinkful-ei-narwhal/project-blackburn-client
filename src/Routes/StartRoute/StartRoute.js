@@ -1,43 +1,50 @@
 import React, { Component } from "react";
 import Button from "../../Components/Button/Button";
+import storyService from "../../Services/story-api-service";
+import "./StartRoute.Module.css";
+
 class StartRoute extends Component {
   //static contextType = BlackburnContext
   //const stories = this.context.stories
   state = {
-    storyid: "null",
+    story_id: "null",
     difficulty: "",
+    stories: {},
   };
+
+  componentDidMount() {
+    let array = [];
+    storyService.getAllStories().then((stories) => {
+      array.push(stories);
+      this.setState({ stories: array });
+    });
+  }
+
+  handleInputSelect = (e) => {};
 
   handleStorySubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.select_difficulty.value, e.target.);
+    console.log(e.target.value);
   };
 
   renderStories() {
-    const dummyStories = [
-      { storyid: "detective", synopsis: "whodunnit? butler probz" },
-      { storyid: "batman", synopsis: "joker? i hardly know her" },
-      { storyid: "sultry tales", synopsis: "don't type...too fast" },
-      { storyid: "drones", synopsis: "'murica" },
-      {
-        storyid: "monster hunter",
-        synopsis:
-          "with three red bulls and a dream, seek to take down an industry",
-      },
-    ];
     return (
-      <div className="story-list">
+      //youre figuring out how to select a radio button
+      //change img on line 37 to back ground of line 36 if we wish
+      <div className="story-list" onChange={(e) => this.handleStorySubmit(e)}>
         <h2>Select a Story</h2>
-        {dummyStories.map((x) => (
-          <label key={x.storyid} className="story-label" htmlFor={x.storyid}>
-            <div className="story_panel" id="story_panel">
-              <h4>{x.storyid}</h4>
-              <p>{x.synopsis}</p>
+        {this.state.stories.map((story) => (
+          <label key={story.id} className="story-label" htmlFor={`${story.id}`}>
+            <div className="story_panel" id={`story_panel ${story.id}`}>
+              <img src={story.story_thumbnail} />
+              <h4>{story.story_name}</h4>
+              <p>{story.story_synopsis}</p>
               <input
+                className="inputform"
                 type="radio"
                 name="story_select"
-                id={x.storyid}
-                value={x.storyid}
+                id={story.id}
+                value={story.story_name}
               />
             </div>
           </label>
