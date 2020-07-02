@@ -9,17 +9,17 @@ import BlackBurnContext from '../../Context/BlackburnContext';
 import ScoreboardApiService from '../../Services/scoreboard-api-service';
 
 export default class Dashboard extends React.Component {
+  static contextType = BlackBurnContext;
 
-    state = {
-        menuOpen: true,
-        showHome: true,
-        showLeaderboard: false,
-        showAnalytics: false,
-        showSettings: false,
-        allScores: [],
-        myScores: [],
-        
-    }
+  state = {
+    menuOpen: true,
+    showHome: true,
+    showLeaderboard: false,
+    showAnalytics: false,
+    showSettings: false,
+    allScores: [],
+    myScores: [],
+  };
 
   handleShowHome = () => {
     if (!this.state.showHome) {
@@ -71,9 +71,11 @@ export default class Dashboard extends React.Component {
         showSettings: true,
       });
     }
-  }
+  };
   componentDidMount() {
     console.log(this.context);
+    const { user } = this.context;
+    console.log(user);
     ScoreboardApiService.getAllScores('all').then((res) =>
       res.map((data) => {
         return this.setState({
@@ -88,25 +90,33 @@ export default class Dashboard extends React.Component {
         });
       })
     );
-    ScoreboardApiService.getMyScores(1, 'myscores').then((res) =>
+    ScoreboardApiService.getMyScores(user.id, 'myscores').then((res) =>
       res.map((data) => {
         return this.setState({
           myScores: [
             ...this.state.myScores,
-            { score: data.total_score, wpm: data.avg_wpm, date: data.date_created },
+            {
+              score: data.total_score,
+              wpm: data.avg_wpm,
+              date: data.date_created,
+            },
           ],
         });
       })
     );
   }
-
+  renderEmptyScore = () => {
+    return (
+      <div className="empty-score">
+        <p>No data recorded</p>
+      </div>
+    );
+  };
   render() {
-      console.log(this.state.allScores)
+    console.log(this.state.myScores);
     return (
       <>
-        <header
-          className='dashboard-header-open'
-        >
+        <header className="dashboard-header-open">
           {this.state.menuOpen ? (
             <div></div>
           ) : (
@@ -121,7 +131,6 @@ export default class Dashboard extends React.Component {
         <div className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
           {this.state.menuOpen ? (
             <div className="x" onClick={() => this.handleMenuButton()}>
-              {' '}
               {' '}
             </div>
           ) : (
@@ -161,37 +170,32 @@ export default class Dashboard extends React.Component {
           </nav>
         </div>
         <div className={this.state.menuOpen ? 'content-open' : 'content'}>
-          {this.state.showHome ? (
+          {this.state.showHome && (
             <div>
               {' '}
               <Start />{' '}
             </div>
-          ) : (
-            <div></div>
           )}
-          {this.state.showLeaderboard ? (
+          {this.state.showLeaderboard && (
             <div>
               {' '}
               <Leaderboard allScores={this.state.allScores} />{' '}
             </div>
-          ) : (
-            <div></div>
           )}
-          {this.state.showAnalytics ? (
+          {this.state.showAnalytics && (
             <div>
-              {' '}
-              <Analytics myScores={this.state.myScores} />{' '}
+              {this.state.myScores.length === 0 ? (
+                <div>{this.renderEmptyScore()}</div>
+              ) : (
+                <Analytics myScores={this.state.myScores} />
+              )}
             </div>
-          ) : (
-            <div></div>
           )}
-          {this.state.showSettings ? (
+          {this.state.showSettings && (
             <div>
               {' '}
               <Settings />{' '}
             </div>
-          ) : (
-            <div></div>
           )}
         </div>
       </>
