@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { render } from '@testing-library/react';
 import TokenService from '../Services/token-service';
@@ -14,6 +15,7 @@ const BlackBurnContext = React.createContext({
 export default BlackBurnContext;
 
 export class BlackburnProvider extends Component {
+
   state = {
     user: {},
     error: null,

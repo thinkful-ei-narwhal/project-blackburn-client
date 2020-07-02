@@ -3,7 +3,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    background-color: lightgray;
+    background-color: #6A5046;
+
 }
 
 .links {
@@ -32,9 +33,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    background-color: lightgray;
-
+    background-color: #6A5046;
     margin-left: 25%;
 }
 
@@ -49,7 +48,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color:#302B28;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -62,7 +61,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color:#302B28;
     overflow-x: hidden;
     transition: 0.5s;
 
@@ -98,6 +97,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .content-open {
