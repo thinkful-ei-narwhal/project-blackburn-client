@@ -1,14 +1,22 @@
 import React from 'react'
+import { Container, Row, Col } from 'react-grid-system';
 import './Start.Module.css'
 export default class Start extends React.Component {
 
     render() {
         return (
-            <div className = 'start-menu'>
-                <div> Welcome Click start to begin playing</div>
+            <Container>
+            <Row>
+              <Col >
+                <p> Click start to begin playing</p>
                 <button> Start </button> 
-            </div>
-
+             </Col>
+              <Col >
+                <p>If You need a tutorial click here</p>
+                <button> Tutorial </button> 
+              </Col>
+            </Row>
+          </Container>
         )
     }
 }

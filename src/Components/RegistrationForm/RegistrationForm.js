@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
 import { Input, Required, Label } from '../Form/Form';
+import ApiService from '../../Services/auth-api-service';
+import BlackBurnContext from '../../Context/BlackburnContext';
 
 class RegistrationForm extends Component {
+  static contextType = BlackBurnContext;
   state = {
     username: '',
     email: '',
     password: '',
-    repassword: '',
     avatar: '',
     step: 0,
     error: '',
@@ -24,10 +26,18 @@ class RegistrationForm extends Component {
     let step = this.state.step;
     step--;
     this.setState({ step: step });
+    this.setState({ error: '' });
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('I am working');
+    let user = {
+      username: this.state.username,
+      password: this.state.password,
+      avatar: this.state.avatar,
+    };
+    ApiService.postUser(user)
+      .then((user) => this.props.history.push(`/login`))
+      .catch((err) => this.setState(err));
   };
   renderUserInfo = () => {
     return (
@@ -40,9 +50,19 @@ class RegistrationForm extends Component {
           <Required />
           Create Username:
         </Label>
-        <Input className="reg-input username" required />
+        <Input
+          className="reg-input username"
+          onChange={(e) => this.setState({ username: e.target.value })}
+          value={this.state.username}
+          required
+        />
         <Label htmlFor="avatar">Choose Avatar:</Label>
-        <select className="avatar">
+        <select
+          className="avatar"
+          onChange={(e) => this.setState({ avatar: e.target.value })}
+          value={this.state.avatar}
+        >
+          <option value="" defaultValue />
           <option>Red Mage</option>
           <option>Blue Mage</option>
         </select>
@@ -59,19 +79,40 @@ class RegistrationForm extends Component {
           <Required />
           Password:
         </Label>
-        <Input className="reg-input password" required />
+        <Input
+          className="reg-input password"
+          onChange={(e) => this.setState({ password: e.target.value })}
+          value={this.state.password}
+          type="password"
+          required
+        />
         <Label htmlFor="reg-input repassword">
           <Required />
           Re-enter Password:
         </Label>
-        <Input className="reg-input repassword" required />
+        <Input
+          className="reg-input repassword"
+          onChange={(e) => {
+            this.comparePassword(e);
+          }}
+          type="password"
+          required
+        />
       </div>
     );
+  };
+
+  comparePassword = (e) => {
+    if (this.state.password === e.target.value) {
+      console.log('match');
+      this.setState({ error: '' });
+    } else this.setState({ error: 'Passwords do not match' });
   };
 
   render() {
     return (
       <div className="reg-container">
+        {this.context.error !== null && <h3>{this.context.error}</h3>}
         <form className="reg-form" onSubmit={(e) => this.handleSubmit(e)}>
           {this.state.step === 0 ? (
             <div>{this.renderUserInfo()}</div>
@@ -79,12 +120,19 @@ class RegistrationForm extends Component {
             <div>{this.renderPassword()}</div>
           )}
           {this.state.step === 0 ? (
-            <Button className="reg-btn" onClick={(e) => this.handleClick(e)}>
+            <Button
+              className="reg-btn"
+              onClick={(e) => this.handleClick(e)}
+              disabled={this.state.username === ''}
+            >
               Next
             </Button>
           ) : (
             <div className="btn-container">
-              <Button className="reg-btn" onClick={(e) => this.handleBack(e)}>
+              <Button
+                className="reg-btn back"
+                onClick={(e) => this.handleBack(e)}
+              >
                 Back
               </Button>
               <Button className="reg-btn" type="submit">

@@ -11,16 +11,15 @@ class TypeHandler extends Component {
           className="spell-checker"
           onSubmit={(e) => this.props.handleSubmit(e)}
         >
-          <label
+          <Label
             className="basic-label TranslateLabel"
             htmlFor="type-input"
-          ></label>
+          ></Label>
           <Input
             autoComplete="off"
             placeholder="Start Typing!"
             id="type-input"
             name="typeInput"
-            // onChange={(e) => this.handleTypeChange(e)}
           />
           <Button type="submit">Submit</Button>
         </form>
