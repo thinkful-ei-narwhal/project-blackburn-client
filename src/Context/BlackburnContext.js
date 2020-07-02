@@ -28,7 +28,6 @@ export class BlackburnProvider extends Component {
         username: payload.sub,
         avatar: payload.avatar,
       };
-
     this.state = state;
   }
 

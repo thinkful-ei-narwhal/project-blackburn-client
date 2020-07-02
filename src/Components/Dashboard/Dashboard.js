@@ -5,7 +5,8 @@ import Start from '../Start/Start';
 import Analytics from '../Analytics/Analytics';
 import Settings from '../Settings/Settings';
 import './Dashboard.Module.css';
-import TokenService from '../../Services/token-service';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import ScoreboardApiService from '../../Services/scoreboard-api-service';
 
 export default class Dashboard extends React.Component {
   state = {
@@ -23,6 +24,7 @@ export default class Dashboard extends React.Component {
       this.setState({ menuOpen: false });
     }
   };
+
   handleShowHome = () => {
     if (!this.state.showHome) {
       this.setState({
@@ -33,6 +35,26 @@ export default class Dashboard extends React.Component {
       });
     }
   };
+
+  handleMenuButton = () => {
+    if (!this.state.menuOpen) {
+      this.setState({ menuOpen: true });
+    } else {
+      this.setState({ menuOpen: false });
+    }
+  };
+
+  handleShowHome = () => {
+    if (!this.state.showHome) {
+      this.setState({
+        showHome: true,
+        showLeaderboard: false,
+        showAnalytics: false,
+        showSettings: false,
+      });
+    }
+  };
+
   handleShowLeaderboard = () => {
     if (!this.state.showLeaderboard) {
       this.setState({
@@ -43,6 +65,7 @@ export default class Dashboard extends React.Component {
       });
     }
   };
+
   handleShowAnalytics = () => {
     if (!this.state.showAnalytics) {
       this.setState({
@@ -53,6 +76,7 @@ export default class Dashboard extends React.Component {
       });
     }
   };
+
   handleShowSettings = () => {
     if (!this.state.showSettings) {
       this.setState({
@@ -64,9 +88,36 @@ export default class Dashboard extends React.Component {
     }
   };
 
-  render() {
-    console.log(this.state.showLeaderboard);
+  componentDidMount() {
+    console.log(this.context);
+    ScoreboardApiService.getAllScores('all').then((res) =>
+      res.map((data) => {
+        console.log(data);
+        return this.setState({
+          allScores: [
+            ...this.state.allScores,
+            {
+              username: data.username,
+              score: data.score,
+              storyId: data.story_id,
+            },
+          ],
+        });
+      })
+    );
+    ScoreboardApiService.getMyScores(1, 'myscores').then((res) =>
+      res.map((data) => {
+        return this.setState({
+          myScores: [
+            ...this.state.myScores,
+            { score: data.score, wpm: data.wpm, date: data.date_created },
+          ],
+        });
+      })
+    );
+  }
 
+  render() {
     return (
       <>
         <header
@@ -139,7 +190,7 @@ export default class Dashboard extends React.Component {
           {this.state.showLeaderboard ? (
             <div>
               {' '}
-              <Leaderboard />{' '}
+              <Leaderboard allScores={this.state.allScores} />{' '}
             </div>
           ) : (
             <div></div>
@@ -147,7 +198,7 @@ export default class Dashboard extends React.Component {
           {this.state.showAnalytics ? (
             <div>
               {' '}
-              <Analytics />{' '}
+              <Analytics myScores={this.state.myScores} />{' '}
             </div>
           ) : (
             <div></div>
