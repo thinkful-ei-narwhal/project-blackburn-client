@@ -5,6 +5,8 @@ import Start from '../Start/Start';
 import Analytics from '../Analytics/Analytics';
 import Settings from '../Settings/Settings';
 import './Dashboard.Module.css';
+import TokenService from '../../Services/token-service';
+
 export default class Dashboard extends React.Component {
   state = {
     menuOpen: true,

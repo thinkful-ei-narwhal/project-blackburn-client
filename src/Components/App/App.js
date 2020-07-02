@@ -4,9 +4,7 @@ import './App.css';
 import ChallengeRoute from './../../Routes/ChallengeRoute/ChallengeRoute';
 import RegistrationRoute from '../../Routes/RegistrationRoute/RegistrationRoute';
 import LoginRoute from '../../Routes/LoginRoute/LoginRoute';
-import SettingsRoute from '../../Routes/SettingsRoute/SettingsRoute';
-import Dashboard from '../Dashboard/Dashboard'
-
+import Dashboard from '../Dashboard/Dashboard';
 
 class App extends Component {
   render() {
@@ -18,9 +16,7 @@ class App extends Component {
             <Route exact path={'/challenge'} component={ChallengeRoute} />
             <Route exact path={'/registration'} component={RegistrationRoute} />
             <Route exact path={'/login'} component={LoginRoute} />
-            <Route exact path={'/settings'} component={SettingsRoute} />
-            <Route exact path={"/dashboard"} component={Dashboard} />
-
+            <Route exact path={'/dashboard'} component={Dashboard} />
           </Switch>
         </main>
       </div>
