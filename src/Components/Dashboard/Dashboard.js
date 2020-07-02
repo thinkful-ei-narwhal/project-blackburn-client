@@ -5,14 +5,33 @@ import Start from '../Start/Start'
 import Analytics from '../Analytics/Analytics'
 import Settings from '../Settings/Settings'
 import './Dashboard.Module.css'
-export default class Dashboard extends React.Component {
+import BlackBurnContext from '../../Context/BlackburnContext'
+import ScoreboardApiService from '../../Services/scoreboard-api-service'
 
-    state = {
-        menuOpen: true,
-        showAnalytics: false,
+export default class Dashboard extends React.Component {
+  state = {
+    menuOpen: true,
+    showAnalytics: false,
+    showLeaderboard: false,
+    showSettings: false,
+    showHome: true,
+  };
+
+
+  handleMenuButton = () => {
+    if (!this.state.menuOpen) {
+      this.setState({ menuOpen: true });
+    } else {
+      this.setState({ menuOpen: false });
+    }
+  };
+  handleShowHome = () => {
+    if (!this.state.showHome) {
+      this.setState({
+        showHome: true,
         showLeaderboard: false,
+        showAnalytics: false,
         showSettings: false,
-        showHome: true
     }
 
     handleMenuButton = () => {
@@ -27,26 +46,58 @@ export default class Dashboard extends React.Component {
         if(!this.state.showHome) {
             this.setState({ showHome: true, showLeaderboard: false, showAnalytics: false, showSettings: false })
         }
+      });
     }
-    handleShowLeaderboard = () => {
-        if(!this.state.showLeaderboard) {
-            this.setState({ showHome: false, showLeaderboard: true, showAnalytics: false, showSettings: false })
-        }
+  };
+  handleShowLeaderboard = () => {
+    if (!this.state.showLeaderboard) {
+      this.setState({
+        showHome: false,
+        showLeaderboard: true,
+        showAnalytics: false,
+        showSettings: false,
+      });
+    }
+  };
+  handleShowAnalytics = () => {
+    if (!this.state.showAnalytics) {
+      this.setState({
+        showHome: false,
+        showLeaderboard: false,
+        showAnalytics: true,
+        showSettings: false,
+      });
+    }
+  };
+  handleShowSettings = () => {
+    if (!this.state.showSettings) {
+      this.setState({
+        showHome: false,
+        showLeaderboard: false,
+        showAnalytics: false,
+        showSettings: true,
+      });
+    }
+  };
 
-    }
-    handleShowAnalytics = () => {
-        if(!this.state.showAnalytics) {
-            this.setState({  showHome: false, showLeaderboard: false, showAnalytics: true, showSettings: false })
-        }
-    }
-    handleShowSettings = () => {
-        if(!this.state.showSettings) {
-            this.setState({ showHome: false, showLeaderboard: false, showAnalytics: false, showSettings: true })
-        }
+    componentDidMount() {
+        console.log(this.context)
+        ScoreboardApiService.getAllScores('all')
+            .then(res => res.map(data => {
+                console.log(data)
+                return this.setState({
+                   allScores:  [...this.state.allScores, {username: data.username, score: data.score, storyId: data.story_id}]
+                })
+            }))
+        ScoreboardApiService.getMyScores(1, 'myscores')
+            .then(res => res.map(data => {
+                return this.setState({
+                    myScores: [...this.state.myScores, {score: data.score, wpm: data.wpm, date: data.date_created}]
+                })
+            }))
     }
 
     render() {
-        console.log(this.state.showLeaderboard)
         return (
             <>
                 <header className = {(this.state.menuOpen) ? 'dashboard-header-open' : 'dashboard-header'}>
@@ -68,10 +119,10 @@ export default class Dashboard extends React.Component {
                             ? <div> <Start /> </div>
                             : <div></div>}
                     {(this.state.showLeaderboard) 
-                            ? <div> <Leaderboard /> </div>
+                            ? <div> <Leaderboard allScores = {this.state.allScores}/> </div>
                             : <div></div>}
                     {(this.state.showAnalytics) 
-                            ? <div> <Analytics /> </div>
+                            ? <div> <Analytics myScores = {this.state.myScores}/> </div>
                             : <div></div>}
                     {(this.state.showSettings) 
                             ? <div> <Settings /> </div>

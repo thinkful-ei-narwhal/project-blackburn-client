@@ -5,7 +5,7 @@ import Score from "./../../Components/Score/Score";
 import Wpm from "./../../Components/Wpm/Wpm";
 import Word from "./../../Components/Word/Word";
 import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
-import ScoreboardApiService from "./../../Services/scoreboard-api-service";
+import StoryApiService from "./../../Services/story-api-service";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
 import "./ChallengeRoute.module.css";
 import WinLosePage from "../../Components/WinLosePage/WinLosePage";
@@ -133,9 +133,10 @@ class ChallengeRoute extends Component {
 
   componentDidMount() {
     //todo get all of the data you need and set contexts!
-    // ScoreboardApiService.getScoreboard(3,"story",1).then(res => {
-    //   console.log('TESTING ', res);
-    // });
+    StoryApiService.getStoryCheckpointDifficulty(1, "easy", 1).then((res) => {
+      console.log("TESTING ", res);
+    });
+
     //Values this route will eventually need to get on start:
     //So in componentDidMount we need:
     //>>story, difficulty, player's high score
@@ -145,10 +146,10 @@ class ChallengeRoute extends Component {
       () => this.generateWord(20000, 5),
       2000
     );
-    //   this.wpmAvgCalculator = setInterval(
-    //     () => this.pushWpmValue(this.state),
-    //     1000
-    //   );
+    // this.wpmAvgCalculator = setInterval(
+    //   () => this.pushWpmValue(this.state),
+    //   1000
+    // );
     this.setState({ initialized: true });
   }
 
@@ -166,6 +167,10 @@ class ChallengeRoute extends Component {
           {this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
         </p>
         <Healthbar health={this.state.playerHealth} />
+        <div>
+          <span>Passing Score: </span>
+          <Score score={this.state.passingScore} />
+        </div>
         <div>
           <span>Personal best: </span>
           <Score score={this.state.playerBest} />

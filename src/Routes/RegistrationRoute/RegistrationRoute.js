@@ -7,7 +7,7 @@ class RegistrationRoute extends Component {
     return (
       <div className="Registration">
         <h2>Create New Account:</h2>
-        <RegistrationForm />
+        <RegistrationForm {...this.props} />
       </div>
     );
   }
