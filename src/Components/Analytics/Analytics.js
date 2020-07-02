@@ -12,7 +12,7 @@ export default function Analytics(props) {
             return data.score
              })
         let avgScore = scoreArr.reduce((a, b) => a + b, 0) / scoreArr.length
-
+        console.log(props)     
         return (
             <Container>
             <Row>

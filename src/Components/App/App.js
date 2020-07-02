@@ -19,13 +19,8 @@ class App extends Component {
             <Route exact path={'/challenge'} component={ChallengeRoute} />
             <Route exact path={'/registration'} component={RegistrationRoute} />
             <Route exact path={'/login'} component={LoginRoute} />
-<<<<<<< HEAD
-            <Route exact path={'/settings'} component={SettingsRoute} />
             <Route exact path={"/dashboard"} component={Dashboard} />
             <Route exact path={"/storypage"} component={Story} />
-=======
-            <Route exact path={'/dashboard'} component={Dashboard} />
->>>>>>> dc110551131be9e24bdf0d39a3cc5a6504a4ea3f
           </Switch>
         </main>
       </div>
