@@ -13,6 +13,18 @@ const ApiService = {
       !res.ok ? res.json().then((err) => Promise.reject(err)) : res.json()
     );
   },
+  editUser(user) {
+    return fetch(`${config.API_ENDPOINT}/users/edit`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(user),
+    }).then((res) =>
+      !res.ok ? res.json().then((err) => Promise.reject(err)) : res.json()
+    );
+  },
   postLogin({ username, password }) {
     return fetch(`${config.API_ENDPOINT}/auth/token`, {
       method: 'POST',
