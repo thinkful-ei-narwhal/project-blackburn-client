@@ -26,6 +26,7 @@ const ApiService = {
     );
   },
   postLogin({ username, password }) {
+    console.log(config.API_ENDPOINT)
     return fetch(`${config.API_ENDPOINT}/auth/token`, {
       method: 'POST',
       headers: {
