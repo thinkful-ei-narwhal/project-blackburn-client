@@ -16,40 +16,24 @@ class ChallengeRoute extends Component {
     playerHealth: 5,
     playerScore: 0,
     playerBest: 0,
-    playerBestStored: 0,
+    playerBestStored: 0, // need to figure out how to get this data
     typedWords: 0,
-    // wpmAvgs: [],
-    // wpmCalc: 0,
-    levelTimer: 60, //1 minute
-    levelTimerTotal: 120,
+    levelTimer: 0,
+    levelTimerTotal: 0,
     initialized: false,
   };
 
-  //smaller Todos:
+  //Todos:
+  //Get the values for level, checkpoint, and difficulty from context after the next route goes
+  //Set score in black burn context so it persists between levels until you end win or lose
+  //Set the win/lose pages to fire when timer runs out or health hits zero
+  //get Best score working
+
+
   //Research how to make word components appear at different places on the screen
   //screen shake > part of typeHandler, if it's correct or incorrect
   //need to get timers for each word appearing
-
-  //Todo get the WPM tracker working
-  // pushWpmValue(state) {
-  //   let typedWords = state.typedWords;
-  //   const wpmAvgs = state.wpmAvgs;
-  //   const currentWPM = typedWords / (state.levelTimerTotal / 60);
-  //   if (currentWPM !== wpmAvgs[wpmAvgs.length - 1]) {
-  //     wpmAvgs.push(currentWPM);
-  //   }
-  //   else {
-  //     wpmAvgs.push(0);
-  //   }
-
-  //   let totalWPM = 0;
-  //   for (let i = 0; i < wpmAvgs.length; i++) {
-  //     totalWPM += wpmAvgs[i];
-  //   }
-  //   const wpmCalc = totalWPM / wpmAvgs.length;
-
-  //   this.setState({ wpmAvgs, wpmCalc });
-  // }
+  //css
 
   updateLevelTimer() {
     let levelTimer = this.state.levelTimer;
@@ -132,25 +116,22 @@ class ChallengeRoute extends Component {
   }
 
   componentDidMount() {
-    //todo get all of the data you need and set contexts!
     StoryApiService.getStoryCheckpointDifficulty(1, "easy", 1).then((res) => {
-      console.log("TESTING ", res);
+      this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
+      this.intervalGenerator = setInterval(
+        () =>
+          this.generateWord(
+            res[0].word_expiration_timer * 100,
+            res[0].max_screen_words
+          ),
+        1000 //this value might have to become more interesting later
+      );
+      this.setState({
+        levelTimer: res[0].level_timer,
+        levelTimerTotal: res[0].level_timer,
+        initialized: true,
+      });
     });
-
-    //Values this route will eventually need to get on start:
-    //So in componentDidMount we need:
-    //>>story, difficulty, player's high score
-
-    this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
-    this.intervalGenerator = setInterval(
-      () => this.generateWord(20000, 5),
-      2000
-    );
-    // this.wpmAvgCalculator = setInterval(
-    //   () => this.pushWpmValue(this.state),
-    //   1000
-    // );
-    this.setState({ initialized: true });
   }
 
   componentWillUnmount() {

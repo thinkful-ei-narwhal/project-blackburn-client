@@ -14,7 +14,6 @@ const storyService = {
         authorization: `Bearer ${TokenService.getAuthToken}`,
       }
     ).then((res) => {
-      console.log("TESTING ", res);
       return !res.ok
         ? res.json().then((err) => Promise.reject(err))
         : res.json();
