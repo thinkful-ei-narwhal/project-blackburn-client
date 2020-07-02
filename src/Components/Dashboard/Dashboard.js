@@ -9,21 +9,17 @@ import BlackBurnContext from '../../Context/BlackburnContext';
 import ScoreboardApiService from '../../Services/scoreboard-api-service';
 
 export default class Dashboard extends React.Component {
-  state = {
-    menuOpen: true,
-    showAnalytics: false,
-    showLeaderboard: false,
-    showSettings: false,
-    showHome: true,
-  };
 
-  handleMenuButton = () => {
-    if (!this.state.menuOpen) {
-      this.setState({ menuOpen: true });
-    } else {
-      this.setState({ menuOpen: false });
+    state = {
+        menuOpen: true,
+        showHome: true,
+        showLeaderboard: false,
+        showAnalytics: false,
+        showSettings: false,
+        allScores: [],
+        myScores: [],
+        
     }
-  };
 
   handleShowHome = () => {
     if (!this.state.showHome) {
@@ -41,17 +37,6 @@ export default class Dashboard extends React.Component {
       this.setState({ menuOpen: true });
     } else {
       this.setState({ menuOpen: false });
-    }
-  };
-
-  handleShowHome = () => {
-    if (!this.state.showHome) {
-      this.setState({
-        showHome: true,
-        showLeaderboard: false,
-        showAnalytics: false,
-        showSettings: false,
-      });
     }
   };
 
@@ -86,20 +71,18 @@ export default class Dashboard extends React.Component {
         showSettings: true,
       });
     }
-  };
-
+  }
   componentDidMount() {
     console.log(this.context);
     ScoreboardApiService.getAllScores('all').then((res) =>
       res.map((data) => {
-        console.log(data);
         return this.setState({
           allScores: [
             ...this.state.allScores,
             {
               username: data.username,
-              score: data.score,
-              storyId: data.story_id,
+              score: data.total_score,
+              storyId: data.story_data,
             },
           ],
         });
@@ -110,7 +93,7 @@ export default class Dashboard extends React.Component {
         return this.setState({
           myScores: [
             ...this.state.myScores,
-            { score: data.score, wpm: data.wpm, date: data.date_created },
+            { score: data.total_score, wpm: data.avg_wpm, date: data.date_created },
           ],
         });
       })
@@ -118,12 +101,11 @@ export default class Dashboard extends React.Component {
   }
 
   render() {
+      console.log(this.state.allScores)
     return (
       <>
         <header
-          className={
-            this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
-          }
+          className='dashboard-header-open'
         >
           {this.state.menuOpen ? (
             <div></div>
@@ -140,7 +122,7 @@ export default class Dashboard extends React.Component {
           {this.state.menuOpen ? (
             <div className="x" onClick={() => this.handleMenuButton()}>
               {' '}
-              &times;{' '}
+              {' '}
             </div>
           ) : (
             <div></div>

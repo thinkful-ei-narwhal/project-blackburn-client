@@ -7,6 +7,7 @@ import LoginRoute from "../../Routes/LoginRoute/LoginRoute";
 import Dashboard from "../Dashboard/Dashboard";
 import LandingPage from "../LandingPage/LandingPage";
 import StartRoute from "../../Routes/StartRoute/StartRoute";
+import Story from "../Story/Story";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path={"/registration"} component={RegistrationRoute} />
             <Route exact path={"/login"} component={LoginRoute} />
             <Route exact path={"/dashboard"} component={Dashboard} />
+            <Route exact path={"/storypage"} component={Story} />
             <Route exact path={"/start"} component={StartRoute} />
           </Switch>
         </main>
