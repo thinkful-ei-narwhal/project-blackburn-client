@@ -137,6 +137,8 @@ class ChallengeRoute extends Component {
 
   componentDidMount() {
     const contextObj = this.context.getCheckpointIds();
+    const playerScore = this.context.getScore();
+    const playerBestStored = this.context.getBestScore();
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
     this.intervalGenerator = setInterval(
@@ -150,6 +152,9 @@ class ChallengeRoute extends Component {
     this.setState({
       levelTimer: checkpointData.level_timer,
       levelTimerTotal: checkpointData.level_timer,
+      playerScore: playerScore,
+      playerBest: playerBestStored,
+      playerBestStored: playerBestStored,
       initialized: true,
     });
   }
@@ -161,6 +166,9 @@ class ChallengeRoute extends Component {
   renderGameplay() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer < 0) {
       this.clearTimers();
+      this.context.setScore();
+      if (this.context.getBestScore() < this.state.playerBest)
+        this.context.setBestScore(this.state.playerBest);
     }
 
     return (
