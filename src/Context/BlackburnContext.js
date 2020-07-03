@@ -127,6 +127,7 @@ export class BlackburnProvider extends Component {
       difficulty_setting: this.state.difficulty_setting,
       story_id: this.state.story_id,
       checkpoint_id: this.state.checkpoint_id,
+      score: this.state.score,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,

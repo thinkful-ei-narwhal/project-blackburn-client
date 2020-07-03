@@ -17,16 +17,16 @@ class WinLosePage extends Component {
   }
 
   postScore() {
+    console.log(this.context.score)
     const data = {
-      userid: this.context.user.id,
-      storyid: this.context.story_id,
-      score: this.context.score,
-      difficultyid: this.context.difficulty_setting,
-      //   wpm: this.context.wpm,
-      //   accuracy,
+      user_id: this.context.user.id,
+      story_data: this.context.story_id,
+      total_score: this.context.score,
+      avg_wpm: 0,
+      total_accuracy: 0,
     };
     console.log("postScore() with data", data);
-    ScoreboardApiService.postScore({ data });
+    ScoreboardApiService.postScore(data);
   }
 
   handleRetryClick = () => {

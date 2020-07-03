@@ -113,7 +113,7 @@ export default class Dashboard extends React.Component {
     );
   };
   render() {
-    console.log(this.state.myScores);
+    console.log(this.state.allScores);
     return (
       <>
         <header className="dashboard-header-open">

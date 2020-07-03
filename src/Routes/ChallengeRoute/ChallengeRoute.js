@@ -166,9 +166,9 @@ class ChallengeRoute extends Component {
   renderGameplay() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer < 0) {
       this.clearTimers();
-      this.context.setScore();
-      if (this.context.getBestScore() < this.state.playerBest)
-        this.context.setBestScore(this.state.playerBest);
+      // this.context.setScore();
+      // if (this.context.getBestScore() < this.state.playerBest)
+      //   this.context.setBestScore(this.state.playerBest);
     }
 
     return (
