@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Leaderboard from '../Leaderboard/Leaderboard';
-import Start from '../Start/Start';
-import Analytics from '../Analytics/Analytics';
-import Settings from '../Settings/Settings';
-import './Dashboard.Module.css';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import ScoreboardApiService from '../../Services/scoreboard-api-service';
+import React from "react";
+import { Link } from "react-router-dom";
+import Leaderboard from "../Leaderboard/Leaderboard";
+import Start from "../Start/Start";
+import Analytics from "../Analytics/Analytics";
+import Settings from "../Settings/Settings";
+import "./Dashboard.Module.css";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import ScoreboardApiService from "../../Services/scoreboard-api-service";
 
 export default class Dashboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -76,7 +76,7 @@ export default class Dashboard extends React.Component {
     console.log(this.context);
     const { user } = this.context;
     console.log(user);
-    ScoreboardApiService.getAllScores('all').then((res) =>
+    ScoreboardApiService.getAllScores("all").then((res) =>
       res.map((data) => {
         return this.setState({
           allScores: [
@@ -90,7 +90,7 @@ export default class Dashboard extends React.Component {
         });
       })
     );
-    ScoreboardApiService.getMyScores(user.id, 'myscores').then((res) =>
+    ScoreboardApiService.getMyScores(user.id, "myscores").then((res) =>
       res.map((data) => {
         return this.setState({
           myScores: [
@@ -113,7 +113,7 @@ export default class Dashboard extends React.Component {
     );
   };
   render() {
-    console.log(this.state.myScores);
+    console.log(this.state.allScores);
     return (
       <>
         <header className="dashboard-header-open">
@@ -122,12 +122,16 @@ export default class Dashboard extends React.Component {
           ) : (
             <div onClick={() => this.handleMenuButton()}> &#9776; </div>
           )}
-
+          <h1 className="title">Project Blackburn</h1>
+          <Link to={"/"} className="links">
+            {" "}
+            logout{" "}
+          </Link>
         </header>
-        <div className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
+        <div className={this.state.menuOpen ? "sidenav-open" : "sidenav"}>
           {this.state.menuOpen ? (
             <div className="x" onClick={() => this.handleMenuButton()}>
-              {' '}
+              {" "}
             </div>
           ) : (
             <div></div>
@@ -135,34 +139,34 @@ export default class Dashboard extends React.Component {
           <nav className="navLinks">
           <h1 className="title">Project Blackburn</h1>
             <div
-              className={this.state.showHome ? 'links-selected' : 'links'}
+              className={this.state.showHome ? "links-selected" : "links"}
               onClick={() => this.handleShowHome()}
             >
-              {' '}
-              Home{' '}
+              {" "}
+              Home{" "}
             </div>
             <div
               className={
-                this.state.showLeaderboard ? 'links-selected' : 'links'
+                this.state.showLeaderboard ? "links-selected" : "links"
               }
               onClick={() => this.handleShowLeaderboard()}
             >
-              {' '}
-              Leaderboard{' '}
+              {" "}
+              Leaderboard{" "}
             </div>
             <div
-              className={this.state.showAnalytics ? 'links-selected' : 'links'}
+              className={this.state.showAnalytics ? "links-selected" : "links"}
               onClick={() => this.handleShowAnalytics()}
             >
-              {' '}
-              Analytics{' '}
+              {" "}
+              Analytics{" "}
             </div>
             <div
-              className={this.state.showSettings ? 'links-selected' : 'links'}
+              className={this.state.showSettings ? "links-selected" : "links"}
               onClick={() => this.handleShowSettings()}
             >
-              {' '}
-              Settings{' '}
+              {" "}
+              Settings{" "}
             </div>
             <Link to={'/'} className="links">
                 {' '}
@@ -170,17 +174,17 @@ export default class Dashboard extends React.Component {
           </Link>
           </nav>
         </div>
-        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
+        <div className={this.state.menuOpen ? "content-open" : "content"}>
           {this.state.showHome && (
             <div>
-              {' '}
-              <Start />{' '}
+              {" "}
+              <Start />{" "}
             </div>
           )}
           {this.state.showLeaderboard && (
             <div>
-              {' '}
-              <Leaderboard allScores={this.state.allScores} />{' '}
+              {" "}
+              <Leaderboard allScores={this.state.allScores} />{" "}
             </div>
           )}
           {this.state.showAnalytics && (
@@ -194,8 +198,8 @@ export default class Dashboard extends React.Component {
           )}
           {this.state.showSettings && (
             <div>
-              {' '}
-              <Settings />{' '}
+              {" "}
+              <Settings />{" "}
             </div>
           )}
         </div>

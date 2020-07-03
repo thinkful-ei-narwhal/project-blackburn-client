@@ -9,13 +9,20 @@ const BlackBurnContext = React.createContext({
   story_id: null,
   checkpoint_ids: null,
   difficulty_setting: null,
+  score: 0,
+  bestScore: 0,
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
+  setScore: () => {},
+  getScore: () => {},
+  setBestScore: () => {},
+  getBestScore: () => {},
   processLogin: () => {},
   setStoryState: () => {},
   setCheckpointIds: () => {},
   getCheckpointIds: () => {},
+  incrementCheckpointIndex: () => {},
 });
 
 export default BlackBurnContext;
@@ -29,6 +36,8 @@ export class BlackburnProvider extends Component {
       story_id: null,
       checkpoint_ids: null,
       difficulty_setting: null,
+      score: 0,
+      bestScore: 0,
     };
     const payload = TokenService.parseAuthToken();
     if (payload)
@@ -53,6 +62,22 @@ export class BlackburnProvider extends Component {
     this.setState({ user });
   };
 
+  setScore = (score) => {
+    this.setState({ score });
+  };
+
+  setBestScore = (bestScore) => {
+    this.setState({ bestScore });
+  };
+
+  getScore = () => {
+    return this.state.score;
+  };
+
+  getBestScore = () => {
+    return this.state.bestScore;
+  };
+
   processLogin = (token) => {
     TokenService.saveAuthToken(token);
     const payload = TokenService.parseAuthToken();
@@ -68,6 +93,18 @@ export class BlackburnProvider extends Component {
       story_id: story_id,
       difficulty_setting: difficulty_setting,
     });
+  };
+
+  incrementCheckpointIndex = () => {
+    let index = this.state.checkpoint_ids.currentIndex;
+    index++;
+    if (index > this.state.checkpoint_ids.checkpointArray.length - 1) {
+      return null;
+    }
+    const checkpoint_ids = this.state.checkpoint_ids;
+    checkpoint_ids.currentIndex = index;
+    this.setState({ checkpoint_ids: checkpoint_ids });
+    return index;
   };
 
   setCheckpointIds = (checkpointArray, currentIndex) => {
@@ -90,13 +127,19 @@ export class BlackburnProvider extends Component {
       difficulty_setting: this.state.difficulty_setting,
       story_id: this.state.story_id,
       checkpoint_id: this.state.checkpoint_id,
+      score: this.state.score,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
+      setScore: this.setScore,
+      getScore: this.getScore,
+      setBestScore: this.setBestScore,
+      getBestScore: this.getBestScore,
       processLogin: this.processLogin,
       setStoryState: this.setStoryState,
       setCheckpointIds: this.setCheckpointIds,
       getCheckpointIds: this.getCheckpointIds,
+      incrementCheckpointIndex: () => {},
     };
     return (
       <BlackBurnContext.Provider value={value}>
