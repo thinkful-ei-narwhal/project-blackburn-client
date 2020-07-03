@@ -9,6 +9,8 @@ import BlackBurnContext from "../../Context/BlackburnContext";
 import ScoreboardApiService from "../../Services/scoreboard-api-service";
 
 export default class Dashboard extends React.Component {
+  static contextType = BlackBurnContext;
+
   state = {
     menuOpen: true,
     showHome: true,
@@ -72,7 +74,13 @@ export default class Dashboard extends React.Component {
   };
   componentDidMount() {
     console.log(this.context);
+<<<<<<< HEAD
     ScoreboardApiService.getAllScores("all").then((res) =>
+=======
+    const { user } = this.context;
+    console.log(user);
+    ScoreboardApiService.getAllScores('all').then((res) =>
+>>>>>>> 271f11cfb7cf387e5af242a87ea591f21a66f975
       res.map((data) => {
         return this.setState({
           allScores: [
@@ -86,7 +94,11 @@ export default class Dashboard extends React.Component {
         });
       })
     );
+<<<<<<< HEAD
     ScoreboardApiService.getMyScores(1, "myscores").then((res) =>
+=======
+    ScoreboardApiService.getMyScores(user.id, 'myscores').then((res) =>
+>>>>>>> 271f11cfb7cf387e5af242a87ea591f21a66f975
       res.map((data) => {
         return this.setState({
           myScores: [
@@ -101,9 +113,19 @@ export default class Dashboard extends React.Component {
       })
     );
   }
-
+  renderEmptyScore = () => {
+    return (
+      <div className="empty-score">
+        <p>No data recorded</p>
+      </div>
+    );
+  };
   render() {
+<<<<<<< HEAD
     console.log(this.state.allScores);
+=======
+    console.log(this.state.myScores);
+>>>>>>> 271f11cfb7cf387e5af242a87ea591f21a66f975
     return (
       <>
         <header className="dashboard-header-open">
@@ -121,7 +143,11 @@ export default class Dashboard extends React.Component {
         <div className={this.state.menuOpen ? "sidenav-open" : "sidenav"}>
           {this.state.menuOpen ? (
             <div className="x" onClick={() => this.handleMenuButton()}>
+<<<<<<< HEAD
               {" "}
+=======
+              {' '}
+>>>>>>> 271f11cfb7cf387e5af242a87ea591f21a66f975
             </div>
           ) : (
             <div></div>
@@ -159,38 +185,43 @@ export default class Dashboard extends React.Component {
             </div>
           </nav>
         </div>
+<<<<<<< HEAD
         <div className={this.state.menuOpen ? "content-open" : "content"}>
           {this.state.showHome ? (
+=======
+        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
+          {this.state.showHome && (
+>>>>>>> 271f11cfb7cf387e5af242a87ea591f21a66f975
             <div>
               {" "}
               <Start />{" "}
             </div>
-          ) : (
-            <div></div>
           )}
-          {this.state.showLeaderboard ? (
+          {this.state.showLeaderboard && (
             <div>
               {" "}
               <Leaderboard allScores={this.state.allScores} />{" "}
             </div>
-          ) : (
-            <div></div>
           )}
-          {this.state.showAnalytics ? (
+          {this.state.showAnalytics && (
             <div>
+<<<<<<< HEAD
               {" "}
               <Analytics myScores={this.state.myScores} />{" "}
+=======
+              {this.state.myScores.length === 0 ? (
+                <div>{this.renderEmptyScore()}</div>
+              ) : (
+                <Analytics myScores={this.state.myScores} />
+              )}
+>>>>>>> 271f11cfb7cf387e5af242a87ea591f21a66f975
             </div>
-          ) : (
-            <div></div>
           )}
-          {this.state.showSettings ? (
+          {this.state.showSettings && (
             <div>
               {" "}
               <Settings />{" "}
             </div>
-          ) : (
-            <div></div>
           )}
         </div>
       </>
