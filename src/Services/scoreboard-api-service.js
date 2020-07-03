@@ -34,10 +34,10 @@ const scoreboardService = {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ data })
-        .then((res) => res.json())
-        .then((data) => console.log(data)),
-    });
+      body: JSON.stringify({ data }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   },
 };
 

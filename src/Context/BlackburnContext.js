@@ -16,6 +16,7 @@ const BlackBurnContext = React.createContext({
   setStoryState: () => {},
   setCheckpointIds: () => {},
   getCheckpointIds: () => {},
+  incrementCheckpointIndex: () => {},
 });
 
 export default BlackBurnContext;
@@ -70,6 +71,18 @@ export class BlackburnProvider extends Component {
     });
   };
 
+  incrementCheckpointIndex = () => {
+    const index = this.state.checkpoint_ids.currentIndex;
+    index++;
+    if (index > this.state.checkpoint_ids.checkpointArray.length - 1) {
+      return null;
+    }
+    const checkpoint_ids = this.state.checkpoint_ids;
+    checkpoint_ids.currentIndex = index;
+    this.setState({ checkpoint_ids: checkpoint_ids });
+    return index;
+  };
+
   setCheckpointIds = (checkpointArray, currentIndex) => {
     this.setState({
       checkpoint_ids: {
@@ -97,6 +110,7 @@ export class BlackburnProvider extends Component {
       setStoryState: this.setStoryState,
       setCheckpointIds: this.setCheckpointIds,
       getCheckpointIds: this.getCheckpointIds,
+      incrementCheckpointIndex: () => {},
     };
     return (
       <BlackBurnContext.Provider value={value}>
