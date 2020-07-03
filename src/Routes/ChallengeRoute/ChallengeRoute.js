@@ -29,11 +29,6 @@ class ChallengeRoute extends Component {
 
   //Todos:
   //Get data from context and clear on END
-  //Level, checkpoint, difficulty
-
-  //Data to context to get between levels
-  //  > playerBestScored
-  //  > playerScore
 
   //Get the values for level, checkpoint, and difficulty from context after the next route goes
   //Set score in black burn context so it persists between levels until you end win or lose
@@ -48,11 +43,7 @@ class ChallengeRoute extends Component {
     clearInterval(this.intervalGenerator);
     clearInterval(this.levelTimeout);
     clearInterval(this.wpmAvgCalculator);
-  }
-
-  setGameover(isWin) {
-    this.clearTimers();
-    this.setState({ isWin });
+    clearInterval(this.checkWinInterval);
   }
 
   updateLevelTimer() {
@@ -141,6 +132,7 @@ class ChallengeRoute extends Component {
     const playerBestStored = this.context.getBestScore();
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
+    this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
     this.intervalGenerator = setInterval(
       () =>
         this.generateWord(
@@ -163,14 +155,19 @@ class ChallengeRoute extends Component {
     this.clearTimers();
   }
 
-  renderGameplay() {
-    if (this.state.playerHealth <= 0 || this.state.levelTimer < 0) {
+  triggerLevelEnd() {
+    if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
-      // this.context.setScore();
-      // if (this.context.getBestScore() < this.state.playerBest)
-      //   this.context.setBestScore(this.state.playerBest);
+      this.context.setScore(this.state.playerScore);
+      if (this.context.getBestScore() < this.state.playerBest)
+        this.context.setBestScore(this.state.playerBest);
+      this.state.levelTimer <= 0
+        ? this.setState({ isWin: true })
+        : this.setState({ isWin: false });
     }
+  }
 
+  renderGameplay() {
     return (
       <div>
         <p>
