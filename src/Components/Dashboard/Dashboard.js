@@ -137,6 +137,7 @@ export default class Dashboard extends React.Component {
             <div></div>
           )}
           <nav className="navLinks">
+          <h1 className="title">Project Blackburn</h1>
             <div
               className={this.state.showHome ? "links-selected" : "links"}
               onClick={() => this.handleShowHome()}
@@ -167,6 +168,10 @@ export default class Dashboard extends React.Component {
               {" "}
               Settings{" "}
             </div>
+            <Link to={'/'} className="links">
+                {' '}
+                logout{' '}
+          </Link>
           </nav>
         </div>
         <div className={this.state.menuOpen ? "content-open" : "content"}>
