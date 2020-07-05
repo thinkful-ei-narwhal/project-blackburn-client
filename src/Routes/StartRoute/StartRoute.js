@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import Button from "../../Components/Button/Button";
 import storyService from "../../Services/story-api-service";
-import "./StartRoute.Module.css";
+import BlackburnContext from '../../Context/BlackburnContext'
+import { Link } from 'react-router-dom'
+// import "./StartRoute.Module.css";
+
 
 class StartRoute extends Component {
-  //static contextType = BlackburnContext
+  static contextType = BlackburnContext
   //const stories = this.context.stories
   state = {
-    story_id: "null",
-    difficulty_setting: "",
+    story_id: 1,
+    difficulty_setting: "medium",
     stories: [],
   };
 
@@ -29,10 +32,13 @@ class StartRoute extends Component {
   handleStorySubmit = (e) => {
     e.preventDefault();
     console.log(e.target.value);
+    this.context.setStoryState(this.state.story_id, this.state.difficulty_setting)
     //grab checkpoint ID and pass to story component
+
   };
 
   renderStories() {
+    console.log('context',this.context.story_id)
     return (
       //youre figuring out how to select a radio button
       //change img on line 37 to back ground of line 36 if we wish
@@ -81,9 +87,11 @@ class StartRoute extends Component {
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
-          <Button className="difficulty-btn" type="submit">
-            Start
-          </Button>
+          <Link to = {'/storypage'}>
+            <Button className="difficulty-btn" type="submit">
+              Start
+            </Button>
+          </Link>
         </form>
       </div>
     );
