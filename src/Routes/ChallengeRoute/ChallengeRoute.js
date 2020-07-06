@@ -23,6 +23,7 @@ class ChallengeRoute extends Component {
     levelTimerTotal: 0,
     wpm: 0,
     isWin: null,
+    levelEnded: false,
     initialized: false,
   };
 
@@ -47,8 +48,8 @@ class ChallengeRoute extends Component {
       if (this.context.getBestScore() < this.state.playerBest)
         this.context.setBestScore(this.state.playerBest);
       this.state.levelTimer <= 0
-        ? this.setState({ isWin: true })
-        : this.setState({ isWin: false });
+        ? this.setState({ isWin: true, levelEnded: true })
+        : this.setState({ isWin: false, levelEnded: true });
     }
   }
 
@@ -80,40 +81,6 @@ class ChallengeRoute extends Component {
     //adds a new word if it's updated
     if (addWordObj !== null) newWordArray.push(addWordObj);
     this.setState({ words: newWordArray });
-  }
-
-  timer(callback, delay) {
-    let id,
-      started,
-      remaining = delay,
-      running;
-
-    this.start = function () {
-      running = true;
-      started = new Date();
-      id = setTimeout(callback, remaining);
-    };
-
-    this.pause = function () {
-      running = false;
-      clearTimeout(id);
-      remaining -= new Date() - started;
-    };
-
-    this.getTimeLeft = function () {
-      if (running) {
-        this.pause();
-        this.start();
-      }
-
-      return remaining;
-    };
-
-    this.getStateRunning = function () {
-      return running;
-    };
-
-    this.start();
   }
 
   generateWord(word_expiration_timer, max_screen_words) {
@@ -243,15 +210,17 @@ class ChallengeRoute extends Component {
         </ul>
         <GameplayScreen />
 
-        {this.state.levelTimer < 0 &&
+        {this.state.levelEnded &&
+          this.state.levelTimer < 0 &&
           this.context.getCurrentCheckpointIndex() !== null && (
             <WinLosePage condition={"checkpoint"} autoSave={false} />
           )}
-        {this.state.levelTimer < 0 &&
+        {this.state.levelEnded &&
+          this.state.levelTimer < 0 &&
           this.context.getCurrentCheckpointIndex() === null && (
             <WinLosePage condition={"level_beaten"} autoSave={true} />
           )}
-        {this.state.playerHealth <= 0 && (
+        {this.state.levelEnded && this.state.playerHealth <= 0 && (
           <WinLosePage condition={"lose"} autoSave={true} />
         )}
       </div>

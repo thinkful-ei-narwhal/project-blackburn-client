@@ -81,6 +81,7 @@ export class BlackburnProvider extends Component {
   };
 
   setWpm = (wpm) => {
+    console.log('TESTING 2', wpm);
     this.setState({ wpm });
   };
 
