@@ -74,34 +74,21 @@ export default class Dashboard extends React.Component {
   };
   componentDidMount() {
     const { user } = this.context;
-    ScoreboardApiService.getAllScores("all").then((res) =>
-      res.map((data) => {
-        return this.setState({
-          allScores: [
-            ...this.state.allScores,
-            {
-              username: data.username,
-              score: data.total_score,
-              storyId: data.story_data,
-            },
-          ],
-        });
-      })
-    );
-    ScoreboardApiService.getMyScores(user.id, "myscores").then((res) =>
-      res.map((data) => {
-        return this.setState({
-          myScores: [
-            ...this.state.myScores,
-            {
-              score: data.total_score,
-              wpm: data.avg_wpm,
-              date: data.date_created,
-            },
-          ],
-        });
-      })
-    );
+    this.context.getMyScores()
+    // ScoreboardApiService.getMyScores(user.id, "myscores").then((res) =>
+    //   res.map((data) => {
+    //     return this.setState({
+    //       myScores: [
+    //         ...this.state.myScores,
+    //         {
+    //           score: data.total_score,
+    //           wpm: data.avg_wpm,
+    //           date: data.date_created,
+    //         },
+    //       ],
+    //     });
+    //   })
+    // );
   }
   renderEmptyScore = () => {
     return (
@@ -181,7 +168,7 @@ export default class Dashboard extends React.Component {
           {this.state.showLeaderboard && (
             <div>
               {" "}
-              <Leaderboard allScores={this.state.allScores} myScores={this.state.myScores} />{" "}
+              <Leaderboard myScores={this.state.myScores} />{" "}
             </div>
           )}
           {this.state.showAnalytics && (

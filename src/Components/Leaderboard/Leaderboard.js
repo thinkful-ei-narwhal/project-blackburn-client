@@ -27,16 +27,23 @@ export default class Leaderboard extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.context.getTopTenScores()
+        this.context.getMyScores()
+    }
 
     renderLeaderBoard = () => {
         if(this.state.overall) {
-            return this.props.allScores.sort((a,b) => b - a).slice(0, 10).map((score, index) => {
+            return this.context.topTenScores.sort((a,b) => b - a).slice(0, 10).map((score, index) => {
                 return(
-                 <Trail items = {score} from = {{opacity: 0}} to = {{opacity: 1}}>   
+                 <Trail items = {score} from = {{opacity: 0}} to = {{opacity: 1}}  key = {index}>   
                    {
+                       // if logged in user == leaderboard user 
+                       // render the list item differently 
                     score => props => 
                     <div>
-                        <li className = 'leaderboard-list' key = {index} style = {props}> 
+                        
+                        <li className = 'leaderboard-list' style = {props}> 
                             <span className = 'username'> {index + 1} </span> 
                             <div className = 'avatar'></div>
                             <span className = 'username'> {score.username} </span> 
@@ -81,7 +88,7 @@ export default class Leaderboard extends React.Component {
     }
 
     render() {
-        const myScoreArr = this.props.myScores.map(score => score.score)
+        const myScoreArr = this.context.myScores.map(score => score.score)
         const maxMyScore = Math.max(...myScoreArr)
         return (
             <div className = 'leaderboard'>
@@ -102,13 +109,12 @@ export default class Leaderboard extends React.Component {
                     {    
                        this.renderLeaderBoard()
                     }   
-                    <li className = 'leaderboard-list'>  
-                        {/* <span className = 'username'> Your Top Score </span>  */}
+                    <li className = 'leaderboard-list' style = {{marginTop: '10px'}}>  
+                        <span className = 'username'> Your Top Score </span> 
                         <div className = 'avatar'></div>
                         <span className = 'username'> {this.context.user.username} </span> 
                         <span className = 'score'> {maxMyScore} </span>  
                     </li>
-
                 </ul>
             </div>
         )
