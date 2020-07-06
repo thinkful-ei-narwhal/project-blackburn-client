@@ -7,6 +7,7 @@ import Settings from '../Settings/Settings';
 import './Dashboard.Module.css';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import ScoreboardApiService from '../../Services/scoreboard-api-service';
+import UserHeader from '../UserHeader/UserHeader';
 
 export default class Dashboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -126,9 +127,7 @@ export default class Dashboard extends React.Component {
             <div onClick={() => this.handleMenuButton()}> &#9776; </div>
           )}
           <h2 className="user-welcome">Welcome {user.username}</h2>
-          <p className="user-info">
-            {user.username} : {user.avatar}
-          </p>
+          <UserHeader />
         </header>
         <div className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
           {this.state.menuOpen && (
@@ -168,9 +167,12 @@ export default class Dashboard extends React.Component {
               {' '}
               Settings{' '}
             </div>
-            <Link to={'/'} className="links">
-              {' '}
-              logout{' '}
+            <Link
+              className="links"
+              onClick={(e) => this.handleLogout(e)}
+              to="/"
+            >
+              Logout
             </Link>
           </nav>
         </div>
