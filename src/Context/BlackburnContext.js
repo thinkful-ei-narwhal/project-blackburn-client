@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import TokenService from "../Services/token-service";
 import ScoreboardApiService from "../Services/scoreboard-api-service";
@@ -23,6 +24,7 @@ const BlackBurnContext = React.createContext({
   setBestScore: () => {},
   getBestScore: () => {},
   processLogin: () => {},
+  processLogout: () => {},
   setStoryState: () => {},
   setCheckpointIds: () => {},
   getCheckpointIds: () => {},
@@ -81,7 +83,6 @@ export class BlackburnProvider extends Component {
   };
 
   setWpm = (wpm) => {
-    console.log('TESTING 2', wpm);
     this.setState({ wpm });
   };
 
@@ -113,6 +114,11 @@ export class BlackburnProvider extends Component {
       username: payload.sub,
       avatar: payload.avatar,
     });
+  };
+
+  processLogout = () => {
+    TokenService.clearAuthToken();
+    this.setUser({});
   };
 
   setStoryState = (story_id, difficulty_setting) => {
@@ -166,19 +172,22 @@ export class BlackburnProvider extends Component {
   };
 
   getMyScores = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
-      (res) => {
-        const outputArr = res.map((data) => {
-          return {
-            score: data.total_score,
-            wpm: data.avg_wpm,
-            date: data.date_created,
-          };
-        });
-        return this.setState({ myScores: outputArr });
-      }
-    );
-  };
+    ScoreboardApiService.getMyScores(this.state.user.id, "myscores")
+    .then((res) => {
+        console.log('res', res)
+        const outputArr = res.map(data => {
+            return (
+                { 
+                    score: data.total_score, 
+                    wpm: data.avg_wpm, 
+                    date: data.date_created 
+                }
+            )
+        })
+    return this.setState({ myScores: outputArr })   
+    })
+    
+ }
 
   render() {
     console.log(this.state.myScores);
@@ -202,6 +211,7 @@ export class BlackburnProvider extends Component {
       setBestScore: this.setBestScore,
       getBestScore: this.getBestScore,
       processLogin: this.processLogin,
+      processLogout: this.processLogout,
       setStoryState: this.setStoryState,
       setCheckpointIds: this.setCheckpointIds,
       getCheckpointIds: this.getCheckpointIds,

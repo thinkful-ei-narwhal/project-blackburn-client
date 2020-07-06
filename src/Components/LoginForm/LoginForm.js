@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import { Input, Label } from '../Form/Form';
 import ApiService from '../../Services/auth-api-service';
-import TokenService from '../../Services/token-service';
 import BlackBurnContext from '../../Context/BlackburnContext';
 
 class LoginForm extends Component {
