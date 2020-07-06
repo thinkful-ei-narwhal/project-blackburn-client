@@ -18,8 +18,6 @@ export default class Dashboard extends React.Component {
     showLeaderboard: false,
     showAnalytics: false,
     showSettings: false,
-    allScores: [],
-    myScores: [],
   };
   handleLogout = (e) => {
     this.context.processLogout(e);
@@ -75,39 +73,7 @@ export default class Dashboard extends React.Component {
       });
     }
   };
-  componentDidMount() {
-    console.log(this.context);
-    const { user } = this.context;
-    console.log(user);
-    ScoreboardApiService.getAllScores('all').then((res) =>
-      res.map((data) => {
-        return this.setState({
-          allScores: [
-            ...this.state.allScores,
-            {
-              username: data.username,
-              score: data.total_score,
-              storyId: data.story_data,
-            },
-          ],
-        });
-      })
-    );
-    ScoreboardApiService.getMyScores(user.id, 'myscores').then((res) =>
-      res.map((data) => {
-        return this.setState({
-          myScores: [
-            ...this.state.myScores,
-            {
-              score: data.total_score,
-              wpm: data.avg_wpm,
-              date: data.date_created,
-            },
-          ],
-        });
-      })
-    );
-  }
+
   renderEmptyScore = () => {
     return (
       <div className="empty-score">
@@ -118,6 +84,7 @@ export default class Dashboard extends React.Component {
   render() {
     console.log(this.state.allScores);
     const { user } = this.context;
+
     return (
       <>
         <header className="dashboard-header-open">
@@ -185,16 +152,17 @@ export default class Dashboard extends React.Component {
           )}
           {this.state.showLeaderboard && (
             <div>
-              {' '}
-              <Leaderboard allScores={this.state.allScores} />{' '}
+
+              {" "}
+              <Leaderboard />{" "}
             </div>
           )}
           {this.state.showAnalytics && (
             <div>
-              {this.state.myScores.length === 0 ? (
+              {this.context.myScores.length === 0 ? (
                 <div>{this.renderEmptyScore()}</div>
               ) : (
-                <Analytics myScores={this.state.myScores} />
+                <Analytics />
               )}
             </div>
           )}
