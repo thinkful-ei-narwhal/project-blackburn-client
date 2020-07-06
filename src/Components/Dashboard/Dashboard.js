@@ -73,9 +73,7 @@ export default class Dashboard extends React.Component {
     }
   };
   componentDidMount() {
-    console.log(this.context);
     const { user } = this.context;
-    console.log(user);
     ScoreboardApiService.getAllScores("all").then((res) =>
       res.map((data) => {
         return this.setState({
@@ -113,7 +111,6 @@ export default class Dashboard extends React.Component {
     );
   };
   render() {
-    console.log(this.state.allScores);
     return (
       <>
         <header className="dashboard-header-open">
@@ -184,7 +181,7 @@ export default class Dashboard extends React.Component {
           {this.state.showLeaderboard && (
             <div>
               {" "}
-              <Leaderboard allScores={this.state.allScores} />{" "}
+              <Leaderboard allScores={this.state.allScores} myScores={this.state.myScores} />{" "}
             </div>
           )}
           {this.state.showAnalytics && (
