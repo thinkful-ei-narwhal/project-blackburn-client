@@ -17,8 +17,6 @@ export default class Dashboard extends React.Component {
     showLeaderboard: false,
     showAnalytics: false,
     showSettings: false,
-    allScores: [],
-    myScores: [],
   };
 
   handleShowHome = () => {
@@ -72,24 +70,7 @@ export default class Dashboard extends React.Component {
       });
     }
   };
-  componentDidMount() {
-    const { user } = this.context;
-    this.context.getMyScores()
-    // ScoreboardApiService.getMyScores(user.id, "myscores").then((res) =>
-    //   res.map((data) => {
-    //     return this.setState({
-    //       myScores: [
-    //         ...this.state.myScores,
-    //         {
-    //           score: data.total_score,
-    //           wpm: data.avg_wpm,
-    //           date: data.date_created,
-    //         },
-    //       ],
-    //     });
-    //   })
-    // );
-  }
+
   renderEmptyScore = () => {
     return (
       <div className="empty-score">
@@ -168,15 +149,15 @@ export default class Dashboard extends React.Component {
           {this.state.showLeaderboard && (
             <div>
               {" "}
-              <Leaderboard myScores={this.state.myScores} />{" "}
+              <Leaderboard />{" "}
             </div>
           )}
           {this.state.showAnalytics && (
             <div>
-              {this.state.myScores.length === 0 ? (
+              {this.context.myScores.length === 0 ? (
                 <div>{this.renderEmptyScore()}</div>
               ) : (
-                <Analytics myScores={this.state.myScores} />
+                <Analytics />
               )}
             </div>
           )}
