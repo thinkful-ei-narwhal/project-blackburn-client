@@ -82,6 +82,7 @@ export default class Dashboard extends React.Component {
       </div>
     );
   };
+
   render() {
     console.log(this.state.allScores);
     const { user } = this.context;
@@ -162,14 +163,8 @@ export default class Dashboard extends React.Component {
             </div>
           )}
           {this.state.showAnalytics && (
-            <div>
-              {this.context.myScores.length === 0 ? (
-                <div>{this.renderEmptyScore()}</div>
-              ) : (
                 <Analytics />
               )}
-            </div>
-          )}
           {this.state.showSettings && (
             <div>
               {' '}
