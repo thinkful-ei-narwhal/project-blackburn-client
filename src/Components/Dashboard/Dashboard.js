@@ -72,24 +72,7 @@ export default class Dashboard extends React.Component {
       });
     }
   };
-  componentDidMount() {
-    const { user } = this.context;
-    this.context.getMyScores()
-    // ScoreboardApiService.getMyScores(user.id, "myscores").then((res) =>
-    //   res.map((data) => {
-    //     return this.setState({
-    //       myScores: [
-    //         ...this.state.myScores,
-    //         {
-    //           score: data.total_score,
-    //           wpm: data.avg_wpm,
-    //           date: data.date_created,
-    //         },
-    //       ],
-    //     });
-    //   })
-    // );
-  }
+
   renderEmptyScore = () => {
     return (
       <div className="empty-score">
