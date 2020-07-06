@@ -45,7 +45,7 @@ export default class Leaderboard extends React.Component {
                         
                         <li className = 'leaderboard-list' style = {props}> 
                             <span className = 'username'> {index + 1} </span> 
-                            <div className = 'avatar'></div>
+                            <div className = 'avatar'> {this.context.user.avatar} </div>
                             <span className = 'username'> {score.username} </span> 
                             <span className = 'score'> {score.score} </span> 
                         </li>
@@ -55,30 +55,30 @@ export default class Leaderboard extends React.Component {
                 )
             })
         }
-        else if(this.state.byStory && this.state.story === 'monsters') {
-            return this.props.allScores.filter(data => data.storyId === 'monster').sort((a,b) => b - a).map((score, index) => {
-                return(
-                <li className = 'leaderboard-list' key = {index} > 
-                    <span className = 'username'> {index + 1} </span> 
-                    <div className = 'avatar'></div>
-                    <span className = 'username'> {score.username} </span> 
-                    <span className = 'score'> {score.score} </span> 
-                </li>
-                )
-            })
-        }
-        else if(this.state.byStory && this.state.story === 'detective') {
-            return this.props.allScores.filter(data => data.storyId === 'detective').sort((a,b) => b - a).map((score, index) => {
-                return(
-                <li className = 'leaderboard-list' key = {index} > 
-                    <span className = 'username'> {index + 1} </span> 
-                    <div className = 'avatar'></div>
-                    <span className = 'username'> {score.username} </span> 
-                    <span className = 'score'> {score.score} </span> 
-                </li>
-                )
-            })
-        }
+        // else if(this.state.byStory && this.state.story === 'monsters') {
+        //     return this.props.allScores.filter(data => data.storyId === 'monster').sort((a,b) => b - a).map((score, index) => {
+        //         return(
+        //         <li className = 'leaderboard-list' key = {index} > 
+        //             <span className = 'username'> {index + 1} </span> 
+        //             <div className = 'avatar'></div>
+        //             <span className = 'username'> {score.username} </span> 
+        //             <span className = 'score'> {score.score} </span> 
+        //         </li>
+        //         )
+        //     })
+        // }
+        // else if(this.state.byStory && this.state.story === 'detective') {
+        //     return this.props.allScores.filter(data => data.storyId === 'detective').sort((a,b) => b - a).map((score, index) => {
+        //         return(
+        //         <li className = 'leaderboard-list' key = {index} > 
+        //             <span className = 'username'> {index + 1} </span> 
+        //             <div className = 'avatar'></div>
+        //             <span className = 'username'> {score.username} </span> 
+        //             <span className = 'score'> {score.score} </span> 
+        //         </li>
+        //         )
+        //     })
+        // }
     }
 
     handleOption = (e) => {
@@ -111,7 +111,7 @@ export default class Leaderboard extends React.Component {
                     }   
                     <li className = 'leaderboard-list' style = {{marginTop: '10px'}}>  
                         <span className = 'username'> Your Top Score </span> 
-                        <div className = 'avatar'></div>
+                        <div className = 'avatar'> {this.context.user.avatar} </div>
                         <span className = 'username'> {this.context.user.username} </span> 
                         <span className = 'score'> {maxMyScore} </span>  
                     </li>

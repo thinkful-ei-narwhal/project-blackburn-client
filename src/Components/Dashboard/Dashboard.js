@@ -17,8 +17,6 @@ export default class Dashboard extends React.Component {
     showLeaderboard: false,
     showAnalytics: false,
     showSettings: false,
-    allScores: [],
-    myScores: [],
   };
 
   handleShowHome = () => {
@@ -151,15 +149,15 @@ export default class Dashboard extends React.Component {
           {this.state.showLeaderboard && (
             <div>
               {" "}
-              <Leaderboard myScores={this.state.myScores} />{" "}
+              <Leaderboard />{" "}
             </div>
           )}
           {this.state.showAnalytics && (
             <div>
-              {this.state.myScores.length === 0 ? (
+              {this.context.myScores.length === 0 ? (
                 <div>{this.renderEmptyScore()}</div>
               ) : (
-                <Analytics myScores={this.state.myScores} />
+                <Analytics />
               )}
             </div>
           )}
