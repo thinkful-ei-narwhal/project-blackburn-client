@@ -13,6 +13,7 @@ const BlackBurnContext = React.createContext({
   bestScore: 0,
   setError: () => {},
   clearError: () => {},
+  resetGameData: () => {},
   setUser: () => {},
   setScore: () => {},
   getScore: () => {},
@@ -23,6 +24,7 @@ const BlackBurnContext = React.createContext({
   setCheckpointIds: () => {},
   getCheckpointIds: () => {},
   incrementCheckpointIndex: () => {},
+  getCurrentCheckpointIndex: () => {},
 });
 
 export default BlackBurnContext;
@@ -56,6 +58,17 @@ export class BlackburnProvider extends Component {
 
   clearError = () => {
     this.setState({ error: null });
+  };
+
+  resetGameData = () => {
+    this.setState({
+      error: null,
+      story_id: null,
+      checkpoint_ids: null,
+      difficulty_setting: null,
+      score: 0,
+      bestScore: 0,
+    });
   };
 
   setUser = (user) => {
@@ -99,12 +112,17 @@ export class BlackburnProvider extends Component {
     let index = this.state.checkpoint_ids.currentIndex;
     index++;
     if (index > this.state.checkpoint_ids.checkpointArray.length - 1) {
-      return null;
+      this.setState({ checkpoint_ids: null });
+    } else {
+      const checkpoint_ids = this.state.checkpoint_ids;
+      checkpoint_ids.currentIndex = index;
+      this.setState({ checkpoint_ids: checkpoint_ids });
     }
-    const checkpoint_ids = this.state.checkpoint_ids;
-    checkpoint_ids.currentIndex = index;
-    this.setState({ checkpoint_ids: checkpoint_ids });
-    return index;
+    return this.state.checkpoint_ids.currentIndex;
+  };
+
+  getCurrentCheckpointIndex = () => {
+    return this.state.checkpoint_ids.currentIndex;
   };
 
   setCheckpointIds = (checkpointArray, currentIndex) => {
@@ -130,6 +148,7 @@ export class BlackburnProvider extends Component {
       score: this.state.score,
       setError: this.setError,
       clearError: this.clearError,
+      resetGameData: this.resetGameData,
       setUser: this.setUser,
       setScore: this.setScore,
       getScore: this.getScore,
@@ -139,7 +158,8 @@ export class BlackburnProvider extends Component {
       setStoryState: this.setStoryState,
       setCheckpointIds: this.setCheckpointIds,
       getCheckpointIds: this.getCheckpointIds,
-      incrementCheckpointIndex: () => {},
+      incrementCheckpointIndex: this.incrementCheckpointIndex,
+      getCurrentCheckpointIndex: this.getCurrentCheckpointIndex,
     };
     return (
       <BlackBurnContext.Provider value={value}>
