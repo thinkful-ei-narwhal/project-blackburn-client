@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { render } from "@testing-library/react";
 import TokenService from "../Services/token-service";
-import ApiService from "../Services/auth-api-service";
-import ScoreboardApiService from '../Services/scoreboard-api-service'
+import ScoreboardApiService from "../Services/scoreboard-api-service";
+
 const BlackBurnContext = React.createContext({
   user: {},
   error: null,
@@ -11,6 +10,7 @@ const BlackBurnContext = React.createContext({
   difficulty_setting: null,
   score: 0,
   bestScore: 0,
+  wpm: 0,
   topTenScores: [],
   myScores: [],
   setError: () => {},
@@ -19,6 +19,7 @@ const BlackBurnContext = React.createContext({
   setUser: () => {},
   setScore: () => {},
   getScore: () => {},
+  setWpm: () => {},
   setBestScore: () => {},
   getBestScore: () => {},
   processLogin: () => {},
@@ -28,7 +29,7 @@ const BlackBurnContext = React.createContext({
   incrementCheckpointIndex: () => {},
   getCurrentCheckpointIndex: () => {},
   getTopTenScores: () => {},
-  getMyScores: () => {}
+  getMyScores: () => {},
 });
 
 export default BlackBurnContext;
@@ -44,8 +45,9 @@ export class BlackburnProvider extends Component {
       difficulty_setting: null,
       score: 0,
       bestScore: 0,
+      wpm: 0,
       topTenScores: [],
-      myScores: []
+      myScores: [],
     };
     const payload = TokenService.parseAuthToken();
     if (payload)
@@ -74,7 +76,12 @@ export class BlackburnProvider extends Component {
       difficulty_setting: null,
       score: 0,
       bestScore: 0,
+      wpm: 0,
     });
+  };
+
+  setWpm = (wpm) => {
+    this.setState({ wpm });
   };
 
   setUser = (user) => {
@@ -145,40 +152,35 @@ export class BlackburnProvider extends Component {
   };
 
   getTopTenScores = () => {
-    ScoreboardApiService.getAllScores('all')
-        .then((res) => {
-            const outputArr = res.map(data => {
-                return ( 
-                    {
-                    username: data.username,
-                    score: data.total_score,
-                    storyId: data.story_data,
-                    }
-                )
-            })
-            return this.setState({ topTenScores: outputArr })
-        })
-  }
+    ScoreboardApiService.getAllScores("all").then((res) => {
+      const outputArr = res.map((data) => {
+        return {
+          username: data.username,
+          score: data.total_score,
+          storyId: data.story_data,
+        };
+      });
+      return this.setState({ topTenScores: outputArr });
+    });
+  };
 
   getMyScores = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores")
-    .then((res) => {
-        const outputArr = res.map(data => {
-            return (
-                { 
-                    score: data.total_score, 
-                    wpm: data.avg_wpm, 
-                    date: data.date_created 
-                }
-            )
-        })
-    return this.setState({ myScores: outputArr })   
-    })
-    
- }
+    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+      (res) => {
+        const outputArr = res.map((data) => {
+          return {
+            score: data.total_score,
+            wpm: data.avg_wpm,
+            date: data.date_created,
+          };
+        });
+        return this.setState({ myScores: outputArr });
+      }
+    );
+  };
 
   render() {
-    console.log(this.state.myScores)
+    console.log(this.state.myScores);
     const value = {
       user: this.state.user,
       error: this.state.error,
@@ -188,6 +190,8 @@ export class BlackburnProvider extends Component {
       score: this.state.score,
       topTenScores: this.state.topTenScores,
       myScores: this.state.myScores,
+      wpm: this.state.wpm,
+      setWpm: this.setWpm,
       setError: this.setError,
       clearError: this.clearError,
       resetGameData: this.resetGameData,
@@ -203,7 +207,7 @@ export class BlackburnProvider extends Component {
       incrementCheckpointIndex: this.incrementCheckpointIndex,
       getCurrentCheckpointIndex: this.getCurrentCheckpointIndex,
       getTopTenScores: this.getTopTenScores,
-      getMyScores: this.getMyScores
+      getMyScores: this.getMyScores,
     };
     return (
       <BlackBurnContext.Provider value={value}>
