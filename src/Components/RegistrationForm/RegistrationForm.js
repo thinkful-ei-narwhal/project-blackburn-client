@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import { Input, Required, Label } from '../Form/Form';
 import ApiService from '../../Services/auth-api-service';
@@ -141,6 +142,13 @@ class RegistrationForm extends Component {
             </div>
           )}
         </form>
+        <p>
+          Already a member? Click{' '}
+          <Link className="signup-lnk" to="/registration">
+            here
+          </Link>{' '}
+          to login
+        </p>
       </div>
     );
   }

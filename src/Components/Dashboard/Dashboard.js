@@ -1,12 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Leaderboard from "../Leaderboard/Leaderboard";
-import Start from "../Start/Start";
-import Analytics from "../Analytics/Analytics";
-import Settings from "../Settings/Settings";
-import "./Dashboard.Module.css";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import ScoreboardApiService from "../../Services/scoreboard-api-service";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Leaderboard from '../Leaderboard/Leaderboard';
+import Start from '../Start/Start';
+import Analytics from '../Analytics/Analytics';
+import Settings from '../Settings/Settings';
+import './Dashboard.Module.css';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import ScoreboardApiService from '../../Services/scoreboard-api-service';
+import UserHeader from '../UserHeader/UserHeader';
 
 export default class Dashboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -18,7 +19,9 @@ export default class Dashboard extends React.Component {
     showAnalytics: false,
     showSettings: false,
   };
-
+  handleLogout = (e) => {
+    this.context.processLogout(e);
+  };
   handleShowHome = () => {
     if (!this.state.showHome) {
       this.setState({
@@ -79,6 +82,9 @@ export default class Dashboard extends React.Component {
     );
   };
   render() {
+    console.log(this.state.allScores);
+    const { user } = this.context;
+
     return (
       <>
         <header className="dashboard-header-open">
@@ -87,67 +93,66 @@ export default class Dashboard extends React.Component {
           ) : (
             <div onClick={() => this.handleMenuButton()}> &#9776; </div>
           )}
-          <h1 className="title">Project Blackburn</h1>
-          <Link to={"/"} className="links">
-            {" "}
-            logout{" "}
-          </Link>
+          <h2 className="user-welcome">Welcome {user.username}</h2>
+          <UserHeader />
         </header>
-        <div className={this.state.menuOpen ? "sidenav-open" : "sidenav"}>
-          {this.state.menuOpen ? (
+        <div className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
+          {this.state.menuOpen && (
             <div className="x" onClick={() => this.handleMenuButton()}>
-              {" "}
+              {' '}
             </div>
-          ) : (
-            <div></div>
           )}
           <nav className="navLinks">
-          <h1 className="title">Project Blackburn</h1>
+            <h1 className="title">Project Blackburn</h1>
             <div
-              className={this.state.showHome ? "links-selected" : "links"}
+              className={this.state.showHome ? 'links-selected' : 'links'}
               onClick={() => this.handleShowHome()}
             >
-              {" "}
-              Home{" "}
+              {' '}
+              Home{' '}
             </div>
             <div
               className={
-                this.state.showLeaderboard ? "links-selected" : "links"
+                this.state.showLeaderboard ? 'links-selected' : 'links'
               }
               onClick={() => this.handleShowLeaderboard()}
             >
-              {" "}
-              Leaderboard{" "}
+              {' '}
+              Leaderboard{' '}
             </div>
             <div
-              className={this.state.showAnalytics ? "links-selected" : "links"}
+              className={this.state.showAnalytics ? 'links-selected' : 'links'}
               onClick={() => this.handleShowAnalytics()}
             >
-              {" "}
-              Analytics{" "}
+              {' '}
+              Analytics{' '}
             </div>
             <div
-              className={this.state.showSettings ? "links-selected" : "links"}
+              className={this.state.showSettings ? 'links-selected' : 'links'}
               onClick={() => this.handleShowSettings()}
             >
-              {" "}
-              Settings{" "}
+              {' '}
+              Settings{' '}
             </div>
-            <Link to={'/'} className="links">
-                {' '}
-                logout{' '}
-          </Link>
+            <Link
+              className="links"
+              onClick={(e) => this.handleLogout(e)}
+              to="/"
+            >
+              Logout
+            </Link>
           </nav>
         </div>
-        <div className={this.state.menuOpen ? "content-open" : "content"}>
+        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
           {this.state.showHome && (
             <div>
-              {" "}
-              <Start />{" "}
+              {' '}
+              <Start />{' '}
             </div>
           )}
           {this.state.showLeaderboard && (
             <div>
+
               {" "}
               <Leaderboard />{" "}
             </div>
@@ -163,8 +168,11 @@ export default class Dashboard extends React.Component {
           )}
           {this.state.showSettings && (
             <div>
-              {" "}
-              <Settings />{" "}
+              {' '}
+              <Settings />{' '}
+              <Link onClick={(e) => this.handleLogout(e)} to="/">
+                Logout
+              </Link>
             </div>
           )}
         </div>

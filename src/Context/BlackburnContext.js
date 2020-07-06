@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { render } from "@testing-library/react";
 import TokenService from "../Services/token-service";
@@ -22,6 +23,7 @@ const BlackBurnContext = React.createContext({
   setBestScore: () => {},
   getBestScore: () => {},
   processLogin: () => {},
+  processLogout: () => {},
   setStoryState: () => {},
   setCheckpointIds: () => {},
   getCheckpointIds: () => {},
@@ -105,6 +107,11 @@ export class BlackburnProvider extends Component {
       username: payload.sub,
       avatar: payload.avatar,
     });
+  };
+
+  processLogout = () => {
+    TokenService.clearAuthToken();
+    this.setUser({});
   };
 
   setStoryState = (story_id, difficulty_setting) => {
@@ -198,6 +205,7 @@ export class BlackburnProvider extends Component {
       setBestScore: this.setBestScore,
       getBestScore: this.getBestScore,
       processLogin: this.processLogin,
+      processLogout: this.processLogout,
       setStoryState: this.setStoryState,
       setCheckpointIds: this.setCheckpointIds,
       getCheckpointIds: this.getCheckpointIds,

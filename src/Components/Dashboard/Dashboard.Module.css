@@ -3,7 +3,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #6a5046;
 }
 
 .links {
@@ -29,15 +28,18 @@
 
 .dashboard-header-open {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
-  background-color: #6a5046;
   margin-left: 25%;
+}
+.user-info {
+  margin: 20px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
 
 .title {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .sidenav {
@@ -63,7 +65,7 @@
   background-color: #003f5c;
   overflow-x: hidden;
   transition: 0.5s;
-  box-shadow: 2px 2px #f1f1f1 ;
+  box-shadow: 2px 2px #f1f1f1;
 
   display: flex;
   flex-direction: column;
