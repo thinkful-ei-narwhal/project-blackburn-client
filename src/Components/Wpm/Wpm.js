@@ -4,12 +4,8 @@ class Wpm extends Component {
   //todos:
   //handles words per minute calculation
 
-  componentDidMount() {}
-
   render() {
-    return (
-    <span>{this.props.wpm}</span>
-    );
+    return <span>{this.props.wpm}</span>;
   }
 }
 

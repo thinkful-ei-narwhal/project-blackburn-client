@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
 import Healthbar from "./../../Components/Healthbar/Healthbar";
 import Score from "./../../Components/Score/Score";
-import Wpm from "./../../Components/Wpm/Wpm";
 import Word from "./../../Components/Word/Word";
 import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
-import StoryApiService from "./../../Services/story-api-service";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
 import "./ChallengeRoute.module.css";
@@ -23,27 +21,44 @@ class ChallengeRoute extends Component {
     typedWords: 0,
     levelTimer: 0,
     levelTimerTotal: 0,
+    wpm: 0,
     isWin: null,
+    levelEnded: false,
     initialized: false,
   };
 
   //Todos:
-  //Get data from context and clear on END
-
-  //Get the values for level, checkpoint, and difficulty from context after the next route goes
-  //Set score in black burn context so it persists between levels until you end win or lose
-  //Set the win/lose pages to fire when timer runs out or health hits zero
-  //get Best score working
-  //Research how to make word components appear at different places on the screen
+  //Get Player Best Score appearing
+  //Need to get timers for each word appearing visible on screen
+  //Use animations to make words appear at different places
   //screen shake > part of typeHandler, if it's correct or incorrect
-  //need to get timers for each word appearing
   //css
+
+  calcWPM() {
+    const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
+    const wpm = Math.floor((this.state.typedWords / timePassed) * 100);
+    this.setState({ wpm });
+  }
+
+  triggerLevelEnd() {
+    if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
+      this.clearTimers();
+      this.context.setScore(this.state.playerScore);
+      this.context.setWpm(this.state.wpm);
+      if (this.context.getBestScore() < this.state.playerBest)
+        this.context.setBestScore(this.state.playerBest);
+      this.state.levelTimer <= 0
+        ? this.setState({ isWin: true, levelEnded: true })
+        : this.setState({ isWin: false, levelEnded: true });
+    }
+  }
 
   clearTimers() {
     clearInterval(this.intervalGenerator);
     clearInterval(this.levelTimeout);
-    clearInterval(this.wpmAvgCalculator);
     clearInterval(this.checkWinInterval);
+    clearInterval(this.calcWpmInterval);
+    this.state.words.forEach((wordObj) => wordObj.clearTimeout());
   }
 
   updateLevelTimer() {
@@ -53,7 +68,12 @@ class ChallengeRoute extends Component {
   }
 
   manageWords(addWordObj = null) {
-    //removes all words that are expired
+    //clear timeouts for each word that was already typed
+    this.state.words.forEach((wordObj) => {
+      if (wordObj.expired) wordObj.clearTimeout();
+    });
+
+    //filters out all expired words from state
     const newWordArray = this.state.words.filter(
       (wordObj) => wordObj.expired === false
     );
@@ -63,8 +83,8 @@ class ChallengeRoute extends Component {
     this.setState({ words: newWordArray });
   }
 
-  generateWord(wordTimeout, maxWords) {
-    if (this.state.words.length < maxWords) {
+  generateWord(word_expiration_timer, max_screen_words) {
+    if (this.state.words.length < max_screen_words) {
       const randomWord = uniqueNamesGenerator({
         dictionaries: [animals],
         length: 1,
@@ -77,7 +97,8 @@ class ChallengeRoute extends Component {
           newWord.expired = true;
           this.setState({ playerHealth: this.state.playerHealth - 0.5 });
           this.manageWords();
-        }, wordTimeout),
+        }, word_expiration_timer),
+        clearTimeout: () => clearTimeout(newWord.timeout),
       };
 
       this.manageWords(newWord);
@@ -131,12 +152,14 @@ class ChallengeRoute extends Component {
     const playerScore = this.context.getScore();
     const playerBestStored = this.context.getBestScore();
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
+
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
     this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
+    this.calcWpmInterval = setInterval(() => this.calcWPM(), 200);
     this.intervalGenerator = setInterval(
       () =>
         this.generateWord(
-          checkpointData.word_expiration_timer * 100,
+          checkpointData.word_expiration_timer * 1000,
           checkpointData.max_screen_words
         ),
       1000 //this value might have to become more interesting later
@@ -155,18 +178,6 @@ class ChallengeRoute extends Component {
     this.clearTimers();
   }
 
-  triggerLevelEnd() {
-    if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
-      this.clearTimers();
-      this.context.setScore(this.state.playerScore);
-      if (this.context.getBestScore() < this.state.playerBest)
-        this.context.setBestScore(this.state.playerBest);
-      this.state.levelTimer <= 0
-        ? this.setState({ isWin: true })
-        : this.setState({ isWin: false });
-    }
-  }
-
   renderGameplay() {
     return (
       <div>
@@ -178,10 +189,7 @@ class ChallengeRoute extends Component {
           <Healthbar health={this.state.playerHealth} />
         )}
         <div>
-          <span>Passing Score: </span>
-          <Score score={this.state.passingScore} />
-        </div>
-        <div>
+          {/* do a get request for personal best, which finds highest score */}
           <span>Personal best: </span>
           <Score score={this.state.playerBest} />
         </div>
@@ -190,26 +198,29 @@ class ChallengeRoute extends Component {
           <Score score={this.state.playerScore} />
         </div>
         <span>Words Per Minute: </span>
-        <Wpm wpm={this.state.wpmCalc} />
+        <Score score={this.state.wpm} />
         <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
         <ul>
           {this.state.words.map((wordObj, index) => (
             <li key={index}>
               <Word word={wordObj.word} />
+              {/* <span>{wordObj.getTimeLeft()}</span> - NEED TO FIGURE OUT */}
             </li>
           ))}
         </ul>
         <GameplayScreen />
 
-        {this.state.levelTimer < 0 &&
+        {this.state.levelEnded &&
+          this.state.levelTimer < 0 &&
           this.context.getCurrentCheckpointIndex() !== null && (
             <WinLosePage condition={"checkpoint"} autoSave={false} />
           )}
-        {this.state.levelTimer < 0 &&
+        {this.state.levelEnded &&
+          this.state.levelTimer < 0 &&
           this.context.getCurrentCheckpointIndex() === null && (
             <WinLosePage condition={"level_beaten"} autoSave={true} />
           )}
-        {this.state.playerHealth <= 0 && (
+        {this.state.levelEnded && this.state.playerHealth <= 0 && (
           <WinLosePage condition={"lose"} autoSave={true} />
         )}
       </div>
