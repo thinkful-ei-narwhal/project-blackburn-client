@@ -12,7 +12,6 @@ const scoreboardService = {
   },
 
   getAllScores(request) {
-    console.log(request);
     return fetch(`${config.API_ENDPOINT}/scoreboard?request=${request}`, {
       authorization: `Bearer ${TokenService.getAuthToken()}`,
     }).then((res) => res.json());

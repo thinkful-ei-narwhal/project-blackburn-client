@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Button from "../../Components/Button/Button";
 import storyService from "../../Services/story-api-service";
-import BlackburnContext from "../../Context/BlackburnContext";
-import { Link } from "react-router-dom";
-// import "./StartRoute.Module.css";
+import BlackburnContext from '../../Context/BlackburnContext'
+import { Link } from 'react-router-dom'
+import "./StartRoute.css";
 
 class StartRoute extends Component {
   static contextType = BlackburnContext;
@@ -95,6 +95,7 @@ class StartRoute extends Component {
           </Link>
         </form>
       </div>
+      
     );
   }
 }

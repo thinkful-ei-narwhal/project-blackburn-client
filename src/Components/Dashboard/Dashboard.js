@@ -1,12 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Leaderboard from "../Leaderboard/Leaderboard";
-import Start from "../Start/Start";
-import Analytics from "../Analytics/Analytics";
-import Settings from "../Settings/Settings";
-import "./Dashboard.Module.css";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import ScoreboardApiService from "../../Services/scoreboard-api-service";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Leaderboard from '../Leaderboard/Leaderboard';
+import Start from '../Start/Start';
+import Analytics from '../Analytics/Analytics';
+import Settings from '../Settings/Settings';
+import './Dashboard.Module.css';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import ScoreboardApiService from '../../Services/scoreboard-api-service';
+import UserHeader from '../UserHeader/UserHeader';
+import { Spring, animated } from 'react-spring/renderprops'
 
 export default class Dashboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -17,10 +19,10 @@ export default class Dashboard extends React.Component {
     showLeaderboard: false,
     showAnalytics: false,
     showSettings: false,
-    allScores: [],
-    myScores: [],
   };
-
+  handleLogout = (e) => {
+    this.context.processLogout(e);
+  };
   handleShowHome = () => {
     if (!this.state.showHome) {
       this.setState({
@@ -72,39 +74,7 @@ export default class Dashboard extends React.Component {
       });
     }
   };
-  componentDidMount() {
-    console.log(this.context);
-    const { user } = this.context;
-    console.log(user);
-    ScoreboardApiService.getAllScores("all").then((res) =>
-      res.map((data) => {
-        return this.setState({
-          allScores: [
-            ...this.state.allScores,
-            {
-              username: data.username,
-              score: data.total_score,
-              storyId: data.story_data,
-            },
-          ],
-        });
-      })
-    );
-    ScoreboardApiService.getMyScores(user.id, "myscores").then((res) =>
-      res.map((data) => {
-        return this.setState({
-          myScores: [
-            ...this.state.myScores,
-            {
-              score: data.total_score,
-              wpm: data.avg_wpm,
-              date: data.date_created,
-            },
-          ],
-        });
-      })
-    );
-  }
+
   renderEmptyScore = () => {
     return (
       <div className="empty-score">
@@ -114,92 +84,99 @@ export default class Dashboard extends React.Component {
   };
   render() {
     console.log(this.state.allScores);
+    const { user } = this.context;
+ 
     return (
       <>
-        <header className="dashboard-header-open">
-          {this.state.menuOpen ? (
-            <div></div>
-          ) : (
-            <div onClick={() => this.handleMenuButton()}> &#9776; </div>
-          )}
-          <h1 className="title">Project Blackburn</h1>
-          <Link to={"/"} className="links">
-            {" "}
-            logout{" "}
-          </Link>
+        <header className= {(this.state.menuOpen) ? "dashboard-header-open" : "dashboard-header"}>
+          <h2 className="user-welcome">Welcome {user.username}</h2>
+          <div className = 'user-header'> <UserHeader /> </div>
         </header>
-        <div className={this.state.menuOpen ? "sidenav-open" : "sidenav"}>
-          {this.state.menuOpen ? (
-            <div className="x" onClick={() => this.handleMenuButton()}>
-              {" "}
-            </div>
-          ) : (
-            <div></div>
-          )}
-          <nav className="navLinks">
-          <h1 className="title">Project Blackburn</h1>
-            <div
-              className={this.state.showHome ? "links-selected" : "links"}
-              onClick={() => this.handleShowHome()}
-            >
-              {" "}
-              Home{" "}
-            </div>
-            <div
-              className={
-                this.state.showLeaderboard ? "links-selected" : "links"
-              }
-              onClick={() => this.handleShowLeaderboard()}
-            >
-              {" "}
-              Leaderboard{" "}
-            </div>
-            <div
-              className={this.state.showAnalytics ? "links-selected" : "links"}
-              onClick={() => this.handleShowAnalytics()}
-            >
-              {" "}
-              Analytics{" "}
-            </div>
-            <div
-              className={this.state.showSettings ? "links-selected" : "links"}
-              onClick={() => this.handleShowSettings()}
-            >
-              {" "}
-              Settings{" "}
-            </div>
-            <Link to={'/'} className="links">
+        {(!this.state.menuOpen) && <div className = 'x' onClick = {() => this.handleMenuButton()}>  &#x2192;  </div>}
+       {this.state.menuOpen && <Spring 
+            from = {{
+                transform:
+               'translate3d(400px,0,0) scale(2) '
+            }} 
+            to = {{
+                transform:
+                'translate3d(0px,0,0) scale(1) '
+            }}>
+            { props => <div style = {props} className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
+            {(this.state.menuOpen) && <div className = 'x' onClick = {() => this.handleMenuButton()}> &#x2190; </div>}
+
+            <nav className="navLinks">
+                <h1 className="title">Project <br /> Blackburn</h1>
+                <div
+                className={this.state.showHome ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowHome()}
+                >
                 {' '}
-                logout{' '}
-          </Link>
-          </nav>
-        </div>
-        <div className={this.state.menuOpen ? "content-open" : "content"}>
+                Home{' '}
+                </div>
+                <div
+                className={
+                    this.state.showLeaderboard ? 'links-selected' : 'links'
+                }
+                onClick={() => this.handleShowLeaderboard()}
+                >
+                {' '}
+                Leaderboard{' '}
+                </div>
+                <div
+                className={this.state.showAnalytics ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowAnalytics()}
+                >
+                {' '}
+                Analytics{' '}
+                </div>
+                <div
+                className={this.state.showSettings ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowSettings()}
+                >
+                {' '}
+                Settings{' '}
+                </div>
+                <Link
+                className="links"
+                onClick={(e) => this.handleLogout(e)}
+                to="/"
+                >
+                Logout
+                </Link>
+            </nav>
+            </div>}
+        </Spring>}
+        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
           {this.state.showHome && (
             <div>
-              {" "}
-              <Start />{" "}
+              {' '}
+              <Start />{' '}
             </div>
           )}
           {this.state.showLeaderboard && (
             <div>
+
               {" "}
-              <Leaderboard allScores={this.state.allScores} />{" "}
+              <Leaderboard />{" "}
             </div>
           )}
           {this.state.showAnalytics && (
             <div>
-              {this.state.myScores.length === 0 ? (
+              {this.context.myScores.length === 0 ? (
                 <div>{this.renderEmptyScore()}</div>
               ) : (
-                <Analytics myScores={this.state.myScores} />
+                <Analytics />
               )}
             </div>
           )}
           {this.state.showSettings && (
             <div>
-              {" "}
-              <Settings />{" "}
+              {' '}
+              <Settings />{' '}
+              <Link onClick={(e) => this.handleLogout(e)} to="/">
+                Logout
+              </Link>
             </div>
           )}
         </div>
