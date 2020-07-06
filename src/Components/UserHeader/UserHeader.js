@@ -9,7 +9,7 @@ class UserHeader extends Component {
     return (
       <div classname="user-info">
         <p className="user-info">
-          {user.username} : {user.avatar}
+           {user.avatar}
         </p>
       </div>
     );
