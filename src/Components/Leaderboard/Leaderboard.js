@@ -2,8 +2,11 @@ import React from 'react'
 import './Leaderboard.Module.css'
 import Button from '../Button/Button'
 import { Trail } from 'react-spring/renderprops'
-import { Input, Label } from '../Form/Form'
+import { Label } from '../Form/Form'
+import BlackBurnContext from '../../Context/BlackburnContext'
 export default class Leaderboard extends React.Component {
+
+    static contextType = BlackBurnContext
 
     state = {
         overall: true,
@@ -27,15 +30,20 @@ export default class Leaderboard extends React.Component {
 
     renderLeaderBoard = () => {
         if(this.state.overall) {
-            return this.props.allScores.sort((a,b) => b - a).map((score, index) => {
+            return this.props.allScores.sort((a,b) => b - a).slice(0, 10).map((score, index) => {
                 return(
                  <Trail items = {score} from = {{opacity: 0}} to = {{opacity: 1}}>   
-                  {score => props =>  <li className = 'leaderboard-list' key = {index} style = {props}> 
-                        <span className = 'username'> {index + 1} </span> 
-                        <div className = 'avatar'></div>
-                        <span className = 'username'> {score.username} </span> 
-                        <span className = 'score'> {score.score} </span> 
-                    </li>}
+                   {
+                    score => props => 
+                    <div>
+                        <li className = 'leaderboard-list' key = {index} style = {props}> 
+                            <span className = 'username'> {index + 1} </span> 
+                            <div className = 'avatar'></div>
+                            <span className = 'username'> {score.username} </span> 
+                            <span className = 'score'> {score.score} </span> 
+                        </li>
+                    </div>
+                    }
                 </Trail>
                 )
             })
@@ -73,6 +81,8 @@ export default class Leaderboard extends React.Component {
     }
 
     render() {
+        const myScoreArr = this.props.myScores.map(score => score.score)
+        const maxMyScore = Math.max(...myScoreArr)
         return (
             <div className = 'leaderboard'>
                 <div className = 'leaderboard-buttons'>
@@ -92,6 +102,13 @@ export default class Leaderboard extends React.Component {
                     {    
                        this.renderLeaderBoard()
                     }   
+                    <li className = 'leaderboard-list'>  
+                        {/* <span className = 'username'> Your Top Score </span>  */}
+                        <div className = 'avatar'></div>
+                        <span className = 'username'> {this.context.user.username} </span> 
+                        <span className = 'score'> {maxMyScore} </span>  
+                    </li>
+
                 </ul>
             </div>
         )

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import LineChart from './LineChart';
 import { Container, Row, Col } from 'react-grid-system';
 
@@ -11,8 +11,6 @@ export default function Analytics(props) {
     return data.score;
   });
   let avgScore = scoreArr.reduce((a, b) => a + b, 0) / scoreArr.length;
-  console.log(props);
-
   return (
     <Container>
       <Row>

@@ -181,7 +181,7 @@ export default class Dashboard extends React.Component {
           {this.state.showLeaderboard && (
             <div>
               {" "}
-              <Leaderboard allScores={this.state.allScores} />{" "}
+              <Leaderboard allScores={this.state.allScores} myScores={this.state.myScores} />{" "}
             </div>
           )}
           {this.state.showAnalytics && (

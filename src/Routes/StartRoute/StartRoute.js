@@ -3,7 +3,7 @@ import Button from "../../Components/Button/Button";
 import storyService from "../../Services/story-api-service";
 import BlackburnContext from '../../Context/BlackburnContext'
 import { Link } from 'react-router-dom'
-// import "./StartRoute.Module.css";
+import "./StartRoute.css";
 
 
 class StartRoute extends Component {
@@ -94,6 +94,7 @@ class StartRoute extends Component {
           </Link>
         </form>
       </div>
+      
     );
   }
 }
