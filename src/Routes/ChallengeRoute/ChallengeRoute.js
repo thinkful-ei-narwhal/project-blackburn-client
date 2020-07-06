@@ -201,9 +201,17 @@ class ChallengeRoute extends Component {
         </ul>
         <GameplayScreen />
 
-        {/* Need to fill out the win/lose pages with different values */}
-        {this.state.playerHealth <= 0 && <WinLosePage win={true} />}
-        {this.state.levelTimer < 0 && <WinLosePage win={false} />}
+        {this.state.levelTimer < 0 &&
+          this.context.getCurrentCheckpointIndex() !== null && (
+            <WinLosePage condition={"checkpoint"} autoSave={false} />
+          )}
+        {this.state.levelTimer < 0 &&
+          this.context.getCurrentCheckpointIndex() === null && (
+            <WinLosePage condition={"level_beaten"} autoSave={true} />
+          )}
+        {this.state.playerHealth <= 0 && (
+          <WinLosePage condition={"lose"} autoSave={true} />
+        )}
       </div>
     );
   }
