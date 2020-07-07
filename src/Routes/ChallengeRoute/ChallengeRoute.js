@@ -194,7 +194,7 @@ class ChallengeRoute extends Component {
         ),
       1000 //this value might have to become more interesting later
     );
-    this.staticWordTimer = checkpointData.word_expiration_timer * 1000
+    this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
     this.setState({
       levelTimer: checkpointData.level_timer,
       levelTimerTotal: checkpointData.level_timer,
@@ -206,8 +206,8 @@ class ChallengeRoute extends Component {
   }
 
   getRandomInt = (min, max) => {
-    return Math.random() * (max - min) + min; 
-   }
+    return Math.random() * (max - min) + min;
+  };
 
   componentWillUnmount() {
     this.clearTimers();
@@ -257,24 +257,34 @@ class ChallengeRoute extends Component {
             textAfter={"%"}
           />
         </div>
-        {!this.state.levelEnded && ( <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
-        <ul className = 'word-ul'>
-          {this.state.words.map((wordObj, index) => (
-            <li className = 'word-li' key={index} 
-              style = {{}}
-            >
-              <Spring
-               from = {{transform:
-                'translate3d(200px,0,0) scale(2) rotateX(90deg)', }}
-               to = {{transform:
-                'translate3d(0px,0,0) scale(1) rotateX(0deg)'}}
-               config = {{duration: 2000}}
-              >
-                {props => <span className = 'wordTimer' style = {props}> <Word word={wordObj.word} />{wordObj.getTimeRemaining()}</span>}
-              </Spring>
-            </li>
-          ))}
-        </ul>
+        {!this.state.levelEnded && (
+          <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
+        )}
+        {!this.state.levelEnded && (
+          <ul className="word-ul">
+            {this.state.words.map((wordObj, index) => (
+              <li className="word-li" key={index} style={{}}>
+                <Spring
+                  from={{
+                    transform: "translate3d(200px,0,0) scale(2) rotateX(90deg)",
+                  }}
+                  to={{
+                    transform: "translate3d(0px,0,0) scale(1) rotateX(0deg)",
+                  }}
+                  config={{ duration: 2000 }}
+                >
+                  {(props) => (
+                    <span className="wordTimer" style={props}>
+                      {" "}
+                      <Word word={wordObj.word} />
+                      {wordObj.getTimeRemaining()}
+                    </span>
+                  )}
+                </Spring>
+              </li>
+            ))}
+          </ul>
+        )}
         <GameplayScreen />
 
         {this.state.levelEnded &&
