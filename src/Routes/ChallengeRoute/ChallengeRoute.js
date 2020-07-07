@@ -30,10 +30,8 @@ class ChallengeRoute extends Component {
   };
 
   //Todos:
-  //Need to get timers for each word appearing visible on screen
   //Use animations to make words appear at different places
   //screen shake > part of typeHandler, if it's correct or incorrect
-  //css
 
   calcWPM() {
     const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
@@ -115,7 +113,12 @@ class ChallengeRoute extends Component {
           this.setState({ playerHealth: this.state.playerHealth - 0.5 });
           this.manageWords();
         }, word_expiration_timer),
+        endTime: word_expiration_timer + new Date().getTime(),
         clearTimeout: () => clearTimeout(newWord.timeout),
+        getTimeRemaining: () => {
+          const countDown = (newWord.endTime - new Date().getTime()) / 1000;
+          return countDown.toFixed(2);
+        },
       };
 
       this.manageWords(newWord);
@@ -238,7 +241,7 @@ class ChallengeRoute extends Component {
           {this.state.words.map((wordObj, index) => (
             <li key={index}>
               <Word word={wordObj.word} />
-              {/* <span>{wordObj.getTimeLeft()}</span> - NEED TO FIGURE OUT */}
+              <span>{wordObj.getTimeRemaining()}</span>
             </li>
           ))}
         </ul>
