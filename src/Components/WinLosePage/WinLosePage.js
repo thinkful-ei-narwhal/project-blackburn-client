@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import ScoreboardApiService from "../../Services/scoreboard-api-service";
+import LeaderBoard from "./../Leaderboard/Leaderboard";
 import "./WinLosePage.css";
 
 class WinLosePage extends Component {
@@ -20,7 +21,7 @@ class WinLosePage extends Component {
       user_id: this.context.user.id,
       story_data: this.context.story_id,
       total_score: this.context.score,
-      avg_wpm: 0,
+      avg_wpm: this.context.wpm,
       total_accuracy: 0,
     };
     console.log("postScore() with data", data);
@@ -43,6 +44,7 @@ class WinLosePage extends Component {
         <div className="results header">
           Congratulations! You beat the level.
         </div>
+        <LeaderBoard />
         <Link to={"/start"}>
           <Button
             className="btn results next-btn"
@@ -83,6 +85,7 @@ class WinLosePage extends Component {
     return (
       <div className="results defeat">
         <div className="results header">You suck and your guy died</div>
+        <LeaderBoard />
         <Link to="/start">
           <Button
             className="btn results retry-btn"

@@ -6,7 +6,6 @@ import Analytics from '../Analytics/Analytics';
 import Settings from '../Settings/Settings';
 import './Dashboard.Module.css';
 import BlackBurnContext from '../../Context/BlackburnContext';
-import ScoreboardApiService from '../../Services/scoreboard-api-service';
 import UserHeader from '../UserHeader/UserHeader';
 import { Spring, animated, Transition } from 'react-spring/renderprops'
 import { FaBars, FaTimes, FaChartLine, FaChessKing, FaHome, FaCog } from 'react-icons/fa';
