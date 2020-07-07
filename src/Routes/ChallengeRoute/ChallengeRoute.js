@@ -6,10 +6,10 @@ import Word from "./../../Components/Word/Word";
 import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
-import "./ChallengeRoute.css";
 import WinLosePage from "../../Components/WinLosePage/WinLosePage";
-import { Spring, animated} from 'react-spring/renderprops'
-import { TimingAnimation, Easing } from 'react-spring/renderprops-addons'
+import { Spring, animated } from "react-spring/renderprops";
+import { TimingAnimation, Easing } from "react-spring/renderprops-addons";
+import "./ChallengeRoute.css";
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
@@ -31,9 +31,7 @@ class ChallengeRoute extends Component {
     initialized: false,
   };
 
-  //Todos:
-  //Use animations to make words appear at different places
-  //screen shake > part of typeHandler, if it's correct or incorrect
+  //Todos: Use animations to make words appear at different places
 
   calcWPM() {
     const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
@@ -59,6 +57,7 @@ class ChallengeRoute extends Component {
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
+      this.setState({ words: [] });
       this.context.setScore(this.state.playerScore);
       this.context.setAccuracy(this.state.accuracy);
       this.context.setWpm(this.state.wpm);
@@ -179,7 +178,7 @@ class ChallengeRoute extends Component {
     const playerScore = this.context.getScore();
     const playerBestStored = this.context.getMyBestScore();
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
-    this.levelTimerStaticTotal = checkpointData.level_timer
+    this.levelTimerStaticTotal = checkpointData.level_timer;
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
     this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
     this.calcRuntimeStats = setInterval(() => {
@@ -216,25 +215,28 @@ class ChallengeRoute extends Component {
 
   renderGameplay() {
     return (
-      <div className = 'game-container'>
+      <div className="game-container">
         <UIStats
           textBefore={"Time Remaining:"}
           metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
         />
-        <Spring 
-          from = {{width: '100%', background: 'black'}}
-          to = {{width: '0%' , background: 'white'}}
-          config = {{duration: this.levelTimerStaticTotal * 1000}}
+        <Spring
+          from={{ width: "100%", background: "black" }}
+          to={{ width: "0%", background: "white" }}
+          config={{ duration: this.levelTimerStaticTotal * 1000 }}
         >
-          {props => <animated.div className="bg" style={props} >  </animated.div>}
+          {(props) => (
+            <animated.div className="bg" style={props}>
+              {" "}
+            </animated.div>
+          )}
         </Spring>
-      <div>
-        {this.state.isWin === null && (
-          <Healthbar health={this.state.playerHealth} />
-        )}
+        <div>
+          {!this.state.levelEnded && (
+            <Healthbar health={this.state.playerHealth} />
+          )}
         </div>
         <div>
-       
           <UIStats
             textBefore={"Personal best:"}
             metric={this.state.playerBest}
@@ -253,7 +255,7 @@ class ChallengeRoute extends Component {
             textAfter={"%"}
           />
         </div>
-        <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
+        {!this.state.levelEnded && ( <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
         <ul className = 'word-ul'>
           {this.state.words.map((wordObj, index) => (
             <li className = 'word-li' key={index} 
@@ -292,9 +294,10 @@ class ChallengeRoute extends Component {
 
   render() {
     return (
-      <div className = 'game-container'> 
+      <div className="game-container">
         {this.state.initialized ? this.renderGameplay() : null}
-      </div>)
+      </div>
+    );
   }
 }
 
