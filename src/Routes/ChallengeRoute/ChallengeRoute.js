@@ -45,8 +45,8 @@ class ChallengeRoute extends Component {
       this.clearTimers();
       this.context.setScore(this.state.playerScore);
       this.context.setWpm(this.state.wpm);
-      if (this.context.getBestScore() < this.state.playerBest)
-        this.context.setBestScore(this.state.playerBest);
+      if (this.context.getMyBestScore() < this.state.playerBest)
+        this.context.setNewBestScore(this.state.playerBest);
       this.state.levelTimer <= 0
         ? this.setState({ isWin: true, levelEnded: true })
         : this.setState({ isWin: false, levelEnded: true });
@@ -150,7 +150,7 @@ class ChallengeRoute extends Component {
   componentDidMount() {
     const contextObj = this.context.getCheckpointIds();
     const playerScore = this.context.getScore();
-    const playerBestStored = this.context.getBestScore();
+    const playerBestStored = this.context.getMyBestScore();
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
 
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);

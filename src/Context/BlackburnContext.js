@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import TokenService from "../Services/token-service";
 import ScoreboardApiService from "../Services/scoreboard-api-service";
@@ -21,8 +20,9 @@ const BlackBurnContext = React.createContext({
   setScore: () => {},
   getScore: () => {},
   setWpm: () => {},
-  setBestScore: () => {},
-  getBestScore: () => {},
+  setMyBestScore: () => {},
+  getMyBestScore: () => {},
+  setNewBestScore: () => {},
   processLogin: () => {},
   processLogout: () => {},
   setStoryState: () => {},
@@ -94,16 +94,8 @@ export class BlackburnProvider extends Component {
     this.setState({ score });
   };
 
-  setBestScore = (bestScore) => {
-    this.setState({ bestScore });
-  };
-
   getScore = () => {
     return this.state.score;
-  };
-
-  getBestScore = () => {
-    return this.state.bestScore;
   };
 
   processLogin = (token) => {
@@ -172,22 +164,44 @@ export class BlackburnProvider extends Component {
   };
 
   getMyScores = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores")
-    .then((res) => {
-        console.log('res', res)
-        const outputArr = res.map(data => {
-            return (
-                { 
-                    score: data.total_score, 
-                    wpm: data.avg_wpm, 
-                    date: data.date_created 
-                }
-            )
-        })
-    return this.setState({ myScores: outputArr })   
-    })
-    
- }
+    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+      (res) => {
+        console.log("res", res);
+        const outputArr = res.map((data) => {
+          return {
+            score: data.total_score,
+            wpm: data.avg_wpm,
+            date: data.date_created,
+          };
+        });
+        return this.setState({ myScores: outputArr });
+      }
+    );
+  };
+
+  getMyBestScore = () => {
+    return this.state.bestScore;
+  };
+
+  setMyBestScore = () => {
+    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+      (res) => {
+        const outputArr = res.map((data) => {
+          return data.total_score;
+        });
+
+        let bestScore = outputArr[0];
+        outputArr.forEach(
+          (score) => (bestScore = score > bestScore ? score : bestScore)
+        );
+        return this.setState({ bestScore });
+      }
+    );
+  };
+
+  setNewBestScore = (bestScore) => {
+    this.setState({bestScore});
+  }
 
   render() {
     console.log(this.state.myScores);
@@ -208,8 +222,9 @@ export class BlackburnProvider extends Component {
       setUser: this.setUser,
       setScore: this.setScore,
       getScore: this.getScore,
-      setBestScore: this.setBestScore,
-      getBestScore: this.getBestScore,
+      setNewBestScore: this.setNewBestScore,
+      setMyBestScore: this.setMyBestScore,
+      getMyBestScore: this.getMyBestScore,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
       setStoryState: this.setStoryState,
