@@ -207,10 +207,10 @@ class ChallengeRoute extends Component {
   renderGameplay() {
     return (
       <div>
-        <p>
-          Time Remaining:{" "}
-          {this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
-        </p>
+        <UIStats
+          textBefore={"Time Remaining:"}
+          metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
+        />
         {this.state.isWin === null && (
           <Healthbar health={this.state.playerHealth} />
         )}
