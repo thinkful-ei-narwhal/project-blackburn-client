@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import { Input, Label } from '../Form/Form';
 import ApiService from '../../Services/auth-api-service';
 import BlackBurnContext from '../../Context/BlackburnContext';
-
+import '../../Components/Settings/Settings.Module.css'
 class SettingsForm extends Component {
   static contextType = BlackBurnContext;
 
@@ -42,7 +42,7 @@ class SettingsForm extends Component {
             <h4 className="error">{this.state.error}</h4>
           )}
           <Label className="set-label username" htmlFor="set-input username">
-            Username:
+            Username
           </Label>
           <Input
             className="set-input username"
@@ -51,7 +51,7 @@ class SettingsForm extends Component {
             required
           />
           <Label className="set-label" htmlFor="avatar">
-            Avatar:
+            Avatar
           </Label>
           <select
             className="set-select avatar"

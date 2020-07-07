@@ -1,0 +1,28 @@
+.start-page-form {
+    padding: 20px;
+    box-shadow: 4px 4px 4px 4px lightgray;
+    border: 1px solid gray;
+}
+
+
+.start-header {
+    text-align: center;
+}
+
+
+.back-btn {
+    margin-top: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    border: 1px solid #D9C1AA;
+    padding: 15px;
+    color: #D9C1AA;
+    border-radius: 6px;
+    background-color: black;
+}
+
+.back-btn:hover {
+    background-color: #AE9172;
+    opacity: 75%;
+    color: #D9C1AA
+}
