@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Trail } from "react-spring/renderprops";
 import StoryApiService from "../../Services/story-api-service";
+import ScoreboardApiService from "../../Services/scoreboard-api-service";
 import "./Story.css";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { Link } from "react-router-dom";
@@ -15,9 +16,10 @@ export default class Story extends Component {
   static contextType = BlackBurnContext;
 
   componentDidMount() {
+    this.context.setMyBestScore();
+    
     const story_id = this.context.story_id;
     const difficulty_setting = this.context.difficulty_setting;
-
     StoryApiService.getStory(story_id, difficulty_setting).then((res) => {
       if (this.context.getCheckpointIds() === null) {
         const checkpoints = res.map((checkpoint) => checkpoint);
