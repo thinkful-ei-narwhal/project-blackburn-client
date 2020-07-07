@@ -4,8 +4,6 @@ import Button from "../Button/Button";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import ScoreboardApiService from "../../Services/scoreboard-api-service";
 import LeaderBoard from "./../Leaderboard/Leaderboard";
-import useWindowSize from "react-use/lib/useWindowSize";
-import Confetti from "react-confetti";
 import "./WinLosePage.css";
 
 class WinLosePage extends Component {
