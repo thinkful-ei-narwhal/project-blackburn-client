@@ -59,9 +59,9 @@ export default class LandingPage extends React.Component {
               style={props}
               id="Capa_1"
               enableBackground="new 0 0 512 512"
+              width="100"
               height="100"
               viewBox="0 0 512 512"
-              width="100"
               xmlns="http://www.w3.org/2000/svg"
             >
               <g>
