@@ -1,0 +1,11 @@
+.averages {
+    margin: 10px;
+    margin-top: 100px;
+    box-shadow: 5px 5px 5px 5px lightgray;
+    padding: 20px;
+}
+
+.averages:hover {
+    box-shadow: 20px 20px 20px 20px lightgray;
+    
+}

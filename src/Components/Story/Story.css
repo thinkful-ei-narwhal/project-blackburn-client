@@ -15,7 +15,12 @@
     position: absolute;
     top: 25px;
 } */
-
+.skip {
+    text-align: right;
+    margin: 50px;
+    padding: 30px;
+    border-bottom: 1px solid gray;
+}
 .story-img {
     margin-bottom: 50px;
 }
@@ -29,3 +34,21 @@
     align-items: flex-start;
 }
 
+.story {
+    text-align: center ;
+    margin: 50px;
+}
+
+.start-challenge {
+    text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+    border-bottom: 2px solid lightgray;
+}
+
+.after-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
