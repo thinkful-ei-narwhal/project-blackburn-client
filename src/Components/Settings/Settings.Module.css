@@ -1,23 +1,65 @@
 .Settings {
-  text-align: center;
 }
 
 .settings-container {
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+  box-shadow: 4px 4px 4px 4px lightgray;
+  border-bottom: 2px solid lightgray;
 }
 
 .set-label {
   display: flex;
   margin: 10px;
+  padding: 10px;
 }
 .set-btn {
+  margin-top: 25px;
+  margin-right: 10px;
+  text-decoration: none;
   border: none;
-  margin: 10px;
-  padding: 5px;
+  border-bottom: 3px solid #D9C2AC;
+  padding: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+
+  color: #74665a;
+  border-radius: 6px;
+}
+
+.set-btn:hover {
+  background-color: #AE9172;
+  opacity: 75%;
+  color: #D9C1AA
 }
 
 .error {
   color: red;
   font-size: 15px;
   font-weight: normal;
+}
+
+
+.option-setting {
+  padding-top: 50px;
+  text-align: center;
+  font-weight: 500;
+  border-bottom: 1px solid lightgray;
+}
+
+
+.setting-header {
+  border-bottom: 2px solid lightgray;
+  padding: 25px; 
+}
+
+
+@media screen and (min-width: 800px) {
+  .settings-container {
+    padding: 50px;
+  }
 }

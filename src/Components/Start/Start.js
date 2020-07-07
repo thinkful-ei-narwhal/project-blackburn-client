@@ -4,18 +4,6 @@ import { Container, Row, Col } from 'react-grid-system';
 import './Start.Module.css';
 import { Transition, animated as a } from 'react-spring/renderprops'
 
-// const pages = [
-//     ({ style, history }) => (
-//         <a.div style={{ ...style, background: 'lightpink' }}>
-//           <div
-//             onClick={() => {
-//               history.push('/b')
-//             }}>
-//             A
-//           </div>
-//         </a.div>
-//       )
-// ]
 export default class Start extends React.Component {
   render() {
     return (
