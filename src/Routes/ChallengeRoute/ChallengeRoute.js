@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
 import Healthbar from "./../../Components/Healthbar/Healthbar";
-import Score from "./../../Components/Score/Score";
+import UIStats from "../../Components/UIStats/UIStats";
 import Word from "./../../Components/Word/Word";
 import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import BlackBurnContext from "../../Context/BlackburnContext";
@@ -19,6 +19,8 @@ class ChallengeRoute extends Component {
     playerBest: 0,
     playerBestStored: 0, // need to figure out how to get this data
     typedWords: 0,
+    typedWordsTotal: 0,
+    accuracy: 100,
     levelTimer: 0,
     levelTimerTotal: 0,
     wpm: 0,
@@ -28,22 +30,35 @@ class ChallengeRoute extends Component {
   };
 
   //Todos:
-  //Get Player Best Score appearing
-  //Need to get timers for each word appearing visible on screen
   //Use animations to make words appear at different places
   //screen shake > part of typeHandler, if it's correct or incorrect
-  //css
 
   calcWPM() {
     const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
     const wpm = Math.floor((this.state.typedWords / timePassed) * 100);
-    this.setState({ wpm });
+    if (Number.isNaN(wpm)) {
+      this.setState({ wpm: 0 });
+    } else {
+      this.setState({ wpm });
+    }
+  }
+
+  calcAccuracy() {
+    const accuracy = Math.floor(
+      (this.state.typedWords / this.state.typedWordsTotal) * 100
+    );
+    if (Number.isNaN(accuracy)) {
+      this.setState({ accuracy: 100 });
+    } else {
+      this.setState({ accuracy });
+    }
   }
 
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
       this.context.setScore(this.state.playerScore);
+      this.context.setAccuracy(this.state.accuracy);
       this.context.setWpm(this.state.wpm);
       if (this.context.getMyBestScore() < this.state.playerBest)
         this.context.setNewBestScore(this.state.playerBest);
@@ -57,7 +72,7 @@ class ChallengeRoute extends Component {
     clearInterval(this.intervalGenerator);
     clearInterval(this.levelTimeout);
     clearInterval(this.checkWinInterval);
-    clearInterval(this.calcWpmInterval);
+    clearInterval(this.calcRuntimeStats);
     this.state.words.forEach((wordObj) => wordObj.clearTimeout());
   }
 
@@ -98,7 +113,12 @@ class ChallengeRoute extends Component {
           this.setState({ playerHealth: this.state.playerHealth - 0.5 });
           this.manageWords();
         }, word_expiration_timer),
+        endTime: word_expiration_timer + new Date().getTime(),
         clearTimeout: () => clearTimeout(newWord.timeout),
+        getTimeRemaining: () => {
+          const countDown = (newWord.endTime - new Date().getTime()) / 1000;
+          return countDown.toFixed(2);
+        },
       };
 
       this.manageWords(newWord);
@@ -116,6 +136,7 @@ class ChallengeRoute extends Component {
     let playerBest = state.playerBest;
     let playerBestStored = state.playerBestStored;
     let typedWords = state.typedWords;
+    let typedWordsTotal = state.typedWordsTotal;
 
     let takeDamage = true;
     newWords.forEach((wordObj) => {
@@ -129,9 +150,12 @@ class ChallengeRoute extends Component {
       return;
     });
 
-    //if the player is incorrect he takes damage and losses score
+    //if the player is incorrect he takes damage and loses score
     if (takeDamage) playerHealth--;
     if (takeDamage && playerScore > 0) playerScore -= 5;
+
+    //increase total words typed for accuracy
+    typedWordsTotal++;
 
     //handle player record calculation
     if (playerBest <= playerScore) playerBest = playerScore; //css should turn green when it surpasses old score
@@ -143,6 +167,7 @@ class ChallengeRoute extends Component {
       playerScore,
       playerBest,
       typedWords,
+      typedWordsTotal,
     });
     this.manageWords();
   }
@@ -155,7 +180,11 @@ class ChallengeRoute extends Component {
 
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
     this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
-    this.calcWpmInterval = setInterval(() => this.calcWPM(), 200);
+    this.calcRuntimeStats = setInterval(() => {
+      this.calcWPM();
+      this.calcAccuracy();
+      return;
+    }, 200);
     this.intervalGenerator = setInterval(
       () =>
         this.generateWord(
@@ -181,30 +210,38 @@ class ChallengeRoute extends Component {
   renderGameplay() {
     return (
       <div>
-        <p>
-          Time Remaining:{" "}
-          {this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
-        </p>
+        <UIStats
+          textBefore={"Time Remaining:"}
+          metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
+        />
         {this.state.isWin === null && (
           <Healthbar health={this.state.playerHealth} />
         )}
         <div>
-          {/* do a get request for personal best, which finds highest score */}
-          <span>Personal best: </span>
-          <Score score={this.state.playerBest} />
+          <UIStats
+            textBefore={"Personal best:"}
+            metric={this.state.playerBest}
+          />
         </div>
         <div>
-          <span>Score: </span>
-          <Score score={this.state.playerScore} />
+          <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
         </div>
-        <span>Words Per Minute: </span>
-        <Score score={this.state.wpm} />
+        <div>
+          <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
+        </div>
+        <div>
+          <UIStats
+            textBefore={"Accuracy:"}
+            metric={this.state.accuracy}
+            textAfter={"%"}
+          />
+        </div>
         <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
         <ul>
           {this.state.words.map((wordObj, index) => (
             <li key={index}>
               <Word word={wordObj.word} />
-              {/* <span>{wordObj.getTimeLeft()}</span> - NEED TO FIGURE OUT */}
+              <span>{wordObj.getTimeRemaining()}</span>
             </li>
           ))}
         </ul>

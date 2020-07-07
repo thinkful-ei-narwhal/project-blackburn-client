@@ -20,7 +20,6 @@ export default class Story extends Component {
 
   componentDidMount() {
     this.context.setMyBestScore();
-    
     const story_id = this.context.story_id;
     const difficulty_setting = this.context.difficulty_setting;
     StoryApiService.getStory(story_id, difficulty_setting).then((res) => {

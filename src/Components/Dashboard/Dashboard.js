@@ -4,9 +4,10 @@ import Leaderboard from '../Leaderboard/Leaderboard';
 import Start from '../Start/Start';
 import Analytics from '../Analytics/Analytics';
 import Settings from '../Settings/Settings';
-import './Dashboard.Module.css';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import UserHeader from '../UserHeader/UserHeader';
+import './Dashboard.Module.css';
+
 import { Spring, animated, Transition } from 'react-spring/renderprops'
 import { FaBars, FaTimes, FaChartLine, FaChessKing, FaHome, FaCog } from 'react-icons/fa';
 
@@ -24,7 +25,6 @@ const pages = [
         <animated.div style={{ ...style,  }}><Settings /></animated.div>
       ),
   ]
-
 
 export default class Dashboard extends React.Component {
   static contextType = BlackBurnContext;
