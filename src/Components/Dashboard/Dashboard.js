@@ -7,17 +7,39 @@ import Settings from '../Settings/Settings';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import UserHeader from '../UserHeader/UserHeader';
 import './Dashboard.Module.css';
+import { Spring, animated, Transition } from 'react-spring/renderprops'
+import { FaBars, FaTimes, FaChartLine, FaChessKing, FaHome, FaCog } from 'react-icons/fa';
+
+const pages = [
+    style => (
+      <animated.div style={{ ...style, }}><Start /></animated.div>
+    ),
+    style => (
+      <animated.div style={{ ...style,  }}><Leaderboard /></animated.div>
+    ),
+    style => (
+      <animated.div style={{ ...style,  }}><Analytics /></animated.div>
+    ),
+    style => (
+        <animated.div style={{ ...style,  }}><Settings /></animated.div>
+      ),
+  ]
+
 
 export default class Dashboard extends React.Component {
   static contextType = BlackBurnContext;
 
-  state = {
-    menuOpen: true,
-    showHome: true,
-    showLeaderboard: false,
-    showAnalytics: false,
-    showSettings: false,
-  };
+  constructor(props) {
+      super(props)
+     this.state = {
+        menuOpen: true,
+        showHome: true,
+        showLeaderboard: false,
+        showAnalytics: false,
+        showSettings: false,
+        page: 0,
+      };
+  }
   handleLogout = (e) => {
     this.context.processLogout(e);
   };
@@ -28,6 +50,7 @@ export default class Dashboard extends React.Component {
         showLeaderboard: false,
         showAnalytics: false,
         showSettings: false,
+        page: 0
       });
     }
   };
@@ -47,6 +70,7 @@ export default class Dashboard extends React.Component {
         showLeaderboard: true,
         showAnalytics: false,
         showSettings: false,
+        page: 1
       });
     }
   };
@@ -58,6 +82,7 @@ export default class Dashboard extends React.Component {
         showLeaderboard: false,
         showAnalytics: true,
         showSettings: false,
+        page: 2
       });
     }
   };
@@ -69,6 +94,7 @@ export default class Dashboard extends React.Component {
         showLeaderboard: false,
         showAnalytics: false,
         showSettings: true,
+        page: 3
       });
     }
   };
@@ -80,100 +106,75 @@ export default class Dashboard extends React.Component {
       </div>
     );
   };
-  render() {
-    console.log(this.state.allScores);
-    const { user } = this.context;
 
+  render() {
+    const { user } = this.context;
     return (
       <>
-        <header className="dashboard-header-open">
-          {this.state.menuOpen ? (
-            <div></div>
-          ) : (
-            <div onClick={() => this.handleMenuButton()}> &#9776; </div>
-          )}
+        <header className= {(this.state.menuOpen) ? "dashboard-header-open" : "dashboard-header"}>
           <h2 className="user-welcome">Welcome {user.username}</h2>
-          <UserHeader />
+          <div className = 'user-header'> <UserHeader /> </div> 
         </header>
-        <div className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
-          {this.state.menuOpen && (
-            <div className="x" onClick={() => this.handleMenuButton()}>
-              {' '}
-            </div>
-          )}
-          <nav className="navLinks">
-            <h1 className="title">Project Blackburn</h1>
-            <div
-              className={this.state.showHome ? 'links-selected' : 'links'}
-              onClick={() => this.handleShowHome()}
-            >
-              {' '}
-              Home{' '}
-            </div>
-            <div
-              className={
-                this.state.showLeaderboard ? 'links-selected' : 'links'
-              }
-              onClick={() => this.handleShowLeaderboard()}
-            >
-              {' '}
-              Leaderboard{' '}
-            </div>
-            <div
-              className={this.state.showAnalytics ? 'links-selected' : 'links'}
-              onClick={() => this.handleShowAnalytics()}
-            >
-              {' '}
-              Analytics{' '}
-            </div>
-            <div
-              className={this.state.showSettings ? 'links-selected' : 'links'}
-              onClick={() => this.handleShowSettings()}
-            >
-              {' '}
-              Settings{' '}
-            </div>
-            <Link
-              className="links"
-              onClick={(e) => this.handleLogout(e)}
-              to="/"
-            >
-              Logout
-            </Link>
-          </nav>
-        </div>
-        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
-          {this.state.showHome && (
-            <div>
-              {' '}
-              <Start />{' '}
-            </div>
-          )}
-          {this.state.showLeaderboard && (
-            <div>
+        {(!this.state.menuOpen) && <div className = 'x-closed' onClick = {() => this.handleMenuButton()}>  <FaBars />  </div>}
+       {this.state.menuOpen && <Spring 
+            from = {{
+                opacity: 0
+            }} 
+            to = {{
+                opacity: 1
+            }}>
+            { props => <div style = {props} className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
+            {(this.state.menuOpen) && <div className = 'x' onClick = {() => this.handleMenuButton()}> <FaTimes /> </div>}
 
-              {" "}
-              <Leaderboard />{" "}
-            </div>
-          )}
-          {this.state.showAnalytics && (
-            <div>
-              {this.context.myScores.length === 0 ? (
-                <div>{this.renderEmptyScore()}</div>
-              ) : (
-                <Analytics />
-              )}
-            </div>
-          )}
-          {this.state.showSettings && (
-            <div>
-              {' '}
-              <Settings />{' '}
-              <Link onClick={(e) => this.handleLogout(e)} to="/">
+            <nav className="navLinks">
+                <h1 className="title">Project <br /> Blackburn</h1>
+                <div
+                className={this.state.showHome ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowHome()}
+                >
+                    <FaHome />
+                </div>
+                <div
+                className={
+                    this.state.showLeaderboard ? 'links-selected' : 'links'
+                }
+                onClick={() => this.handleShowLeaderboard()}
+                >
+                    <FaChessKing />
+                </div>
+                <div
+                className={this.state.showAnalytics ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowAnalytics()}
+                >
+                    <FaChartLine />
+                </div>
+                <div
+                className={this.state.showSettings ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowSettings()}
+                >
+                    <FaCog />
+                </div>
+                <Link
+                className="links"
+                onClick={(e) => this.handleLogout(e)}
+                to="/"
+                >
                 Logout
-              </Link>
-            </div>
-          )}
+                </Link>
+            </nav>
+            </div>}
+        </Spring>}
+        <div className = {(this.state.menuOpen) ? 'content-open' : 'content'}>
+            <Transition 
+                native
+                reset
+                unique
+                items={this.state.page}
+                from={{ opacity: 0, height: 0, }}
+                enter={{ opacity: 1, height: 'auto'  }}
+                leave={{ opacity: 0, height: 0 }}>
+                {index => pages[index]}
+            </Transition>
         </div>
       </>
     );
