@@ -4,10 +4,11 @@ import storyService from "../../Services/story-api-service";
 import BlackburnContext from '../../Context/BlackburnContext'
 import { Link } from 'react-router-dom'
 import "./StartRoute.css";
+import { Container, Row, Col } from 'react-grid-system';
 
 class StartRoute extends Component {
   static contextType = BlackburnContext;
-  //const stories = this.context.stories
+  
   state = {
     story_id: 1,
     difficulty_setting: "medium",
@@ -39,12 +40,10 @@ class StartRoute extends Component {
   };
 
   renderStories() {
-    console.log("context", this.context.story_id);
     return (
       //youre figuring out how to select a radio button
       //change img on line 37 to back ground of line 36 if we wish
       <div className="story-list" onChange={(e) => this.handleStorySubmit(e)}>
-        <h2>Select a Story</h2>
         {this.state.stories.map((story) => (
           <label key={story.id} className="story-label" htmlFor={`${story.id}`}>
             <div className="story_panel" id={`story_panel ${story.id}`}>
@@ -68,33 +67,39 @@ class StartRoute extends Component {
   }
   render() {
     return (
-      <div className="startpage-main">
-        <form
-          className="start-page-form"
-          id="story_form"
-          onSubmit={this.handleStorySubmit}
-        >
-          {this.renderStories()}
-          <label className="difficulty-label" htmlFor="select_difficulty">
-            Difficulty
-          </label>
-          <select
-            className="select-difficulty"
-            id="select_difficulty"
-            defaultValue="medium"
-            onChange={this.handleDifficulty}
+      <Container>
+        <Link to = '/dashboard'><Button className = 'back-btn'> &#8592;	 </Button></Link>
+        <h2 className = 'start-header'>Select a Story</h2>
+        <Row>
+        <div className="startpage-main">
+          <form
+            className="start-page-form"
+            id="story_form"
+            onSubmit={this.handleStorySubmit}
           >
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-          <Link to={"/storypage"}>
-            <Button className="difficulty-btn" type="submit">
-              Start
-            </Button>
-          </Link>
-        </form>
-      </div>
+            {this.renderStories()}
+            <label className="difficulty-label" htmlFor="select_difficulty">
+              Difficulty
+            </label>
+            <select
+              className="select-difficulty"
+              id="select_difficulty"
+              defaultValue="medium"
+              onChange={this.handleDifficulty}
+            >
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+            <Link to={"/storypage"}>
+              <Button className="difficulty-btn" type="submit">
+                Start
+              </Button>
+            </Link>
+          </form>
+        </div>
+        </Row>
+      </Container>
       
     );
   }
