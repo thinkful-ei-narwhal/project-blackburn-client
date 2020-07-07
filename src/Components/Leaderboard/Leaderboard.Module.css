@@ -1,5 +1,7 @@
 .leaderboard {
     margin-top: 25px;
+    margin-left: 5px;
+
     padding: 10px;
     display: flex;
     flex-direction: column;

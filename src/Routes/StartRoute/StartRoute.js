@@ -7,7 +7,7 @@ import "./StartRoute.css";
 
 class StartRoute extends Component {
   static contextType = BlackburnContext;
-  //const stories = this.context.stories
+  
   state = {
     story_id: 1,
     difficulty_setting: "medium",

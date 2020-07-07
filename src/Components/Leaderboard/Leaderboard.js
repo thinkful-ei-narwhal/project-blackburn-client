@@ -106,15 +106,16 @@ export default class Leaderboard extends React.Component {
                     </div> 
                     : <></>}
                 <ul className = 'list-container'>
-                    {    
-                       this.renderLeaderBoard()
-                    }   
                     <li className = 'leaderboard-list' style = {{marginTop: '10px'}}>  
                         <span className = 'username'> Your Top Score </span> 
                         <div className = 'avatar'> {this.context.user.avatar} </div>
                         <span className = 'username'> {this.context.user.username} </span> 
                         <span className = 'score'> {maxMyScore} </span>  
                     </li>
+                    {    
+                       this.renderLeaderBoard()
+                    }   
+                   
                 </ul>
             </div>
         )
