@@ -11,6 +11,7 @@ const BlackBurnContext = React.createContext({
   score: 0,
   bestScore: 0,
   wpm: 0,
+  accuracy: 0,
   topTenScores: [],
   myScores: [],
   setError: () => {},
@@ -48,6 +49,7 @@ export class BlackburnProvider extends Component {
       score: 0,
       bestScore: 0,
       wpm: 0,
+      accuracy: 0,
       topTenScores: [],
       myScores: [],
     };
@@ -79,7 +81,12 @@ export class BlackburnProvider extends Component {
       score: 0,
       bestScore: 0,
       wpm: 0,
+      accuracy: 0,
     });
+  };
+
+  setAccuracy = (accuracy) => {
+    this.setState({ accuracy });
   };
 
   setWpm = (wpm) => {
@@ -200,8 +207,8 @@ export class BlackburnProvider extends Component {
   };
 
   setNewBestScore = (bestScore) => {
-    this.setState({bestScore});
-  }
+    this.setState({ bestScore });
+  };
 
   render() {
     console.log(this.state.myScores);
@@ -215,6 +222,8 @@ export class BlackburnProvider extends Component {
       topTenScores: this.state.topTenScores,
       myScores: this.state.myScores,
       wpm: this.state.wpm,
+      accuracy: this.state.accuracy,
+      setAccuracy: this.setAccuracy,
       setWpm: this.setWpm,
       setError: this.setError,
       clearError: this.clearError,
