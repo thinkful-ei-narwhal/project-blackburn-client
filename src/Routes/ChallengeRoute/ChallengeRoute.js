@@ -6,10 +6,10 @@ import Word from "./../../Components/Word/Word";
 import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
-import "./ChallengeRoute.css";
 import WinLosePage from "../../Components/WinLosePage/WinLosePage";
 import { Spring, animated} from 'react-spring/renderprops'
 import { TimingAnimation, Easing } from 'react-spring/renderprops-addons'
+import "./ChallengeRoute.css";
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
