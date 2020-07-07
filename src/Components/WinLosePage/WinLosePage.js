@@ -22,7 +22,7 @@ class WinLosePage extends Component {
       story_data: this.context.story_id,
       total_score: this.context.score,
       avg_wpm: this.context.wpm,
-      total_accuracy: 0,
+      total_accuracy: this.context.accuracy,
     };
     console.log("postScore() with data", data);
     ScoreboardApiService.postScore(data).then(() =>
