@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@opd/g2plot-react": "^1.7.2",
+    "@react-spring/addons": "^9.0.0-beta.33",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
