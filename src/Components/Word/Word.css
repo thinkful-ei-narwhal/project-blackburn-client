@@ -1,0 +1,6 @@
+.word {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid grey;
+    box-shadow: 4px 4px grey;
+}

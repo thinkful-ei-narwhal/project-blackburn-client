@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { animated, Transition, Trail } from "react-spring/renderprops";
+import { animated, Transition, Spring } from "react-spring/renderprops";
 import StoryApiService from "../../Services/story-api-service";
 import ScoreboardApiService from "../../Services/scoreboard-api-service";
 import "./Story.css";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { Link } from "react-router-dom";
 
+//component did mount -> if(context is null redirect to dashboard)
 
 
 export default class Story extends Component {
@@ -14,58 +15,85 @@ export default class Story extends Component {
     story_text: "",
     story_art: "https://source.unsplash.com/random",
     story_name: "",
+    showStory: false,
+    index: 0
   };
 
   static contextType = BlackBurnContext;
 
-  componentDidMount() {
+    timer() {
+        let split = this.state.story_text.split(".").length;
+        console.log(split)
+        this.t1 = setInterval(() => {
+            let newState = this.state.index
+            newState++
+            if(this.state.index === split - 1) {
+                console.log('cleared')
+                clearInterval(this.t1)
+            }        
+            return this.setState({index: newState})}, 2500)
+  }
+
+   async componentDidMount() {
     this.context.setMyBestScore();
     const story_id = this.context.story_id;
     const difficulty_setting = this.context.difficulty_setting;
-    StoryApiService.getStory(story_id, difficulty_setting).then((res) => {
+    await StoryApiService.getStory(story_id, difficulty_setting).then((res) => {
       if (this.context.getCheckpointIds() === null) {
         const checkpoints = res.map((checkpoint) => checkpoint);
         this.context.setCheckpointIds(checkpoints, 0);
       }
-
       return this.setState({
         story_text: res[0].story_text,
         story_name: res[0].story_name,
         story_art: res[0].story_art,
       });
     });
+
+    this.timer()
+
   }
 
   render() {
     let split = this.state.story_text.split(".");
     split = split.map((x, index) => {
-      return { x: x, key: index };
+      return { text: x, key: index };
     });
-    const items = split
+    const animatedText = split.map(text => style => (<animated.div style={{ ...style }}>{text.text}</animated.div>))
+    let arrLength = animatedText.length
     return (
       <div className="story-container">
+            <div className = 'skip'>
+        { 
+            (this.state.index !== arrLength) &&
+            <Link to={"/challenge"}> Skip Story &#x2192;</Link>
+        }            </div>
         <h2 className="story-name">{this.state.story_name}</h2>
-        <img
+        {/* <img
           className="story-img"
           src="https://loremflickr.com/320/240"
           alt="coolpic"
-        />
-        <Trail
-         items={items} keys={item => item.key}
-         from={{ opacity: 0, x: -100 }}
-         to={{ opacity: 1, x: 100 }}
-        >
-             {item => ({ x, opacity }) => (
-            <animated.div
-              className="box"
-              style={{
-                opacity,
-                transform: x.interpolate(x => `translate3d(${x}%,0,0)`),
-              }}
-            />
-          )}
-        </Trail>
-        <Link to={"/challenge"}> Start The Challenge </Link>
+        /> */}
+        {
+            (this.state.index === arrLength) && 
+             <div className = 'after-timer'> 
+                <Spring from = {{opacity: 0, height: 0}} to = {{opacity: 1, height: 'auto'}}>
+                    {props => <div style = {props} className = 'story'>{this.state.story_text}</div>}
+                </Spring> 
+                <Spring from = {{opacity: 0, height: 0}} to = {{opacity: 1, height: 'auto'}}>
+                    {props => <Link style = {props} className = 'start-challenge' to={"/challenge"}> Start The Challenge &#x2192;</Link>}
+                </Spring> 
+            </div>
+            }
+        <div className = 'story'>
+            <Transition
+                items={this.state.index} keys={item => item.key}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0  }}>
+                    {index => animatedText[index]}
+            </Transition>
+        </div>
       </div>
     );
   }
