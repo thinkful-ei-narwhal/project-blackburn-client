@@ -31,9 +31,7 @@ class ChallengeRoute extends Component {
     initialized: false,
   };
 
-  //Todos:
-  //Use animations to make words appear at different places
-  //screen shake > part of typeHandler, if it's correct or incorrect
+  //Todos: Use animations to make words appear at different places
 
   calcWPM() {
     const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
@@ -217,17 +215,19 @@ class ChallengeRoute extends Component {
           textBefore={"Time Remaining:"}
           metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
         />
-        <Spring
-          from={{ width: "100%", background: "black" }}
-          to={{ width: "0%", background: "white" }}
-          config={{ duration: this.levelTimerStaticTotal * 1000 }}
-        >
-          {(props) => (
-            <animated.div className="bg" style={props}>
-              {" "}
-            </animated.div>
-          )}
-        </Spring>
+        {!this.state.levelEnded && (
+          <Spring
+            from={{ width: "100%", background: "black" }}
+            to={{ width: "0%", background: "white" }}
+            config={{ duration: this.levelTimerStaticTotal * 1000 }}
+          >
+            {(props) => (
+              <animated.div className="bg" style={props}>
+                {" "}
+              </animated.div>
+            )}
+          </Spring>
+        )}
         <div>
           {!this.state.levelEnded && (
             <Healthbar health={this.state.playerHealth} />
