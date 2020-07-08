@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import TypeHandler from './../../Components/TypeHandler/TypeHandler';
-import Healthbar from './../../Components/Healthbar/Healthbar';
-import UIStats from '../../Components/UIStats/UIStats';
-import Word from './../../Components/Word/Word';
-import GameplayScreen from './../../Components/GameplayScreen/GameplayScreen';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import { uniqueNamesGenerator, animals } from 'unique-names-generator';
-import './ChallengeRoute.css';
-import WinLosePage from '../../Components/WinLosePage/WinLosePage';
-import { Spring, animated } from 'react-spring/renderprops';
-import { TimingAnimation, Easing } from 'react-spring/renderprops-addons';
+
+import React, { Component } from "react";
+import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
+import Healthbar from "./../../Components/Healthbar/Healthbar";
+import UIStats from "../../Components/UIStats/UIStats";
+import Word from "./../../Components/Word/Word";
+import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import { uniqueNamesGenerator, animals } from "unique-names-generator";
+import WinLosePage from "../../Components/WinLosePage/WinLosePage";
+import { Spring, animated } from "react-spring/renderprops";
+import { TimingAnimation, Easing } from "react-spring/renderprops-addons";
+import "./ChallengeRoute.css";
 import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
 import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
 import duel from '../../Assets/Sounds/bensound-theduel.mp3';
@@ -18,33 +19,38 @@ import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
-  state = {
-    words: [],
-    playerHealth: 5,
-    playerScore: 0,
-    playerBest: 0,
-    playerBestStored: 0, // need to figure out how to get this data
-    typedWords: 0,
-    typedWordsTotal: 0,
-    accuracy: 100,
-    levelTimer: 0,
-    levelTimerTotal: 0,
-    wpm: 0,
-    isWin: null,
-    levelEnded: false,
-    initialized: false,
-    audio: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      words: [],
+      playerHealth: 5,
+      playerScore: 0,
+      playerBest: 0,
+      playerBestStored: 0, // need to figure out how to get this data
+      typedWords: 0,
+      typedWordsTotal: 0,
+      accuracy: 100,
+      levelTimer: 0,
+      levelTimerTotal: 0,
+      wpm: 0,
+      value: "",
+      color: "green",
+      isWin: null,
+      levelEnded: false,
+      initialized: false,
+      audio: '',
 
-  //Todos:
-  //Use animations to make words appear at different places
-  //screen shake > part of typeHandler, if it's correct or incorrect
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
   createAudio() {
     const theduel = duel;
     const enigmatic = eni;
     const badass = bad;
     this.setState({ audio: new Audio(eval(this.context.audio)) });
   }
+  //Todos: Use animations to make words appear at different places
 
   calcWPM() {
     const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
@@ -70,6 +76,7 @@ class ChallengeRoute extends Component {
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
+      this.setState({ words: [] });
       this.context.setScore(this.state.playerScore);
       this.context.setAccuracy(this.state.accuracy);
       this.context.setWpm(this.state.wpm);
@@ -143,8 +150,10 @@ class ChallengeRoute extends Component {
   handleSubmit(event, state) {
     event.preventDefault();
     const userInput = event.target.typeInput.value;
-    event.target.typeInput.value = '';
 
+    event.target.typeInput.value = "";
+    this.setState({ value: "" });
+    
     const newWords = state.words;
     let playerHealth = state.playerHealth;
     let playerScore = state.playerScore;
@@ -193,6 +202,20 @@ class ChallengeRoute extends Component {
     this.manageWords();
   }
 
+  handleChange(event) {
+    const value = event.target.value;
+    this.setState({ value });
+
+    let isMatching = false;
+    this.state.words.forEach((wordObj) => {
+      if (wordObj.word.includes(value)) isMatching = true;
+    });
+
+    isMatching
+      ? this.setState({ color: "green" })
+      : this.setState({ color: "red" });
+  }
+
   componentDidMount() {
     this.createAudio();
     const contextObj = this.context.getCheckpointIds();
@@ -215,6 +238,7 @@ class ChallengeRoute extends Component {
         ),
       1000 //this value might have to become more interesting later
     );
+    this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
     this.setState({
       levelTimer: checkpointData.level_timer,
       levelTimerTotal: checkpointData.level_timer,
@@ -225,93 +249,129 @@ class ChallengeRoute extends Component {
     });
   }
 
+  getRandomInt = (min, max) => {
+    return Math.random() * (max - min) + min;
+  };
+
   componentWillUnmount() {
     this.clearTimers();
   }
 
   renderGameplay() {
+
+    const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green']
     this.state.audio.play();
+
     return (
-      <div className="game-container">
-        <UIStats
-          textBefore={'Time Remaining:'}
-          metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
-        />
-        <Spring
-          from={{ width: '100%', background: 'black' }}
-          to={{ width: '0%', background: 'white' }}
-          config={{ duration: this.levelTimerStaticTotal * 1000 }}
-        >
-          {(props) => (
-            <animated.div className="bg" style={props}>
-              {' '}
-            </animated.div>
-          )}
-        </Spring>
-        <div>
-          {this.state.isWin === null && (
+      <>
+      <div className = 'game-container'>
+         {!this.state.levelEnded && (
+              <Spring
+                from={{ width: "100%", background: "gray" }}
+                to={{ width: "0%", background: "white" }}
+                config={{ duration: this.levelTimerStaticTotal * 1000 }}
+              >
+                {(props) => (
+                  <animated.div className="bg" style={props}>
+                    <UIStats textBefore = {'Time Remaining'} 
+                     metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
+                    />
+                  </animated.div>
+                )}
+              </Spring>
+            )}
+          {!this.state.levelEnded && (
             <Healthbar health={this.state.playerHealth} />
           )}
         </div>
-        <div>
+        <div className = 'stat'>
           <UIStats
             textBefore={'Personal best:'}
             metric={this.state.playerBest}
           />
+
+        </div >
+        <div className = 'stat'>
+          <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
         </div>
-        <div>
-          <UIStats textBefore={'Score:'} metric={this.state.playerScore} />
+        <div className = 'stat'>
+          <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
         </div>
-        <div>
-          <UIStats textBefore={'Words Per Minute:'} metric={this.state.wpm} />
-        </div>
-        <div>
+        <div className = 'stat'>
           <UIStats
             textBefore={'Accuracy:'}
             metric={this.state.accuracy}
             textAfter={'%'}
           />
         </div>
-        <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
-        <ul className="word-ul">
-          {this.state.words.map((wordObj, index) => (
-            <li className="word-li" key={index}>
-              <Word word={wordObj.word} />
-              <span>{wordObj.getTimeRemaining()}</span>
-            </li>
-          ))}
-        </ul>
-        <GameplayScreen />
+        {!this.state.levelEnded && (
+          <TypeHandler
+            handleSubmit={(e) => this.handleSubmit(e, this.state)}
+            value={this.state.value}
+            handleChange={this.handleChange}
+            color={this.state.color}
+          />
+        )}
+        {!this.state.levelEnded && (
+          <ul className="word-ul">
+            {this.state.words.map((wordObj, index) => (
+              <li className="word-li" key={index} style={{}}>
+                <Spring 
+                  from={{
+                    transform: "translate3d(200px,0,0) scale(2) rotateX(90deg)",
+                    // backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+                  }}
+                  to={{
+                    transform: "translate3d(0px,0,0) scale(1) rotateX(0deg)",
+                    // backgroundColor:colors[Math.floor(Math.random() * colors.length)],
 
-        {this.state.levelEnded &&
-          this.state.levelTimer < 0 &&
-          this.context.getCurrentCheckpointIndex() !== null && (
+                  }}
+                  // config={{ duration: 2000 }}
+                >
+                  {(props) => (
+                    <span className="wordTimer" style={props}>
+                      <Word word={wordObj.word} />
+                    </span>
+                  )}
+                </Spring>
+                {wordObj.getTimeRemaining()}
+              </li>
+            ))}
+          </ul>
+        )}
+        {!this.state.levelEnded && (
+          <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
+        )}
+        <GameplayScreen />
+          {this.state.levelEnded &&
+            this.state.levelTimer < 0 &&
+            this.context.getCurrentCheckpointIndex() !== null && (
             <div>
-              {' '}
               {this.state.audio.pause()}{' '}
               <WinLosePage condition={'checkpoint'} autoSave={false} />
             </div>
+            )}
+          {this.state.levelEnded &&
+            this.state.levelTimer < 0 &&
+            this.context.getCurrentCheckpointIndex() === null && (
+            <div>
+              {this.state.audio.pause()}{' '}
+              <WinLosePage condition={"level_beaten"} autoSave={true} />
+            </div>
+            )}
+          {this.state.levelEnded && this.state.playerHealth <= 0 && (
+            <div>
+              {this.state.audio.pause()}{' '}
+              <WinLosePage condition={"lose"} autoSave={true} />
+            </div>           
           )}
-        {this.state.levelEnded &&
-          this.state.levelTimer < 0 &&
-          this.context.getCurrentCheckpointIndex() === null && (
-            <WinLosePage condition={'level_beaten'} autoSave={true} />
-          )}
-        {this.state.levelEnded && this.state.playerHealth <= 0 && (
-          <div>
-            {this.state.audio.pause()}{' '}
-            <WinLosePage condition={'lose'} autoSave={true} />
-          </div>
-        )}
-      </div>
+        </>
     );
   }
 
   render() {
     return (
-      <div className="game-container">
-        {this.state.initialized ? this.renderGameplay() : null}
-      </div>
+        this.state.initialized ? this.renderGameplay() : null
     );
   }
 }

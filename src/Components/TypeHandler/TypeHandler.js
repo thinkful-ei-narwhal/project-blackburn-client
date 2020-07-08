@@ -17,11 +17,14 @@ class TypeHandler extends Component {
           ></Label>
           <Input
             autoComplete="off"
+            autoFocus={true}
             placeholder="Start Typing!"
             id="type-input"
             name="typeInput"
+            value={this.props.value}
+            onChange={(e) => this.props.handleChange(e)}
+            style={{ color: this.props.color }}
           />
-          <Button type="submit">Submit</Button>
         </form>
       </div>
     );
