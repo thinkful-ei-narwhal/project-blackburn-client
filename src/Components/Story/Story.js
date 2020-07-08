@@ -5,6 +5,7 @@ import ScoreboardApiService from "../../Services/scoreboard-api-service";
 import "./Story.css";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { Link } from "react-router-dom";
+import Typist from 'react-typist';
 
 //component did mount -> if(context is null redirect to dashboard)
 
@@ -12,7 +13,7 @@ import { Link } from "react-router-dom";
 export default class Story extends Component {
   // CLICK START --> Render the First Checikpoint (the story page)
   state = {
-    story_text: "",
+    story_text: '',
     story_art: "https://source.unsplash.com/random",
     story_name: "",
     showStory: false,
@@ -29,7 +30,7 @@ export default class Story extends Component {
             if(this.state.index === split - 1) {
                 clearInterval(this.t1)
             }        
-            return this.setState({index: newState})}, 2500)
+            return this.setState({index: newState})}, 2000)
   }
 
    async componentDidMount() {
@@ -48,8 +49,58 @@ export default class Story extends Component {
       });
     });
 
-    this.timer()
+    if(this.state.story_text.length < 599) {
+        this.timer()
+    }
   }
+
+  renderTyping = () => {
+    if(this.state.story_text && this.state.story_text.length > 600) {
+        return (
+            <div className = 'story-type-text'>  
+                <Typist avgTypingDelay = {35}>
+                    {this.state.story_text}
+                </Typist>
+                <div className = 'after-timer'>
+                <Spring delay = {25000} from = {{opacity: 0, height: 0}} to = {{opacity: 1, height: 'auto'}}>
+                        {props => <Link style = {props} className = 'start-challenge' to={"/challenge"}> Start The Challenge &#x2192;</Link>}
+                </Spring>
+                </div>
+            </div>
+            )
+    }
+    else if (this.state.story_text && this.state.story_text.length < 599) {
+        let split = this.state.story_text.split(".");
+        split = split.map((x, index) => {
+        return { text: x, key: index };
+        });
+        const animatedTextDiv = split.map(text => style => (<animated.div style={{ ...style }}>{text.text}</animated.div>))
+        let arrLength = animatedTextDiv.length
+        return (
+            <div>
+               {(this.state.index === arrLength) && 
+                <div className = 'after-timer'> 
+                    {
+                    <Spring from = {{opacity: 0, height: 0}} to = {{opacity: 1, height: 'auto'}}>
+                        {props => <Link style = {props} className = 'start-challenge' to={"/challenge"}> Start The Challenge &#x2192;</Link>}
+                    </Spring>
+                    }
+                    <Spring from = {{opacity: 0, height: 0}} to = {{opacity: 1, height: 'auto'}}>
+                        {props => <div style = {props} className = 'story'>{this.state.story_text}</div>}
+                    </Spring>  
+                </div>}
+                    <Transition
+                        items={this.state.index} keys={item => item.key}
+                        from={{ opacity: 0 }}
+                        enter={{ opacity: 1 }}
+                        leave={{ opacity: 0  }}>
+                            {index => animatedTextDiv[index]}
+                    </Transition>
+            </div>
+        )
+    }
+  }
+
 
   render() {
     let split = this.state.story_text.split(".");
@@ -58,41 +109,17 @@ export default class Story extends Component {
     });
     const animatedTextDiv = split.map(text => style => (<animated.div style={{ ...style }}>{text.text}</animated.div>))
     let arrLength = animatedTextDiv.length
-
     return (
       <div className="story-container">
             <div className = 'skip'>
         { 
-            (this.state.index !== arrLength) &&
+            (this.state.index !== arrLength ) &&
             <Link to={"/challenge"}> Skip Story &#x2192;</Link>
-        }            </div>
-        <h2 className="story-name">{this.state.story_name}</h2>
-        {
-            (this.state.index === arrLength) && 
-             <div className = 'after-timer'> 
-                <Spring from = {{opacity: 0, height: 0}} to = {{opacity: 1, height: 'auto'}}>
-                    {props => <div style = {props} className = 'story'>{this.state.story_text}</div>}
-                </Spring> 
-                <Spring from = {{opacity: 0, height: 0}} to = {{opacity: 1, height: 'auto'}}>
-                    {props => <Link style = {props} className = 'start-challenge' to={"/challenge"}> Start The Challenge &#x2192;</Link>}
-                </Spring> 
+        }        
             </div>
-            }
+        <h2 className="story-name">{this.state.story_name}</h2>
         <div className = 'story'>
-            <Transition
-                items={this.state.index} keys={item => item.key}
-                from={{ opacity: 0 }}
-                enter={{ opacity: 1 }}
-                leave={{ opacity: 0  }}>
-                    {index => animatedTextDiv[index]}
-            </Transition>
-            {/* <Transition
-                items={this.state.index} keys={item => item.key}
-                from={{ opacity: 0 }}
-                enter={{ opacity: 1 }}
-                leave={{ opacity: 0  }}>
-                    {index => animatedTextDiv[index - 1]}
-            </Transition> */}
+            {this.renderTyping()}
         </div>
       </div>
     );
