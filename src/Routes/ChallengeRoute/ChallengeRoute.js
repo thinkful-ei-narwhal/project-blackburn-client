@@ -13,23 +13,29 @@ import "./ChallengeRoute.css";
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
+  constructor(props) {
+    super(props);
+    this.state = {
+      words: [],
+      playerHealth: 5,
+      playerScore: 0,
+      playerBest: 0,
+      playerBestStored: 0, // need to figure out how to get this data
+      typedWords: 0,
+      typedWordsTotal: 0,
+      accuracy: 100,
+      levelTimer: 0,
+      levelTimerTotal: 0,
+      wpm: 0,
+      value: "",
+      color: "green",
+      isWin: null,
+      levelEnded: false,
+      initialized: false,
+    };
 
-  state = {
-    words: [],
-    playerHealth: 5,
-    playerScore: 0,
-    playerBest: 0,
-    playerBestStored: 0, // need to figure out how to get this data
-    typedWords: 0,
-    typedWordsTotal: 0,
-    accuracy: 100,
-    levelTimer: 0,
-    levelTimerTotal: 0,
-    wpm: 0,
-    isWin: null,
-    levelEnded: false,
-    initialized: false,
-  };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   //Todos: Use animations to make words appear at different places
 
@@ -130,6 +136,7 @@ class ChallengeRoute extends Component {
     event.preventDefault();
     const userInput = event.target.typeInput.value;
     event.target.typeInput.value = "";
+    this.setState({ value: "" });
 
     const newWords = state.words;
     let playerHealth = state.playerHealth;
@@ -171,6 +178,20 @@ class ChallengeRoute extends Component {
       typedWordsTotal,
     });
     this.manageWords();
+  }
+
+  handleChange(event) {
+    const value = event.target.value;
+    this.setState({ value });
+
+    let isMatching = false;
+    this.state.words.forEach((wordObj) => {
+      if (wordObj.word.includes(value)) isMatching = true;
+    });
+
+    isMatching
+      ? this.setState({ color: "green" })
+      : this.setState({ color: "red" });
   }
 
   componentDidMount() {
@@ -216,6 +237,7 @@ class ChallengeRoute extends Component {
   renderGameplay() {
     const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green']
     return (
+      <>
       <div className = 'game-container'>
          {!this.state.levelEnded && (
               <Spring
@@ -235,27 +257,34 @@ class ChallengeRoute extends Component {
           {!this.state.levelEnded && (
             <Healthbar health={this.state.playerHealth} />
           )}
-          <div className = 'stats-container'>
-              <div className = 'stat'>
-                <UIStats
-                  textBefore={"Personal best:"}
-                  metric={this.state.playerBest}
-                />
-              </div>
-              <div className = 'stat'>
-                <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
-              </div>
-              <div className = 'stat'>
-                <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
-              </div>
-              <div className = 'stat'>
-                <UIStats
-                  textBefore={"Accuracy:"}
-                  metric={this.state.accuracy}
-                  textAfter={"%"}
-                />
-              </div>
-          </div>
+        </div>
+        <div className = 'stat'>
+          <UIStats
+            textBefore={"Personal best:"}
+            metric={this.state.playerBest}
+          />
+        </div >
+        <div className = 'stat'>
+          <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
+        </div>
+        <div className = 'stat'>
+          <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
+        </div>
+        <div className = 'stat'>
+          <UIStats
+            textBefore={"Accuracy:"}
+            metric={this.state.accuracy}
+            textAfter={"%"}
+          />
+        </div>
+        {!this.state.levelEnded && (
+          <TypeHandler
+            handleSubmit={(e) => this.handleSubmit(e, this.state)}
+            value={this.state.value}
+            handleChange={this.handleChange}
+            color={this.state.color}
+          />
+        )}
         {!this.state.levelEnded && (
           <ul className="word-ul">
             {this.state.words.map((wordObj, index) => (
@@ -300,7 +329,7 @@ class ChallengeRoute extends Component {
           {this.state.levelEnded && this.state.playerHealth <= 0 && (
             <WinLosePage condition={"lose"} autoSave={true} />
           )}
-        </div>
+        </>
     );
   }
 
