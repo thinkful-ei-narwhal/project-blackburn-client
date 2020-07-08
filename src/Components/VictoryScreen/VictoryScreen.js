@@ -9,7 +9,7 @@ class VictoryScreen extends Component {
   }
 
   renderVictory() {
-    return <div className="victory-message">Victory!</div>;
+    return;
   }
 
   render() {

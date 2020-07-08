@@ -109,10 +109,18 @@ class WinLosePage extends Component {
   render() {
     return (
       <div className="results-div">
-        {this.state.condition === "lose" && this.renderLose()}
-        {this.state.condition === "checkpoint" && this.renderWin()}
-        {this.state.condition === "level_beaten" && this.renderLevelWin()}
-        {this.state.condition === "final_victory" && this.renderFinalVictory()}
+        {this.state.condition === "lose" &&
+          !this.state.autoSave &&
+          this.renderLose()}
+        {this.state.condition === "checkpoint" &&
+          !this.state.autoSave &&
+          this.renderWin()}
+        {this.state.condition === "level_beaten" &&
+          !this.state.autoSave &&
+          this.renderLevelWin()}
+        {this.state.condition === "final_victory" &&
+          !this.state.autoSave &&
+          this.renderFinalVictory()}
       </div>
     );
   }
