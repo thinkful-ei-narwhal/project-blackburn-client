@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import TokenService from "../Services/token-service";
-import ScoreboardApiService from "../Services/scoreboard-api-service";
+import React, { Component } from 'react';
+import TokenService from '../Services/token-service';
+import ScoreboardApiService from '../Services/scoreboard-api-service';
 
 const BlackBurnContext = React.createContext({
   user: {},
@@ -14,10 +14,12 @@ const BlackBurnContext = React.createContext({
   accuracy: 0,
   topTenScores: [],
   myScores: [],
+  audio: '',
   setError: () => {},
   clearError: () => {},
   resetGameData: () => {},
   setUser: () => {},
+  setAudio: () => {},
   setScore: () => {},
   getScore: () => {},
   setWpm: () => {},
@@ -52,6 +54,7 @@ export class BlackburnProvider extends Component {
       accuracy: 0,
       topTenScores: [],
       myScores: [],
+      audio: '',
     };
     const payload = TokenService.parseAuthToken();
     if (payload)
@@ -96,7 +99,9 @@ export class BlackburnProvider extends Component {
   setUser = (user) => {
     this.setState({ user });
   };
-
+  setAudio = (audio) => {
+    this.setState({ audio });
+  };
   setScore = (score) => {
     this.setState({ score });
   };
@@ -158,7 +163,7 @@ export class BlackburnProvider extends Component {
   };
 
   getTopTenScores = () => {
-    ScoreboardApiService.getAllScores("all").then((res) => {
+    ScoreboardApiService.getAllScores('all').then((res) => {
       const outputArr = res.map((data) => {
         return {
           username: data.username,
@@ -171,9 +176,9 @@ export class BlackburnProvider extends Component {
   };
 
   getMyScores = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
-        console.log("res", res);
+        console.log('res', res);
         const outputArr = res.map((data) => {
           return {
             score: data.total_score,
@@ -191,7 +196,7 @@ export class BlackburnProvider extends Component {
   };
 
   setMyBestScore = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
         const outputArr = res.map((data) => {
           return data.total_score;
@@ -223,12 +228,14 @@ export class BlackburnProvider extends Component {
       myScores: this.state.myScores,
       wpm: this.state.wpm,
       accuracy: this.state.accuracy,
+      audio: this.state.audio,
       setAccuracy: this.setAccuracy,
       setWpm: this.setWpm,
       setError: this.setError,
       clearError: this.clearError,
       resetGameData: this.resetGameData,
       setUser: this.setUser,
+      setAudio: this.setAudio,
       setScore: this.setScore,
       getScore: this.getScore,
       setNewBestScore: this.setNewBestScore,

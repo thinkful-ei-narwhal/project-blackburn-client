@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
 import Healthbar from "./../../Components/Healthbar/Healthbar";
@@ -10,6 +11,11 @@ import WinLosePage from "../../Components/WinLosePage/WinLosePage";
 import { Spring, animated } from "react-spring/renderprops";
 import { TimingAnimation, Easing } from "react-spring/renderprops-addons";
 import "./ChallengeRoute.css";
+import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
+import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
+import duel from '../../Assets/Sounds/bensound-theduel.mp3';
+import bad from '../../Assets/Sounds/bensound-badass.mp3';
+import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
@@ -32,11 +38,18 @@ class ChallengeRoute extends Component {
       isWin: null,
       levelEnded: false,
       initialized: false,
+      audio: '',
+
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
-
+  createAudio() {
+    const theduel = duel;
+    const enigmatic = eni;
+    const badass = bad;
+    this.setState({ audio: new Audio(eval(this.context.audio)) });
+  }
   //Todos: Use animations to make words appear at different places
 
   calcWPM() {
@@ -119,6 +132,8 @@ class ChallengeRoute extends Component {
           newWord.expired = true;
           this.setState({ playerHealth: this.state.playerHealth - 0.5 });
           this.manageWords();
+          let hit = new Audio(healthLoss);
+          hit.play();
         }, word_expiration_timer),
         endTime: word_expiration_timer + new Date().getTime(),
         clearTimeout: () => clearTimeout(newWord.timeout),
@@ -135,9 +150,10 @@ class ChallengeRoute extends Component {
   handleSubmit(event, state) {
     event.preventDefault();
     const userInput = event.target.typeInput.value;
+
     event.target.typeInput.value = "";
     this.setState({ value: "" });
-
+    
     const newWords = state.words;
     let playerHealth = state.playerHealth;
     let playerScore = state.playerScore;
@@ -154,12 +170,18 @@ class ChallengeRoute extends Component {
         playerScore += 10;
         typedWords++;
         clearTimeout(wordObj.timeout);
+        let correct = new Audio(bellTone);
+        correct.play();
       }
       return;
     });
 
     //if the player is incorrect he takes damage and loses score
-    if (takeDamage) playerHealth--;
+    if (takeDamage) {
+      let hit = new Audio(healthLoss);
+      hit.play();
+      playerHealth--;
+    }
     if (takeDamage && playerScore > 0) playerScore -= 5;
 
     //increase total words typed for accuracy
@@ -195,6 +217,7 @@ class ChallengeRoute extends Component {
   }
 
   componentDidMount() {
+    this.createAudio();
     const contextObj = this.context.getCheckpointIds();
     const playerScore = this.context.getScore();
     const playerBestStored = this.context.getMyBestScore();
@@ -235,7 +258,10 @@ class ChallengeRoute extends Component {
   }
 
   renderGameplay() {
+
     const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green']
+    this.state.audio.play();
+
     return (
       <>
       <div className = 'game-container'>
@@ -260,9 +286,10 @@ class ChallengeRoute extends Component {
         </div>
         <div className = 'stat'>
           <UIStats
-            textBefore={"Personal best:"}
+            textBefore={'Personal best:'}
             metric={this.state.playerBest}
           />
+
         </div >
         <div className = 'stat'>
           <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
@@ -272,9 +299,9 @@ class ChallengeRoute extends Component {
         </div>
         <div className = 'stat'>
           <UIStats
-            textBefore={"Accuracy:"}
+            textBefore={'Accuracy:'}
             metric={this.state.accuracy}
-            textAfter={"%"}
+            textAfter={'%'}
           />
         </div>
         {!this.state.levelEnded && (
@@ -319,15 +346,24 @@ class ChallengeRoute extends Component {
           {this.state.levelEnded &&
             this.state.levelTimer < 0 &&
             this.context.getCurrentCheckpointIndex() !== null && (
-              <WinLosePage condition={"checkpoint"} autoSave={false} />
+            <div>
+              {this.state.audio.pause()}{' '}
+              <WinLosePage condition={'checkpoint'} autoSave={false} />
+            </div>
             )}
           {this.state.levelEnded &&
             this.state.levelTimer < 0 &&
             this.context.getCurrentCheckpointIndex() === null && (
+            <div>
+              {this.state.audio.pause()}{' '}
               <WinLosePage condition={"level_beaten"} autoSave={true} />
+            </div>
             )}
           {this.state.levelEnded && this.state.playerHealth <= 0 && (
-            <WinLosePage condition={"lose"} autoSave={true} />
+            <div>
+              {this.state.audio.pause()}{' '}
+              <WinLosePage condition={"lose"} autoSave={true} />
+            </div>           
           )}
         </>
     );

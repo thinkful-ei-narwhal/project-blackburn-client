@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { animated, Transition, Spring } from "react-spring/renderprops";
 import StoryApiService from "../../Services/story-api-service";
@@ -7,17 +8,18 @@ import BlackBurnContext from "../../Context/BlackburnContext";
 import { Link } from "react-router-dom";
 import Typist from 'react-typist';
 
-//component did mount -> if(context is null redirect to dashboard)
 
+//component did mount -> if(context is null redirect to dashboard)
 
 export default class Story extends Component {
   // CLICK START --> Render the First Checkpoint (the story page)
   state = {
     story_text: '',
-    story_art: "https://source.unsplash.com/random",
-    story_name: "",
+    story_art: 'https://source.unsplash.com/random',
+    story_name: '',
+    audio: '',
     showStory: false,
-    index: 0
+    index: 0,
   };
 
   static contextType = BlackBurnContext;
@@ -33,7 +35,7 @@ export default class Story extends Component {
             return this.setState({index: newState})}, 2000)
   }
 
-   async componentDidMount() {
+  async componentDidMount() {
     this.context.setMyBestScore();
     const story_id = this.context.story_id;
     const difficulty_setting = this.context.difficulty_setting;
@@ -42,10 +44,13 @@ export default class Story extends Component {
         const checkpoints = res.map((checkpoint) => checkpoint);
         this.context.setCheckpointIds(checkpoints, 0);
       }
+      console.log(res);
+      this.context.setAudio(res[0].music);
       return this.setState({
         story_text: res[0].story_text,
         story_name: res[0].story_name,
         story_art: res[0].story_art,
+        dictionary: res[0].dictionary_string,
       });
     });
 
@@ -107,10 +112,12 @@ export default class Story extends Component {
   }
 
   render() {
-    let split = this.state.story_text.split(".");
+    console.log(typeof this.context.audio);
+    let split = this.state.story_text.split('.');
     split = split.map((x, index) => {
       return { text: x, key: index };
     });
+
     const animatedTextDiv = split.map(text => style => (<animated.div style={{ ...style }}>{text.text}</animated.div>))
     let arrLength = animatedTextDiv.length
     return (
