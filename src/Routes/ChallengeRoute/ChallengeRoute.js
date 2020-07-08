@@ -295,6 +295,11 @@ class ChallengeRoute extends Component {
         {this.state.levelEnded &&
           this.state.levelTimer < 0 &&
           this.context.getCurrentCheckpointIndex() === null && (
+            <WinLosePage condition={"final_victory"} autoSave={true} />
+          )}
+        {this.state.levelEnded &&
+          this.state.levelTimer < 0 &&
+          this.context.getCurrentCheckpointIndex() === null && (
             <WinLosePage condition={"level_beaten"} autoSave={true} />
           )}
         {this.state.levelEnded && this.state.playerHealth <= 0 && (

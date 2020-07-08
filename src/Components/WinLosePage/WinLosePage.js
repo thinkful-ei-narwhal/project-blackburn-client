@@ -98,6 +98,10 @@ class WinLosePage extends Component {
     );
   }
 
+  renderFinalVictory() {
+    return <div className="final-victory">Victory!</div>;
+  }
+
   componentDidMount() {
     if (this.state.autoSave) this.autoSave();
   }
@@ -108,6 +112,7 @@ class WinLosePage extends Component {
         {this.state.condition === "lose" && this.renderLose()}
         {this.state.condition === "checkpoint" && this.renderWin()}
         {this.state.condition === "level_beaten" && this.renderLevelWin()}
+        {this.state.condition === "final_victory" && this.renderFinalVictory()}
       </div>
     );
   }
