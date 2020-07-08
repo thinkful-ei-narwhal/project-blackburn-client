@@ -1,0 +1,16 @@
+.story-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-page-form {
+  display: inline-block;
+}
+
+.story_panel {
+  border: solid 1pt black;
+  width: 200px;
+  margin: 10px;
+}
