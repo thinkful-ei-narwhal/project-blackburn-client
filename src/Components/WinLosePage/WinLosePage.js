@@ -1,10 +1,12 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Button from "../Button/Button";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import ScoreboardApiService from "../../Services/scoreboard-api-service";
-import LeaderBoard from "./../Leaderboard/Leaderboard";
-import "./WinLosePage.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../Button/Button';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import ScoreboardApiService from '../../Services/scoreboard-api-service';
+import LeaderBoard from './../Leaderboard/Leaderboard';
+import loseSound from '../../Assets/Sounds/arcade_game_fall_tone_001.mp3';
+import winSound from '../../Assets/Sounds/arcade-climb_tone_001.mp3';
+import './WinLosePage.css';
 
 class WinLosePage extends Component {
   static contextType = BlackBurnContext;
@@ -24,7 +26,7 @@ class WinLosePage extends Component {
       avg_wpm: this.context.wpm,
       total_accuracy: this.context.accuracy,
     };
-    console.log("postScore() with data", data);
+    console.log('postScore() with data', data);
     ScoreboardApiService.postScore(data).then(() =>
       this.setState({ autoSave: false })
     );
@@ -45,7 +47,7 @@ class WinLosePage extends Component {
           Congratulations! You beat the level.
         </div>
         <LeaderBoard />
-        <Link to={"/start"}>
+        <Link to={'/start'}>
           <Button
             className="btn results next-btn"
             onClick={this.handleReturnToStartClick}
@@ -58,8 +60,11 @@ class WinLosePage extends Component {
   }
 
   renderWin() {
+    let winTone = new Audio(winSound);
+
     return (
       <div className="results victory">
+        {winTone.play()}
         <div className="results header">You're a genius bruh</div>
         <Link to="/story">
           <Button
@@ -82,8 +87,10 @@ class WinLosePage extends Component {
   }
 
   renderLose() {
+    let loseTone = new Audio(loseSound);
     return (
       <div className="results defeat">
+        {loseTone.play()}
         <div className="results header">You suck and your guy died</div>
         <LeaderBoard />
         <Link to="/start">
