@@ -1,19 +1,23 @@
-import React, { Component } from "react";
-import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
-import Healthbar from "./../../Components/Healthbar/Healthbar";
-import UIStats from "../../Components/UIStats/UIStats";
-import Word from "./../../Components/Word/Word";
-import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import { uniqueNamesGenerator, animals } from "unique-names-generator";
-import "./ChallengeRoute.css";
-import WinLosePage from "../../Components/WinLosePage/WinLosePage";
-import { Spring, animated} from 'react-spring/renderprops'
-import { TimingAnimation, Easing } from 'react-spring/renderprops-addons'
+import React, { Component } from 'react';
+import TypeHandler from './../../Components/TypeHandler/TypeHandler';
+import Healthbar from './../../Components/Healthbar/Healthbar';
+import UIStats from '../../Components/UIStats/UIStats';
+import Word from './../../Components/Word/Word';
+import GameplayScreen from './../../Components/GameplayScreen/GameplayScreen';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import { uniqueNamesGenerator, animals } from 'unique-names-generator';
+import './ChallengeRoute.css';
+import WinLosePage from '../../Components/WinLosePage/WinLosePage';
+import { Spring, animated } from 'react-spring/renderprops';
+import { TimingAnimation, Easing } from 'react-spring/renderprops-addons';
+import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
+import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
+import duel from '../../Assets/Sounds/bensound-theduel.mp3';
+import bad from '../../Assets/Sounds/bensound-badass.mp3';
+import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
-
   state = {
     words: [],
     playerHealth: 5,
@@ -29,11 +33,18 @@ class ChallengeRoute extends Component {
     isWin: null,
     levelEnded: false,
     initialized: false,
+    audio: '',
   };
 
   //Todos:
   //Use animations to make words appear at different places
   //screen shake > part of typeHandler, if it's correct or incorrect
+  createAudio() {
+    const theduel = duel;
+    const enigmatic = eni;
+    const badass = bad;
+    this.setState({ audio: new Audio(eval(this.context.audio)) });
+  }
 
   calcWPM() {
     const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
@@ -114,6 +125,8 @@ class ChallengeRoute extends Component {
           newWord.expired = true;
           this.setState({ playerHealth: this.state.playerHealth - 0.5 });
           this.manageWords();
+          let hit = new Audio(healthLoss);
+          hit.play();
         }, word_expiration_timer),
         endTime: word_expiration_timer + new Date().getTime(),
         clearTimeout: () => clearTimeout(newWord.timeout),
@@ -130,7 +143,7 @@ class ChallengeRoute extends Component {
   handleSubmit(event, state) {
     event.preventDefault();
     const userInput = event.target.typeInput.value;
-    event.target.typeInput.value = "";
+    event.target.typeInput.value = '';
 
     const newWords = state.words;
     let playerHealth = state.playerHealth;
@@ -148,12 +161,18 @@ class ChallengeRoute extends Component {
         playerScore += 10;
         typedWords++;
         clearTimeout(wordObj.timeout);
+        let correct = new Audio(bellTone);
+        correct.play();
       }
       return;
     });
 
     //if the player is incorrect he takes damage and loses score
-    if (takeDamage) playerHealth--;
+    if (takeDamage) {
+      let hit = new Audio(healthLoss);
+      hit.play();
+      playerHealth--;
+    }
     if (takeDamage && playerScore > 0) playerScore -= 5;
 
     //increase total words typed for accuracy
@@ -175,11 +194,12 @@ class ChallengeRoute extends Component {
   }
 
   componentDidMount() {
+    this.createAudio();
     const contextObj = this.context.getCheckpointIds();
     const playerScore = this.context.getScore();
     const playerBestStored = this.context.getMyBestScore();
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
-    this.levelTimerStaticTotal = checkpointData.level_timer
+    this.levelTimerStaticTotal = checkpointData.level_timer;
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
     this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
     this.calcRuntimeStats = setInterval(() => {
@@ -210,48 +230,52 @@ class ChallengeRoute extends Component {
   }
 
   renderGameplay() {
+    this.state.audio.play();
     return (
-      <div className = 'game-container'>
+      <div className="game-container">
         <UIStats
-          textBefore={"Time Remaining:"}
+          textBefore={'Time Remaining:'}
           metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
         />
-        <Spring 
-          from = {{width: '100%', background: 'black'}}
-          to = {{width: '0%' , background: 'white'}}
-          config = {{duration: this.levelTimerStaticTotal * 1000}}
+        <Spring
+          from={{ width: '100%', background: 'black' }}
+          to={{ width: '0%', background: 'white' }}
+          config={{ duration: this.levelTimerStaticTotal * 1000 }}
         >
-          {props => <animated.div className="bg" style={props} >  </animated.div>}
+          {(props) => (
+            <animated.div className="bg" style={props}>
+              {' '}
+            </animated.div>
+          )}
         </Spring>
-      <div>
-        {this.state.isWin === null && (
-          <Healthbar health={this.state.playerHealth} />
-        )}
+        <div>
+          {this.state.isWin === null && (
+            <Healthbar health={this.state.playerHealth} />
+          )}
         </div>
         <div>
-       
           <UIStats
-            textBefore={"Personal best:"}
+            textBefore={'Personal best:'}
             metric={this.state.playerBest}
           />
         </div>
         <div>
-          <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
+          <UIStats textBefore={'Score:'} metric={this.state.playerScore} />
         </div>
         <div>
-          <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
+          <UIStats textBefore={'Words Per Minute:'} metric={this.state.wpm} />
         </div>
         <div>
           <UIStats
-            textBefore={"Accuracy:"}
+            textBefore={'Accuracy:'}
             metric={this.state.accuracy}
-            textAfter={"%"}
+            textAfter={'%'}
           />
         </div>
         <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
-        <ul className = 'word-ul'>
+        <ul className="word-ul">
           {this.state.words.map((wordObj, index) => (
-            <li className = 'word-li' key={index}>
+            <li className="word-li" key={index}>
               <Word word={wordObj.word} />
               <span>{wordObj.getTimeRemaining()}</span>
             </li>
@@ -262,15 +286,22 @@ class ChallengeRoute extends Component {
         {this.state.levelEnded &&
           this.state.levelTimer < 0 &&
           this.context.getCurrentCheckpointIndex() !== null && (
-            <WinLosePage condition={"checkpoint"} autoSave={false} />
+            <div>
+              {' '}
+              {this.state.audio.pause()}{' '}
+              <WinLosePage condition={'checkpoint'} autoSave={false} />
+            </div>
           )}
         {this.state.levelEnded &&
           this.state.levelTimer < 0 &&
           this.context.getCurrentCheckpointIndex() === null && (
-            <WinLosePage condition={"level_beaten"} autoSave={true} />
+            <WinLosePage condition={'level_beaten'} autoSave={true} />
           )}
         {this.state.levelEnded && this.state.playerHealth <= 0 && (
-          <WinLosePage condition={"lose"} autoSave={true} />
+          <div>
+            {this.state.audio.pause()}{' '}
+            <WinLosePage condition={'lose'} autoSave={true} />
+          </div>
         )}
       </div>
     );
@@ -278,9 +309,10 @@ class ChallengeRoute extends Component {
 
   render() {
     return (
-      <div className = 'game-container'> 
+      <div className="game-container">
         {this.state.initialized ? this.renderGameplay() : null}
-      </div>)
+      </div>
+    );
   }
 }
 
