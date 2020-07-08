@@ -216,7 +216,6 @@ export class BlackburnProvider extends Component {
   };
 
   render() {
-    console.log(this.state.myScores);
     const value = {
       user: this.state.user,
       error: this.state.error,

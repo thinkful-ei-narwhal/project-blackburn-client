@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-grid-system";
 import "./Start.Module.css";
-import { Transition, animated as a } from "react-spring/renderprops";
 
 export default class Start extends React.Component {
   state = {
