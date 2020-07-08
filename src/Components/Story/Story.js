@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 
 export default class Story extends Component {
-  // CLICK START --> Render the First Checikpoint (the story page)
+  // CLICK START --> Render the First Checkpoint (the story page)
   state = {
     story_text: "",
     story_art: "https://source.unsplash.com/random",
@@ -23,12 +23,10 @@ export default class Story extends Component {
 
     timer() {
         let split = this.state.story_text.split(".").length;
-        console.log(split)
         this.t1 = setInterval(() => {
             let newState = this.state.index
             newState++
             if(this.state.index === split - 1) {
-                console.log('cleared')
                 clearInterval(this.t1)
             }        
             return this.setState({index: newState})}, 2500)
@@ -51,7 +49,10 @@ export default class Story extends Component {
     });
 
     this.timer()
+  }
 
+  componentWillUnmount() {
+    clearInterval(this.t1);
   }
 
   render() {
@@ -59,8 +60,9 @@ export default class Story extends Component {
     split = split.map((x, index) => {
       return { text: x, key: index };
     });
-    const animatedText = split.map(text => style => (<animated.div style={{ ...style }}>{text.text}</animated.div>))
-    let arrLength = animatedText.length
+    const animatedTextDiv = split.map(text => style => (<animated.div style={{ ...style }}>{text.text}</animated.div>))
+    let arrLength = animatedTextDiv.length
+
     return (
       <div className="story-container">
             <div className = 'skip'>
@@ -69,11 +71,6 @@ export default class Story extends Component {
             <Link to={"/challenge"}> Skip Story &#x2192;</Link>
         }            </div>
         <h2 className="story-name">{this.state.story_name}</h2>
-        {/* <img
-          className="story-img"
-          src="https://loremflickr.com/320/240"
-          alt="coolpic"
-        /> */}
         {
             (this.state.index === arrLength) && 
              <div className = 'after-timer'> 
@@ -91,8 +88,15 @@ export default class Story extends Component {
                 from={{ opacity: 0 }}
                 enter={{ opacity: 1 }}
                 leave={{ opacity: 0  }}>
-                    {index => animatedText[index]}
+                    {index => animatedTextDiv[index]}
             </Transition>
+            {/* <Transition
+                items={this.state.index} keys={item => item.key}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0  }}>
+                    {index => animatedTextDiv[index - 1]}
+            </Transition> */}
         </div>
       </div>
     );

@@ -9,9 +9,31 @@
 .word-ul {
     border: 1px solid grey;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50vw;
+    height:800px;
+    
+    /* box-shadow: 6px 6px 6px 6px lightgray; */
 }
 
 .bg {
     background-color: black;
     height: 40px;
+}
+
+.word-li {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin: 10px;
+}
+
+.wordTimer {
+    float: left;
 }
