@@ -20,7 +20,6 @@ export default class LineChart extends React.Component {
     });
     return (
       <div className="graphs">
-        {this.scoreLogic()}
         <div className="score-graph">
           <h3> Score Over Time </h3>
           <VictoryChart domainPadding={20} theme={VictoryTheme.material}>

@@ -18,7 +18,7 @@ class WinLosePage extends Component {
     };
   }
 
-  autoSave() {
+  async autoSave() {
     const data = {
       user_id: this.context.user.id,
       story_data: this.context.story_id,
@@ -27,9 +27,10 @@ class WinLosePage extends Component {
       total_accuracy: this.context.accuracy,
     };
     console.log('postScore() with data', data);
-    ScoreboardApiService.postScore(data).then(() =>
-      this.setState({ autoSave: false })
-    );
+    await ScoreboardApiService.postScore(data)
+  
+    this.setState({ autoSave: false })
+    console.log(this.state.autoSave)
   }
 
   handleReturnToStartClick = () => {
@@ -59,12 +60,16 @@ class WinLosePage extends Component {
     );
   }
 
-  renderWin() {
+  playWintone = () => {
     let winTone = new Audio(winSound);
+    winTone.play()
+  }
 
+
+  renderWin() {
     return (
       <div className="results victory">
-        {winTone.play()}
+        {this.playWintone()}
         <div className="results header">You're a genius bruh</div>
         <Link to="/story">
           <Button
@@ -86,11 +91,15 @@ class WinLosePage extends Component {
     );
   }
 
+  playLoseTone = () => {
+    let loseTone = new Audio(loseSound)
+    loseTone.play()
+  }
+
   renderLose() {
-    let loseTone = new Audio(loseSound);
     return (
       <div className="results defeat">
-        {loseTone.play()}
+        {this.playLoseTone()}
         <div className="results header">You suck and your guy died</div>
         <LeaderBoard />
         <Link to="/start">

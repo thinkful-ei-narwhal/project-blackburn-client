@@ -283,35 +283,38 @@ class ChallengeRoute extends Component {
           {!this.state.levelEnded && (
             <Healthbar health={this.state.playerHealth} />
           )}
-        </div>
-        <div className = 'stat'>
-          <UIStats
-            textBefore={'Personal best:'}
-            metric={this.state.playerBest}
-          />
+        <div className = 'stats-container'>
+          <div className = 'stat'>
+            <UIStats
+              textBefore={'Personal best:'}
+              metric={this.state.playerBest}
+            />
 
-        </div >
-        <div className = 'stat'>
-          <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
+          </div >
+          <div className = 'stat'>
+            <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
+          </div>
+          <div className = 'stat'>
+            <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
+          </div>
+          <div className = 'stat'>
+            <UIStats
+              textBefore={'Accuracy:'}
+              metric={this.state.accuracy}
+              textAfter={'%'}
+            />
+          </div>
         </div>
-        <div className = 'stat'>
-          <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
+        <div className = 'type-input'>
+          {!this.state.levelEnded && (
+            <TypeHandler
+              handleSubmit={(e) => this.handleSubmit(e, this.state)}
+              value={this.state.value}
+              handleChange={this.handleChange}
+              color={this.state.color}
+            />
+          )}
         </div>
-        <div className = 'stat'>
-          <UIStats
-            textBefore={'Accuracy:'}
-            metric={this.state.accuracy}
-            textAfter={'%'}
-          />
-        </div>
-        {!this.state.levelEnded && (
-          <TypeHandler
-            handleSubmit={(e) => this.handleSubmit(e, this.state)}
-            value={this.state.value}
-            handleChange={this.handleChange}
-            color={this.state.color}
-          />
-        )}
         {!this.state.levelEnded && (
           <ul className="word-ul">
             {this.state.words.map((wordObj, index) => (
@@ -339,9 +342,6 @@ class ChallengeRoute extends Component {
             ))}
           </ul>
         )}
-        {!this.state.levelEnded && (
-          <TypeHandler handleSubmit={(e) => this.handleSubmit(e, this.state)} />
-        )}
         <GameplayScreen />
           {this.state.levelEnded &&
             this.state.levelTimer < 0 &&
@@ -365,6 +365,8 @@ class ChallengeRoute extends Component {
               <WinLosePage condition={"lose"} autoSave={true} />
             </div>           
           )}
+        </div>
+
         </>
     );
   }

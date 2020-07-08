@@ -36,7 +36,6 @@ const scoreboardService = {
       body: JSON.stringify({ data }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
   },
 };
 
