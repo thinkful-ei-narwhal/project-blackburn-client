@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 
 export default class Story extends Component {
-  // CLICK START --> Render the First Checikpoint (the story page)
+  // CLICK START --> Render the First Checkpoint (the story page)
   state = {
     story_text: "",
     story_art: "https://source.unsplash.com/random",
@@ -49,6 +49,10 @@ export default class Story extends Component {
     });
 
     this.timer()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.t1);
   }
 
   render() {
