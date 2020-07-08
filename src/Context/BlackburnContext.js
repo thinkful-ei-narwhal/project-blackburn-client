@@ -135,7 +135,8 @@ export class BlackburnProvider extends Component {
   incrementCheckpointIndex = () => {
     let index = this.state.checkpoint_ids.currentIndex;
     index++;
-    if (index > this.state.checkpoint_ids.checkpointArray.length - 1) {
+    if (index > this.state.checkpoint_ids.checkpointArray.length - 2) {
+      console.log("DONT FUCKING MISS THIS ", index)
       this.setState({ checkpoint_ids: null });
     } else {
       const checkpoint_ids = this.state.checkpoint_ids;

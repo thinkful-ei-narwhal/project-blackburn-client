@@ -240,8 +240,8 @@ class ChallengeRoute extends Component {
     );
     this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
     this.setState({
-      levelTimer: checkpointData.level_timer,
-      levelTimerTotal: checkpointData.level_timer,
+      levelTimer: 1, //checkpointData.level_timer,
+      levelTimerTotal:1, //checkpointData.level_timer,
       playerScore: playerScore,
       playerBest: playerBestStored,
       playerBestStored: playerBestStored,
@@ -261,7 +261,6 @@ class ChallengeRoute extends Component {
 
     const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green']
     this.state.audio.play();
-
     return (
       <>
       <div className = 'game-container'>
@@ -344,7 +343,7 @@ class ChallengeRoute extends Component {
         )}
         <GameplayScreen />
           {this.state.levelEnded &&
-            this.state.levelTimer < 0 &&
+            this.state.levelTimer <= 0 &&
             this.context.getCurrentCheckpointIndex() !== null && (
             <div>
               {this.state.audio.pause()}{' '}
@@ -352,7 +351,7 @@ class ChallengeRoute extends Component {
             </div>
             )}
           {this.state.levelEnded &&
-            this.state.levelTimer < 0 &&
+            this.state.levelTimer <= 0 &&
             this.context.getCurrentCheckpointIndex() === null && (
             <div>
               {this.state.audio.pause()}{' '}
