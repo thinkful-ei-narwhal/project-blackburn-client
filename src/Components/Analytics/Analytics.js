@@ -8,7 +8,6 @@ export default class Analytics extends React.Component {
     static contextType = BlackBurnContext 
 
     componentDidMount() {
-        console.log('test')
         this.context.getMyScores()
         this.context.getTopTenScores()
     }
