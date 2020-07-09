@@ -218,10 +218,14 @@ class ChallengeRoute extends Component {
   componentDidMount() {
     this.createAudio();
     const contextObj = this.context.getCheckpointIds();
+    let storyCheckpoints = contextObj.checkpointArray;
+    let i = contextObj.currentIndex || 0;
+    this.winText = storyCheckpoints[i].win_text;
+    this.loseText = storyCheckpoints[i].lose_text;
     const playerScore = this.context.getScore();
     const playerBestStored = this.context.getMyBestScore();
-    console.log('uhiwquqeiuw', contextObj.currentIndex);
-    console.log('zcbnzxcnbv', contextObj.checkpointArray);
+    console.log("uhiwquqeiuw", contextObj.currentIndex);
+    console.log("zcbnzxcnbv", contextObj.checkpointArray);
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
     this.levelTimerStaticTotal = checkpointData.level_timer;
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
@@ -241,7 +245,7 @@ class ChallengeRoute extends Component {
     );
     this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
     this.setState({
-      levelTimer: 5, //checkpointData.level_timer,
+      levelTimer: 5, // checkpointData.level_timer,
       levelTimerTotal: 5, //checkpointData.level_timer,
       playerScore: playerScore,
       playerBest: playerBestStored,
@@ -259,6 +263,7 @@ class ChallengeRoute extends Component {
   }
 
   renderGameplay() {
+    //for animation and music
     const colors = ["blue", "red", "orange", "violet", "black", "green"];
     this.state.audio.play();
     return (
@@ -363,7 +368,11 @@ class ChallengeRoute extends Component {
             this.context.getCurrentCheckpointIndex() !== null && (
               <div>
                 {this.state.audio.pause()}{" "}
-                <WinLosePage condition={"checkpoint"} autoSave={false} />
+                <WinLosePage
+                  text={this.winText}
+                  condition={"checkpoint"}
+                  autoSave={false}
+                />
               </div>
             )}
           {this.state.levelEnded &&
@@ -371,13 +380,21 @@ class ChallengeRoute extends Component {
             this.context.getCurrentCheckpointIndex() === null && (
               <div>
                 {this.state.audio.pause()}{" "}
-                <WinLosePage condition={"level_beaten"} autoSave={true} />
+                <WinLosePage
+                  text={this.winText}
+                  condition={"level_beaten"}
+                  autoSave={true}
+                />
               </div>
             )}
           {this.state.levelEnded && this.state.playerHealth <= 0 && (
             <div>
               {this.state.audio.pause()}{" "}
-              <WinLosePage condition={"lose"} autoSave={true} />
+              <WinLosePage
+                text={this.loseText}
+                condition={"lose"}
+                autoSave={true}
+              />
             </div>
           )}
         </div>

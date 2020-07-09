@@ -6,7 +6,7 @@ const BlackBurnContext = React.createContext({
   user: {},
   error: null,
   story_id: null,
-  checkpoint_ids: null,
+  checkpoint_ids: { checkpointArray: [], currentIndex: 0 },
   difficulty_setting: null,
   score: 0,
   bestScore: 0,
