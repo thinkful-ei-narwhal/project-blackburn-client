@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Leaderboard from "../Leaderboard/Leaderboard";
-import Start from "../Start/Start";
-import Analytics from "../Analytics/Analytics";
-import Settings from "../Settings/Settings";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import UserHeader from "../UserHeader/UserHeader";
-import "./Dashboard.Module.css";
-import { Spring, animated, Transition } from "react-spring/renderprops";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Leaderboard from '../Leaderboard/Leaderboard';
+import Start from '../Start/Start';
+import Analytics from '../Analytics/Analytics';
+import Settings from '../Settings/Settings';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import UserHeader from '../UserHeader/UserHeader';
+import './Dashboard.Module.css';
+import { Spring, animated, Transition } from 'react-spring/renderprops';
 import {
   FaBars,
   FaTimes,
@@ -15,7 +15,8 @@ import {
   FaChessKing,
   FaHome,
   FaCog,
-} from "react-icons/fa";
+} from 'react-icons/fa';
+import { GiExitDoor } from 'react-icons/gi';
 
 const pages = [
   (style) => (
@@ -134,17 +135,16 @@ export default class Dashboard extends React.Component {
         )}
         <header
           className={
-            this.state.menuOpen ? "dashboard-header-open" : "dashboard-header"
+            this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
           }
         >
 
           <h2 className="user-welcome">Welcome {user.username}</h2>
           <div className="user-header">
-            {" "}
-            <UserHeader />{" "}
+            {' '}
+            <UserHeader />{' '}
           </div>
         </header>
-
         {this.state.menuOpen && (
           <Spring
             from={{
@@ -157,12 +157,12 @@ export default class Dashboard extends React.Component {
             {(props) => (
               <div
                 style={props}
-                className={this.state.menuOpen ? "sidenav-open" : "sidenav"}
+                className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}
               >
                 {this.state.menuOpen && (
                   <div className="x" onClick={() => this.handleMenuButton()}>
-                    {" "}
-                    <FaTimes />{" "}
+                    {' '}
+                    <FaTimes />{' '}
                   </div>
                 )}
 
@@ -171,14 +171,14 @@ export default class Dashboard extends React.Component {
                     Project <br /> Blackburn
                   </h1>
                   <div
-                    className={this.state.showHome ? "links-selected" : "links"}
+                    className={this.state.showHome ? 'links-selected' : 'links'}
                     onClick={() => this.handleShowHome()}
                   >
                     <FaHome />
                   </div>
                   <div
                     className={
-                      this.state.showLeaderboard ? "links-selected" : "links"
+                      this.state.showLeaderboard ? 'links-selected' : 'links'
                     }
                     onClick={() => this.handleShowLeaderboard()}
                   >
@@ -186,7 +186,7 @@ export default class Dashboard extends React.Component {
                   </div>
                   <div
                     className={
-                      this.state.showAnalytics ? "links-selected" : "links"
+                      this.state.showAnalytics ? 'links-selected' : 'links'
                     }
                     onClick={() => this.handleShowAnalytics()}
                   >
@@ -194,7 +194,7 @@ export default class Dashboard extends React.Component {
                   </div>
                   <div
                     className={
-                      this.state.showSettings ? "links-selected" : "links"
+                      this.state.showSettings ? 'links-selected' : 'links'
                     }
                     onClick={() => this.handleShowSettings()}
                   >
@@ -205,21 +205,21 @@ export default class Dashboard extends React.Component {
                     onClick={(e) => this.handleLogout(e)}
                     to="/"
                   >
-                    Logout
+                    <GiExitDoor />
                   </Link>
                 </nav>
               </div>
             )}
           </Spring>
         )}
-        <div className={this.state.menuOpen ? "content-open" : "content"}>
+        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
           <Transition
             native
             reset
             unique
             items={this.state.page}
             from={{ opacity: 0, height: 0 }}
-            enter={{ opacity: 1, height: "auto" }}
+            enter={{ opacity: 1, height: 'auto' }}
             leave={{ opacity: 0, height: 0 }}
           >
             {(index) => pages[index]}
