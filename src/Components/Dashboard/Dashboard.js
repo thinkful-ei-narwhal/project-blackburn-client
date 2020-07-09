@@ -126,17 +126,18 @@ export default class Dashboard extends React.Component {
     const { user } = this.context;
     return (
       <>
-        <header
-          className={
-            this.state.menuOpen ? "dashboard-header-open" : "dashboard-header"
-          }
-        >
-         {!this.state.menuOpen && (
+               {!this.state.menuOpen && (
           <div className="x-closed" onClick={() => this.handleMenuButton()}>
             {" "}
             <FaBars />{" "}
           </div>
         )}
+        <header
+          className={
+            this.state.menuOpen ? "dashboard-header-open" : "dashboard-header"
+          }
+        >
+
           <h2 className="user-welcome">Welcome {user.username}</h2>
           <div className="user-header">
             {" "}

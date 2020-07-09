@@ -6,7 +6,9 @@
     text-align: center;
     border: 1px solid grey;
     width: 100%;
-    background-color: #d3d3d3;
+    /* background-color: #d3d3d3; */
+    background-image: url('../../Images/DetectiveAtDesk.jpg');
+    
     position: absolute;
     bottom: 0;
     right: 0;
@@ -25,7 +27,7 @@
     flex-wrap: wrap;
     width: 40vh;
     height: 20em;
-
+    background-color: lightgrey;
     box-shadow: 6px 6px 6px 6px lightgray;
 }
 
@@ -64,14 +66,17 @@
     align-self: center; 
     text-align: center; 
     border: 1px solid gray;
-    max-width: 40vh;
-    box-shadow: 4px 4px 4px 4px lightgray;
+    max-width: 46vh;
+    box-shadow: 4px 4px 4px 4px black;
+    background-color: lightgrey;
+    font-size: larger;
+
 
 }
 
 .stat {
     text-align: center;
-    margin: 5px;
+    margin: 10px;
     border-bottom: 1px solid lightgray;
 }
 
