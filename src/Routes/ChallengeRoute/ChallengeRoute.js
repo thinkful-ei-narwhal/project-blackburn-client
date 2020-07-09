@@ -238,7 +238,6 @@ class ChallengeRoute extends Component {
     .then(() => {
       this.createAudio();
       const contextObj = this.context.getCheckpointIds();
-      const contextObj = this.context.getCheckpointIds();
       let storyCheckpoints = contextObj.checkpointArray;
       let i = contextObj.currentIndex || 0;
       this.winText = storyCheckpoints[i].win_text;
