@@ -27,8 +27,12 @@
 .reg-select {
   margin: 10px;
   padding: 5px;
-  border: 1px solid #d9c1aa;
+  border: none;
   border-radius: 10px;
+}
+.reg-input:focus,
+.reg-select:focus {
+  outline: none;
 }
 
 .reg-btn {
@@ -36,14 +40,14 @@
   margin-left: 10px;
   margin-right: 10px;
   padding: 20px;
-  border: 1px solid #d9c1aa;
+  border: 1px solid #302b28;
   border-radius: 6px;
-  color: #d9c1aa;
-  background-color: #302b28;
+  background-color: #d9c1aa;
+  color: #302b28;
 }
 .reg-btn:hover {
-  background-color: #ae9172;
-  color: #302b28;
+  background-color: #302b28;
+  color: #d9c1aa;
 }
 .reg-btn:disabled {
   display: none;
