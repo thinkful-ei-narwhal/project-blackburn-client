@@ -39,8 +39,8 @@ class WinLosePage extends Component {
 
   renderLevelWin() {
     return (
-      <div className="results victory">
-        <div className="results header">
+      <div className="results-victory">
+        <div className="results-header">
           Congratulations! You beat the level.
         </div>
         <LeaderBoard />
@@ -63,9 +63,9 @@ class WinLosePage extends Component {
 
   renderWin() {
     return (
-      <div className="results victory">
+      <div className="results-victory">
         {this.playWintone()}
-        <div className="results header">You're a genius bruh</div>
+        <div className="results-header">You're a genius bruh</div>
         <Link to="/storypage">
           <Button className="btn results next-btn">Next</Button>
         </Link>
