@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import TokenService from '../Services/token-service';
-import ScoreboardApiService from '../Services/scoreboard-api-service';
+import React, { Component } from "react";
+import TokenService from "../Services/token-service";
+import ScoreboardApiService from "../Services/scoreboard-api-service";
 
 const BlackBurnContext = React.createContext({
   user: {},
@@ -14,7 +14,7 @@ const BlackBurnContext = React.createContext({
   accuracy: 0,
   topTenScores: [],
   myScores: [],
-  audio: '',
+  audio: "",
   setError: () => {},
   clearError: () => {},
   resetGameData: () => {},
@@ -46,7 +46,7 @@ export class BlackburnProvider extends Component {
       user: {},
       error: null,
       story_id: null,
-      checkpoint_ids: null,
+      checkpoint_ids: { checkpointArray: [], currentIndex: 0 },
       difficulty_setting: null,
       score: 0,
       bestScore: 0,
@@ -54,7 +54,7 @@ export class BlackburnProvider extends Component {
       accuracy: 0,
       topTenScores: [],
       myScores: [],
-      audio: '',
+      audio: "",
     };
     const payload = TokenService.parseAuthToken();
     if (payload)
@@ -134,19 +134,24 @@ export class BlackburnProvider extends Component {
 
   incrementCheckpointIndex = () => {
     let index = this.state.checkpoint_ids.currentIndex;
+    const checkpoint_ids = this.state.checkpoint_ids;
     index++;
-    if (index > this.state.checkpoint_ids.checkpointArray.length - 2) {
-      console.log("DONT FUCKING MISS THIS ", index)
-      this.setState({ checkpoint_ids: null });
+    if (index > this.state.checkpoint_ids.checkpointArray.length - 1) {
+      checkpoint_ids.currentIndex = null;
+      this.setState({ checkpoint_ids });
     } else {
-      const checkpoint_ids = this.state.checkpoint_ids;
       checkpoint_ids.currentIndex = index;
-      this.setState({ checkpoint_ids: checkpoint_ids });
+      this.setState({ checkpoint_ids });
     }
+
     return this.state.checkpoint_ids.currentIndex;
   };
 
   getCurrentCheckpointIndex = () => {
+    console.log(
+      "Checkpoint index test",
+      this.state.checkpoint_ids.currentIndex
+    );
     return this.state.checkpoint_ids.currentIndex;
   };
 
@@ -164,7 +169,7 @@ export class BlackburnProvider extends Component {
   };
 
   getTopTenScores = () => {
-    ScoreboardApiService.getAllScores('all').then((res) => {
+    ScoreboardApiService.getAllScores("all").then((res) => {
       const outputArr = res.map((data) => {
         return {
           username: data.username,
@@ -177,9 +182,9 @@ export class BlackburnProvider extends Component {
   };
 
   getMyScores = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
+    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
       (res) => {
-        console.log('res', res);
+        console.log("res", res);
         const outputArr = res.map((data) => {
           return {
             score: data.total_score,
@@ -197,7 +202,7 @@ export class BlackburnProvider extends Component {
   };
 
   setMyBestScore = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
+    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
       (res) => {
         const outputArr = res.map((data) => {
           return data.total_score;

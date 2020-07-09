@@ -41,20 +41,19 @@ export default class Story extends Component {
     await StoryApiService.getStory(story_id, difficulty_setting)
       .then((res) => {
         if (this.context.getCheckpointIds() === null) {
-          if (res === null) {
-            console.log('testing testing')
-            return;
-          }
-          const checkpoints = res.map((checkpoint) => checkpoint);
-          this.context.setCheckpointIds(checkpoints, 0);
+          console.log("testing testing");
+          return;
         }
+        const checkpoints = res.map((checkpoint) => checkpoint);
+        this.context.setCheckpointIds(checkpoints, 0);
         console.log("TESTING ", res[this.context.getCurrentCheckpointIndex()]);
         this.context.setAudio(res[0].music);
         return this.setState({
           story_text: res[this.context.getCurrentCheckpointIndex()].story_text,
           story_name: res[this.context.getCurrentCheckpointIndex()].story_name,
           story_art: res[this.context.getCurrentCheckpointIndex()].story_art,
-          dictionary: res[this.context.getCurrentCheckpointIndex()].dictionary_string,
+          dictionary:
+            res[this.context.getCurrentCheckpointIndex()].dictionary_string,
         });
       })
       .catch((err) => this.context.setError(err));
@@ -150,7 +149,7 @@ export default class Story extends Component {
   }
 
   render() {
-    console.log('test render')
+    console.log("test render");
     let split = this.state.story_text.split(".");
     split = split.map((x, index) => {
       return { text: x, key: index };
