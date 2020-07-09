@@ -7,14 +7,15 @@ import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
 import WinLosePage from "../../Components/WinLosePage/WinLosePage";
-import { Spring, animated } from "react-spring/renderprops";
-import { TimingAnimation, Easing } from "react-spring/renderprops-addons";
+import { Spring, animated, Trail } from "react-spring/renderprops";
 import "./ChallengeRoute.css";
-import bellTone from "../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3";
-import healthLoss from "../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3";
-import duel from "../../Assets/Sounds/bensound-theduel.mp3";
-import bad from "../../Assets/Sounds/bensound-badass.mp3";
-import eni from "../../Assets/Sounds/bensound-enigmatic.mp3";
+import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
+import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
+import duel from '../../Assets/Sounds/bensound-theduel.mp3';
+import bad from '../../Assets/Sounds/bensound-badass.mp3';
+import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
+import gameplayImg from "./../../Images/DetectiveAtDesk.jpg";
+import TimerContent from '../../Components/TimerContent/TimerContent'
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
   constructor(props) {
@@ -37,6 +38,7 @@ class ChallengeRoute extends Component {
       levelEnded: false,
       initialized: false,
       audio: "",
+      timer: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -215,43 +217,61 @@ class ChallengeRoute extends Component {
       : this.setState({ color: "red" });
   }
 
-  componentDidMount() {
-    this.createAudio();
-    const contextObj = this.context.getCheckpointIds();
-    let storyCheckpoints = contextObj.checkpointArray;
-    let i = contextObj.currentIndex || 0;
-    this.winText = storyCheckpoints[i].win_text;
-    this.loseText = storyCheckpoints[i].lose_text;
-    const playerScore = this.context.getScore();
-    const playerBestStored = this.context.getMyBestScore();
-    console.log("uhiwquqeiuw", contextObj.currentIndex);
-    console.log("zcbnzxcnbv", contextObj.checkpointArray);
-    const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
-    this.levelTimerStaticTotal = checkpointData.level_timer;
-    this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
-    this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
-    this.calcRuntimeStats = setInterval(() => {
-      this.calcWPM();
-      this.calcAccuracy();
-      return;
-    }, 200);
-    this.intervalGenerator = setInterval(
-      () =>
-        this.generateWord(
-          checkpointData.word_expiration_timer * 1000,
-          checkpointData.max_screen_words
-        ),
-      1000 //this value might have to become more interesting later
-    );
-    this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
-    this.setState({
-      levelTimer: 5, // checkpointData.level_timer,
-      levelTimerTotal: 5, //checkpointData.level_timer,
-      playerScore: playerScore,
-      playerBest: playerBestStored,
-      playerBestStored: playerBestStored,
-      initialized: true,
-    });
+
+  renderTimer = () => {
+    return (
+      <div className = 'game-container'>
+          <TimerContent>
+           { props => <animated.div style= {{fontSize: '20vh',height: '100vh', width: '100vh', ...props}}> {props.value} </animated.div>}
+          </TimerContent>
+      </div>
+    )
+  }
+
+  startTimer = () => {
+    return new Promise (resolve => setTimeout(resolve, 5500))
+  }
+  
+  async componentDidMount() {
+    await this.startTimer(this.setState({timer: true}))
+    .then(() => this.setState({timer: false}))
+    .then(() => {
+      this.createAudio();
+      const contextObj = this.context.getCheckpointIds();
+      const contextObj = this.context.getCheckpointIds();
+      let storyCheckpoints = contextObj.checkpointArray;
+      let i = contextObj.currentIndex || 0;
+      this.winText = storyCheckpoints[i].win_text;
+      this.loseText = storyCheckpoints[i].lose_text;
+      const playerScore = this.context.getScore();
+      const playerBestStored = this.context.getMyBestScore();
+      const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
+      this.levelTimerStaticTotal = checkpointData.level_timer;
+      this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
+      this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
+      this.calcRuntimeStats = setInterval(() => {
+        this.calcWPM();
+        this.calcAccuracy();
+        return;
+      }, 200);
+      this.intervalGenerator = setInterval(
+        () =>
+          this.generateWord(
+            checkpointData.word_expiration_timer * 1000,
+            checkpointData.max_screen_words
+          ),
+        1000 //this value might have to become more interesting later
+      );
+      this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
+      this.setState({
+        levelTimer: 5, //checkpointData.level_timer,
+        levelTimerTotal: 5, //checkpointData.level_timer,
+        playerScore: playerScore,
+        playerBest: playerBestStored,
+        playerBestStored: playerBestStored,
+        initialized: true,
+      });
+    })
   }
 
   getRandomInt = (min, max) => {
@@ -268,8 +288,8 @@ class ChallengeRoute extends Component {
     this.state.audio.play();
     return (
       <>
-        <div className="game-container">
-          {!this.state.levelEnded && (
+      <Spring from = {{opacity: 0}} to = {{opacity: 1}}>
+         { props => <div style = {props}> {!this.state.levelEnded && (
             <Spring
               from={{ width: "100%", background: "gray" }}
               to={{ width: "0%", background: "white" }}
@@ -362,7 +382,6 @@ class ChallengeRoute extends Component {
               ))}
             </ul>
           )}
-          <GameplayScreen />
           {this.state.levelEnded &&
             this.state.levelTimer <= 0 &&
             this.context.getCurrentCheckpointIndex() !== null && (
@@ -397,13 +416,21 @@ class ChallengeRoute extends Component {
               />
             </div>
           )}
-        </div>
+          </div>}
+        </Spring>
       </>
     );
   }
 
   render() {
-    return this.state.initialized ? this.renderGameplay() : null;
+    return (
+      <div className = 'game-container'>
+        { 
+        !this.state.timer && this.state.initialized ? this.renderGameplay() : this.renderTimer()
+        }
+      </div>
+      
+      );
   }
 }
 

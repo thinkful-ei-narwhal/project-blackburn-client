@@ -61,7 +61,7 @@ class WinLosePage extends Component {
 
   renderWin() {
     return (
-      <div className="results victory">
+      <div className="results-victory">
         {this.playWintone()}
         <div className="results header">{this.props.text}</div>
         <Link to="/storypage">
