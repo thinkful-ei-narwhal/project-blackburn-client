@@ -1,18 +1,19 @@
 .dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* margin-left: 120px; */
+    display: flex;
+    justify-content: space-evenly ;
+    align-items: center;
+    /* margin-left: 120px; */
+    border-bottom: 2px solid black;
+    box-shadow: 0 4px 0 0px lightgrey;
+
 }
 
 .dashboard-header-open {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-left: 120px;
-}
-.links .logout {
-  font-size: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 33%;
+    border-bottom: 1px lightgray;
 }
 .links {
   text-decoration: none;
@@ -85,24 +86,26 @@
   color: black;
   font-size: 24px;
   cursor: pointer;
-  margin-top: 7px;
+  margin-top: 15px;
 }
 
 .x-closed {
-  color: black;
-  font-size: 24px;
-  cursor: pointer;
-  margin-top: 7px;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: 7px;
+    padding: 5px;
+    /* position: absolute;
+    left: 0;
+    top: 0; */
+  }
 
 .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 
 .content-open {
@@ -110,8 +113,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 35%;
-  /* margin-right: 8%; */
+  margin-left: 33%;
 }
 
 @media screen and (min-width: 600px) {

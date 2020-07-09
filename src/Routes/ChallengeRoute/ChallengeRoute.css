@@ -6,6 +6,14 @@
     text-align: center;
     border: 1px solid grey;
     width: 100%;
+    /* background-color: #d3d3d3; */
+    background-image: url('../../Images/DetectiveAtDesk.jpg');
+    
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
 }
 
 
@@ -19,7 +27,7 @@
     flex-wrap: wrap;
     width: 40vh;
     height: 20em;
-
+    background-color: lightgrey;
     box-shadow: 6px 6px 6px 6px lightgray;
 }
 
@@ -29,7 +37,7 @@
 }
 
 .word-li {
-    margin: 10px
+    /* margin: 10px */
 }
 
 /* .wordTimer {
@@ -45,8 +53,8 @@
     max-width: 100%;
     border: 1px solid gray;
     box-shadow: 4px 4px 4px 4px lightgray;
-    padding: 20px;
-    margin: 15px;
+    /* padding: 20px; */
+    /* margin: 15px; */
 }
 
 .stats-container {
@@ -58,18 +66,28 @@
     align-self: center; 
     text-align: center; 
     border: 1px solid gray;
-    max-width: 40vh;
-    box-shadow: 4px 4px 4px 4px lightgray;
+    max-width: 46vh;
+    box-shadow: 4px 4px 4px 4px black;
+    background-color: lightgrey;
+    font-size: larger;
+
 
 }
 
 .stat {
     text-align: center;
-    margin: 5px;
+    margin: 10px;
     border-bottom: 1px solid lightgray;
 }
 
 .type-input {
-    margin: 10px;
+    margin: 5px;
     text-align: center;
+}
+
+
+.word-timer {
+    border-radius: 50px;
+    background-color: black;
+    /* width: 50px; */
 }
