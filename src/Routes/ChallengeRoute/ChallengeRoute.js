@@ -16,7 +16,6 @@ import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_
 import duel from '../../Assets/Sounds/bensound-theduel.mp3';
 import bad from '../../Assets/Sounds/bensound-badass.mp3';
 import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
-
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
   constructor(props) {
@@ -240,8 +239,8 @@ class ChallengeRoute extends Component {
     );
     this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
     this.setState({
-      levelTimer: 1, //checkpointData.level_timer,
-      levelTimerTotal:1, //checkpointData.level_timer,
+      levelTimer: checkpointData.level_timer,
+      levelTimerTotal: checkpointData.level_timer,
       playerScore: playerScore,
       playerBest: playerBestStored,
       playerBestStored: playerBestStored,
@@ -321,22 +320,33 @@ class ChallengeRoute extends Component {
                 <Spring 
                   from={{
                     transform: "translate3d(200px,0,0) scale(2) rotateX(90deg)",
-                    // backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+                    color: colors[Math.floor(Math.random() * colors.length)],
                   }}
                   to={{
                     transform: "translate3d(0px,0,0) scale(1) rotateX(0deg)",
-                    // backgroundColor:colors[Math.floor(Math.random() * colors.length)],
+                    color:colors[Math.floor(Math.random() * colors.length)],
 
                   }}
                   // config={{ duration: 2000 }}
                 >
                   {(props) => (
-                    <span className="wordTimer" style={props}>
+                    <animated.div className="wordTimer" style={props}>
                       <Word word={wordObj.word} />
-                    </span>
+                    </animated.div>
                   )}
-                </Spring>
-                {wordObj.getTimeRemaining()}
+                </Spring >
+
+              <Spring
+                from={{ width: "100%", background: "gray" }}
+                to={{ width: "0%", background: "white" }}
+                config={{ duration: this.staticWordTimer }}
+              >
+                {(props) => (
+                  <animated.div className="word-timer" style={props}>
+                    {wordObj.getTimeRemaining()}
+                  </animated.div>
+                )}
+              </Spring>
               </li>
             ))}
           </ul>

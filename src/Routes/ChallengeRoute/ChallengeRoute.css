@@ -73,3 +73,10 @@
     margin: 10px;
     text-align: center;
 }
+
+
+.word-timer {
+    border-radius: 50px;
+    background-color: black;
+    width: 50px;
+}
