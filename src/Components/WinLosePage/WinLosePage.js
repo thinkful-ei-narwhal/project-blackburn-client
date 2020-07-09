@@ -38,7 +38,7 @@ class WinLosePage extends Component {
   };
 
   handleNextClick = () => {
-    this.context.incrementCheckpointIds();
+    this.context.incrementCheckpointIndex();
   };
 
   renderLevelWin() {
@@ -71,7 +71,7 @@ class WinLosePage extends Component {
       <div className="results victory">
         {this.playWintone()}
         <div className="results header">You're a genius bruh</div>
-        <Link to="/story">
+        <Link to="/storypage">
           <Button
             className="btn results next-btn"
             onClick={this.handleNextClick}
