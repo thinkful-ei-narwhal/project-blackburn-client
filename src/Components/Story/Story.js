@@ -35,18 +35,14 @@ export default class Story extends Component {
   async componentDidMount() {
     this.context.clearError();
     this.context.setMyBestScore();
-    console.log("TESTING contect", this.context.story_id);
     const story_id = this.context.story_id;
     const difficulty_setting = this.context.difficulty_setting;
     await StoryApiService.getStory(story_id, difficulty_setting)
       .then((res) => {
-        if (this.context.getCheckpointIds() === null) {
-          console.log("testing testing");
-          return;
-        }
         const checkpoints = res.map((checkpoint) => checkpoint);
-        this.context.setCheckpointIds(checkpoints, 0);
-        console.log("TESTING ", res[this.context.getCurrentCheckpointIndex()]);
+        if (this.context.getCheckpointIds().checkpointArray.length === 0) {
+          this.context.setCheckpointIds(checkpoints);
+        }
         this.context.setAudio(res[0].music);
         return this.setState({
           story_text: res[this.context.getCurrentCheckpointIndex()].story_text,
@@ -149,7 +145,6 @@ export default class Story extends Component {
   }
 
   render() {
-    console.log("test render");
     let split = this.state.story_text.split(".");
     split = split.map((x, index) => {
       return { text: x, key: index };

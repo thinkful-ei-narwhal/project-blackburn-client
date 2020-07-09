@@ -72,7 +72,8 @@ class ChallengeRoute extends Component {
 
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
-      this.context.incrementCheckpointIndex();
+      if (this.state.levelEnded === false)
+        this.context.incrementCheckpointIndex();
       this.clearTimers();
       this.setState({ words: [] });
       this.context.setScore(this.state.playerScore);
@@ -219,6 +220,8 @@ class ChallengeRoute extends Component {
     const contextObj = this.context.getCheckpointIds();
     const playerScore = this.context.getScore();
     const playerBestStored = this.context.getMyBestScore();
+    console.log('uhiwquqeiuw', contextObj.currentIndex);
+    console.log('zcbnzxcnbv', contextObj.checkpointArray);
     const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
     this.levelTimerStaticTotal = checkpointData.level_timer;
     this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);

@@ -148,18 +148,14 @@ export class BlackburnProvider extends Component {
   };
 
   getCurrentCheckpointIndex = () => {
-    console.log(
-      "Checkpoint index test",
-      this.state.checkpoint_ids.currentIndex
-    );
     return this.state.checkpoint_ids.currentIndex;
   };
 
-  setCheckpointIds = (checkpointArray, currentIndex) => {
+  setCheckpointIds = (checkpointArray) => {
     this.setState({
       checkpoint_ids: {
         checkpointArray,
-        currentIndex,
+        currentIndex: 0,
       },
     });
   };
