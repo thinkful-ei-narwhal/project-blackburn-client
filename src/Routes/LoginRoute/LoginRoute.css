@@ -1,5 +1,25 @@
 .Login {
+  background-color: #302b28;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.title {
+  color: #d9c1aa;
+  position: absolute;
+  padding: 20px;
+  top: 10px;
+  text-decoration: none;
+}
+.login-container {
+  margin: 25vh;
+  padding: 20px;
   text-align: center;
+  border-radius: 10px;
+  background-color: #d9c1aa;
+  box-shadow: 3px 3px 3px lightgray;
 }
 .log-form {
   display: flex;
@@ -10,9 +30,23 @@
   padding: 20px;
   width: 50%;
 }
+.log-input {
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid #d9c1aa;
+  border-radius: 10px;
+}
 .log-btn {
   margin: 10px auto;
-  padding: 5px;
+  padding: 20px;
+  border: 1px solid #d9c1aa;
+  border-radius: 6px;
+  color: #d9c1aa;
+  background-color: #302b28;
+}
+.log-btn:hover {
+  background-color: #ae9172;
+  color: #302b28;
 }
 .log-input {
   margin: 10px;

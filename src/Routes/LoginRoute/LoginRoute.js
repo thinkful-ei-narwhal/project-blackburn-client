@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './LoginRoute.css';
 import LoginForm from '../../Components/LoginForm/LoginForm';
 import BlackBurnContext from '../../Context/BlackburnContext';
@@ -9,7 +10,9 @@ class LoginRoute extends Component {
   render() {
     return (
       <div className="Login">
-        <h2>Login:</h2>
+        <Link className="title" to="/">
+          Project <br /> Blackburn
+        </Link>
         <LoginForm {...this.props} />
       </div>
     );

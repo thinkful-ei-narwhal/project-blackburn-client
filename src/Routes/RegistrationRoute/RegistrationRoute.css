@@ -1,5 +1,18 @@
 .Registration {
+  background-color: #302b28;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.reg-container {
+  margin: 25vh;
+  padding: 20px;
   text-align: center;
+  border-radius: 10px;
+  background-color: #d9c1aa;
+  box-shadow: 3px 3px 3px lightgray;
 }
 .reg-account {
   display: flex;
@@ -13,13 +26,28 @@
 .reg-input,
 .reg-select {
   margin: 10px;
+  padding: 5px;
+  border: 1px solid #d9c1aa;
+  border-radius: 10px;
 }
 
 .reg-btn {
   margin: 10px auto;
   margin-left: 10px;
   margin-right: 10px;
-  padding: 10px;
+  padding: 20px;
+  border: 1px solid #d9c1aa;
+  border-radius: 6px;
+  color: #d9c1aa;
+  background-color: #302b28;
+}
+.reg-btn:hover {
+  background-color: #ae9172;
+  color: #302b28;
+}
+.reg-btn:disabled {
+  display: none;
+  pointer-events: none;
 }
 
 .error {

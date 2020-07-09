@@ -2,22 +2,50 @@ import React from 'react';
 import { VictoryChart, VictoryTheme, VictoryLine } from 'victory';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import './LineChart.css';
+import scoreboardService from '../../Services/scoreboard-api-service';
+import { ContinuousColorLegend } from 'react-vis';
 
 export default class LineChart extends React.Component {
   static contextType = BlackBurnContext;
+  state = {
+    sortedScores: [],
+    sortedWPM: [],
+    error: '',
+  };
+  componentDidMount() {
+    scoreboardService
+      .getSortedScores(this.context.user.id, 'sortdate')
+      .then((res) =>
+        this.setState({ sortedScores: res.score, sortedWPM: res.wpm })
+      )
+      .catch((err) => this.setState({ error: err.error }));
+  }
 
   render() {
-    const formatData = this.props.myScores.map((data) => {
+    console.log(this.state.sortedScores);
+    const formatScoreDate = this.state.sortedScores.map((data) => {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      const newDate = new Date(data.date).toLocaleDateString('en-US', options);
-      return { date: newDate, score: data.score, wpm: data.wpm };
+      const newDate = new Date(data.date_trunc).toLocaleDateString(
+        'en-US',
+        options
+      );
+      return { date_trunc: newDate, max: data.max };
     });
-    const wpmData = formatData.map((data) => {
-      return { x: data.date, y: data.wpm };
+    const formatWPMDate = this.state.sortedWPM.map((data) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const newDate = new Date(data.date_trunc).toLocaleDateString(
+        'en-US',
+        options
+      );
+      return { date_trunc: newDate, max: data.max };
     });
-    const scoreData = formatData.map((data) => {
-      return { x: data.date, y: data.score };
+    const wpmData = formatWPMDate.map((data) => {
+      return { x: data.date_trunc, y: data.max };
     });
+    const scoreData = formatScoreDate.map((data) => {
+      return { x: data.date_trunc, y: data.max };
+    });
+    console.log(formatScoreDate);
     return (
       <div className="graphs">
         <div className="score-graph">
