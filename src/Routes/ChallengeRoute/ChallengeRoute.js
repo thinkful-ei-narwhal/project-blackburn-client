@@ -217,6 +217,7 @@ class ChallengeRoute extends Component {
       : this.setState({ color: "red" });
   }
 
+
   renderTimer = () => {
     return (
       <div className = 'game-container'>
@@ -230,13 +231,18 @@ class ChallengeRoute extends Component {
   startTimer = () => {
     return new Promise (resolve => setTimeout(resolve, 5500))
   }
-
+  
   async componentDidMount() {
     await this.startTimer(this.setState({timer: true}))
     .then(() => this.setState({timer: false}))
     .then(() => {
       this.createAudio();
       const contextObj = this.context.getCheckpointIds();
+      const contextObj = this.context.getCheckpointIds();
+      let storyCheckpoints = contextObj.checkpointArray;
+      let i = contextObj.currentIndex || 0;
+      this.winText = storyCheckpoints[i].win_text;
+      this.loseText = storyCheckpoints[i].lose_text;
       const playerScore = this.context.getScore();
       const playerBestStored = this.context.getMyBestScore();
       const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
@@ -266,7 +272,6 @@ class ChallengeRoute extends Component {
         initialized: true,
       });
     })
-
   }
 
   getRandomInt = (min, max) => {
@@ -278,6 +283,7 @@ class ChallengeRoute extends Component {
   }
 
   renderGameplay() {
+    //for animation and music
     const colors = ["blue", "red", "orange", "violet", "black", "green"];
     this.state.audio.play();
     return (
@@ -381,7 +387,11 @@ class ChallengeRoute extends Component {
             this.context.getCurrentCheckpointIndex() !== null && (
               <div>
                 {this.state.audio.pause()}{" "}
-                <WinLosePage condition={"checkpoint"} autoSave={false} />
+                <WinLosePage
+                  text={this.winText}
+                  condition={"checkpoint"}
+                  autoSave={false}
+                />
               </div>
             )}
           {this.state.levelEnded &&
@@ -389,13 +399,21 @@ class ChallengeRoute extends Component {
             this.context.getCurrentCheckpointIndex() === null && (
               <div>
                 {this.state.audio.pause()}{" "}
-                <WinLosePage condition={"level_beaten"} autoSave={true} />
+                <WinLosePage
+                  text={this.winText}
+                  condition={"level_beaten"}
+                  autoSave={true}
+                />
               </div>
             )}
           {this.state.levelEnded && this.state.playerHealth <= 0 && (
             <div>
               {this.state.audio.pause()}{" "}
-              <WinLosePage condition={"lose"} autoSave={true} />
+              <WinLosePage
+                text={this.loseText}
+                condition={"lose"}
+                autoSave={true}
+              />
             </div>
           )}
           </div>}
