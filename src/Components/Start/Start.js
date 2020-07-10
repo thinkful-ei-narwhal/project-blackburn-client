@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-grid-system";
 import "./Start.Module.css";
-import { Transition, animated as a } from "react-spring/renderprops";
 
 export default class Start extends React.Component {
   state = {
@@ -30,27 +29,21 @@ export default class Start extends React.Component {
             </Col>
             <Col>
               <div className="start-buttons">
-                <button
+                <div
                   className="start-btn"
                   onClick={() =>
                     this.setState({ showTooltip: !this.state.showTooltip })
                   }
                 >
-                  {" "}
-                  How to Play{" "}
-                </button>
-              </div>
-              {this.state.showTooltip && (
-                <div>
-                  <p>
-                    Click start then select a story and a difficulty. To play
+                  {this.state.showTooltip 
+                    ? `Click start then select a story and a difficulty. To play
                     just start typing the words that appear on screen. But be
                     careful! For each word that disappears, you lose half a
                     heart. For each word that you mispell, you lose a whole
-                    heart. Compete with your friends to get the highest score.
-                  </p>
+                    heart. Compete with your friends to get the highest score. ` 
+                    : 'How To Play'}
                 </div>
-              )}
+              </div>
             </Col>
           </Row>
         </Container>

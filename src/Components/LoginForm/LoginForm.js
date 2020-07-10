@@ -30,20 +30,21 @@ class LoginForm extends Component {
     const { error } = this.state;
     return (
       <div className="login-container">
+        <h2>Login:</h2>
         <form className="log-form" onSubmit={(e) => this.handleSubmit(e)}>
           {error !== '' && <h3 className="error">{error}</h3>}
-          <Label htmlFor="log-input username">Username:</Label>
+          <Label htmlFor="log-input">Username:</Label>
           <Input
-            className="log-input username"
+            className="log-input"
             name="username"
             onChange={(e) => this.setState({ username: e.target.value })}
             value={this.state.username}
             required
           />
 
-          <Label htmlFor="log-input password">Password:</Label>
+          <Label htmlFor="log-input">Password:</Label>
           <Input
-            className="log-input password"
+            className="log-input"
             name="password"
             type="password"
             required

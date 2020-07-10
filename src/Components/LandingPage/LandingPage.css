@@ -1,14 +1,17 @@
+
+
 .landing-page-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #302B28;
-    position: absolute;
+    position: static;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+
 }
 
 .landing-page-nav {
@@ -18,18 +21,17 @@
     align-items: flex-start;
 }
 
-svg {
-    margin-bottom: 50px;
-}
 
 .login-signup {
-    margin-top: 10px;
-    margin-right: 10px;
+    width: 10vh;
     text-decoration: none;
     border: 1px solid #D9C1AA;
-    padding: 20px;
+    padding: 15px;
     color: #D9C1AA;
     border-radius: 6px;
+    margin-bottom: 10vh;
+    font-size: larger;
+    margin-right: 3vh;
 }
 
 .login-signup:hover {
@@ -40,8 +42,6 @@ svg {
 
 .landing-page-h1 {
     color: #D9C1AA;
-    position: absolute;
-    top: 52px;
     font-size: 56px;
     text-align: center;
 }
@@ -66,7 +66,7 @@ svg {
     padding: 10px;
     line-height: 2em;
     font-size: 2vw;
-    color: #D9C1AA
+    color: #D9C1AA;
 }
 
 .info {
@@ -74,9 +74,8 @@ svg {
 }
 
 .footer {
-    position: absolute;
+    position: static;
     bottom: 10px;
-    margin-top: 100px;
     font-size: 10px;
     text-decoration: none;
 }
@@ -88,6 +87,27 @@ svg {
     align-items: center;
 }
 
+
+.landingText {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    margin-bottom: 2vh;
+    margin-left: 6vh;
+    margin-right: 6vh;
+    height: auto;
+    width: auto;
+    padding: 2vh;
+
+    border-radius: 6px;
+
+    color: #302B28;
+    font-weight: 400;
+    line-height: 30px;
+    background-color: #D9C1AA;
+}
 
 @media screen and (min-width: 375px) {
 

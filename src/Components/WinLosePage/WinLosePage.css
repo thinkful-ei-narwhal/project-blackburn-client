@@ -1,0 +1,15 @@
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+  margin: 20px;
+  padding: 5px;
+  background-color: #d9c1aa;
+  box-shadow: 3px 3px 3px lightgray;
+  width: 50%;
+}
+
+.button-results {
+}
