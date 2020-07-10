@@ -7,7 +7,10 @@
   right: 0;
 }
 .reg-container {
-  margin: 25vh;
+  position: absolute;
+  top: 25vh;
+  right: 5vh;
+  left: 5vh;
   padding: 20px;
   text-align: center;
   border-radius: 10px;
@@ -79,4 +82,21 @@
 
 .avatar-select:checked + .avatar-img {
   outline: 2px solid black;
+}
+
+@media screen and (min-width: 800px) {
+  .reg-container {
+    position: absolute;
+    top: 25vh;
+    right: 25vh;
+    left: 25vh;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .reg-container {
+    position: absolute;
+    top: 25vh;
+    right: 50vh;
+    left: 50vh;
+  }
 }

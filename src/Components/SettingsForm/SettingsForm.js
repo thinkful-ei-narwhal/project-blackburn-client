@@ -8,15 +8,16 @@ class SettingsForm extends Component {
   static contextType = BlackBurnContext;
 
   state = {
+    avatar: '',
     error: '',
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    const { username, avatar } = e.target;
+    const { username } = e.target;
     let user = {
       id: this.context.user.id,
       username: username.value,
-      avatar: avatar.value,
+      avatar: this.state.avatar,
     };
     ApiService.editUser(user)
       .then((data) => {
@@ -35,6 +36,7 @@ class SettingsForm extends Component {
 
   render() {
     const { user } = this.context;
+    console.log(user);
     return (
       <div className="settings-container">
         <form className="set-form" onSubmit={(e) => this.handleSubmit(e)}>

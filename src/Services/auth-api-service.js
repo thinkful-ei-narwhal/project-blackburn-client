@@ -2,6 +2,15 @@ import config from '../config';
 import TokenService from './token-service';
 
 const ApiService = {
+  getUser(id) {
+    return fetch(`${config.API_ENDPOINT}/users`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((err) => Promise.reject(err)) : res.json()
+    );
+  },
   postUser(user) {
     return fetch(`${config.API_ENDPOINT}/users`, {
       method: 'POST',
@@ -26,7 +35,6 @@ const ApiService = {
     );
   },
   postLogin({ username, password }) {
-    console.log(config.API_ENDPOINT)
     return fetch(`${config.API_ENDPOINT}/auth/token`, {
       method: 'POST',
       headers: {

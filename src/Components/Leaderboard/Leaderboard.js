@@ -58,7 +58,9 @@ export default class Leaderboard extends React.Component {
                         <FaCrown style={{ margin: 6 }} />
                       ) : null}
                     </span>
-                    <div className="avatar"> {this.context.user.avatar} </div>
+                    <div className="avatar">
+                      <img src={this.context.user.avatar}></img>
+                    </div>
                     <span
                       className="username"
                       style={
@@ -132,7 +134,9 @@ export default class Leaderboard extends React.Component {
         <ul className="list-container">
           <li className="leaderboard-list" style={{ margiBottom: '10px' }}>
             <span className="username"> Your Top Score </span>
-            <div className="avatar"> {this.context.user.avatar} </div>
+            <div className="avatar">
+              <img src={this.context.user.avatar}></img>
+            </div>
             <span className="username"> {this.context.user.username} </span>
             <span className="score"> {maxMyScore} </span>
           </li>
