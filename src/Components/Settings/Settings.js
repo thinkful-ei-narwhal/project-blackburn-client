@@ -28,11 +28,17 @@ export default class Settings extends React.Component {
     console.log(user);
     return (
       <div className="accountInfo">
-        <h3 className = 'setting-header'>Personal Info</h3>
+        <h3 className="setting-header">Personal Info</h3>
         {this.state.edit === false ? (
           <div className="settings-container">
-            <p><span className = 'option-setting'>Username</span> <br /> <br /> {user.username}</p>
-            <p><span className = 'option-setting'>Avatar</span> <br /> <br /> {user.avatar}</p>
+            <p>
+              <span className="option-setting">Username</span> <br /> <br />{' '}
+              {user.username}
+            </p>
+            <p>
+              <span className="option-setting">Avatar</span> <br /> <br />{' '}
+              <img src={user.avatar}></img>
+            </p>
 
             <Button
               className="set-btn edit"

@@ -17,6 +17,7 @@ import {
   FaCog,
 } from 'react-icons/fa';
 import { GiExitDoor } from 'react-icons/gi';
+import ApiService from '../../Services/auth-api-service';
 
 const pages = [
   (style) => (
@@ -55,7 +56,15 @@ export default class Dashboard extends React.Component {
       page: 0,
     };
   }
-
+  componentDidMount() {
+    ApiService.getUser(this.context.user.id).then((res) =>
+      this.context.setUser({
+        id: res.id,
+        username: res.username,
+        avatar: res.avatar,
+      })
+    );
+  }
   handleLogout = (e) => {
     this.context.processLogout(e);
   };
@@ -125,6 +134,7 @@ export default class Dashboard extends React.Component {
 
   render() {
     const { user } = this.context;
+    console.log(user);
     return (
       <>
         {!this.state.menuOpen && (
@@ -164,9 +174,7 @@ export default class Dashboard extends React.Component {
                 )}
 
                 <nav className="navLinks">
-                  <h1 className="title">
-                    Project Blackburn
-                  </h1>
+                  <h1 className="title">Project Blackburn</h1>
                   <div
                     className={this.state.showHome ? 'links-selected' : 'links'}
                     onClick={() => this.handleShowHome()}

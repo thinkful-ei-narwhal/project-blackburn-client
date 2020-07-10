@@ -14,7 +14,10 @@
   text-decoration: none;
 }
 .login-container {
-  margin: 25vh;
+  position: absolute;
+  top: 25vh;
+  right: 5vh;
+  left: 5vh;
   padding: 20px;
   text-align: center;
   border-radius: 10px;
@@ -63,4 +66,20 @@
 
 .signup-lnk {
   color: blue;
+}
+@media screen and (min-width: 800px) {
+  .login-container {
+    position: absolute;
+    top: 25vh;
+    right: 25vh;
+    left: 25vh;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .login-container {
+    position: absolute;
+    top: 25vh;
+    right: 50vh;
+    left: 50vh;
+  }
 }
