@@ -18,15 +18,14 @@
     align-items: center;
     margin-right: 30px;
     margin-top: 5px;
-    padding: 3px;
+    padding: 1.5px;
     border-radius: 5px;
     background-color: white;
     
 }
 
 .avatar {
-    border: 1px solid gray;
-    padding: 10px;
+    padding: 1px;
     border-radius: 25px;
     margin-right: 20px;
     margin-left: 20px;
