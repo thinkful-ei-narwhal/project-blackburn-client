@@ -6,14 +6,6 @@ import { Spring } from 'react-spring/renderprops'
 import './LandingPage.css'
 import LeaderBoard from '../../Assets/Icons/Untitled.png'
 
-const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
-const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
-const Yellow = ({ children }) => <span style={{ color: '#EFF59B' }}>{children}</span>
-const Lightblue = ({ children }) => <span style={{ color: '#9AEDFE' }}>{children}</span>
-const Green = ({ children }) => <span style={{ color: '#57EE89' }}>{children}</span>
-const Blue = ({ children }) => <span style={{ color: '#57C7FF' }}>{children}</span>
-const Gray = ({ children }) => <span style={{ color: '#909090' }}>{children}</span>
-
 export default class App extends React.Component {
   render() {
     return (
@@ -26,55 +18,41 @@ export default class App extends React.Component {
         <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>
           
         </ParallaxLayer>
-
         <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
-          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '55%' }} />
-          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '55%' }} />
         </ParallaxLayer> 
 
         <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
-          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
-          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '40%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
-          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
-          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '75%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
-          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
-          <img src={url('cloud')} style={{ display: 'block', width: '25%', marginLeft: '30%' }} />
-          <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '80%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '85%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '5%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
-          <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
-          <img src={url('cloud')} style={{ display: 'block', width: '15%', marginLeft: '75%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '75%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '65%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={2.5} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
         </ParallaxLayer>
 
-        {/* <ParallaxLayer
-          offset={2}
-          speed={-0.3}
-          style={{
-            backgroundSize: '80%',
-            backgroundPosition: 'center',
-            backgroundImage: url('clients', true)
-          }}
-        /> */}
-
         <ParallaxLayer
-          offset={0}
+          offset={-0.1}
           speed={0.1}
           onClick={() => this.parallax.scrollTo(1)}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          {/* <img src = {LeaderBoard} /> */}
           <h1> Project <br /> Blackburn</h1>
           <br />
-          <div style = {{fontSize: 20, margin: 5}}>Click To Read More About The Game</div>
+          <div style = {{fontSize: 20, margin: 5, borderBottom: '1px solid grey'}}>Click Anywhere To Read More About The Game</div>
+
         </ParallaxLayer>
         <ParallaxLayer offset = {.6} speed = {.2}>
             <Spring
@@ -84,7 +62,7 @@ export default class App extends React.Component {
             trail={1000}
             >
             {(props) => (
-                <nav className="landing-page-nav" style={props}>
+                <nav className="landing-page-nav" style={{...props}}>
                 <Link to={"/login"} className="login-signup">
                     {" "}
                     Login{" "}
