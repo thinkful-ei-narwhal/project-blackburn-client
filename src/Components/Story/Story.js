@@ -11,7 +11,7 @@ import "./Story.css";
 export default class Story extends Component {
   state = {
     story_text: "",
-    story_art: "https://source.unsplash.com/random",
+    story_art: "",
     story_name: "",
     audio: "",
     showStory: false,
@@ -165,6 +165,12 @@ export default class Story extends Component {
               )}
             </div>
             <h2 className="story-name">{this.state.story_name}</h2>
+            <img
+              src={this.state.story_art}
+              alt="Art for the story"
+              width="500"
+              height="400"
+            />
             <div className="story">{this.renderTyping()}</div>
           </>
         ) : (

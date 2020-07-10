@@ -1,93 +1,88 @@
 .game-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border: 1px solid grey;
-    width: 100%;
-    /* background-color: #d3d3d3; */
-    background-image: url('../../Images/DetectiveAtDesk.jpg');
-    background-size: cover;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid grey;
+  width: 100%;
+  /* background-color: #d3d3d3; */
+  /* background-image: url('../../Images/DetectiveAtDesk.jpg'); */
+  background-size: cover;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
 }
 
-
 .word-ul {
-    /* border: 1px solid grey; */
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 40vh;
-    height: 20em;
-    background-color: lightgrey;
-    box-shadow: 6px 6px 6px 6px lightgray;
+  /* border: 1px solid grey; */
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 40vh;
+  height: 20em;
+  background-color: lightgrey;
+  box-shadow: 6px 6px 6px 6px lightgray;
 }
 
 .bg {
-    background-color: black;
-    height: 40px;
+  background-color: black;
+  height: 40px;
 }
 
 .word-li {
-    /* margin: 10px */
+  /* margin: 10px */
 }
 
 /* .wordTimer {
     float: left;
 } */
 
-
 .time-ui {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 100%;
-    border: 1px solid gray;
-    box-shadow: 4px 4px 4px 4px lightgray;
-    /* padding: 20px; */
-    /* margin: 15px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid gray;
+  box-shadow: 4px 4px 4px 4px lightgray;
+  /* padding: 20px; */
+  /* margin: 15px; */
 }
 
 .stats-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    align-self: center; 
-    text-align: center; 
-    border: 1px solid gray;
-    max-width: 46vh;
-    box-shadow: 4px 4px 4px 4px black;
-    background-color: lightgrey;
-    font-size: larger;
-
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  border: 1px solid gray;
+  max-width: 46vh;
+  box-shadow: 4px 4px 4px 4px black;
+  background-color: lightgrey;
+  font-size: larger;
 }
 
 .stat {
-    text-align: center;
-    margin: 10px;
-    border-bottom: 1px solid lightgray;
+  text-align: center;
+  margin: 10px;
+  border-bottom: 1px solid lightgray;
 }
 
 .type-input {
-    margin: 5px;
-    text-align: center;
+  margin: 5px;
+  text-align: center;
 }
 
-
 .word-timer {
-    border-radius: 50px;
-    background-color: black;
-    /* width: 50px; */
+  border-radius: 50px;
+  background-color: black;
+  /* width: 50px; */
 }
