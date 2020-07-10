@@ -455,7 +455,11 @@ class ChallengeRoute extends Component {
     return (
       <div
         className="game-container"
-        style={{ backgroundImage: `url(${this.state.gameplay_art})` }}
+        style={{
+          backgroundImage: `url(${this.state.gameplay_art})`,
+          backgroundSize: "cover",
+          position: "fixed",
+        }}
       >
         {!this.state.timer && this.state.initialized
           ? this.renderGameplay()
