@@ -5,14 +5,13 @@ import BlackburnContext from "../../Context/BlackburnContext";
 import { Link, Redirect } from "react-router-dom";
 import { Input, Label } from "./../../Components/Form/Form";
 import "./StartRoute.css";
-import { Container, Row, Col } from "react-grid-system";
 
 class StartRoute extends Component {
   static contextType = BlackburnContext;
   constructor(props) {
     super(props);
     this.state = {
-      story_id: 1,
+      story_id: null,
       difficulty_setting: "medium",
       stories: [],
       redirect: false,
@@ -43,6 +42,8 @@ class StartRoute extends Component {
     this.setState({ redirect: true });
   };
 
+
+
   renderStories() {
     return (
       //youre figuring out how to select a radio button
@@ -51,9 +52,11 @@ class StartRoute extends Component {
         {this.state.stories.map((story) => (
           <label key={story.id} className="story-label" htmlFor={`${story.id}`}>
             <div className="story_panel" id={`story_panel ${story.id}`}>
-              <img src={story.story_thumbnail} width="100px" />
+              <img src={story.story_thumbnail} width="75px" />
               <h4>{story.story_name}</h4>
-              <p>{story.story_synopsis}</p>
+              <p>
+                {story.story_synopsis}
+              </p>
               <input
                 className="inputform"
                 type="radio"
@@ -71,7 +74,7 @@ class StartRoute extends Component {
   }
   render() {
     return (
-      <>
+      <div className = 'start-container'> 
         {this.state.redirect ? (
           <Redirect to={"/storypage"} />
         ) : (
@@ -86,14 +89,7 @@ class StartRoute extends Component {
                 id="story_form"
                 onSubmit={(e) => this.handleStorySubmit(e)}
               >
-                <Container>
-                  <Col>
-                    <Row>{this.renderStories()}</Row>
-                  </Col>
-                </Container>
-                <Container>
-                  <Row>
-                    <Col>
+                {this.renderStories()}
                       <label
                         className="difficulty-label"
                         htmlFor="select_difficulty"
@@ -110,17 +106,16 @@ class StartRoute extends Component {
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
                       </select>
-                      <Button className="difficulty-btn" type="submit">
+                      <Button 
+                      disabled = {!!(this.state.story_id === null || this.state.difficulty_setting === null)}
+                      className="difficulty-btn" type="submit">
                         Start
                       </Button>
-                    </Col>
-                  </Row>
-                </Container>
               </form>
             </div>
           </>
         )}
-      </>
+      </div>
     );
   }
 }

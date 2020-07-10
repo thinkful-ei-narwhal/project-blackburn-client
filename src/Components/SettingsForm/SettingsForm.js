@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import { Input, Label } from '../Form/Form';
 import ApiService from '../../Services/auth-api-service';
 import BlackBurnContext from '../../Context/BlackburnContext';
-import '../../Components/Settings/Settings.Module.css'
+import '../../Components/Settings/Settings.Module.css';
 class SettingsForm extends Component {
   static contextType = BlackBurnContext;
 
@@ -50,17 +50,54 @@ class SettingsForm extends Component {
             defaultValue={user.username}
             required
           />
-          <Label className="set-label" htmlFor="avatar">
-            Avatar
-          </Label>
-          <select
-            className="set-select avatar"
-            name="avatar"
-            defaultValue={user.avatar}
-          >
-            <option>Red Mage</option>
-            <option>Blue Mage</option>
-          </select>
+          <div className="select-container">
+            <p>Avatar:</p>
+            <Label htmlFor="man">
+              <input
+                type="radio"
+                name="reg-select"
+                id="man"
+                className="avatar-select"
+                value="/images/man.png"
+                onChange={(e) => this.setState({ avatar: e.target.value })}
+              />
+              <img
+                className="avatar-select"
+                src="/images/man.png"
+                alt="man"
+              ></img>
+            </Label>
+            <Label htmlFor="spy">
+              <input
+                type="radio"
+                name="reg-select"
+                id="spy"
+                className="avatar-select"
+                value="/images/spy.png"
+                onChange={(e) => this.setState({ avatar: e.target.value })}
+              />
+              <img
+                className="avatar-select"
+                src="/images/spy.png"
+                alt="spy"
+              ></img>
+            </Label>
+            <Label htmlFor="serial-killer">
+              <input
+                type="radio"
+                name="reg-select"
+                id="serial-killer"
+                className="avatar-select"
+                value="/images/serial-killer.png"
+                onChange={(e) => this.setState({ avatar: e.target.value })}
+              />
+              <img
+                className="avatar-select"
+                src="/images/serial-killer.png"
+                alt="serial-killer"
+              ></img>
+            </Label>
+          </div>
           <div className="btn-container">
             <Button className="set-btn submit" type="submit">
               Accept

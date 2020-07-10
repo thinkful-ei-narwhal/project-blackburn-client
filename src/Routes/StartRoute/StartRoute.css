@@ -1,7 +1,45 @@
-.start-page-form {
-    padding: 20px;
+.story_panel {
+    /* border: 1px solid gray; */
     box-shadow: 4px 4px 4px 4px lightgray;
-    border: 1px solid gray;
+    margin: 10px;
+    padding: 5px;
+    width: 25vh;
+    height: 100%;
+    justify-self: center;
+
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.story_panel:hover {
+    border: 1px solid blue;
+}
+.inputform {
+    width: 5vh;
+    height: 5vh;
+}
+
+.story_panel:hover {
+    box-shadow: 8px 8px 8px 8px lightgray;
+    flex-grow: 3;
+}
+
+.select-difficulty {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10vh 3vh 3vh 3vh;
+    padding: 1vh;
+}
+
+.story-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 

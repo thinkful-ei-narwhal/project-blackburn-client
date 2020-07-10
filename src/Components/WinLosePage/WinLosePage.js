@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../Button/Button';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import ScoreboardApiService from '../../Services/scoreboard-api-service';
-import LeaderBoard from './../Leaderboard/Leaderboard';
-import loseSound from '../../Assets/Sounds/arcade_game_fall_tone_001.mp3';
-import winSound from '../../Assets/Sounds/arcade-climb_tone_001.mp3';
-import './WinLosePage.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Button from "../Button/Button";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import ScoreboardApiService from "../../Services/scoreboard-api-service";
+import LeaderBoard from "./../Leaderboard/Leaderboard";
+import loseSound from "../../Assets/Sounds/arcade_game_fall_tone_001.mp3";
+import winSound from "../../Assets/Sounds/arcade-climb_tone_001.mp3";
+import "./WinLosePage.css";
 
 class WinLosePage extends Component {
   static contextType = BlackBurnContext;
@@ -26,29 +26,25 @@ class WinLosePage extends Component {
       avg_wpm: this.context.wpm,
       total_accuracy: this.context.accuracy,
     };
-    console.log('postScore() with data', data);
-    await ScoreboardApiService.postScore(data)
-  
-    this.setState({ autoSave: false })
-    console.log(this.state.autoSave)
+    console.log("postScore() with data", data);
+    await ScoreboardApiService.postScore(data);
+
+    this.setState({ autoSave: false });
+    console.log(this.state.autoSave);
   }
 
   handleReturnToStartClick = () => {
     this.context.resetGameData();
   };
 
-  handleNextClick = () => {
-    this.context.incrementCheckpointIds();
-  };
-
   renderLevelWin() {
     return (
-      <div className="results victory">
-        <div className="results header">
+      <div className="results-victory">
+        <div className="results-header">
           Congratulations! You beat the level.
         </div>
         <LeaderBoard />
-        <Link to={'/start'}>
+        <Link to={"/start"}>
           <Button
             className="btn results next-btn"
             onClick={this.handleReturnToStartClick}
@@ -62,22 +58,16 @@ class WinLosePage extends Component {
 
   playWintone = () => {
     let winTone = new Audio(winSound);
-    winTone.play()
-  }
-
+    winTone.play();
+  };
 
   renderWin() {
     return (
-      <div className="results victory">
+      <div className="results-victory">
         {this.playWintone()}
-        <div className="results header">You're a genius bruh</div>
-        <Link to="/story">
-          <Button
-            className="btn results next-btn"
-            onClick={this.handleNextClick}
-          >
-            Next
-          </Button>
+        <div className="results-header">You're a genius bruh</div>
+        <Link to="/storypage">
+          <Button className="btn results next-btn">Next</Button>
         </Link>
         <Link to="/dashboard">
           <Button
@@ -92,9 +82,9 @@ class WinLosePage extends Component {
   }
 
   playLoseTone = () => {
-    let loseTone = new Audio(loseSound)
-    loseTone.play()
-  }
+    let loseTone = new Audio(loseSound);
+    loseTone.play();
+  };
 
   renderLose() {
     return (

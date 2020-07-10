@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
 import Healthbar from "./../../Components/Healthbar/Healthbar";
@@ -8,15 +7,15 @@ import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
 import WinLosePage from "../../Components/WinLosePage/WinLosePage";
-import { Spring, animated } from "react-spring/renderprops";
-import { TimingAnimation, Easing } from "react-spring/renderprops-addons";
+import { Spring, animated, Trail } from "react-spring/renderprops";
 import "./ChallengeRoute.css";
 import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
 import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
 import duel from '../../Assets/Sounds/bensound-theduel.mp3';
 import bad from '../../Assets/Sounds/bensound-badass.mp3';
 import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
-
+import gameplayImg from "./../../Images/DetectiveAtDesk.jpg";
+import TimerContent from '../../Components/TimerContent/TimerContent'
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
   constructor(props) {
@@ -38,8 +37,8 @@ class ChallengeRoute extends Component {
       isWin: null,
       levelEnded: false,
       initialized: false,
-      audio: '',
-
+      audio: "",
+      timer: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -75,6 +74,8 @@ class ChallengeRoute extends Component {
 
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
+      if (this.state.levelEnded === false)
+        this.context.incrementCheckpointIndex();
       this.clearTimers();
       this.setState({ words: [] });
       this.context.setScore(this.state.playerScore);
@@ -153,7 +154,7 @@ class ChallengeRoute extends Component {
 
     event.target.typeInput.value = "";
     this.setState({ value: "" });
-    
+
     const newWords = state.words;
     let playerHealth = state.playerHealth;
     let playerScore = state.playerScore;
@@ -216,37 +217,56 @@ class ChallengeRoute extends Component {
       : this.setState({ color: "red" });
   }
 
-  componentDidMount() {
-    this.createAudio();
-    const contextObj = this.context.getCheckpointIds();
-    const playerScore = this.context.getScore();
-    const playerBestStored = this.context.getMyBestScore();
-    const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
-    this.levelTimerStaticTotal = checkpointData.level_timer;
-    this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
-    this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
-    this.calcRuntimeStats = setInterval(() => {
-      this.calcWPM();
-      this.calcAccuracy();
-      return;
-    }, 200);
-    this.intervalGenerator = setInterval(
-      () =>
-        this.generateWord(
-          checkpointData.word_expiration_timer * 1000,
-          checkpointData.max_screen_words
-        ),
-      1000 //this value might have to become more interesting later
-    );
-    this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
-    this.setState({
-      levelTimer: checkpointData.level_timer,
-      levelTimerTotal: checkpointData.level_timer,
-      playerScore: playerScore,
-      playerBest: playerBestStored,
-      playerBestStored: playerBestStored,
-      initialized: true,
-    });
+  renderTimer = () => {
+    return (
+      <div className = 'game-container'>
+          <TimerContent>
+           { props => <animated.div style= {{fontSize: '20vh',height: '100vh', width: '100vh', ...props}}> {props.value} </animated.div>}
+          </TimerContent>
+      </div>
+    )
+  }
+
+  startTimer = () => {
+    return new Promise (resolve => setTimeout(resolve, 5500))
+  }
+
+  async componentDidMount() {
+    await this.startTimer(this.setState({timer: true}))
+    .then(() => this.setState({timer: false}))
+    .then(() => {
+      this.createAudio();
+      const contextObj = this.context.getCheckpointIds();
+      const playerScore = this.context.getScore();
+      const playerBestStored = this.context.getMyBestScore();
+      const checkpointData = contextObj.checkpointArray[contextObj.currentIndex];
+      this.levelTimerStaticTotal = checkpointData.level_timer;
+      this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
+      this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
+      this.calcRuntimeStats = setInterval(() => {
+        this.calcWPM();
+        this.calcAccuracy();
+        return;
+      }, 200);
+      this.intervalGenerator = setInterval(
+        () =>
+          this.generateWord(
+            checkpointData.word_expiration_timer * 1000,
+            checkpointData.max_screen_words
+          ),
+        1000 //this value might have to become more interesting later
+      );
+      this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
+      this.setState({
+        levelTimer: 5, //checkpointData.level_timer,
+        levelTimerTotal: 5, //checkpointData.level_timer,
+        playerScore: playerScore,
+        playerBest: playerBestStored,
+        playerBestStored: playerBestStored,
+        initialized: true,
+      });
+    })
+
   }
 
   getRandomInt = (min, max) => {
@@ -258,123 +278,141 @@ class ChallengeRoute extends Component {
   }
 
   renderGameplay() {
-
-    const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green']
+    const colors = ["blue", "red", "orange", "violet", "black", "green"];
     this.state.audio.play();
-
     return (
       <>
-      <div className = 'game-container'>
-         {!this.state.levelEnded && (
-              <Spring
-                from={{ width: "100%", background: "gray" }}
-                to={{ width: "0%", background: "white" }}
-                config={{ duration: this.levelTimerStaticTotal * 1000 }}
-              >
-                {(props) => (
-                  <animated.div className="bg" style={props}>
-                    <UIStats textBefore = {'Time Remaining'} 
-                     metric={this.state.levelTimer >= 0 ? this.state.levelTimer : 0}
-                    />
-                  </animated.div>
-                )}
-              </Spring>
-            )}
+      <Spring from = {{opacity: 0}} to = {{opacity: 1}}>
+         { props => <div style = {props}> {!this.state.levelEnded && (
+            <Spring
+              from={{ width: "100%", background: "gray" }}
+              to={{ width: "0%", background: "white" }}
+              config={{ duration: this.levelTimerStaticTotal * 1000 }}
+            >
+              {(props) => (
+                <animated.div className="bg" style={props}>
+                  <UIStats
+                    textBefore={"Time Remaining"}
+                    metric={
+                      this.state.levelTimer >= 0 ? this.state.levelTimer : 0
+                    }
+                  />
+                </animated.div>
+              )}
+            </Spring>
+          )}
           {!this.state.levelEnded && (
             <Healthbar health={this.state.playerHealth} />
           )}
-        <div className = 'stats-container'>
-          <div className = 'stat'>
-            <UIStats
-              textBefore={'Personal best:'}
-              metric={this.state.playerBest}
-            />
-
-          </div >
-          <div className = 'stat'>
-            <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
-          </div>
-          <div className = 'stat'>
-            <UIStats textBefore={"Words Per Minute:"} metric={this.state.wpm} />
-          </div>
-          <div className = 'stat'>
-            <UIStats
-              textBefore={'Accuracy:'}
-              metric={this.state.accuracy}
-              textAfter={'%'}
-            />
-          </div>
-        </div>
-        <div className = 'type-input'>
-          {!this.state.levelEnded && (
-            <TypeHandler
-              handleSubmit={(e) => this.handleSubmit(e, this.state)}
-              value={this.state.value}
-              handleChange={this.handleChange}
-              color={this.state.color}
-            />
-          )}
-        </div>
-        {!this.state.levelEnded && (
-          <ul className="word-ul">
-            {this.state.words.map((wordObj, index) => (
-              <li className="word-li" key={index} style={{}}>
-                <Spring 
-                  from={{
-                    transform: "translate3d(200px,0,0) scale(2) rotateX(90deg)",
-                    // backgroundColor: colors[Math.floor(Math.random() * colors.length)],
-                  }}
-                  to={{
-                    transform: "translate3d(0px,0,0) scale(1) rotateX(0deg)",
-                    // backgroundColor:colors[Math.floor(Math.random() * colors.length)],
-
-                  }}
-                  // config={{ duration: 2000 }}
-                >
-                  {(props) => (
-                    <span className="wordTimer" style={props}>
-                      <Word word={wordObj.word} />
-                    </span>
-                  )}
-                </Spring>
-                {wordObj.getTimeRemaining()}
-              </li>
-            ))}
-          </ul>
-        )}
-        <GameplayScreen />
-          {this.state.levelEnded &&
-            this.state.levelTimer < 0 &&
-            this.context.getCurrentCheckpointIndex() !== null && (
-            <div>
-              {this.state.audio.pause()}{' '}
-              <WinLosePage condition={'checkpoint'} autoSave={false} />
+          <div className="stats-container">
+            <div className="stat">
+              <UIStats
+                textBefore={"Personal best:"}
+                metric={this.state.playerBest}
+              />
             </div>
+            <div className="stat">
+              <UIStats textBefore={"Score:"} metric={this.state.playerScore} />
+            </div>
+            <div className="stat">
+              <UIStats
+                textBefore={"Words Per Minute:"}
+                metric={this.state.wpm}
+              />
+            </div>
+            <div className="stat">
+              <UIStats
+                textBefore={"Accuracy:"}
+                metric={this.state.accuracy}
+                textAfter={"%"}
+              />
+            </div>
+          </div>
+          <div className="type-input">
+            {!this.state.levelEnded && (
+              <TypeHandler
+                handleSubmit={(e) => this.handleSubmit(e, this.state)}
+                value={this.state.value}
+                handleChange={this.handleChange}
+                color={this.state.color}
+              />
+            )}
+          </div>
+          {!this.state.levelEnded && (
+            <ul className="word-ul">
+              {this.state.words.map((wordObj, index) => (
+                <li className="word-li" key={index} style={{}}>
+                  <Spring
+                    from={{
+                      transform:
+                        "translate3d(200px,0,0) scale(2) rotateX(90deg)",
+                      color: colors[Math.floor(Math.random() * colors.length)],
+                    }}
+                    to={{
+                      transform: "translate3d(0px,0,0) scale(1) rotateX(0deg)",
+                      color: colors[Math.floor(Math.random() * colors.length)],
+                    }}
+                    // config={{ duration: 2000 }}
+                  >
+                    {(props) => (
+                      <animated.div className="wordTimer" style={props}>
+                        <Word word={wordObj.word} />
+                      </animated.div>
+                    )}
+                  </Spring>
+
+                  <Spring
+                    from={{ width: "100%", background: "gray" }}
+                    to={{ width: "0%", background: "white" }}
+                    config={{ duration: this.staticWordTimer }}
+                  >
+                    {(props) => (
+                      <animated.div className="word-timer" style={props}>
+                        {wordObj.getTimeRemaining()}
+                      </animated.div>
+                    )}
+                  </Spring>
+                </li>
+              ))}
+            </ul>
+          )}
+          {this.state.levelEnded &&
+            this.state.levelTimer <= 0 &&
+            this.context.getCurrentCheckpointIndex() !== null && (
+              <div>
+                {this.state.audio.pause()}{" "}
+                <WinLosePage condition={"checkpoint"} autoSave={false} />
+              </div>
             )}
           {this.state.levelEnded &&
-            this.state.levelTimer < 0 &&
+            this.state.levelTimer <= 0 &&
             this.context.getCurrentCheckpointIndex() === null && (
-            <div>
-              {this.state.audio.pause()}{' '}
-              <WinLosePage condition={"level_beaten"} autoSave={true} />
-            </div>
+              <div>
+                {this.state.audio.pause()}{" "}
+                <WinLosePage condition={"level_beaten"} autoSave={true} />
+              </div>
             )}
           {this.state.levelEnded && this.state.playerHealth <= 0 && (
             <div>
-              {this.state.audio.pause()}{' '}
+              {this.state.audio.pause()}{" "}
               <WinLosePage condition={"lose"} autoSave={true} />
-            </div>           
+            </div>
           )}
-        </div>
-
-        </>
+          </div>}
+        </Spring>
+      </>
     );
   }
 
   render() {
     return (
-        this.state.initialized ? this.renderGameplay() : null
-    );
+      <div className = 'game-container'>
+        { 
+        !this.state.timer && this.state.initialized ? this.renderGameplay() : this.renderTimer()
+        }
+      </div>
+      
+      );
   }
 }
 

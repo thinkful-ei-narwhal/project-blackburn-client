@@ -39,20 +39,17 @@ export default class Story extends Component {
     const difficulty_setting = this.context.difficulty_setting;
     await StoryApiService.getStory(story_id, difficulty_setting)
       .then((res) => {
-        if (this.context.getCheckpointIds() === null) {
-          if (res === null) {
-            return;
-          }
-          const checkpoints = res.map((checkpoint) => checkpoint);
-          this.context.setCheckpointIds(checkpoints, 0);
+        const checkpoints = res.map((checkpoint) => checkpoint);
+        if (this.context.getCheckpointIds().checkpointArray.length === 0) {
+          this.context.setCheckpointIds(checkpoints);
         }
-        console.log("TESTING ", res);
         this.context.setAudio(res[0].music);
         return this.setState({
-          story_text: res[0].story_text,
-          story_name: res[0].story_name,
-          story_art: res[0].story_art,
-          dictionary: res[0].dictionary_string,
+          story_text: res[this.context.getCurrentCheckpointIndex()].story_text,
+          story_name: res[this.context.getCurrentCheckpointIndex()].story_name,
+          story_art: res[this.context.getCurrentCheckpointIndex()].story_art,
+          dictionary:
+            res[this.context.getCurrentCheckpointIndex()].dictionary_string,
         });
       })
       .catch((err) => this.context.setError(err));

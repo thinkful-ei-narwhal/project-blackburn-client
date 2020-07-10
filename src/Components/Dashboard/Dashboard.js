@@ -47,7 +47,7 @@ export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: true,
+      menuOpen: false,
       showHome: true,
       showLeaderboard: false,
       showAnalytics: false,
@@ -55,6 +55,7 @@ export default class Dashboard extends React.Component {
       page: 0,
     };
   }
+
   handleLogout = (e) => {
     this.context.processLogout(e);
   };
@@ -126,6 +127,12 @@ export default class Dashboard extends React.Component {
     const { user } = this.context;
     return (
       <>
+        {!this.state.menuOpen && (
+          <div className="x-closed" onClick={() => this.handleMenuButton()}>
+            {' '}
+            <FaBars />{' '}
+          </div>
+        )}
         <header
           className={
             this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
@@ -137,12 +144,6 @@ export default class Dashboard extends React.Component {
             <UserHeader />{' '}
           </div>
         </header>
-        {!this.state.menuOpen && (
-          <div className="x-closed" onClick={() => this.handleMenuButton()}>
-            {' '}
-            <FaBars />{' '}
-          </div>
-        )}
         {this.state.menuOpen && (
           <Spring
             from={{
