@@ -6,11 +6,12 @@
     justify-content: center;
     align-items: center;
     background-color: #302B28;
-    position: absolute;
+    position: static;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+
 }
 
 .landing-page-nav {
@@ -20,21 +21,17 @@
     align-items: flex-start;
 }
 
-svg {
-    margin-bottom: 50px;
-}
 
 .login-signup {
-    margin-top: 10px;
-    margin-right: 10px;
+    width: 10vh;
     text-decoration: none;
     border: 1px solid #D9C1AA;
-    padding: 20px;
+    padding: 15px;
     color: #D9C1AA;
     border-radius: 6px;
-    height: 7vh;
     margin-bottom: 10vh;
     font-size: larger;
+    margin-right: 3vh;
 }
 
 .login-signup:hover {
@@ -45,7 +42,6 @@ svg {
 
 .landing-page-h1 {
     color: #D9C1AA;
-    top: 52px;
     font-size: 56px;
     text-align: center;
 }
@@ -78,9 +74,8 @@ svg {
 }
 
 .footer {
-    position: absolute;
+    position: static;
     bottom: 10px;
-    margin-top: 100px;
     font-size: 10px;
     text-decoration: none;
 }
@@ -90,7 +85,6 @@ svg {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10vh;
 }
 
 

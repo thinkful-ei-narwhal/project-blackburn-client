@@ -138,6 +138,8 @@ export default class Dashboard extends React.Component {
             this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
           }
         >
+          <img src="https://img.icons8.com/metro/26/000000/fraud.png" />
+
           <h2 className="user-welcome">Welcome {user.username}</h2>
           <div className="user-header">
             {' '}

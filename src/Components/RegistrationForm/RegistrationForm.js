@@ -58,8 +58,8 @@ class RegistrationForm extends Component {
           required
         />
 
-        <p>Choose Avatar:</p>
         <div className="select-container">
+          <p>Choose Avatar:</p>
           <Label htmlFor="man">
             <input
               type="radio"
