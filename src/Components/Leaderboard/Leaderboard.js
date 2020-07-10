@@ -1,10 +1,9 @@
-import React from 'react';
-import './Leaderboard.Module.css';
-import Button from '../Button/Button';
-import { Trail } from 'react-spring/renderprops';
-import { Label } from '../Form/Form';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import { FaCrown } from 'react-icons/fa';
+import React from 'react'
+import './Leaderboard.Module.css'
+import { Trail } from 'react-spring/renderprops'
+import BlackBurnContext from '../../Context/BlackburnContext'
+import { FaCrown } from 'react-icons/fa'
+
 export default class Leaderboard extends React.Component {
   static contextType = BlackBurnContext;
 
@@ -31,81 +30,38 @@ export default class Leaderboard extends React.Component {
     this.context.getMyScores();
   }
 
-  renderLeaderBoard = () => {
-    if (this.state.overall) {
-      return this.context.topTenScores
-        .sort((a, b) => b - a)
-        .slice(0, 10)
-        .map((score, index) => {
-          return (
-            <Trail
-              items={score}
-              from={{ opacity: 0 }}
-              to={{ opacity: 1 }}
-              key={index}
-            >
-              {(score) => (props) => (
-                <div>
-                  <li
-                    className="leaderboard-list"
-                    style={{
-                      ...props,
-                    }}
-                  >
-                    <span className="username">
-                      {index + 1}
-                      {index + 1 === 1 ? (
-                        <FaCrown style={{ margin: 6 }} />
-                      ) : null}
-                    </span>
-                    <div className="avatar">
-                      <img src={this.context.user.avatar}></img>
+    renderLeaderBoard = () => {
+        if(this.state.overall) {
+            return this.context.topTenScores.sort((a,b) => b - a).slice(0, 10).map((score, index) => {
+                return(
+                <>
+                 <Trail items = {score} from = {{opacity: 0}} to = {{opacity: 1}}  key = {index}>   
+                   { 
+                    score => props => 
+                    <div>
+
+                        <li className = 'leaderboard-list' style = {{
+                            ...props}}> 
+                            <span className = 'username'> 
+                                {index + 1} 
+                                {(index + 1 === 1) ? <FaCrown style = {{margin: 6}} /> : null}
+                            </span> 
+                            <div className = 'avatar'> {this.context.user.avatar} </div>
+                            <span className = 'username' 
+                                style = {(this.context.user.username === score.username) ? {color:'red'} : {color: 'black'}}> {score.username}
+                            </span> 
+                            {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
+                            <span className = 'score'> {score.score} </span> 
+                        </li>
                     </div>
-                    <span
-                      className="username"
-                      style={
-                        this.context.user.username === score.username
-                          ? { color: 'red' }
-                          : { color: 'black' }
-                      }
-                    >
-                      {' '}
-                      {score.username}
-                    </span>
-                    {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
-                    <span className="score"> {score.score} </span>
-                  </li>
-                </div>
-              )}
-            </Trail>
-          );
-        });
+                    }
+                </Trail>
+                </>
+                )
+            })
+        }
     }
-    // else if(this.state.byStory && this.state.story === 'monsters') {
-    //     return this.props.allScores.filter(data => data.storyId === 'monster').sort((a,b) => b - a).map((score, index) => {
-    //         return(
-    //         <li className = 'leaderboard-list' key = {index} >
-    //             <span className = 'username'> {index + 1} </span>
-    //             <div className = 'avatar'></div>
-    //             <span className = 'username'> {score.username} </span>
-    //             <span className = 'score'> {score.score} </span>
-    //         </li>
-    //         )
-    //     })
-    // }
-    // else if(this.state.byStory && this.state.story === 'detective') {
-    //     return this.props.allScores.filter(data => data.storyId === 'detective').sort((a,b) => b - a).map((score, index) => {
-    //         return(
-    //         <li className = 'leaderboard-list' key = {index} >
-    //             <span className = 'username'> {index + 1} </span>
-    //             <div className = 'avatar'></div>
-    //             <span className = 'username'> {score.username} </span>
-    //             <span className = 'score'> {score.score} </span>
-    //         </li>
-    //         )
-    //     })
-    // }
-  };
+
 
   handleOption = (e) => {
     this.setState({
@@ -131,17 +87,21 @@ export default class Leaderboard extends React.Component {
                         </select>
                     </div> 
                     : <></>} */}
-        <ul className="list-container">
-          <li className="leaderboard-list" style={{ margiBottom: '10px' }}>
-            <span className="username"> Your Top Score </span>
-            <div className="avatar">
-              <img src={this.context.user.avatar}></img>
-            </div>
-            <span className="username"> {this.context.user.username} </span>
-            <span className="score"> {maxMyScore} </span>
-          </li>
-          {this.renderLeaderBoard()}
-        </ul>
+                <div className = 'leaderboard-header'>
+                    <h2> Leader Board </h2>
+                </div>
+                <ul className = 'list-container'>
+                    <li className = 'leaderboard-list' style = {{margiBottom: '10px'}}>  
+                        <span className = 'username'> Your Top Score </span> 
+                        <div className = 'avatar'> {this.context.user.avatar} </div>
+                        <span className = 'username'> {this.context.user.username} </span> 
+                        <span className = 'score'> {maxMyScore} </span>  
+                    </li>
+                    {    
+                       this.renderLeaderBoard()
+                    }   
+                   
+                </ul>
       </div>
     );
   }
