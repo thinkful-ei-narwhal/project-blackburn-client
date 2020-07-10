@@ -78,7 +78,7 @@ export class BlackburnProvider extends Component {
     this.setState({
       error: null,
       story_id: null,
-      checkpoint_ids: null,
+      checkpoint_ids: { checkpointArray: [], currentIndex: 0 },
       difficulty_setting: null,
       score: 0,
       bestScore: 0,
@@ -150,12 +150,18 @@ export class BlackburnProvider extends Component {
   };
 
   setCheckpointIds = (checkpointArray) => {
-    this.setState({
-      checkpoint_ids: {
-        checkpointArray,
-        currentIndex: 0,
-      },
-    });
+    localStorage.setItem("checkpointArray", JSON.stringify(checkpointArray));
+    return new Promise((resolve) =>
+      this.setState(
+        {
+          checkpoint_ids: {
+            checkpointArray,
+            currentIndex: 0,
+          },
+        },
+        resolve
+      )
+    );
   };
 
   getCheckpointIds = () => {
@@ -221,7 +227,7 @@ export class BlackburnProvider extends Component {
       error: this.state.error,
       difficulty_setting: this.state.difficulty_setting,
       story_id: this.state.story_id,
-      checkpoint_id: this.state.checkpoint_id,
+      checkpoint_ids: this.state.checkpoint_ids,
       score: this.state.score,
       topTenScores: this.state.topTenScores,
       myScores: this.state.myScores,

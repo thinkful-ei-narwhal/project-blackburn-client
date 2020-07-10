@@ -42,8 +42,6 @@ class StartRoute extends Component {
     this.setState({ redirect: true });
   };
 
-
-
   renderStories() {
     return (
       //youre figuring out how to select a radio button
@@ -54,9 +52,7 @@ class StartRoute extends Component {
             <div className="story_panel" id={`story_panel ${story.id}`}>
               <img src={story.story_thumbnail} width="75px" />
               <h4>{story.story_name}</h4>
-              <p>
-                {story.story_synopsis}
-              </p>
+              <p>{story.story_synopsis}</p>
               <input
                 className="inputform"
                 type="radio"
@@ -74,7 +70,7 @@ class StartRoute extends Component {
   }
   render() {
     return (
-      <div className = 'start-container'> 
+      <div className="start-container">
         {this.state.redirect ? (
           <Redirect to={"/storypage"} />
         ) : (
@@ -90,27 +86,31 @@ class StartRoute extends Component {
                 onSubmit={(e) => this.handleStorySubmit(e)}
               >
                 {this.renderStories()}
-                      <label
-                        className="difficulty-label"
-                        htmlFor="select_difficulty"
-                      >
-                        Difficulty
-                      </label>
-                      <select
-                        className="select-difficulty"
-                        id="select_difficulty"
-                        defaultValue="medium"
-                        onChange={this.handleDifficulty}
-                      >
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                      </select>
-                      <Button 
-                      disabled = {!!(this.state.story_id === null || this.state.difficulty_setting === null)}
-                      className="difficulty-btn" type="submit">
-                        Start
-                      </Button>
+                <label className="difficulty-label" htmlFor="select_difficulty">
+                  Difficulty
+                </label>
+                <select
+                  className="select-difficulty"
+                  id="select_difficulty"
+                  defaultValue="medium"
+                  onChange={this.handleDifficulty}
+                >
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+                <Button
+                  disabled={
+                    !!(
+                      this.state.story_id === null ||
+                      this.state.difficulty_setting === null
+                    )
+                  }
+                  className="difficulty-btn"
+                  type="submit"
+                >
+                  Start
+                </Button>
               </form>
             </div>
           </>
