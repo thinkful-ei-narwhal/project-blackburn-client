@@ -1,14 +1,13 @@
+
+
 .leaderboard {
     margin-top: 25px;
     margin-left: 5px;
-
-    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid gray;
-    box-shadow: 8px 8px lightgray;
+    text-align: center;
 
 }
 
@@ -18,18 +17,15 @@
 }
 
 .leaderboard-list {
+    background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B);
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 2px;
-    border-bottom: 1px solid gray;
-    border-top: 1px solid gray;
-    box-shadow: 2px 2px lightgray;
+    border: 1px solid gray;
+    margin-right: 30px;
 }
-.leaderboard-list:hover {
-    box-shadow: 8px 8px lightgray;
-}
+
 .avatar {
     border: 1px solid gray;
     padding: 10px;

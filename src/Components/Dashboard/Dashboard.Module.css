@@ -13,8 +13,8 @@
     justify-content: space-evenly;
     align-items: center;
     margin-left: 33%;
-    border-bottom: 1px lightgray;
-}
+    border-bottom: 2px solid black;
+    box-shadow: 0 4px 0 0px lightgrey;}
 .links {
   text-decoration: none;
   text-align: center;
