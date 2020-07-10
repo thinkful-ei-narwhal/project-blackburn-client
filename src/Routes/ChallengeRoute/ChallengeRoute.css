@@ -8,7 +8,7 @@
     width: 100%;
     /* background-color: #d3d3d3; */
     background-image: url('../../Images/DetectiveAtDesk.jpg');
-    
+    background-size: cover;
     position: absolute;
     bottom: 0;
     right: 0;

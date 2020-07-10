@@ -7,15 +7,31 @@ const TimerContent = Keyframes.Spring(async next => {
             from: { opactity: 0, background: 'seagreen' },
             opacity: 1,
             background: 'tomato',
-            value: 'GET READY'
+            value: '3'
 
         })
-        await delay(3000)
+        await delay(1000)
+        await next({
+            from: { opactity: 0, background: 'seagreen' },
+            opacity: 1,
+            background: 'tomato',
+            value: '2'
+
+        })
+        await delay(1000)
+        await next({
+            from: { opactity: 0, background: 'seagreen' },
+            opacity: 1,
+            background: 'tomato',
+            value: '1'
+
+        })
+        await delay(1000)
         await next({
             from: { opactity: 0, background: 'tomato' },
             opacity: 1,
             background: 'seagreen',
-            value: 'GO'
+            value: '0'
         })
         await delay(500)
 

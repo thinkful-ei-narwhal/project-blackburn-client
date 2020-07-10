@@ -6,11 +6,12 @@
     justify-content: center;
     align-items: center;
     background-color: #302B28;
-    position: absolute;
+    position: static;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+
 }
 
 .landing-page-nav {
@@ -45,7 +46,6 @@ svg {
 
 .landing-page-h1 {
     color: #D9C1AA;
-    top: 52px;
     font-size: 56px;
     text-align: center;
 }
@@ -78,9 +78,8 @@ svg {
 }
 
 .footer {
-    position: absolute;
+    position: static;
     bottom: 10px;
-    margin-top: 100px;
     font-size: 10px;
     text-decoration: none;
 }
@@ -90,7 +89,6 @@ svg {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10vh;
 }
 
 
