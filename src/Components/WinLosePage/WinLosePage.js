@@ -44,7 +44,7 @@ class WinLosePage extends Component {
         <LeaderBoard />
         <Link to={"/start"}>
           <Button
-            className="btn results next-btn"
+            className="btn-results next-btn"
             onClick={this.handleReturnToStartClick}
           >
             Return to Start
@@ -65,11 +65,11 @@ class WinLosePage extends Component {
         {this.playWintone()}
         <div className="results header">{this.props.text}</div>
         <Link to="/storypage">
-          <Button className="btn results next-btn">Next</Button>
+          <Button className="btn-results next-btn">Next</Button>
         </Link>
         <Link to="/dashboard">
           <Button
-            className="btn results dashboard-btn"
+            className="btn-results dashboard-btn"
             onClick={this.handleReturnToStartClick}
           >
             Quit Run
@@ -92,7 +92,7 @@ class WinLosePage extends Component {
         <LeaderBoard />
         <Link to="/start">
           <Button
-            className="btn results retry-btn"
+            className="btn-results retry-btn"
             onClick={this.handleReturnToStartClick}
           >
             Return to Start

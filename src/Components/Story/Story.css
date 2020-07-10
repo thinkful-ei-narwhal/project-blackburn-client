@@ -3,8 +3,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #D9C1AA;
-    position: absolute;
+    background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B);
+    /* background-color: #D9C1AA; */
+    position: static;
     bottom: 0;
     top: 0;
     right: 0;
@@ -21,13 +22,14 @@
     text-align: left;
     line-height: 30px;
     /* margin: 2em; */
+    height: 100vh;
 }
 
 .skip {
     text-align: center;
     justify-self: center;
     align-self: center;
-    margin: 50px;
+    /* margin: 50px; */
     padding: 30px;
     border-bottom: 1px solid gray;
 }
@@ -36,7 +38,7 @@
 }
 
 .story-text {
-    margin: 7px;
+    margin: 50px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -46,9 +48,12 @@
 .story {
     text-align: center ;
     margin: 50px;
+    width: 50vh;
+    height: 100vh;
 }
 
 .start-challenge {
+    position: relative;
     text-align: center;
     font-weight: 600;
     font-size: 32px;

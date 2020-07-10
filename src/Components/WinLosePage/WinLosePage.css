@@ -1,15 +1,43 @@
-.results {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.header {
   font-size: larger;
   margin: 20px;
   padding: 5px;
   background-color: #d9c1aa;
   box-shadow: 3px 3px 3px lightgray;
-  width: 50%;
+  width: 40%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.button-results {
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.btn-results {
+  margin-top: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  border: 1px solid #d9c1aa;
+  padding: 20px;
+  color: #302b28;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-results:hover {
+  background-color: #ae9172;
+  color: #d9c1aa;
+}
+
+
+.results-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

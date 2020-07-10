@@ -10,10 +10,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Parallax ref={ref => (this.parallax = ref)} pages={3}>
-        <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
-        <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
-
-        <ParallaxLayer offset={0} speed={0} factor={3} style={{ backgroundColor: '#302B28'  }} />
+        <ParallaxLayer offset={1} speed={1} style={{ backroundImage: 'linear-gradient(to bottom right, #D9C1AA, #DFA36B)' }} />
+        <ParallaxLayer offset={2} speed={1} factor={2} style={{ backgroundImage: 'linear-gradient(to bottom right, #C9BEE6, #DFA36B)' }} />
+        <ParallaxLayer offset={0} speed={0} factor={3} style={{ backgroundImage: 'linear-gradient(to bottom right, #D9C1AA, #DFA36B)'  }} />
 
         <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>
           
@@ -49,7 +48,10 @@ export default class App extends React.Component {
           speed={0.1}
           onClick={() => this.parallax.scrollTo(1)}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <h1> Project <br /> Blackburn</h1>
+          <h1
+                style = {{color: '#A8E6AD', fontSize: '10vh'}}
+            > Project <br /> Blackburn
+          </h1>
           <br />
           <div style = {{fontSize: 20, margin: 5, borderBottom: '1px solid grey'}}>Click Anywhere To Read More About The Game</div>
 
@@ -62,12 +64,21 @@ export default class App extends React.Component {
             trail={1000}
             >
             {(props) => (
-                <nav className="landing-page-nav" style={{...props}}>
-                <Link to={"/login"} className="login-signup">
+                <nav className="landing-page-nav" style={{ 
+                    ...props}}>
+                <Link to={"/login"} className="login-signup"
+                    style = {{
+                        color: 'black',
+                        backgroundImage: 'linear-gradient(to bottom right, #E6B3A8, #91A9E6)',}}
+                >
                     {" "}
                     Login{" "}
-                </Link>
-                <Link to={"/registration"} className="login-signup">
+                </Link >
+                <Link
+                style = {{
+                    color: 'grey',
+                    backgroundImage: 'linear-gradient(to bottom right, #E6B3A8, #91A9E6)',}}
+                to={"/registration"} className="login-signup">
                     {" "}
                     Sign Up{" "}
                 </Link>
