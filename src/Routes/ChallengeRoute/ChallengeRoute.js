@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
 import Healthbar from "./../../Components/Healthbar/Healthbar";
 import UIStats from "../../Components/UIStats/UIStats";
@@ -223,6 +224,10 @@ class ChallengeRoute extends Component {
   };
 
   async componentDidMount() {
+    if (this.context.checkpoint_ids.checkpointArray.length === 0) {
+      const backupArray = JSON.parse(localStorage.getItem("checkpointArray"));
+      await this.context.setCheckpointIds(backupArray);
+    }
     const contextObj = this.context.getCheckpointIds();
     let storyCheckpoints = contextObj.checkpointArray;
     let i = contextObj.currentIndex || 0;
@@ -234,6 +239,9 @@ class ChallengeRoute extends Component {
       .then(() => this.setState({ timer: false }))
       .then(() => {
         this.createAudio();
+        const contextObj = this.context.getCheckpointIds();
+        let storyCheckpoints = contextObj.checkpointArray;
+        let i = contextObj.currentIndex || 0;
         this.winText = storyCheckpoints[i].win_text;
         this.loseText = storyCheckpoints[i].lose_text;
         const playerScore = this.context.getScore();
@@ -265,7 +273,8 @@ class ChallengeRoute extends Component {
           playerBestStored: playerBestStored,
           initialized: true,
         });
-      });
+      })
+      .catch((error) => this.context.setError(error));
   }
 
   renderTimer = () => {
@@ -461,9 +470,15 @@ class ChallengeRoute extends Component {
           position: "fixed",
         }}
       >
-        {!this.state.timer && this.state.initialized
-          ? this.renderGameplay()
-          : this.renderTimer()}
+        {this.context.error === null ? (
+          <>
+            {!this.state.timer && this.state.initialized
+              ? this.renderGameplay()
+              : this.renderTimer()}
+          </>
+        ) : (
+          <Redirect to={"/start"} />
+        )}
       </div>
     );
   }
