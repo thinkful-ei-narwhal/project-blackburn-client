@@ -3,29 +3,69 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #D9C1AA;
-    position: absolute;
+    background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B);
+    /* background-color: #D9C1AA; */
+    position: static;
     bottom: 0;
     top: 0;
     right: 0;
     left: 0;
+    height: 100%;
+}
+.story-name {
+    align-self: center;
+
 }
 
-/* .story-name {
-    position: absolute;
-    top: 25px;
-} */
+.story-type-text {
+    justify-self: left;
+    text-align: left;
+    line-height: 30px;
+    /* margin: 2em; */
+    height: 100vh;
+}
 
+.skip {
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    /* margin: 50px; */
+    padding: 30px;
+    border-bottom: 1px solid gray;
+}
 .story-img {
     margin-bottom: 50px;
 }
 
 .story-text {
-    margin: 7px;
-    /* padding: 20px; */
+    margin: 50px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
+.story {
+    text-align: center ;
+    margin: 50px;
+    width: 50vh;
+    height: 100vh;
+}
+
+.start-challenge {
+    position: relative;
+    text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+    border-bottom: 2px solid lightgray;
+    margin-top: 25px;
+}
+
+.after-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}

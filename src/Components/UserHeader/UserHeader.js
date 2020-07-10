@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import BlackBurnContext from '../../Context/BlackburnContext';
+import React, { Component } from "react";
+import BlackBurnContext from "../../Context/BlackburnContext";
 
 class UserHeader extends Component {
   static contextType = BlackBurnContext;
@@ -7,10 +7,8 @@ class UserHeader extends Component {
   render() {
     const { user } = this.context;
     return (
-      <div classname="user-info">
-        <p className="user-info">
-           {user.avatar}
-        </p>
+      <div className="user-info">
+        <p className="user-info">{user.avatar}</p>
       </div>
     );
   }

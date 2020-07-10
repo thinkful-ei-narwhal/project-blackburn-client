@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Word.module.css";
+import "./Word.css";
 
 class Word extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Word extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.word}</p>
+        <p className = 'word'>{this.props.word}</p>
         {/* <p>{this.state.timer}</p> */}
       </div>
     );

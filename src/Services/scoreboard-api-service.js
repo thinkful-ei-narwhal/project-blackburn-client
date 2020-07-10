@@ -1,5 +1,5 @@
-import config from "../config";
-import TokenService from "./token-service";
+import config from '../config';
+import TokenService from './token-service';
 
 const scoreboardService = {
   getScoresByUser(userId) {
@@ -26,17 +26,23 @@ const scoreboardService = {
       }
     ).then((res) => res.json());
   },
+  getSortedScores(userId, request) {
+    return fetch(
+      `${config.API_ENDPOINT}/scoreboard?userid=${userId}&request=${request}`,
+      {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+      }
+    ).then((res) => res.json());
+  },
   postScore(data) {
     return fetch(`${config.API_ENDPOINT}/scoreboard`, {
-      method: "POST",
+      method: 'POST',
       authorization: `Bearer ${TokenService.getAuthToken()}`,
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify({ data }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    }).then((res) => res.json());
   },
 };
 

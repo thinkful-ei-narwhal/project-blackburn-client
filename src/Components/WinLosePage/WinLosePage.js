@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import ScoreboardApiService from "../../Services/scoreboard-api-service";
+import LeaderBoard from "./../Leaderboard/Leaderboard";
+import loseSound from "../../Assets/Sounds/arcade_game_fall_tone_001.mp3";
+import winSound from "../../Assets/Sounds/arcade-climb_tone_001.mp3";
 import "./WinLosePage.css";
 
 class WinLosePage extends Component {
@@ -15,37 +18,33 @@ class WinLosePage extends Component {
     };
   }
 
-  autoSave() {
+  async autoSave() {
     const data = {
       user_id: this.context.user.id,
       story_data: this.context.story_id,
       total_score: this.context.score,
-      avg_wpm: 0,
-      total_accuracy: 0,
+      avg_wpm: this.context.wpm,
+      total_accuracy: this.context.accuracy,
     };
     console.log("postScore() with data", data);
-    ScoreboardApiService.postScore(data).then(() =>
-      this.setState({ autoSave: false })
-    );
+    await ScoreboardApiService.postScore(data);
+
+    this.setState({ autoSave: false });
+    console.log(this.state.autoSave);
   }
 
   handleReturnToStartClick = () => {
     this.context.resetGameData();
   };
 
-  handleNextClick = () => {
-    this.context.incrementCheckpointIds();
-  };
-
   renderLevelWin() {
     return (
       <div className="results victory">
-        <div className="results header">
-          Congratulations! You beat the level.
-        </div>
+        <div className="results header">{this.props.text}</div>
+        <LeaderBoard />
         <Link to={"/start"}>
           <Button
-            className="btn results next-btn"
+            className="btn-results next-btn"
             onClick={this.handleReturnToStartClick}
           >
             Return to Start
@@ -55,21 +54,22 @@ class WinLosePage extends Component {
     );
   }
 
+  playWintone = () => {
+    let winTone = new Audio(winSound);
+    winTone.play();
+  };
+
   renderWin() {
     return (
-      <div className="results victory">
-        <div className="results header">You're a genius bruh</div>
-        <Link to="/story">
-          <Button
-            className="btn results next-btn"
-            onClick={this.handleNextClick}
-          >
-            Next
-          </Button>
+      <div className="results-victory">
+        {this.playWintone()}
+        <div className="results header">{this.props.text}</div>
+        <Link to="/storypage">
+          <Button className="btn-results next-btn">Next</Button>
         </Link>
         <Link to="/dashboard">
           <Button
-            className="btn results dashboard-btn"
+            className="btn-results dashboard-btn"
             onClick={this.handleReturnToStartClick}
           >
             Quit Run
@@ -79,13 +79,20 @@ class WinLosePage extends Component {
     );
   }
 
+  playLoseTone = () => {
+    let loseTone = new Audio(loseSound);
+    loseTone.play();
+  };
+
   renderLose() {
     return (
       <div className="results defeat">
-        <div className="results header">You suck and your guy died</div>
+        {this.playLoseTone()}
+        <div className="results header">{this.props.text}</div>
+        <LeaderBoard />
         <Link to="/start">
           <Button
-            className="btn results retry-btn"
+            className="btn-results retry-btn"
             onClick={this.handleReturnToStartClick}
           >
             Return to Start
@@ -102,9 +109,15 @@ class WinLosePage extends Component {
   render() {
     return (
       <div className="results-div">
-        {this.state.condition === "lose" && this.renderLose()}
-        {this.state.condition === "checkpoint" && this.renderWin()}
-        {this.state.condition === "level_beaten" && this.renderLevelWin()}
+        {this.state.condition === "lose" &&
+          !this.state.autoSave &&
+          this.renderLose()}
+        {this.state.condition === "checkpoint" &&
+          !this.state.autoSave &&
+          this.renderWin()}
+        {this.state.condition === "level_beaten" &&
+          !this.state.autoSave &&
+          this.renderLevelWin()}
       </div>
     );
   }

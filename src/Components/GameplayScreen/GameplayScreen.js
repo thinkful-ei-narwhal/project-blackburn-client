@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import gameplayImg from "./../../Images/DetectiveAtDesk.jpg";
 
 class GameplayScreen extends Component {
-  //todos:
-  //Show the gameplay screenshot
-
-  componentDidMount() {}
-
   render() {
     return (
       <div>

@@ -46,20 +46,20 @@ class RegistrationForm extends Component {
         {this.state.error !== '' && (
           <h3 className="error">{this.state.error}</h3>
         )}
-        <Label htmlFor="reg-input username">
+        <Label htmlFor="reg-input">
           {' '}
           <Required />
           Create Username:
         </Label>
         <Input
-          className="reg-input username"
+          className="reg-input"
           onChange={(e) => this.setState({ username: e.target.value })}
           value={this.state.username}
           required
         />
-        <Label htmlFor="avatar">Choose Avatar:</Label>
+        <Label htmlFor="reg-select">Choose Avatar:</Label>
         <select
-          className="avatar"
+          className="reg-select"
           onChange={(e) => this.setState({ avatar: e.target.value })}
           value={this.state.avatar}
         >
@@ -73,26 +73,27 @@ class RegistrationForm extends Component {
   renderPassword = () => {
     return (
       <div className="reg-account">
+        <h2>Create New Account:</h2>
         {this.state.error !== '' && (
           <h3 className="error">{this.state.error}</h3>
         )}
-        <Label htmlFor="reg-input password">
+        <Label htmlFor="reg-input">
           <Required />
           Password:
         </Label>
         <Input
-          className="reg-input password"
+          className="reg-input"
           onChange={(e) => this.setState({ password: e.target.value })}
           value={this.state.password}
           type="password"
           required
         />
-        <Label htmlFor="reg-input repassword">
+        <Label htmlFor="reg-input">
           <Required />
           Re-enter Password:
         </Label>
         <Input
-          className="reg-input repassword"
+          className="reg-input"
           onChange={(e) => {
             this.comparePassword(e);
           }}
@@ -144,7 +145,7 @@ class RegistrationForm extends Component {
         </form>
         <p>
           Already a member? Click{' '}
-          <Link className="signup-lnk" to="/registration">
+          <Link className="signup-lnk" to="/login">
             here
           </Link>{' '}
           to login
