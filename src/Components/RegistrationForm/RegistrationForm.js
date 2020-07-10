@@ -58,7 +58,7 @@ class RegistrationForm extends Component {
           required
         />
 
-        <div className="select-container">
+        <div className="avatar-container">
           <p>Choose Avatar:</p>
           <Label htmlFor="man">
             <input
@@ -69,11 +69,7 @@ class RegistrationForm extends Component {
               value="/images/man.png"
               onChange={(e) => this.setState({ avatar: e.target.value })}
             />
-            <img
-              className="avatar-select"
-              src="/images/man.png"
-              alt="man"
-            ></img>
+            <img className="avatar-img" src="/images/man.png" alt="man"></img>
           </Label>
           <Label htmlFor="spy">
             <input
@@ -84,11 +80,7 @@ class RegistrationForm extends Component {
               value="/images/spy.png"
               onChange={(e) => this.setState({ avatar: e.target.value })}
             />
-            <img
-              className="avatar-select"
-              src="/images/spy.png"
-              alt="spy"
-            ></img>
+            <img className="avatar-img" src="/images/spy.png" alt="spy"></img>
           </Label>
           <Label htmlFor="serial-killer">
             <input
@@ -100,7 +92,7 @@ class RegistrationForm extends Component {
               onChange={(e) => this.setState({ avatar: e.target.value })}
             />
             <img
-              className="avatar-select"
+              className="avatar-img"
               src="/images/serial-killer.png"
               alt="serial-killer"
             ></img>

@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
-import Healthbar from "./../../Components/Healthbar/Healthbar";
-import UIStats from "../../Components/UIStats/UIStats";
-import Word from "./../../Components/Word/Word";
-import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import { uniqueNamesGenerator, animals } from "unique-names-generator";
-import WinLosePage from "../../Components/WinLosePage/WinLosePage";
-import { Spring, animated, Trail } from "react-spring/renderprops";
-import "./ChallengeRoute.css";
-import bellTone from "../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3";
-import healthLoss from "../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3";
-import duel from "../../Assets/Sounds/bensound-theduel.mp3";
-import bad from "../../Assets/Sounds/bensound-badass.mp3";
-import eni from "../../Assets/Sounds/bensound-enigmatic.mp3";
-import gameplayImg from "./../../Images/DetectiveAtDesk.jpg";
-import TimerContent from "../../Components/TimerContent/TimerContent";
+import React, { Component } from 'react';
+import TypeHandler from './../../Components/TypeHandler/TypeHandler';
+import Healthbar from './../../Components/Healthbar/Healthbar';
+import UIStats from '../../Components/UIStats/UIStats';
+import Word from './../../Components/Word/Word';
+import GameplayScreen from './../../Components/GameplayScreen/GameplayScreen';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import { uniqueNamesGenerator, animals } from 'unique-names-generator';
+import WinLosePage from '../../Components/WinLosePage/WinLosePage';
+import { Spring, animated, Trail } from 'react-spring/renderprops';
+import './ChallengeRoute.css';
+import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
+import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
+import duel from '../../Assets/Sounds/bensound-theduel.mp3';
+import bad from '../../Assets/Sounds/bensound-badass.mp3';
+import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
+import gameplayImg from './../../Images/DetectiveAtDesk.jpg';
+import TimerContent from '../../Components/TimerContent/TimerContent';
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
   constructor(props) {
@@ -32,14 +32,14 @@ class ChallengeRoute extends Component {
       levelTimer: 0,
       levelTimerTotal: 0,
       wpm: 0,
-      value: "",
-      color: "green",
+      value: '',
+      color: 'green',
       isWin: null,
       levelEnded: false,
       initialized: false,
-      audio: "",
+      audio: '',
       timer: false,
-      gameplay_art: "",
+      gameplay_art: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -153,8 +153,8 @@ class ChallengeRoute extends Component {
     event.preventDefault();
     const userInput = event.target.typeInput.value;
 
-    event.target.typeInput.value = "";
-    this.setState({ value: "" });
+    event.target.typeInput.value = '';
+    this.setState({ value: '' });
 
     const newWords = state.words;
     let playerHealth = state.playerHealth;
@@ -214,8 +214,8 @@ class ChallengeRoute extends Component {
     });
 
     isMatching
-      ? this.setState({ color: "green" })
-      : this.setState({ color: "red" });
+      ? this.setState({ color: 'green' })
+      : this.setState({ color: 'red' });
   }
 
   startTimer = () => {
@@ -278,14 +278,14 @@ class ChallengeRoute extends Component {
           {(props) => (
             <animated.div
               style={{
-                fontSize: "20vh",
-                height: "100vh",
-                width: "100vh",
+                fontSize: '20vh',
+                height: '100vh',
+                width: '100vh',
                 ...props,
               }}
             >
-              {" "}
-              {Math.floor(props.value)}{" "}
+              {' '}
+              {Math.floor(props.value)}{' '}
             </animated.div>
           )}
         </TimerContent>
@@ -299,28 +299,29 @@ class ChallengeRoute extends Component {
 
   componentWillUnmount() {
     this.clearTimers();
+    this.state.audio.pause();
   }
 
   renderGameplay() {
     //for animation and music
-    const colors = ["blue", "red", "orange", "violet", "black", "green"];
+    const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green'];
     this.state.audio.play();
     return (
       <>
         <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
           {(props) => (
             <div style={props}>
-              {" "}
+              {' '}
               {!this.state.levelEnded && (
                 <Spring
-                  from={{ width: "100%", background: "gray" }}
-                  to={{ width: "0%", background: "white" }}
+                  from={{ width: '100%', background: 'gray' }}
+                  to={{ width: '0%', background: 'white' }}
                   config={{ duration: this.levelTimerStaticTotal * 1000 }}
                 >
                   {(props) => (
                     <animated.div className="bg" style={props}>
                       <UIStats
-                        textBefore={"Time Remaining"}
+                        textBefore={'Time Remaining'}
                         metric={
                           this.state.levelTimer >= 0 ? this.state.levelTimer : 0
                         }
@@ -335,27 +336,27 @@ class ChallengeRoute extends Component {
               <div className="stats-container">
                 <div className="stat">
                   <UIStats
-                    textBefore={"Personal best:"}
+                    textBefore={'Personal best:'}
                     metric={this.state.playerBest}
                   />
                 </div>
                 <div className="stat">
                   <UIStats
-                    textBefore={"Score:"}
+                    textBefore={'Score:'}
                     metric={this.state.playerScore}
                   />
                 </div>
                 <div className="stat">
                   <UIStats
-                    textBefore={"Words Per Minute:"}
+                    textBefore={'Words Per Minute:'}
                     metric={this.state.wpm}
                   />
                 </div>
                 <div className="stat">
                   <UIStats
-                    textBefore={"Accuracy:"}
+                    textBefore={'Accuracy:'}
                     metric={this.state.accuracy}
-                    textAfter={"%"}
+                    textAfter={'%'}
                   />
                 </div>
               </div>
@@ -376,13 +377,13 @@ class ChallengeRoute extends Component {
                       <Spring
                         from={{
                           transform:
-                            "translate3d(200px,0,0) scale(2) rotateX(90deg)",
+                            'translate3d(200px,0,0) scale(2) rotateX(90deg)',
                           color:
                             colors[Math.floor(Math.random() * colors.length)],
                         }}
                         to={{
                           transform:
-                            "translate3d(0px,0,0) scale(1) rotateX(0deg)",
+                            'translate3d(0px,0,0) scale(1) rotateX(0deg)',
                           color:
                             colors[Math.floor(Math.random() * colors.length)],
                         }}
@@ -396,8 +397,8 @@ class ChallengeRoute extends Component {
                       </Spring>
 
                       <Spring
-                        from={{ width: "100%", background: "gray" }}
-                        to={{ width: "0%", background: "white" }}
+                        from={{ width: '100%', background: 'gray' }}
+                        to={{ width: '0%', background: 'white' }}
                         config={{ duration: this.staticWordTimer }}
                       >
                         {(props) => (
@@ -414,10 +415,10 @@ class ChallengeRoute extends Component {
                 this.state.levelTimer <= 0 &&
                 this.context.getCurrentCheckpointIndex() !== null && (
                   <div>
-                    {this.state.audio.pause()}{" "}
+                    {this.state.audio.pause()}{' '}
                     <WinLosePage
                       text={this.winText}
-                      condition={"checkpoint"}
+                      condition={'checkpoint'}
                       autoSave={false}
                     />
                   </div>
@@ -426,20 +427,20 @@ class ChallengeRoute extends Component {
                 this.state.levelTimer <= 0 &&
                 this.context.getCurrentCheckpointIndex() === null && (
                   <div>
-                    {this.state.audio.pause()}{" "}
+                    {this.state.audio.pause()}{' '}
                     <WinLosePage
                       text={this.winText}
-                      condition={"level_beaten"}
+                      condition={'level_beaten'}
                       autoSave={true}
                     />
                   </div>
                 )}
               {this.state.levelEnded && this.state.playerHealth <= 0 && (
                 <div>
-                  {this.state.audio.pause()}{" "}
+                  {this.state.audio.pause()}{' '}
                   <WinLosePage
                     text={this.loseText}
-                    condition={"lose"}
+                    condition={'lose'}
                     autoSave={true}
                   />
                 </div>
@@ -457,8 +458,8 @@ class ChallengeRoute extends Component {
         className="game-container"
         style={{
           backgroundImage: `url(${this.state.gameplay_art})`,
-          backgroundSize: "cover",
-          position: "fixed",
+          backgroundSize: 'cover',
+          position: 'fixed',
         }}
       >
         {!this.state.timer && this.state.initialized

@@ -59,23 +59,24 @@
   font-size: 15px;
   font-weight: normal;
 }
-.select-container {
+.avatar-container {
   display: flex;
 }
-.avatar-select {
+.avatar-img {
   margin: 10px;
 }
-[type='radio'] {
+
+.avatar-select {
   position: fixed;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-[type='radio'] + img {
+.avatar-select + .avatar-img {
   cursor: pointer;
 }
 
-[type='radio']:checked + img {
+.avatar-select:checked + .avatar-img {
   outline: 2px solid black;
 }

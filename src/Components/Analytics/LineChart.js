@@ -48,6 +48,7 @@ export default class LineChart extends React.Component {
     console.log(formatScoreDate);
     return (
       <div className="graphs">
+        {this.state.error && <div className="error">{this.state.error}</div>}
         <div className="score-graph">
           <h3> Score Over Time </h3>
           <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
