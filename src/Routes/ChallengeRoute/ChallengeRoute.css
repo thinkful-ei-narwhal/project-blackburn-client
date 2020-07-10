@@ -16,6 +16,14 @@
   top: 0;
 }
 
+.challenge-div,
+.winlose-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .word-ul {
   /* border: 1px solid grey; */
   padding: 10px;

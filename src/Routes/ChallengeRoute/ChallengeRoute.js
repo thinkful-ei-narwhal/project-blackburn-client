@@ -309,7 +309,7 @@ class ChallengeRoute extends Component {
       <>
         <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
           {(props) => (
-            <div style={props}>
+            <div className="challenge-div" style={props}>
               {" "}
               {!this.state.levelEnded && (
                 <Spring
@@ -413,7 +413,7 @@ class ChallengeRoute extends Component {
               {this.state.levelEnded &&
                 this.state.levelTimer <= 0 &&
                 this.context.getCurrentCheckpointIndex() !== null && (
-                  <div>
+                  <div className="winlose-div">
                     {this.state.audio.pause()}{" "}
                     <WinLosePage
                       text={this.winText}
@@ -425,7 +425,7 @@ class ChallengeRoute extends Component {
               {this.state.levelEnded &&
                 this.state.levelTimer <= 0 &&
                 this.context.getCurrentCheckpointIndex() === null && (
-                  <div>
+                  <div className="winlose-div">
                     {this.state.audio.pause()}{" "}
                     <WinLosePage
                       text={this.winText}
@@ -435,7 +435,7 @@ class ChallengeRoute extends Component {
                   </div>
                 )}
               {this.state.levelEnded && this.state.playerHealth <= 0 && (
-                <div>
+                <div className="winlose-div">
                   {this.state.audio.pause()}{" "}
                   <WinLosePage
                     text={this.loseText}
