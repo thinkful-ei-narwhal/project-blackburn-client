@@ -15,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 
 .btn-results {
@@ -31,4 +32,12 @@
 .btn-results:hover {
   background-color: #ae9172;
   color: #d9c1aa;
+}
+
+
+.results-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

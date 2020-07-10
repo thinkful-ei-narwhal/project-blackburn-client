@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { animated, Transition, Spring } from "react-spring/renderprops";
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import StoryApiService from "../../Services/story-api-service";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { Link, Redirect } from "react-router-dom";
@@ -156,27 +157,27 @@ export default class Story extends Component {
     let arrLength = animatedTextDiv.length;
 
     return (
-      <div className="story-container">
-        {this.context.error === null ? (
-          <>
-            <div className="skip">
-              {this.state.index !== arrLength && (
-                <Link to={"/challenge"}> Skip Story &#x2192;</Link>
-              )}
-            </div>
-            <h2 className="story-name">{this.state.story_name}</h2>
-            <img
-              src={this.state.story_art}
-              alt="Art for the story"
-              width="500"
-              height="400"
-            />
-            <div className="story">{this.renderTyping()}</div>
-          </>
-        ) : (
-          <Redirect to={"/start"} />
-        )}
-      </div>
+          <div className="story-container">
+            {this.context.error === null ? (
+              <>
+                <div className="skip">
+                  {this.state.index !== arrLength && (
+                    <Link to={"/challenge"}> Skip Story &#x2192;</Link>
+                  )}
+                </div>
+                <h2 className="story-name">{this.state.story_name}</h2>
+                <img
+                  src={this.state.story_art}
+                  alt="Art for the story"
+                  width="300"
+                  height="200"
+                />
+                <div className="story">{this.renderTyping()}</div>
+              </>
+            ) : (
+              <Redirect to={"/start"} />
+            )}
+          </div>
     );
   }
 }
