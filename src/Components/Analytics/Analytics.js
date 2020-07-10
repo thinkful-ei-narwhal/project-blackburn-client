@@ -12,6 +12,7 @@ export default class Analytics extends React.Component {
   }
 
   render() {
+    console.log(this.context.myScores);
     let arrWPM = this.context.myScores.map((data) => {
       return data.wpm;
     });

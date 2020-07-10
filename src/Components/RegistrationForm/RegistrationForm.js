@@ -57,16 +57,47 @@ class RegistrationForm extends Component {
           value={this.state.username}
           required
         />
-        <Label htmlFor="reg-select">Choose Avatar:</Label>
-        <select
-          className="reg-select"
-          onChange={(e) => this.setState({ avatar: e.target.value })}
-          value={this.state.avatar}
-        >
-          <option value="" defaultValue />
-          <option>Red Mage</option>
-          <option>Blue Mage</option>
-        </select>
+
+        <div className="avatar-container">
+          <p>Choose Avatar:</p>
+          <Label htmlFor="man">
+            <input
+              type="radio"
+              name="reg-select"
+              id="man"
+              className="avatar-select"
+              value="/images/man.png"
+              onChange={(e) => this.setState({ avatar: e.target.value })}
+            />
+            <img className="avatar-img" src="/images/man.png" alt="man"></img>
+          </Label>
+          <Label htmlFor="spy">
+            <input
+              type="radio"
+              name="reg-select"
+              id="spy"
+              className="avatar-select"
+              value="/images/spy.png"
+              onChange={(e) => this.setState({ avatar: e.target.value })}
+            />
+            <img className="avatar-img" src="/images/spy.png" alt="spy"></img>
+          </Label>
+          <Label htmlFor="serial-killer">
+            <input
+              type="radio"
+              name="reg-select"
+              id="serial-killer"
+              className="avatar-select"
+              value="/images/serial-killer.png"
+              onChange={(e) => this.setState({ avatar: e.target.value })}
+            />
+            <img
+              className="avatar-img"
+              src="/images/serial-killer.png"
+              alt="serial-killer"
+            ></img>
+          </Label>
+        </div>
       </div>
     );
   };

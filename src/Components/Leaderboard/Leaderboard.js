@@ -3,33 +3,32 @@ import './Leaderboard.Module.css'
 import { Trail } from 'react-spring/renderprops'
 import BlackBurnContext from '../../Context/BlackburnContext'
 import { FaCrown } from 'react-icons/fa'
+
 export default class Leaderboard extends React.Component {
+  static contextType = BlackBurnContext;
 
-    static contextType = BlackBurnContext
+  state = {
+    overall: true,
+    byStory: false,
+    story: 'monsters',
+  };
 
-    state = {
-        overall: true,
-        byStory: false,
-        story: 'monsters'
+  handleOverallState = () => {
+    if (!this.state.overall) {
+      this.setState({ overall: true, byStory: false });
     }
+  };
 
-
-    handleOverallState = () => {
-        if(!this.state.overall) {
-            this.setState({ overall: true, byStory: false})
-        }
+  handleByStoryState = () => {
+    if (!this.state.byStory) {
+      this.setState({ overall: false, byStory: true });
     }
+  };
 
-    handleByStoryState = () => {
-        if(!this.state.byStory) {
-            this.setState({ overall: false, byStory: true})
-        }
-    }
-
-    componentDidMount() {
-        this.context.getTopTenScores()
-        this.context.getMyScores()
-    }
+  componentDidMount() {
+    this.context.getTopTenScores();
+    this.context.getMyScores();
+  }
 
     renderLeaderBoard = () => {
         if(this.state.overall) {
@@ -61,48 +60,25 @@ export default class Leaderboard extends React.Component {
                 )
             })
         }
-        // else if(this.state.byStory && this.state.story === 'monsters') {
-        //     return this.props.allScores.filter(data => data.storyId === 'monster').sort((a,b) => b - a).map((score, index) => {
-        //         return(
-        //         <li className = 'leaderboard-list' key = {index} > 
-        //             <span className = 'username'> {index + 1} </span> 
-        //             <div className = 'avatar'></div>
-        //             <span className = 'username'> {score.username} </span> 
-        //             <span className = 'score'> {score.score} </span> 
-        //         </li>
-        //         )
-        //     })
-        // }
-        // else if(this.state.byStory && this.state.story === 'detective') {
-        //     return this.props.allScores.filter(data => data.storyId === 'detective').sort((a,b) => b - a).map((score, index) => {
-        //         return(
-        //         <li className = 'leaderboard-list' key = {index} > 
-        //             <span className = 'username'> {index + 1} </span> 
-        //             <div className = 'avatar'></div>
-        //             <span className = 'username'> {score.username} </span> 
-        //             <span className = 'score'> {score.score} </span> 
-        //         </li>
-        //         )
-        //     })
-        // }
     }
 
-    handleOption = (e) => {
-        this.setState({
-            story: e.target.value
-        })
-    }
 
-    render() {
-        const myScoreArr = this.context.myScores.map(score => score.score)
-        const maxMyScore = Math.max(...myScoreArr)
-        return (
-            <div className = 'leaderboard'>
-                {/* <div className = 'leaderboard-buttons'>
+  handleOption = (e) => {
+    this.setState({
+      story: e.target.value,
+    });
+  };
+
+  render() {
+    const myScoreArr = this.context.myScores.map((score) => score.score);
+    const maxMyScore = Math.max(...myScoreArr);
+    return (
+      <div className="leaderboard">
+        {/* <div className = 'leaderboard-buttons'>
                     <Button onClick = {() => this.handleOverallState()}> Overall </Button>
                     <Button onClick = {() => this.handleByStoryState()}> By Story </Button>
                 </div> */}
-                {/* {(this.state.byStory) 
+        {/* {(this.state.byStory) 
                     ? <div className = 'select-story'>
                         <Label htmlFor = 'stories' > Select a Story   </Label>
                         <select name = 'stories' onChange = {(e) => this.handleOption(e)}>
@@ -126,7 +102,7 @@ export default class Leaderboard extends React.Component {
                     }   
                    
                 </ul>
-            </div>
-        )
-    }
+      </div>
+    );
+  }
 }

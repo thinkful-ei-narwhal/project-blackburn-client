@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import TokenService from "../Services/token-service";
-import ScoreboardApiService from "../Services/scoreboard-api-service";
+import React, { Component } from 'react';
+import TokenService from '../Services/token-service';
+import ScoreboardApiService from '../Services/scoreboard-api-service';
 
 const BlackBurnContext = React.createContext({
   user: {},
@@ -14,7 +14,7 @@ const BlackBurnContext = React.createContext({
   accuracy: 0,
   topTenScores: [],
   myScores: [],
-  audio: "",
+  audio: '',
   setError: () => {},
   clearError: () => {},
   resetGameData: () => {},
@@ -54,15 +54,14 @@ export class BlackburnProvider extends Component {
       accuracy: 0,
       topTenScores: [],
       myScores: [],
-      audio: "",
+      audio: '',
     };
-    const payload = TokenService.parseAuthToken();
-    if (payload)
-      state.user = {
-        id: payload.user_id,
-        username: payload.sub,
-        avatar: payload.avatar,
-      };
+    // const payload = TokenService.parseAuthToken();
+    // if (payload)
+    //   state.user = {
+    //     id: payload.user_id,
+    //     username: payload.sub,
+    //   };
     this.state = state;
   }
 
@@ -79,7 +78,7 @@ export class BlackburnProvider extends Component {
     this.setState({
       error: null,
       story_id: null,
-      checkpoint_ids: null,
+      checkpoint_ids: { checkpointArray: [], currentIndex: 0 },
       difficulty_setting: null,
       score: 0,
       bestScore: 0,
@@ -116,7 +115,6 @@ export class BlackburnProvider extends Component {
     this.setUser({
       id: payload.user_id,
       username: payload.sub,
-      avatar: payload.avatar,
     });
   };
 
@@ -152,12 +150,18 @@ export class BlackburnProvider extends Component {
   };
 
   setCheckpointIds = (checkpointArray) => {
-    this.setState({
-      checkpoint_ids: {
-        checkpointArray,
-        currentIndex: 0,
-      },
-    });
+    localStorage.setItem("checkpointArray", JSON.stringify(checkpointArray));
+    return new Promise((resolve) =>
+      this.setState(
+        {
+          checkpoint_ids: {
+            checkpointArray,
+            currentIndex: 0,
+          },
+        },
+        resolve
+      )
+    );
   };
 
   getCheckpointIds = () => {
@@ -165,7 +169,7 @@ export class BlackburnProvider extends Component {
   };
 
   getTopTenScores = () => {
-    ScoreboardApiService.getAllScores("all").then((res) => {
+    ScoreboardApiService.getAllScores('all').then((res) => {
       const outputArr = res.map((data) => {
         return {
           username: data.username,
@@ -178,9 +182,9 @@ export class BlackburnProvider extends Component {
   };
 
   getMyScores = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
-        console.log("res", res);
+        console.log('res', res);
         const outputArr = res.map((data) => {
           return {
             score: data.total_score,
@@ -198,7 +202,7 @@ export class BlackburnProvider extends Component {
   };
 
   setMyBestScore = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
         const outputArr = res.map((data) => {
           return data.total_score;
@@ -223,7 +227,7 @@ export class BlackburnProvider extends Component {
       error: this.state.error,
       difficulty_setting: this.state.difficulty_setting,
       story_id: this.state.story_id,
-      checkpoint_id: this.state.checkpoint_id,
+      checkpoint_ids: this.state.checkpoint_ids,
       score: this.state.score,
       topTenScores: this.state.topTenScores,
       myScores: this.state.myScores,

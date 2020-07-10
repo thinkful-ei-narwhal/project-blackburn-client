@@ -1,11 +1,10 @@
 .dashboard-header {
-    display: flex;
-    justify-content: space-evenly ;
-    align-items: center;
-    /* margin-left: 120px; */
-    border-bottom: 2px solid black;
-    box-shadow: 0 4px 0 0px lightgrey;
-
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-left: 120px; */
+  border-bottom: 2px solid black;
+  box-shadow: 0 4px 0 0px lightgrey;
 }
 
 .dashboard-header-open {
@@ -66,7 +65,6 @@
   overflow-x: hidden;
   transition: 0.5s;
   box-shadow: 6px 6px #f1f1f1;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -87,22 +85,21 @@
 }
 
 .x-closed {
-    color: black;
-    font-size: 24px;
-    cursor: pointer;
-    margin-top: 7px;
-    padding: 5px;
-    /* position: absolute;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+  margin-top: 7px;
+  padding: 5px;
+  /* position: absolute;
     left: 0;
     top: 0; */
-  }
+}
 
 .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .content-open {
