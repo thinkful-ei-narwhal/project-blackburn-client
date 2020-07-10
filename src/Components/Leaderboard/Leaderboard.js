@@ -46,9 +46,10 @@ export default class Leaderboard extends React.Component {
                                 {index + 1} 
                                 {(index + 1 === 1) ? <FaCrown style = {{margin: 6}} /> : null}
                             </span> 
-                            <div className = 'avatar'> {this.context.user.avatar} </div>
+                            <div className = 'avatar'> <img src = {this.context.user.avatar} alt = {`Avatar ${this.context.user.avatar}`} /> </div>
                             <span className = 'username' 
-                                style = {(this.context.user.username === score.username) ? {color:'red'} : {color: 'black'}}> {score.username}
+                                style = {(this.context.user.username === score.username) ? {color:'red'} : {color: 'black'}}> 
+                                {score.username}
                             </span> 
                             {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
                             <span className = 'score'> {score.score} </span> 
@@ -72,6 +73,7 @@ export default class Leaderboard extends React.Component {
   render() {
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
+    console.log(maxMyScore)
     return (
       <div className="leaderboard">
         {/* <div className = 'leaderboard-buttons'>
@@ -93,9 +95,9 @@ export default class Leaderboard extends React.Component {
                 <ul className = 'list-container'>
                     <li className = 'leaderboard-list' style = {{margiBottom: '10px'}}>  
                         <span className = 'username'> Your Top Score </span> 
-                        <div className = 'avatar'> {this.context.user.avatar} </div>
+                        <div className = 'avatar'> <img src = {this.context.user.avatar}/> </div>
                         <span className = 'username'> {this.context.user.username} </span> 
-                        <span className = 'score'> {maxMyScore} </span>  
+                        <span className = 'score'> {(maxMyScore === '-Infinity') ? maxMyScore : 'No Scores'} </span>  
                     </li>
                     {    
                        this.renderLeaderBoard()
