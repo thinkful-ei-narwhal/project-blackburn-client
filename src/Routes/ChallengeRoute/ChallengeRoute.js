@@ -258,8 +258,8 @@ class ChallengeRoute extends Component {
         );
         this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
         this.setState({
-          levelTimer: 5, //checkpointData.level_timer,
-          levelTimerTotal: 5, //checkpointData.level_timer,
+          levelTimer: checkpointData.level_timer,
+          levelTimerTotal: checkpointData.level_timer,
           playerScore: playerScore,
           playerBest: playerBestStored,
           playerBestStored: playerBestStored,

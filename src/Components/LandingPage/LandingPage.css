@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #302B28;
+    background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B);
     position: static;
     top: 0;
     bottom: 0;
@@ -31,7 +31,7 @@
     border-radius: 6px;
     margin-bottom: 10vh;
     font-size: larger;
-    margin-right: 3vh;
+    margin: 3vh;
 }
 
 .login-signup:hover {

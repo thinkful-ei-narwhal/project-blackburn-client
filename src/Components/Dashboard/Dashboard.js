@@ -129,8 +129,7 @@ export default class Dashboard extends React.Component {
       <>
         {!this.state.menuOpen && (
           <div className="x-closed" onClick={() => this.handleMenuButton()}>
-            {" "}
-            <FaBars />{" "}
+            <FaBars />
           </div>
         )}
         <header
@@ -138,12 +137,9 @@ export default class Dashboard extends React.Component {
             this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
           }
         >
-        <img src="https://img.icons8.com/metro/26/000000/fraud.png"/>
-
           <h2 className="user-welcome">Welcome {user.username}</h2>
           <div className="user-header">
-            {' '}
-            <UserHeader />{' '}
+            <UserHeader />
           </div>
         </header>
         {this.state.menuOpen && (
@@ -169,7 +165,7 @@ export default class Dashboard extends React.Component {
 
                 <nav className="navLinks">
                   <h1 className="title">
-                    Project <br /> Blackburn
+                    Project Blackburn
                   </h1>
                   <div
                     className={this.state.showHome ? 'links-selected' : 'links'}
