@@ -15,7 +15,6 @@ class WinLosePage extends Component {
     this.state = {
       condition: this.props.condition,
       autoSave: this.props.autoSave,
-      score: '',
     };
   }
 
@@ -28,11 +27,9 @@ class WinLosePage extends Component {
       total_accuracy: this.context.accuracy,
     };
     console.log('postScore() with data', data);
-    await ScoreboardApiService.postScore(data).then((res) =>
-      this.setState({ score: res })
+    await ScoreboardApiService.postScore(data).then(
+      this.setState({ autoSave: false })
     );
-
-    this.setState({ autoSave: false });
     console.log(this.state.autoSave);
   }
 
@@ -63,9 +60,9 @@ class WinLosePage extends Component {
   };
 
   renderWin() {
+    this.playWintone();
     return (
       <div className="results-victory">
-        {this.playWintone()}
         <div className="results header">{this.props.text}</div>
         <Link to="/storypage">
           <Button className="btn-results next-btn">Next</Button>
@@ -88,11 +85,10 @@ class WinLosePage extends Component {
   };
 
   renderLose() {
+    this.playLoseTone();
     return (
       <div className="results defeat">
-        {this.playLoseTone()}
         <div className="results header">{this.props.text}</div>
-        <LeaderBoard />
         <Link to="/start">
           <Button
             className="btn-results retry-btn"
@@ -101,6 +97,9 @@ class WinLosePage extends Component {
             Return to Start
           </Button>
         </Link>
+        <div className="leaderboard">
+          <LeaderBoard />
+        </div>
       </div>
     );
   }

@@ -17,6 +17,7 @@ import bad from '../../Assets/Sounds/bensound-badass.mp3';
 import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
 import gameplayImg from './../../Images/DetectiveAtDesk.jpg';
 import TimerContent from '../../Components/TimerContent/TimerContent';
+
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
   constructor(props) {
