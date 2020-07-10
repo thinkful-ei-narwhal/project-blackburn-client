@@ -1,37 +1,35 @@
 
-
+ 
 .leaderboard {
-    margin-top: 25px;
-    margin-left: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
+    margin-top: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #d1ebf1;
 
-}
+} 
 
-.list-container {
-    display: flex;
-    flex-direction: column;
-}
 
 .leaderboard-list {
-    background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B);
+    /* background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B); */
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    border: 1px solid gray;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
     margin-right: 30px;
+    margin-top: 5px;
+    padding: 3px;
+    border-radius: 5px;
+    background-color: white;
+    
 }
 
 .avatar {
     border: 1px solid gray;
     padding: 10px;
     border-radius: 25px;
-    margin-right: 15px;
-    margin-left: 15px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .username {
@@ -39,5 +37,11 @@
 }
 
 .score {
-    margin: 10px;
+    margin: 15px;
+}
+
+.leaderboard-header {
+    text-align: center;
+    margin-top: 20px;
+
 }

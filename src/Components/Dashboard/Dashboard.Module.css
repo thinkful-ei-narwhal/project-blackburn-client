@@ -14,7 +14,8 @@
     align-items: center;
     margin-left: 33%;
     border-bottom: 2px solid black;
-    box-shadow: 0 4px 0 0px lightgrey;}
+    box-shadow: 0 4px 0 0px lightgrey;
+}
 .links {
   text-decoration: none;
   text-align: center;
@@ -40,14 +41,6 @@
   margin-top: 7vh;
 }
 
-.title {
-  margin: 7vh;
-  font-size: 18px;
-  padding: 15px;
-  position: none;
-  text-align: center;
-  color: #4F7C7D;
-}
 
 .sidenav {
   height: 100%;
@@ -80,8 +73,7 @@
   align-items: center;
 }
 
-.navLinks a {
-  padding: 30px;
+.navLinks {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

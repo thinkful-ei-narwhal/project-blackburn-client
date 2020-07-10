@@ -24,7 +24,6 @@ export default class Analytics extends React.Component {
     let roundedScore = avgScore.toFixed(2);
     return (
       <Container>
-        <Row>
           <Col sm={6}>
             <LineChart myScores={this.context.myScores} />
           </Col>
@@ -40,7 +39,6 @@ export default class Analytics extends React.Component {
               </div>
             </div>
           </Col>
-        </Row>
       </Container>
     );
   }

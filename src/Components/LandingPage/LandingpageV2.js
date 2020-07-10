@@ -49,7 +49,7 @@ export default class App extends React.Component {
           onClick={() => this.parallax.scrollTo(1)}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <h1
-                style = {{color: '#A8E6AD', fontSize: '10vh'}}
+                style = {{color: '#51808C', fontSize: '10vh'}}
             > Project <br /> Blackburn
           </h1>
           <br />
@@ -69,15 +69,17 @@ export default class App extends React.Component {
                 <Link to={"/login"} className="login-signup"
                     style = {{
                         color: 'black',
-                        backgroundImage: 'linear-gradient(to bottom right, #E6B3A8, #91A9E6)',}}
+                        backgroundColor: '#AE9172'
+                    }}
                 >
                     {" "}
                     Login{" "}
                 </Link >
                 <Link
                 style = {{
-                    color: 'grey',
-                    backgroundImage: 'linear-gradient(to bottom right, #E6B3A8, #91A9E6)',}}
+                    color: 'black',
+                    backgroundColor: '#AE9172'
+                }}
                 to={"/registration"} className="login-signup">
                     {" "}
                     Sign Up{" "}

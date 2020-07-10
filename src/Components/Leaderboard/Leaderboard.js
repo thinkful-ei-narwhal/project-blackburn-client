@@ -1,8 +1,6 @@
 import React from 'react'
 import './Leaderboard.Module.css'
-import Button from '../Button/Button'
 import { Trail } from 'react-spring/renderprops'
-import { Label } from '../Form/Form'
 import BlackBurnContext from '../../Context/BlackburnContext'
 import { FaCrown } from 'react-icons/fa'
 export default class Leaderboard extends React.Component {
@@ -37,10 +35,12 @@ export default class Leaderboard extends React.Component {
         if(this.state.overall) {
             return this.context.topTenScores.sort((a,b) => b - a).slice(0, 10).map((score, index) => {
                 return(
+                <>
                  <Trail items = {score} from = {{opacity: 0}} to = {{opacity: 1}}  key = {index}>   
                    { 
                     score => props => 
                     <div>
+
                         <li className = 'leaderboard-list' style = {{
                             ...props}}> 
                             <span className = 'username'> 
@@ -57,6 +57,7 @@ export default class Leaderboard extends React.Component {
                     </div>
                     }
                 </Trail>
+                </>
                 )
             })
         }
@@ -110,6 +111,9 @@ export default class Leaderboard extends React.Component {
                         </select>
                     </div> 
                     : <></>} */}
+                <div className = 'leaderboard-header'>
+                    <h2> Leader Board </h2>
+                </div>
                 <ul className = 'list-container'>
                     <li className = 'leaderboard-list' style = {{margiBottom: '10px'}}>  
                         <span className = 'username'> Your Top Score </span> 
