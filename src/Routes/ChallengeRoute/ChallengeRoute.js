@@ -222,7 +222,7 @@ class ChallengeRoute extends Component {
     return (
       <div className = 'game-container'>
           <TimerContent>
-           { props => <animated.div style= {{fontSize: '20vh',height: '100vh', width: '100vh', ...props}}> {props.value} </animated.div>}
+           { props => <animated.div style= {{fontSize: '20vh',height: '100vh', width: '100vh', ...props}}> {Math.floor(props.value)} </animated.div>}
           </TimerContent>
       </div>
     )

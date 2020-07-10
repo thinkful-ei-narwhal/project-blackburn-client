@@ -1,15 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
-import { Spring } from "react-spring/renderprops";
+import { Spring, Parallax, ParallaxLayer } from "react-spring/renderprops";
 export default class LandingPage extends React.Component {
   render() {
     return (
+      <>
       <div className="landing-page-container">
         <div className="landing-header">
-          <h1 className="landing-page-h1">
-            Project <br /> Blackburn
-          </h1>
+
+            <Parallax pages = {2} ref={ref => (this.parallax = ref)}>
+              <ParallaxLayer offset = {1}>
+                  <h1 className="landing-page-h1">
+                    Project <br /> Blackburn
+                  </h1>
+              </ParallaxLayer>
+            </Parallax>
+
           <Spring
           delay={1000}
           trail={1000}
@@ -79,26 +86,7 @@ export default class LandingPage extends React.Component {
             </svg>
           )}
         </Spring>
-          <p className = 'landingText'>
-            {/* Whether to increase your typing accuracy or speed, everyone could
-            benefit from a typing tutor. The trouble is that practicing typing
-            the conventional way is boring, and most typing games forget that
-            they should be games first and typing tutors second.
-            <br />
-            That's why we built Project Blackburn,  */}
-            A typing tutor that knows how
-            to make learning fun! Project Blackburn hosts a collection of
-            campaigns from your to choose from that help you increase your
-            typing skill. Each campaign can be played on multiple difficulty
-            settings, and your runs are recorded to track your progress over
-            time. Project Blackburn also has a leaderboard so you can compete to
-            be the fastest typer!{" "}
-            
-          </p>
-
-        </div>
-     
-       
+               
         <Spring
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
@@ -118,19 +106,37 @@ export default class LandingPage extends React.Component {
             </nav>
           )}
         </Spring>
+          <p className = 'landingText'>
+            {/* Whether to increase your typing accuracy or speed, everyone could
+            benefit from a typing tutor. The trouble is that practicing typing
+            the conventional way is boring, and most typing games forget that
+            they should be games first and typing tutors second.
+            <br />
+            That's why we built Project Blackburn,  */}
+            A typing tutor that knows how
+            to make learning fun! Project Blackburn hosts a collection of
+            campaigns from your to choose from that help you increase your
+            typing skill. Each campaign can be played on multiple difficulty
+            settings, and your runs are recorded to track your progress over
+            time. Project Blackburn also has a leaderboard so you can compete to
+            be the fastest typer!{" "}
+            
+          </p>
 
-        <footer className="footer">
-          Icons made by{" "}
-          <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
-            Freepik
-          </a>{" "}
-          from{" "}
-          <a href="https://www.flaticon.com/" title="Flaticon">
-            {" "}
-            www.flaticon.com
-          </a>
-        </footer>
+        </div>
       </div>
+      <footer className="footer">
+        Icons made by{" "}
+        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+          Freepik
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          {" "}
+          www.flaticon.com
+        </a>
+    </footer>
+    </>
     );
   }
 }
