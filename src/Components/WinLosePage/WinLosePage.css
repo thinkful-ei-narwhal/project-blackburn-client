@@ -15,7 +15,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .btn-results {
@@ -34,10 +33,13 @@
   color: #d9c1aa;
 }
 
-
 .results-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.leaderboard {
+  height: 50vh;
 }

@@ -1,46 +1,40 @@
-
- 
 .leaderboard {
-    margin-top: 50px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: #d1ebf1;
-
-} 
-
+  margin-top: 50px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #d1ebf1;
+}
 
 .leaderboard-list {
-    /* background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B); */
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: space-around;
-    align-items: center;
-    margin-right: 30px;
-    margin-top: 5px;
-    padding: 1.5px;
-    border-radius: 5px;
-    background-color: white;
-    
+  /* background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B); */
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 30px;
+  margin-top: 5px;
+  padding: 1.5px;
+  border-radius: 5px;
+  background-color: white;
 }
 
 .avatar {
-    padding: 1px;
-    border-radius: 25px;
-    margin-right: 20px;
-    margin-left: 20px;
+  padding: 1px;
+  border-radius: 25px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .username {
-    margin: 10px;
+  margin: 10px;
 }
 
 .score {
-    margin: 15px;
+  margin: 15px;
 }
 
 .leaderboard-header {
-    text-align: center;
-    margin-top: 20px;
-
+  text-align: center;
+  margin-top: 20px;
 }
