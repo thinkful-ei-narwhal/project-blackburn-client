@@ -7,7 +7,7 @@ import Settings from '../Settings/Settings';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import UserHeader from '../UserHeader/UserHeader';
 import './Dashboard.Module.css';
-import { Spring, animated, Transition } from 'react-spring/renderprops';
+import { Spring, animated, Transition } from 'react-spring/renderprops.cjs';
 import {
   FaBars,
   FaTimes,

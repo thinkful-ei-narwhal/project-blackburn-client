@@ -1,15 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
-import { BlackBurnProvider } from '../../context/PotluckContext'
+import ReactDOM from 'react-dom'
+import  BlackburnContext  from '../../Context/BlackburnContext'
 import Analytics from './Analytics';
+import BlackBurnContext from '../../Context/BlackburnContext';
 
-describe(`Adds analytics to dom without crashing`, () => {
+describe(`Adds header to dom without crashing`, () => {
     it('renders without crashing', () => {
         const wrapper = shallow(
-        <BlackBurnProvider>
+        <BlackBurnContext.Provider
+            value = {{}}
+        >
             <Analytics />
-        </BlackBurnProvider>
+        </BlackBurnContext.Provider>
     )
     .find('.analytics-container')
     expect(toJson(wrapper)).toMatchSnapshot()

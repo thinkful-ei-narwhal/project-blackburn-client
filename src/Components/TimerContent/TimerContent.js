@@ -1,4 +1,4 @@
-import { Keyframes } from 'react-spring/renderprops';
+import { Keyframes } from 'react-spring/renderprops.cjs';
 import delay from 'delay';
 
 const TimerContent = Keyframes.Spring(async (next) => {

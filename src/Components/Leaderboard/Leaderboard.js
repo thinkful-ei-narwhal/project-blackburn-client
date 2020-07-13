@@ -1,8 +1,8 @@
-import React from "react";
-import "./Leaderboard.Module.css";
-import { Trail } from "react-spring/renderprops";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import { FaCrown } from "react-icons/fa";
+import React from 'react'
+import './Leaderboard.Module.css'
+import { Trail } from 'react-spring/renderprops.cjs'
+import BlackBurnContext from '../../Context/BlackburnContext'
+import { FaCrown } from 'react-icons/fa'
 
 export default class Leaderboard extends React.Component {
   static contextType = BlackBurnContext;

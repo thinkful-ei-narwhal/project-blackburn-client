@@ -1,9 +1,8 @@
 import React from 'react';
-import { VictoryChart, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
+import { VictoryChart, VictoryLine } from 'victory';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import './LineChart.css';
 import scoreboardService from '../../Services/scoreboard-api-service';
-import { ContinuousColorLegend } from 'react-vis';
 
 export default class LineChart extends React.Component {
   static contextType = BlackBurnContext;

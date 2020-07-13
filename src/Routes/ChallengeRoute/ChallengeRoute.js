@@ -1,21 +1,20 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
-import Healthbar from "./../../Components/Healthbar/Healthbar";
-import UIStats from "../../Components/UIStats/UIStats";
-import Word from "./../../Components/Word/Word";
-import GameplayScreen from "./../../Components/GameplayScreen/GameplayScreen";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import { uniqueNamesGenerator, animals } from "unique-names-generator";
-import WinLosePage from "../../Components/WinLosePage/WinLosePage";
-import { Spring, animated, Trail } from "react-spring/renderprops";
-import "./ChallengeRoute.css";
-import bellTone from "../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3";
-import healthLoss from "../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3";
-import duel from "../../Assets/Sounds/bensound-theduel.mp3";
-import bad from "../../Assets/Sounds/bensound-badass.mp3";
-import eni from "../../Assets/Sounds/bensound-enigmatic.mp3";
-import TimerContent from "../../Components/TimerContent/TimerContent";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import TypeHandler from './../../Components/TypeHandler/TypeHandler';
+import Healthbar from './../../Components/Healthbar/Healthbar';
+import UIStats from '../../Components/UIStats/UIStats';
+import Word from './../../Components/Word/Word';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import { uniqueNamesGenerator, animals } from 'unique-names-generator';
+import WinLosePage from '../../Components/WinLosePage/WinLosePage';
+import { Spring, animated, Trail } from 'react-spring/renderprops.cjs';
+import './ChallengeRoute.css';
+import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
+import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
+import duel from '../../Assets/Sounds/bensound-theduel.mp3';
+import bad from '../../Assets/Sounds/bensound-badass.mp3';
+import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
+import TimerContent from '../../Components/TimerContent/TimerContent';
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;

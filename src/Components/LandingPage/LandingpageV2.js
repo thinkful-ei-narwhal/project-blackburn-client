@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
-import { Parallax, ParallaxLayer } from "react-spring/renderprops-addons";
-import { Spring } from 'react-spring/renderprops'
+import { Parallax, ParallaxLayer } from "react-spring/renderprops-addons.cjs";
+import { Spring } from 'react-spring/renderprops.cjs'
 import './LandingPage.css'
 import LeaderBoard from '../../Assets/Icons/Untitled.png'
 

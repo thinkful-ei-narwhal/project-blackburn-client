@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // import "./LandingPageV2.css";
-import { Spring, Parallax, ParallaxLayer } from "react-spring/renderprops";
+import { Spring } from "react-spring/renderprops.cjs";
 export default class LandingPage extends React.Component {
   render() {
     return (
