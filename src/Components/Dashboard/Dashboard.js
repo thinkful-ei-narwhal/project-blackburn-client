@@ -134,19 +134,18 @@ export default class Dashboard extends React.Component {
 
   render() {
     const { user } = this.context;
-    console.log(user);
     return (
       <>
-        {!this.state.menuOpen && (
-          <div className="x-closed" onClick={() => this.handleMenuButton()}>
-            <FaBars />
-          </div>
-        )}
         <header
           className={
             this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
           }
         >
+          {!this.state.menuOpen && (
+            <div className="x-closed" onClick={() => this.handleMenuButton()}>
+              <FaBars />
+            </div>
+          )}
           <h2 className="user-welcome">Welcome {user.username}</h2>
           <div className="user-header">
             <UserHeader />
@@ -172,9 +171,10 @@ export default class Dashboard extends React.Component {
                     <FaTimes />{' '}
                   </div>
                 )}
-
+                  <h1 
+                    style = {{fontSize: '2vh', textAlign: 'center'}}
+                    className="title">Project Blackburn</h1>
                 <nav className="navLinks">
-                  <h1 className="title">Project Blackburn</h1>
                   <div
                     className={this.state.showHome ? 'links-selected' : 'links'}
                     onClick={() => this.handleShowHome()}

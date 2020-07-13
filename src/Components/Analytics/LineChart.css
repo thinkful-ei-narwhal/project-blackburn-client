@@ -19,3 +19,9 @@
     box-shadow: 10px 10px 10px 10px lightgray;
 }
  */
+
+ .graphs {
+    display: flex;
+    flex-direction: row;    
+    
+ }

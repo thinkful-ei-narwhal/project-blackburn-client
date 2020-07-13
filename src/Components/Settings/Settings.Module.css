@@ -6,10 +6,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  padding: 10px;
+  background-color: white;
   box-shadow: 4px 4px 4px 4px lightgray;
-  border-bottom: 2px solid lightgray;
+  width: 20vh;
+  padding: 5px;
 }
 
 .set-label {

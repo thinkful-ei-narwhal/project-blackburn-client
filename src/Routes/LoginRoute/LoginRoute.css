@@ -6,13 +6,17 @@
   left: 0;
   right: 0;
 }
-.title {
+
+
+.login-title {
   color: #d9c1aa;
   position: absolute;
   padding: 20px;
   top: 10px;
   text-decoration: none;
 }
+
+
 .login-container {
   position: absolute;
   top: 25vh;
