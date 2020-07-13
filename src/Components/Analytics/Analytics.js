@@ -20,7 +20,6 @@ export default class Analytics extends React.Component {
     let scoreArr1 = this.context.myScores.map((data) => {
       return data.score;
     });
-    // let scoreArr2 = scoreArr1
     let avgScore = scoreArr1.reduce((a, b) => a + b, 0) / scoreArr1.length;
     let bestScore = Math.max(...scoreArr1)
     let roundedScore = avgScore.toFixed(2);

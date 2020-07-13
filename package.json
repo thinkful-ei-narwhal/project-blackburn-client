@@ -50,5 +50,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "enzyme": "^3.11.0"
+  }
 }
