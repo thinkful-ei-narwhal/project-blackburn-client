@@ -27,7 +27,8 @@
     text-decoration: none;
     border: 1px solid #D9C1AA;
     padding: 15px;
-    color: #D9C1AA;
+    /* color: #D9C1AA; */
+    color: RED;
     border-radius: 6px;
     margin-bottom: 10vh;
     font-size: larger;
@@ -35,9 +36,9 @@
 }
 
 .login-signup:hover {
-    background-color: #AE9172;
+    background-color: #f1f1f1;
     opacity: 75%;
-    color: #D9C1AA
+    color: white
 }
 
 .landing-page-h1 {

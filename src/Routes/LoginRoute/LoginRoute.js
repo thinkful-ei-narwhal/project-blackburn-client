@@ -10,7 +10,7 @@ class LoginRoute extends Component {
   render() {
     return (
       <div className="Login">
-        <Link className="title" to="/">
+        <Link className="login-title" to="/">
           Project <br /> Blackburn
         </Link>
         <LoginForm {...this.props} />

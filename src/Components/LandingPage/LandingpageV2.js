@@ -17,6 +17,10 @@ export default class App extends React.Component {
         <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>
           
         </ParallaxLayer>
+        <ParallaxLayer offset={.2} speed={0.4} style={{ opacity: 0.6 }}>
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '65%' }} />
+        </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
           <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '55%' }} />
         </ParallaxLayer> 
@@ -46,22 +50,21 @@ export default class App extends React.Component {
         <ParallaxLayer
           offset={-0.1}
           speed={0.1}
-          onClick={() => this.parallax.scrollTo(1)}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <h1
                 style = {{color: '#51808C', fontSize: '10vh'}}
             > Project <br /> Blackburn
           </h1>
           <br />
-          <div style = {{fontSize: 20, margin: 5, borderBottom: '1px solid grey'}}>Click Anywhere To Read More About The Game</div>
+          <div onClick={() => this.parallax.scrollTo(1)} style = {{ cursor: 'pointer', fontSize: 20, margin: 5, borderBottom: '1px solid grey'}}>Click Here To Read More About The Game</div>
 
         </ParallaxLayer>
         <ParallaxLayer offset = {.6} speed = {.2}>
             <Spring
-            from={{ opacity: 0 }}
-            to={{ opacity: 1 }}
-            delay={1000}
-            trail={1000}
+              from={{ opacity: 0 }}
+              to={{ opacity: 1 }}
+              delay={1000}
+              trail={1000}
             >
             {(props) => (
                 <nav className="landing-page-nav" style={{ 
@@ -72,8 +75,7 @@ export default class App extends React.Component {
                         backgroundColor: '#AE9172'
                     }}
                 >
-                    {" "}
-                    Login{" "}
+                    Login
                 </Link >
                 <Link
                 style = {{
@@ -81,8 +83,7 @@ export default class App extends React.Component {
                     backgroundColor: '#AE9172'
                 }}
                 to={"/registration"} className="login-signup">
-                    {" "}
-                    Sign Up{" "}
+                    Sign Up
                 </Link>
                 </nav>
             )}

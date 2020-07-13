@@ -1,11 +1,50 @@
+.graphs-container {
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 2px lightgray;
+    background-color: white;
+}
+
+
 .averages {
-    margin: 10px;
-    margin-top: 100px;
-    box-shadow: 5px 5px 5px 5px lightgray;
+    margin: 20px;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px lightgray;
     padding: 20px;
 }
 
-.averages:hover {
-    box-shadow: 20px 20px 20px 20px lightgray;
-    
+.analytics-container {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.averages-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+@media screen and (min-width: 400px) {
+    .analytics-container {
+        margin-top: 2vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+
+@media screen and (min-width: 1000px) {
+    .analytics-container {
+        margin-top: 2vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 }
