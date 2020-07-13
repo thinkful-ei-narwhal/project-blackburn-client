@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-left: 33%;
+    margin-left: 30%;
     border-bottom: 2px solid black;
     box-shadow: 0 4px 0 0px lightgrey;
 }
@@ -107,7 +107,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 33%;
+  margin-left: 25%;
 }
 
 @media screen and (min-width: 600px) {
@@ -115,12 +115,12 @@
     width: 150px;
   }
 
-  .dashboard-header-open {
+  /* .dashboard-header-open {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     margin-left: 320px;
-  }
+  } */
 }
 
 @media screen and (min-width: 800px) {

@@ -24,12 +24,11 @@ export default class Analytics extends React.Component {
     let avgScore = scoreArr.reduce((a, b) => a + b, 0) / scoreArr.length;
     let roundedScore = avgScore.toFixed(2);
     return (
-      <Container>
-          <Col sm={6}>
+      <>
+      <div className = 'graphs-container'>
             <LineChart myScores={this.context.myScores} />
-          </Col>
-          <Col sm={6}>
-            <div className="averages">
+      </div>
+      <div className="averages">
               <div>
                 {' '}
                 <h3>Average Words Per Minute </h3> {roundedWPM}
@@ -38,9 +37,8 @@ export default class Analytics extends React.Component {
                 {' '}
                 <h3>Average Score </h3> {roundedScore}
               </div>
-            </div>
-          </Col>
-      </Container>
+      </div>
+      </>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { VictoryChart, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import BlackBurnContext from '../../Context/BlackburnContext';
-import './LineChart.css';
+import './LineChart.module.css';
 import scoreboardService from '../../Services/scoreboard-api-service';
 import { ContinuousColorLegend } from 'react-vis';
 
@@ -57,13 +57,15 @@ export default class LineChart extends React.Component {
               }}
               text="Score Over Time"
             />
-          <VictoryChart viewBox={".5, .5"}minDomain={{y: 0}} domainPadding={10} theme={VictoryTheme.material}>
+          <VictoryChart className = 'VictoryChart' 
+            viewBox={".5, .5"}minDomain={{y: 0}} domainPadding={10} >
             <VictoryLine
               interpolation = 'natural'
                 style={{
                   data: { stroke: '#c43a31', strokeWidth: 6} ,
                   parent: { border: '2px solid #ccc' },
                 }}
+                
               data={scoreData}
               
             />
@@ -75,7 +77,7 @@ export default class LineChart extends React.Component {
           }}
             text="WPM Over Time"
           />
-          <VictoryChart minDomain={{y: 0}} domainPadding={20} theme={VictoryTheme.material}>
+          <VictoryChart minDomain={{y: 0}} domainPadding={20}>
             <VictoryLine
             interpolation = 'natural'
               style={{

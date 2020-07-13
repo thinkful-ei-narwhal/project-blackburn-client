@@ -73,7 +73,6 @@ export default class Leaderboard extends React.Component {
   render() {
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
-    console.log(maxMyScore)
     return (
       <div className="leaderboard">
         {/* <div className = 'leaderboard-buttons'>

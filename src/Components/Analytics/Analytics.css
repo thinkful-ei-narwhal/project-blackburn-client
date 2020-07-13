@@ -1,11 +1,14 @@
-.averages {
-    margin: 10px;
-    margin-top: 100px;
+.graphs-container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    padding: 10px;
     box-shadow: 5px 5px 5px 5px lightgray;
-    padding: 20px;
 }
 
-.averages:hover {
-    box-shadow: 20px 20px 20px 20px lightgray;
-    
+
+.averages {
+    margin: 10px;
+    box-shadow: 2px 2px 2px 2px lightgray;
+    padding: 20px;
 }
