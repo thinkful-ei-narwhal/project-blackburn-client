@@ -33,13 +33,13 @@
   color: #d9c1aa;
 }
 
-.results-div {
+/* .results-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.leaderboard {
+.leaderboard-container {
   height: 50vh;
 }

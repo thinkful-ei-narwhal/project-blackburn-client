@@ -1,23 +1,16 @@
-
-a {
-    color: #302B28;
-    text-decoration: none;
-    width: 100%;
-}
-
-
 .start-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #302b28;
+  text-decoration: none;
+  width: 100%;
+  margin-top: 50px;
 }
 
 .start-buttons {
-    /* border: 1px solid black; */
     padding: 20px;
     height: 100%;
     width: 20vh;
@@ -35,8 +28,18 @@ a {
 
 .start-buttons:hover {
     background-color: #AE9172;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  margin-top: 25px;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #302b28;
+  text-decoration: none;
+  width: 100%;
 }
-
 
 .start-btn {
 
