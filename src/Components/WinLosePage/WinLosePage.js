@@ -97,7 +97,7 @@ class WinLosePage extends Component {
             Return to Start
           </Button>
         </Link>
-        <div className="leaderboard">
+        <div className="leaderboard-container">
           <LeaderBoard />
         </div>
       </div>
