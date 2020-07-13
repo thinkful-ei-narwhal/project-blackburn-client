@@ -205,6 +205,7 @@ export class BlackburnProvider extends Component {
   setMyBestScore = () => {
     ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
+        console.log('TESTING ', res);
         const outputArr = res.map((data) => {
           return data.total_score;
         });
