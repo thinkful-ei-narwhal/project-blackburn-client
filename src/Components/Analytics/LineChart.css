@@ -20,7 +20,8 @@
 }
  */
 
-
-.VictoryChart {
-    color: red;
-}
+ .graphs {
+    display: flex;
+    flex-direction: row;    
+    
+ }

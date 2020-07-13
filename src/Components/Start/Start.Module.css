@@ -20,28 +20,41 @@ a {
     /* border: 1px solid black; */
     padding: 20px;
     height: 100%;
-    width: 100%;
+    width: 20vh;
     margin-top: 25px;
     margin-right: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-
-.start-btn {
-    margin-top: 10px;
-    margin-right: 10px;
-    text-decoration: none;
     border: 1px solid #D9C1AA;
     padding: 20px;
     color: #302B28;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.start-buttons:hover {
+    background-color: #AE9172;
+}
+
+
+.start-btn {
+
+    border: none;
+}
+
+
+.tutorial-text {
+    margin-left: 10px;
+    margin-right: 10px
 
 }
 
-.start-btn:hover {
-    background-color: #AE9172;
-    color: #D9C1AA
+
+@media screen and (min-width: 1000px) {
+    .tutorial-text {
+        margin-left: 300px;
+        margin-right: 300px;
+
+    }
 }

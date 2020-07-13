@@ -1,19 +1,22 @@
 import React from 'react';
 import { VictoryChart, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import BlackBurnContext from '../../Context/BlackburnContext';
-import './LineChart.module.css';
+import './LineChart.css';
 import scoreboardService from '../../Services/scoreboard-api-service';
 import { ContinuousColorLegend } from 'react-vis';
 
 export default class LineChart extends React.Component {
   static contextType = BlackBurnContext;
-
-  state = {
-    sortedScores: [],
-    sortedWPM: [],
-    error: '',
-  };
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      sortedScores: [],
+      sortedWPM: [],
+      error: '',
+    };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+  
   componentDidMount() {
     scoreboardService
       .getSortedScores(this.context.user.id, 'sortdate')
@@ -21,6 +24,17 @@ export default class LineChart extends React.Component {
         this.setState({ sortedScores: res.score, sortedWPM: res.wpm })
       )
       .catch((err) => this.setState({ error: err.error }));
+
+      this.updateWindowDimensions();
+      window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
   render() {
@@ -46,19 +60,16 @@ export default class LineChart extends React.Component {
     const scoreData = formatScoreDate.map((data) => {
       return { x: data.date_trunc, y: Math.floor(data.max) };
     });
-    console.log(scoreData)
     return (
       <div className="graphs">
         {this.state.error && <div className="error">{this.state.error}</div>}
         <div className="score-graph">
-          {/* <h3> Score Over Time </h3> */}
-          <VictoryLabel x={25} y={24} style={{
-              fontSize: 24
-              }}
-              text="Score Over Time"
-            />
+          <h3> Score Over Time </h3>
           <VictoryChart className = 'VictoryChart' 
-            viewBox={".5, .5"}minDomain={{y: 0}} domainPadding={10} >
+            minDomain={{y: 0}} domainPadding={20} 
+            height =  {500}
+            width =  {500}
+            >
             <VictoryLine
               interpolation = 'natural'
                 style={{
@@ -67,21 +78,19 @@ export default class LineChart extends React.Component {
                 }}
                 
               data={scoreData}
-              
             />
           </VictoryChart>
         </div>
         <div className="wpm-graph">
-        <VictoryLabel x={25} y={24} style={{
-            fontSize: 24
-          }}
-            text="WPM Over Time"
-          />
-          <VictoryChart minDomain={{y: 0}} domainPadding={20}>
+          <h3> WPM Over Time </h3>
+          <VictoryChart minDomain={{y: 0}} domainPadding={30}
+             height =  {500}
+             width =  {500}
+          >
             <VictoryLine
             interpolation = 'natural'
               style={{
-                data: { stroke: '#c43a31' },
+                data: { stroke: '#c43a31', strokeWidth: 6 },
                 parent: { border: '2px solid #ccc' },
               }}
               animate = {{

@@ -190,6 +190,7 @@ export class BlackburnProvider extends Component {
             score: data.total_score,
             wpm: data.avg_wpm,
             date: data.date_created,
+            accuracy: data.total_accuracy
           };
         });
         return this.setState({ myScores: outputArr });

@@ -221,7 +221,7 @@ class ChallengeRoute extends Component {
   }
 
   startTimer = () => {
-    return new Promise((resolve) => setTimeout(resolve, 5500));
+    return new Promise((resolve) => setTimeout(resolve, 6500));
   };
 
   async componentDidMount() {

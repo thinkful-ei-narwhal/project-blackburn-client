@@ -7,12 +7,19 @@ import { FaCrown } from 'react-icons/fa'
 export default class Leaderboard extends React.Component {
   static contextType = BlackBurnContext;
 
-  state = {
-    overall: true,
-    byStory: false,
-    story: 'monsters',
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      overall: true,
+      byStory: false,
+      story: 'monsters',
+      width: 0,
+      height: 0
+    };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
+  }
+  
   handleOverallState = () => {
     if (!this.state.overall) {
       this.setState({ overall: true, byStory: false });
@@ -28,6 +35,17 @@ export default class Leaderboard extends React.Component {
   componentDidMount() {
     this.context.getTopTenScores();
     this.context.getMyScores();
+
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
     renderLeaderBoard = () => {
@@ -39,14 +57,13 @@ export default class Leaderboard extends React.Component {
                    { 
                     score => props => 
                     <div>
-
-                        <li className = 'leaderboard-list' style = {{
+                        <li key = {index} className = 'leaderboard-list' style = {{
                             ...props}}> 
                             <span className = 'username'> 
                                 {index + 1} 
                                 {(index + 1 === 1) ? <FaCrown style = {{margin: 6}} /> : null}
                             </span> 
-                            <div className = 'avatar'> <img src = {this.context.user.avatar} alt = {`Avatar ${this.context.user.avatar}`} /> </div>
+                            {this.state.width > 800 && <div className = 'avatar'> <img src = {this.context.user.avatar} alt = {`Avatar ${this.context.user.avatar}`} /> </div>}
                             <span className = 'username' 
                                 style = {(this.context.user.username === score.username) ? {color:'red'} : {color: 'black'}}> 
                                 {score.username}
@@ -71,6 +88,7 @@ export default class Leaderboard extends React.Component {
   };
 
   render() {
+    console.log(this.state.width)
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
     return (
@@ -92,9 +110,9 @@ export default class Leaderboard extends React.Component {
                     <h2> Leader Board </h2>
                 </div>
                 <ul className = 'list-container'>
-                    <li className = 'leaderboard-list' style = {{margiBottom: '10px'}}>  
+                    <li key = {'topscore'} className = 'leaderboard-list' style = {{margiBottom: '10px'}}>  
                         <span className = 'username'> Your Top Score </span> 
-                        <div className = 'avatar'> <img src = {this.context.user.avatar}/> </div>
+                        {this.state.width > 800 && <div className = 'avatar'> <img src = {this.context.user.avatar}/> </div>}
                         <span className = 'username'> {this.context.user.username} </span> 
                         <span className = 'score'> {(maxMyScore === '-Infinity') ? maxMyScore : 'No Scores'} </span>  
                     </li>

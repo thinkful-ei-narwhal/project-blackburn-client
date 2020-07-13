@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col } from "react-grid-system";
+import {Spring} from 'react-spring/renderprops'
 import "./Start.Module.css";
 
 export default class Start extends React.Component {
@@ -11,42 +11,36 @@ export default class Start extends React.Component {
   render() {
     return (
       <div className="start-container">
-        <Container>
-          <Row>
-            <Col>
               <h4>
                 {" "}
                 Click Start to test your skills or get some help with our
                 tutorial
               </h4>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
               <Link to="/start" className="start-buttons">
-                <button className="start-btn"> Start </button>
+                Start
               </Link>
-            </Col>
-            <Col>
-              <div className="start-buttons">
                 <div
-                  className="start-btn"
+                  className="start-buttons"
                   onClick={() =>
                     this.setState({ showTooltip: !this.state.showTooltip })
                   }
                 >
-                  {this.state.showTooltip 
-                    ? `Click start then select a story and a difficulty. To play
+                  How To Play
+              </div>
+              {this.state.showTooltip && 
+                <Spring from = {{opacity: 0}} to = {{opacity: 1}}>
+                    {props => <p className = 'tutorial-text'
+                    style = {{
+                      textAlign: 'left',
+                      lineHeight: 2.5,
+                      ...props}}>
+                    Click start then select a story and a difficulty. To play
                     just start typing the words that appear on screen. But be
                     careful! For each word that disappears, you lose half a
                     heart. For each word that you mispell, you lose a whole
-                    heart. Compete with your friends to get the highest score. ` 
-                    : 'How To Play'}
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+                    heart. Compete with your friends to get the highest score.</p>}
+                </Spring>
+              }
       </div>
     );
   }
