@@ -52,7 +52,6 @@ class ChallengeRoute extends Component {
     const badass = bad;
     this.setState({ audio: new Audio(eval(this.context.audio)) });
   }
-  //Todos: Use animations to make words appear at different places
 
   calcWPM() {
     const timePassed = this.state.levelTimerTotal - this.state.levelTimer;
