@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../Button/Button';
-import { Input, Required, Label } from '../Form/Form';
-import ApiService from '../../Services/auth-api-service';
-import BlackBurnContext from '../../Context/BlackburnContext';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Button from "../Button/Button";
+import { Input, Required, Label } from "../Form/Form";
+import ApiService from "../../Services/auth-api-service";
+import BlackBurnContext from "../../Context/BlackburnContext";
 
 class RegistrationForm extends Component {
   static contextType = BlackBurnContext;
   state = {
-    username: '',
-    email: '',
-    password: '',
-    avatar: '',
+    username: "",
+    email: "",
+    password: "",
+    avatar: "",
     step: 0,
-    error: '',
+    error: "",
   };
 
   handleClick = (e) => {
@@ -27,7 +27,7 @@ class RegistrationForm extends Component {
     let step = this.state.step;
     step--;
     this.setState({ step: step });
-    this.setState({ error: '' });
+    this.setState({ error: "" });
   };
   handleSubmit = (e) => {
     e.preventDefault();
@@ -43,11 +43,11 @@ class RegistrationForm extends Component {
   renderUserInfo = () => {
     return (
       <div className="reg-account">
-        {this.state.error !== '' && (
+        {this.state.error !== "" && (
           <h3 className="error">{this.state.error}</h3>
         )}
         <Label htmlFor="reg-input">
-          {' '}
+          {" "}
           <Required />
           Create Username:
         </Label>
@@ -105,7 +105,7 @@ class RegistrationForm extends Component {
     return (
       <div className="reg-account">
         <h2>Create New Account:</h2>
-        {this.state.error !== '' && (
+        {this.state.error !== "" && (
           <h3 className="error">{this.state.error}</h3>
         )}
         <Label htmlFor="reg-input">
@@ -137,9 +137,9 @@ class RegistrationForm extends Component {
 
   comparePassword = (e) => {
     if (this.state.password === e.target.value) {
-      console.log('match');
-      this.setState({ error: '' });
-    } else this.setState({ error: 'Passwords do not match' });
+      console.log("match");
+      this.setState({ error: "" });
+    } else this.setState({ error: "Passwords do not match" });
   };
 
   render() {
@@ -156,29 +156,29 @@ class RegistrationForm extends Component {
             <Button
               className="reg-btn"
               onClick={(e) => this.handleClick(e)}
-              disabled={this.state.username === ''}
+              disabled={this.state.username === ""}
             >
               Next
             </Button>
           ) : (
             <div className="btn-container">
+              <Button className="reg-btn" type="submit">
+                Create Account
+              </Button>
               <Button
                 className="reg-btn back"
                 onClick={(e) => this.handleBack(e)}
               >
                 Back
               </Button>
-              <Button className="reg-btn" type="submit">
-                Create Account
-              </Button>
             </div>
           )}
         </form>
         <p>
-          Already a member? Click{' '}
+          Already a member? Click{" "}
           <Link className="signup-lnk" to="/login">
             here
-          </Link>{' '}
+          </Link>{" "}
           to login
         </p>
       </div>
