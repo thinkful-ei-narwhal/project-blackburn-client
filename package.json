@@ -2,6 +2,11 @@
   "name": "project-blackburn-client",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-spring)"
+    ]
+  },
   "dependencies": {
     "@opd/g2plot-react": "^1.7.2",
     "@react-spring/addons": "^9.0.0-beta.33",
@@ -25,14 +30,13 @@
     "react-use": "^15.3.2",
     "react-uuid": "^1.0.2",
     "react-vis": "^1.11.7",
-    "recharts": "^1.8.5",
     "unique-names-generator": "^4.2.0",
     "victory": "^35.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test":  "react-scripts test --transformIgnorePatterns \"node_modules/(?!react-spring)/\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,5 +54,10 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0"
+  }
 }

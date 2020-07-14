@@ -94,3 +94,14 @@
   background-color: black;
   /* width: 50px; */
 }
+
+
+.hint {
+  position: absolute;
+  top: 50vh;
+  bottom: 50vh;
+  color: white;
+  background-color: lightgrey;
+  height: 20vh;
+  width: 50vh;
+}

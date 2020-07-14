@@ -1,4 +1,4 @@
-import { Keyframes } from 'react-spring/renderprops';
+import { Keyframes } from 'react-spring/renderprops.cjs';
 import delay from 'delay';
 
 const TimerContent = Keyframes.Spring(async (next) => {
@@ -15,6 +15,7 @@ const TimerContent = Keyframes.Spring(async (next) => {
       opacity: 1,
       color: 'tomato',
       value: '2',
+
     });
     await delay(1000);
     await next({
@@ -22,6 +23,7 @@ const TimerContent = Keyframes.Spring(async (next) => {
       opacity: 1,
       color: 'tomato',
       value: '1',
+
     });
     await delay(1000);
     await next({

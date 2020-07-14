@@ -1,5 +1,5 @@
 import React from "react";
-import LineChart from "./LineChart";
+import LineChart from "./Charts/LineChart";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import "./Analytics.css";
 export default class Analytics extends React.Component {
@@ -19,7 +19,6 @@ export default class Analytics extends React.Component {
     let scoreArr1 = this.context.myScores.map((data) => {
       return data.score;
     });
-    // let scoreArr2 = scoreArr1
     let avgScore = scoreArr1.reduce((a, b) => a + b, 0) / scoreArr1.length;
     let bestScore = scoreArr1.length === 0 ? 0 : Math.max(...scoreArr1);
     let roundedScore = scoreArr1.length === 0 ? 0 : avgScore.toFixed(2);

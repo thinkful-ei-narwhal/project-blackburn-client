@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {Spring} from 'react-spring/renderprops'
+import {Spring} from 'react-spring/renderprops.cjs'
 import "./Start.Module.css";
 
 export default class Start extends React.Component {

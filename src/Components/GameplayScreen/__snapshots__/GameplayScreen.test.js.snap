@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Adds dashboard to dom without crashing renders without crashing 1`] = `
+<img
+  alt="Gameplay"
+  height="400"
+  src="DetectiveAtDesk.jpg"
+  width="300"
+/>
+`;
+
+exports[`Adds gameplay img to dom without crashing renders without crashing 1`] = `
+<img
+  alt="Gameplay"
+  height="400"
+  src="DetectiveAtDesk.jpg"
+  width="300"
+/>
+`;

@@ -8,7 +8,7 @@ class UserHeader extends Component {
     const { user } = this.context;
     return (
       <div className="user-info">
-        <img className="user-info" src={user.avatar}></img>
+        <img height = {30} width = {30} className="user-info" src={user.avatar} alt = 'user avatar'></img>
       </div>
     );
   }

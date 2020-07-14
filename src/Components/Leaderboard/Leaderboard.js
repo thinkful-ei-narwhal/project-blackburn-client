@@ -1,8 +1,8 @@
-import React from "react";
-import "./Leaderboard.Module.css";
-import { Trail } from "react-spring/renderprops";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import { FaCrown } from "react-icons/fa";
+import React from 'react'
+import './Leaderboard.Module.css'
+import { Trail } from 'react-spring/renderprops.cjs'
+import BlackBurnContext from '../../Context/BlackburnContext'
+import { FaCrown } from 'react-icons/fa'
 
 export default class Leaderboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -54,7 +54,7 @@ export default class Leaderboard extends React.Component {
         .slice(0, 10)
         .map((score, index) => {
           return (
-            <>
+            <li key = {index}>
               <Trail
                 items={score}
                 from={{ opacity: 0 }}
@@ -62,9 +62,7 @@ export default class Leaderboard extends React.Component {
                 key={index}
               >
                 {(score) => (props) => (
-                  <div>
-                    <li
-                      key={index}
+                    <div
                       className="leaderboard-list"
                       style={{
                         ...props,
@@ -97,11 +95,10 @@ export default class Leaderboard extends React.Component {
                       </span>
                       {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
                       <span className="score"> {score.score} </span>
-                    </li>
-                  </div>
+                    </div>
                 )}
               </Trail>
-            </>
+            </li>
           );
         });
     }
@@ -114,7 +111,6 @@ export default class Leaderboard extends React.Component {
   };
 
   render() {
-    console.log(this.state.width);
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
     return (
@@ -139,7 +135,7 @@ export default class Leaderboard extends React.Component {
           <li
             key={"topscore"}
             className="leaderboard-list"
-            style={{ margiBottom: "10px" }}
+            style={{ marginBottom: "10px" }}
           >
             <span className="username"> Your Top Score </span>
             {this.state.width > 800 && (
@@ -150,8 +146,7 @@ export default class Leaderboard extends React.Component {
             )}
             <span className="username"> {this.context.user.username} </span>
             <span className="score">
-              {" "}
-              {maxMyScore === "-Infinity" ? maxMyScore : "No Scores"}{" "}
+              {maxMyScore === "-Infinity" ? maxMyScore : "No Scores"}
             </span>
           </li>
           {this.renderLeaderBoard()}
