@@ -6,6 +6,9 @@ import UIStats from "../../Components/UIStats/UIStats";
 import Word from "./../../Components/Word/Word";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import { uniqueNamesGenerator, animals } from "unique-names-generator";
+import detective from "./../../Dictionaries/detective";
+import monster from "./../../Dictionaries/monster";
+import drone from "./../../Dictionaries/drone";
 import WinLosePage from "../../Components/WinLosePage/WinLosePage";
 import { Spring, animated, Trail } from "react-spring/renderprops.cjs";
 import "./ChallengeRoute.css";
@@ -15,6 +18,13 @@ import duel from "../../Assets/Sounds/bensound-theduel.mp3";
 import bad from "../../Assets/Sounds/bensound-badass.mp3";
 import eni from "../../Assets/Sounds/bensound-enigmatic.mp3";
 import TimerContent from "../../Components/TimerContent/TimerContent";
+
+const dictMapper = {
+  animals: animals,
+  detective: detective,
+  monster: monster,
+  drone: drone,
+};
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
@@ -125,10 +135,10 @@ class ChallengeRoute extends Component {
     this.setState({ words: newWordArray, expiredBuffer });
   }
 
-  generateWord(word_expiration_timer, max_screen_words) {
+  generateWord(word_expiration_timer, max_screen_words, dictionary_string) {
     if (this.state.words.length < max_screen_words) {
       const randomWord = uniqueNamesGenerator({
-        dictionaries: [animals],
+        dictionaries: [dictMapper[dictionary_string]],
         length: 1,
       });
 
@@ -292,7 +302,8 @@ class ChallengeRoute extends Component {
           () =>
             this.generateWord(
               checkpointData.word_expiration_timer * 1000,
-              checkpointData.max_screen_words
+              checkpointData.max_screen_words,
+              checkpointData.dictionary_string
             ),
           Math.random() * (3000 - 1000) + 1000 //random spawn between 1000 and 5000
         );
