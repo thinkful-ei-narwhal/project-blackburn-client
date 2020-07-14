@@ -1,14 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import toJson from 'enzyme-to-json'
-import Word from './Word';
+import GameplayScreen from './GameplayScreen';
 
-describe(`Adds word to dom without crashing`, () => {
+describe(`Adds gameplay img to dom without crashing`, () => {
     it('renders without crashing', () => {
         const wrapper = shallow(
-        <Word word = {'hello'} />
+            <GameplayScreen />
     )
-    .find('.word')
+    .find('img')
     expect(toJson(wrapper)).toMatchSnapshot()
     })
 })

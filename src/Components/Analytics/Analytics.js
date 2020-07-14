@@ -1,5 +1,5 @@
 import React from "react";
-import LineChart from "./LineChart";
+import LineChart from "./Charts/LineChart";
 import BlackBurnContext from "../../Context/BlackburnContext";
 import "./Analytics.css";
 export default class Analytics extends React.Component {

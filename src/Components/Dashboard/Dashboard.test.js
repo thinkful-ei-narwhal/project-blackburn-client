@@ -1,19 +1,17 @@
 import React from 'react';
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import toJson from 'enzyme-to-json'
-import ReactDOM from 'react-dom'
-import  BlackburnContext  from '../../Context/BlackburnContext'
-import Analytics from './Analytics';
+import Dashboard from './Dashboard';
 import BlackBurnContext from '../../Context/BlackburnContext';
 
-describe(`Adds header to dom without crashing`, () => {
+describe(`Adds dashboard to dom without crashing`, () => {
     it('renders without crashing', () => {
         const wrapper = shallow(
         <BlackBurnContext.Provider>
-            <Analytics />
+            <Dashboard />
         </BlackBurnContext.Provider>
     )
-    .find('.analytics-container')
+    .find('.dashboard-header-open')
     expect(toJson(wrapper)).toMatchSnapshot()
     })
 })

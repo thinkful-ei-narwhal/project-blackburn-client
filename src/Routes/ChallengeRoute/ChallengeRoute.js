@@ -321,6 +321,11 @@ class ChallengeRoute extends Component {
   }
 
   renderTimer = () => {
+    const hintsArray = [
+      'Remember to hit enter after your type a word',
+      'You lose more health mistyping a word than letting it go by!'
+    ]
+    const getRandomHint = hintsArray[Math.floor(Math.random() % ( hintsArray.length + 1))]
     return (
       <div
         className="game-container"
@@ -328,6 +333,7 @@ class ChallengeRoute extends Component {
       >
         <TimerContent>
           {(props) => (
+            <>
             <animated.div
               style={{
                 fontSize: "20vh",
@@ -339,6 +345,8 @@ class ChallengeRoute extends Component {
               {" "}
               {Math.floor(props.value)}{" "}
             </animated.div>
+            <div className = 'hint'>Barbara Blackburn Says: {getRandomHint}</div>
+            </>
           )}
         </TimerContent>
       </div>
@@ -449,8 +457,8 @@ class ChallengeRoute extends Component {
                       </Spring>
 
                       <Spring
-                        from={{ width: "100%", background: "gray" }}
-                        to={{ width: "0%", background: "white" }}
+                        from={{ width: "100%", color: 'grey' }}
+                        to={{ width: "0%", color: 'grey'}}
                         config={{ duration: this.staticWordTimer }}
                       >
                         {(props) => (

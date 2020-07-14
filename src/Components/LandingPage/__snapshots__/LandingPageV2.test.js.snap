@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Adds dashboard to dom without crashing renders without crashing 1`] = `undefined`;
+
+exports[`Adds landing page to dom without crashing renders without crashing 1`] = `undefined`;

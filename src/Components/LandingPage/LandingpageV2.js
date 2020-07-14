@@ -18,30 +18,30 @@ export default class App extends React.Component {
           
         </ParallaxLayer>
         <ParallaxLayer offset={.2} speed={0.4} style={{ opacity: 0.6 }}>
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '65%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '65%' }} />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '55%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '55%' }} />
         </ParallaxLayer> 
 
         <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '85%' }} />
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '5%' }} />
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '85%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '5%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '75%' }} />
-          <img src='https://img.icons8.com/metro/26/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '65%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '75%' }} />
+          <img src='https://img.icons8.com/metro/260/000000/fraud.png' alt = 'fraud main' style={{ display: 'block', width: '10%', marginLeft: '65%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={2.5} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
