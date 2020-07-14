@@ -333,11 +333,12 @@ class ChallengeRoute extends Component {
 
   renderTimer = () => {
     const hintsArray = [
-      "Remember to hit enter after your type a word",
-      "You lose more health mistyping a word than letting it go by!",
-    ];
-    const getRandomHint =
-      hintsArray[Math.floor(Math.random() % (hintsArray.length + 1))];
+      'Remember to hit enter after your type a word',
+      'You lose more health mistyping a word than letting it go by!',
+      'Remember to look at the word timers! They go by quick!'
+    ]
+    const getRandomHint = hintsArray[Math.floor(Math.random() * hintsArray.length)]
+
     return (
       <div
         className="game-container"
@@ -346,25 +347,25 @@ class ChallengeRoute extends Component {
         <TimerContent>
           {(props) => (
             <>
-              <animated.div
-                style={{
-                  fontSize: "20vh",
-                  height: "100vh",
-                  width: "100vh",
-                  ...props,
-                }}
-              >
-                {" "}
-                {Math.floor(props.value)}{" "}
-              </animated.div>
-              <div className="hint">
-                Barbara Blackburn Says: {getRandomHint}
-              </div>
+            <animated.div
+              style={{
+                fontSize: "20vh",
+                height: "100vh",
+                width: "100vh",
+                ...props,
+              }}
+            >
+              {" "}
+              {Math.floor(props.value)}{" "}
+            </animated.div>
+            <div className = 'hint-container'>
+              <div className = 'hint'>Barbara Blackburn Says:<br /> {getRandomHint}</div>
+            </div>
             </>
           )}
         </TimerContent>
       </div>
-    );
+    ); 
   };
 
   getRandomInt = (min, max) => {
@@ -447,21 +448,14 @@ class ChallengeRoute extends Component {
               {!this.state.levelEnded && (
                 <ul className="word-ul">
                   {this.state.words.map((wordObj, index) => (
-                    <li className="word-li" key={index} style={{}}>
+                    <li className="word-li" key={index}>
                       <Spring
                         from={{
-                          transform:
-                            "translate3d(200px,0,0) scale(2) rotateX(90deg)",
-                          color:
-                            colors[Math.floor(Math.random() * colors.length)],
+                          opacity: 0
                         }}
                         to={{
-                          transform:
-                            "translate3d(0px,0,0) scale(1) rotateX(0deg)",
-                          color:
-                            colors[Math.floor(Math.random() * colors.length)],
+                          opacity: 1
                         }}
-                        // config={{ duration: 2000 }}
                       >
                         {(props) => (
                           <animated.div className="wordTimer" style={props}>
@@ -469,20 +463,11 @@ class ChallengeRoute extends Component {
                           </animated.div>
                         )}
                       </Spring>
-
-                      <Spring
-                        from={{ width: "100%", color: "grey" }}
-                        to={{ width: "0%", color: "grey" }}
-                        config={{ duration: this.staticWordTimer }}
-                      >
-                        {(props) => (
-                          <animated.div className="word-timer" style={props}>
+                          <div className="timer">
                             {wordObj.getTimeRemaining() >= 0
                               ? wordObj.getTimeRemaining()
                               : 0}
-                          </animated.div>
-                        )}
-                      </Spring>
+                          </div>
                     </li>
                   ))}
                 </ul>

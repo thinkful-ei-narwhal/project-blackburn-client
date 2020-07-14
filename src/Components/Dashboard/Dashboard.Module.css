@@ -138,7 +138,7 @@ body {
 
 @media screen and (min-width: 600px) {
   .sidenav-open {
-    width: 130px;
+    width: 100px;
   }
 
    .dashboard-header-open {
@@ -151,7 +151,7 @@ body {
 
 @media screen and (min-width: 800px) {
   .sidenav-open {
-    width: 280px;
+    width: 200px;
   }
 
   .dashboard-header-open {
