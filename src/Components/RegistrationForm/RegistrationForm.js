@@ -114,7 +114,8 @@ class RegistrationForm extends Component {
           Password:
         </Label>
         <Input
-          aria-label="passoword"
+          aria-label="password"
+          autoFocus={true}
           className="reg-input"
           onChange={(e) => this.setState({ password: e.target.value })}
           value={this.state.password}
@@ -165,14 +166,14 @@ class RegistrationForm extends Component {
             </Button>
           ) : (
             <div className="btn-container">
+              <Button className="reg-btn" type="submit">
+                Create Account
+              </Button>
               <Button
                 className="reg-btn back"
                 onClick={(e) => this.handleBack(e)}
               >
                 Back
-              </Button>
-              <Button className="reg-btn" type="submit">
-                Create Account
               </Button>
             </div>
           )}

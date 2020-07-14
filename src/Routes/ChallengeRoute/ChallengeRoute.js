@@ -372,15 +372,12 @@ class ChallengeRoute extends Component {
               </div>
               <div className="type-input">
                 {!this.state.levelEnded && (
-                  <>
-                    <label htmlFor="type-input" />
-                    <TypeHandler
-                      handleSubmit={(e) => this.handleSubmit(e, this.state)}
-                      value={this.state.value}
-                      handleChange={this.handleChange}
-                      color={this.state.color}
-                    />
-                  </>
+                  <TypeHandler
+                    handleSubmit={(e) => this.handleSubmit(e, this.state)}
+                    value={this.state.value}
+                    handleChange={this.handleChange}
+                    color={this.state.color}
+                  />
                 )}
               </div>
               {!this.state.levelEnded && (
