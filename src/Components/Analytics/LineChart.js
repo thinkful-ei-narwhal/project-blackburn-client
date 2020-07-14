@@ -8,7 +8,7 @@ import { ContinuousColorLegend } from 'react-vis';
 export default class LineChart extends React.Component {
   static contextType = BlackBurnContext;
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       sortedScores: [],
       sortedWPM: [],
@@ -16,7 +16,7 @@ export default class LineChart extends React.Component {
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
-  
+
   componentDidMount() {
     scoreboardService
       .getSortedScores(this.context.user.id, 'sortdate')
@@ -25,14 +25,14 @@ export default class LineChart extends React.Component {
       )
       .catch((err) => this.setState({ error: err.error }));
 
-      this.updateWindowDimensions();
-      window.addEventListener('resize', this.updateWindowDimensions);
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
-  
+
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
@@ -63,41 +63,43 @@ export default class LineChart extends React.Component {
     return (
       <div className="graphs">
         {this.state.error && <div className="error">{this.state.error}</div>}
-        <div className="score-graph">
+        <div className="score-graph" aria-label="Score graph">
           <h3> Score Over Time </h3>
-          <VictoryChart className = 'VictoryChart' 
-            minDomain={{y: 0}} domainPadding={20} 
-            height =  {500}
-            width =  {500}
-            >
+          <VictoryChart
+            className="VictoryChart"
+            minDomain={{ y: 0 }}
+            domainPadding={20}
+            height={500}
+            width={500}
+          >
             <VictoryLine
-              interpolation = 'natural'
-                style={{
-                  data: { stroke: '#c43a31', strokeWidth: 6} ,
-                  parent: { border: '2px solid #ccc' },
-                }}
-                
+              interpolation="natural"
+              style={{
+                data: { stroke: '#c43a31', strokeWidth: 6 },
+                parent: { border: '2px solid #ccc' },
+              }}
               data={scoreData}
             />
           </VictoryChart>
         </div>
         <div className="wpm-graph">
           <h3> WPM Over Time </h3>
-          <VictoryChart minDomain={{y: 0}} domainPadding={30}
-             height =  {500}
-             width =  {500}
+          <VictoryChart
+            minDomain={{ y: 0 }}
+            domainPadding={30}
+            height={500}
+            width={500}
           >
             <VictoryLine
-            interpolation = 'natural'
+              interpolation="natural"
               style={{
                 data: { stroke: '#c43a31', strokeWidth: 6 },
                 parent: { border: '2px solid #ccc' },
               }}
-              animate = {{
+              animate={{
                 duration: 2000,
-                onLoad: {duration: 1000}
+                onLoad: { duration: 1000 },
               }}
-
               data={wpmData}
             />
           </VictoryChart>

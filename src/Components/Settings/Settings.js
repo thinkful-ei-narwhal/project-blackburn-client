@@ -28,7 +28,7 @@ export default class Settings extends React.Component {
     console.log(user);
     return (
       <div className="accountInfo">
-        <h3 className="setting-header">Personal Info</h3>
+        <h2 className="setting-header">Personal Info</h2>
         {this.state.edit === false ? (
           <div className="settings-container">
             <p>
@@ -37,7 +37,7 @@ export default class Settings extends React.Component {
             </p>
             <p>
               <span className="option-setting">Avatar</span> <br /> <br />{' '}
-              <img src={user.avatar}></img>
+              <img src={user.avatar} alt="User avatar"></img>
             </p>
 
             <Button

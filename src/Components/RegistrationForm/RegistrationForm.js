@@ -46,12 +46,13 @@ class RegistrationForm extends Component {
         {this.state.error !== '' && (
           <h3 className="error">{this.state.error}</h3>
         )}
-        <Label htmlFor="reg-input">
+        <Label htmlFor="username">
           {' '}
           <Required />
           Create Username:
         </Label>
         <Input
+          aria-label="username"
           className="reg-input"
           onChange={(e) => this.setState({ username: e.target.value })}
           value={this.state.username}
@@ -108,11 +109,12 @@ class RegistrationForm extends Component {
         {this.state.error !== '' && (
           <h3 className="error">{this.state.error}</h3>
         )}
-        <Label htmlFor="reg-input">
+        <Label htmlFor="password">
           <Required />
           Password:
         </Label>
         <Input
+          aria-label="passoword"
           className="reg-input"
           onChange={(e) => this.setState({ password: e.target.value })}
           value={this.state.password}
@@ -124,6 +126,7 @@ class RegistrationForm extends Component {
           Re-enter Password:
         </Label>
         <Input
+          aria-label="reenter password"
           className="reg-input"
           onChange={(e) => {
             this.comparePassword(e);

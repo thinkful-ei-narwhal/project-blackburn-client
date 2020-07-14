@@ -50,6 +50,7 @@ class SettingsForm extends Component {
             className="set-input username"
             name="username"
             defaultValue={user.username}
+            aria-label="Username"
             required
           />
           <div className="avatar-container">
