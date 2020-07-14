@@ -1,20 +1,30 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import TypeHandler from './../../Components/TypeHandler/TypeHandler';
-import Healthbar from './../../Components/Healthbar/Healthbar';
-import UIStats from '../../Components/UIStats/UIStats';
-import Word from './../../Components/Word/Word';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import { uniqueNamesGenerator, animals } from 'unique-names-generator';
-import WinLosePage from '../../Components/WinLosePage/WinLosePage';
-import { Spring, animated, Trail } from 'react-spring/renderprops.cjs';
-import './ChallengeRoute.css';
-import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
-import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
-import duel from '../../Assets/Sounds/bensound-theduel.mp3';
-import bad from '../../Assets/Sounds/bensound-badass.mp3';
-import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
-import TimerContent from '../../Components/TimerContent/TimerContent';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
+import Healthbar from "./../../Components/Healthbar/Healthbar";
+import UIStats from "../../Components/UIStats/UIStats";
+import Word from "./../../Components/Word/Word";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import { uniqueNamesGenerator, animals } from "unique-names-generator";
+import detective from "./../../Dictionaries/detective";
+import monster from "./../../Dictionaries/monster";
+import drone from "./../../Dictionaries/drone";
+import WinLosePage from "../../Components/WinLosePage/WinLosePage";
+import { Spring, animated, Trail } from "react-spring/renderprops.cjs";
+import "./ChallengeRoute.css";
+import bellTone from "../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3";
+import healthLoss from "../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3";
+import duel from "../../Assets/Sounds/bensound-theduel.mp3";
+import bad from "../../Assets/Sounds/bensound-badass.mp3";
+import eni from "../../Assets/Sounds/bensound-enigmatic.mp3";
+import TimerContent from "../../Components/TimerContent/TimerContent";
+
+const dictMapper = {
+  animals: animals,
+  detective: detective,
+  monster: monster,
+  drone: drone,
+};
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
@@ -75,7 +85,7 @@ class ChallengeRoute extends Component {
 
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
-      if (this.state.levelEnded === false)
+      if (this.state.levelEnded === false && this.state.isWin === true)
         this.context.incrementCheckpointIndex();
       this.clearTimers();
       this.setState({ words: [] });
@@ -125,10 +135,10 @@ class ChallengeRoute extends Component {
     this.setState({ words: newWordArray, expiredBuffer });
   }
 
-  generateWord(word_expiration_timer, max_screen_words) {
+  generateWord(word_expiration_timer, max_screen_words, dictionary_string) {
     if (this.state.words.length < max_screen_words) {
       const randomWord = uniqueNamesGenerator({
-        dictionaries: [animals],
+        dictionaries: [dictMapper[dictionary_string]],
         length: 1,
       });
 
@@ -292,7 +302,8 @@ class ChallengeRoute extends Component {
           () =>
             this.generateWord(
               checkpointData.word_expiration_timer * 1000,
-              checkpointData.max_screen_words
+              checkpointData.max_screen_words,
+              checkpointData.dictionary_string
             ),
           Math.random() * (3000 - 1000) + 1000 //random spawn between 1000 and 5000
         );
@@ -327,6 +338,7 @@ class ChallengeRoute extends Component {
       'Remember to look at the word timers! They go by quick!'
     ]
     const getRandomHint = hintsArray[Math.floor(Math.random() * hintsArray.length)]
+
     return (
       <div
         className="game-container"
@@ -349,7 +361,6 @@ class ChallengeRoute extends Component {
             <div className = 'hint-container'>
               <div className = 'hint'>Barbara Blackburn Says:<br /> {getRandomHint}</div>
             </div>
-            
             </>
           )}
         </TimerContent>
