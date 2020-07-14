@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import TypeHandler from './../../Components/TypeHandler/TypeHandler';
-import Healthbar from './../../Components/Healthbar/Healthbar';
-import UIStats from '../../Components/UIStats/UIStats';
-import Word from './../../Components/Word/Word';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import { uniqueNamesGenerator, animals } from 'unique-names-generator';
-import WinLosePage from '../../Components/WinLosePage/WinLosePage';
-import { Spring, animated, Trail } from 'react-spring/renderprops.cjs';
-import './ChallengeRoute.css';
-import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
-import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
-import duel from '../../Assets/Sounds/bensound-theduel.mp3';
-import bad from '../../Assets/Sounds/bensound-badass.mp3';
-import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
-import TimerContent from '../../Components/TimerContent/TimerContent';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
+import Healthbar from "./../../Components/Healthbar/Healthbar";
+import UIStats from "../../Components/UIStats/UIStats";
+import Word from "./../../Components/Word/Word";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import { uniqueNamesGenerator, animals } from "unique-names-generator";
+import WinLosePage from "../../Components/WinLosePage/WinLosePage";
+import { Spring, animated, Trail } from "react-spring/renderprops.cjs";
+import "./ChallengeRoute.css";
+import bellTone from "../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3";
+import healthLoss from "../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3";
+import duel from "../../Assets/Sounds/bensound-theduel.mp3";
+import bad from "../../Assets/Sounds/bensound-badass.mp3";
+import eni from "../../Assets/Sounds/bensound-enigmatic.mp3";
+import TimerContent from "../../Components/TimerContent/TimerContent";
 
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
@@ -75,7 +75,7 @@ class ChallengeRoute extends Component {
 
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
-      if (this.state.levelEnded === false)
+      if (this.state.levelEnded === false && this.state.isWin === true)
         this.context.incrementCheckpointIndex();
       this.clearTimers();
       this.setState({ words: [] });
@@ -322,10 +322,11 @@ class ChallengeRoute extends Component {
 
   renderTimer = () => {
     const hintsArray = [
-      'Remember to hit enter after your type a word',
-      'You lose more health mistyping a word than letting it go by!'
-    ]
-    const getRandomHint = hintsArray[Math.floor(Math.random() % ( hintsArray.length + 1))]
+      "Remember to hit enter after your type a word",
+      "You lose more health mistyping a word than letting it go by!",
+    ];
+    const getRandomHint =
+      hintsArray[Math.floor(Math.random() % (hintsArray.length + 1))];
     return (
       <div
         className="game-container"
@@ -334,18 +335,20 @@ class ChallengeRoute extends Component {
         <TimerContent>
           {(props) => (
             <>
-            <animated.div
-              style={{
-                fontSize: "20vh",
-                height: "100vh",
-                width: "100vh",
-                ...props,
-              }}
-            >
-              {" "}
-              {Math.floor(props.value)}{" "}
-            </animated.div>
-            <div className = 'hint'>Barbara Blackburn Says: {getRandomHint}</div>
+              <animated.div
+                style={{
+                  fontSize: "20vh",
+                  height: "100vh",
+                  width: "100vh",
+                  ...props,
+                }}
+              >
+                {" "}
+                {Math.floor(props.value)}{" "}
+              </animated.div>
+              <div className="hint">
+                Barbara Blackburn Says: {getRandomHint}
+              </div>
             </>
           )}
         </TimerContent>
@@ -457,8 +460,8 @@ class ChallengeRoute extends Component {
                       </Spring>
 
                       <Spring
-                        from={{ width: "100%", color: 'grey' }}
-                        to={{ width: "0%", color: 'grey'}}
+                        from={{ width: "100%", color: "grey" }}
+                        to={{ width: "0%", color: "grey" }}
                         config={{ duration: this.staticWordTimer }}
                       >
                         {(props) => (
