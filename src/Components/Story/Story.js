@@ -65,7 +65,7 @@ export default class Story extends Component {
     if (this.state.story_text && this.state.story_text.length > 600) {
       return (
         <div className="story-type-text">
-          <Typist avgTypingDelay={35}>{this.state.story_text}</Typist>
+          <Typist avgTypingDelay={10}>{this.state.story_text}</Typist>
           <div className="after-timer">
             <Spring
               delay={25000}

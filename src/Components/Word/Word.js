@@ -24,7 +24,7 @@ class Word extends Component {
   render() {
     return (
       <div>
-        <p className = 'word'>{this.props.word}</p>
+        <p className = 'word' style = {{fontSize: '24px'}}>{this.props.word}</p>
         {/* <p>{this.state.timer}</p> */}
       </div>
     );
