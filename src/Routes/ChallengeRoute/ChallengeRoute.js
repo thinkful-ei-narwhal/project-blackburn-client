@@ -323,9 +323,10 @@ class ChallengeRoute extends Component {
   renderTimer = () => {
     const hintsArray = [
       'Remember to hit enter after your type a word',
-      'You lose more health mistyping a word than letting it go by!'
+      'You lose more health mistyping a word than letting it go by!',
+      'Remember to look at the word timers! They go by quick!'
     ]
-    const getRandomHint = hintsArray[Math.floor(Math.random() % ( hintsArray.length + 1))]
+    const getRandomHint = hintsArray[Math.floor(Math.random() * hintsArray.length)]
     return (
       <div
         className="game-container"
@@ -345,12 +346,15 @@ class ChallengeRoute extends Component {
               {" "}
               {Math.floor(props.value)}{" "}
             </animated.div>
-            <div className = 'hint'>Barbara Blackburn Says: {getRandomHint}</div>
+            <div className = 'hint-container'>
+              <div className = 'hint'>Barbara Blackburn Says:<br /> {getRandomHint}</div>
+            </div>
+            
             </>
           )}
         </TimerContent>
       </div>
-    );
+    ); 
   };
 
   getRandomInt = (min, max) => {

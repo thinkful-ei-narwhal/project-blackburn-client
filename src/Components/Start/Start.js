@@ -15,10 +15,11 @@ export default class Start extends React.Component {
                 {" "}
                 Click Start to test your skills or get some help with our
                 tutorial
+
               </h4>
-              <Link to="/start" className="start-buttons">
-                Start
-              </Link>
+                <Link to="/start" className="start-buttons">
+                  Start
+                </Link>
                 <div
                   className="start-buttons"
                   onClick={() =>
@@ -29,16 +30,18 @@ export default class Start extends React.Component {
               </div>
               {this.state.showTooltip && 
                 <Spring from = {{opacity: 0}} to = {{opacity: 1}}>
-                    {props => <p className = 'tutorial-text'
-                    style = {{
-                      textAlign: 'left',
-                      lineHeight: 2.5,
-                      ...props}}>
-                    Click start then select a story and a difficulty. To play
-                    just start typing the words that appear on screen. But be
-                    careful! For each word that disappears, you lose half a
-                    heart. For each word that you mispell, you lose a whole
-                    heart. Compete with your friends to get the highest score.</p>}
+                    {props => 
+                      <p className = 'tutorial-text'
+                        style = {{
+                          textAlign: 'left',
+                          lineHeight: 2.5,
+                          ...props}}>
+                        Click start then select a story and a difficulty. To play
+                        just start typing the words that appear on screen. But be
+                        careful! For each word that disappears, you lose half a
+                        heart. For each word that you mispell, you lose a whole
+                        heart. Compete with your friends to get the highest score.
+                      </p>}
                 </Spring>
               }
       </div>
