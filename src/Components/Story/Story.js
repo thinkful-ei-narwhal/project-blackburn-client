@@ -10,10 +10,10 @@ import "./Story.css";
 
 export default class Story extends Component {
   state = {
-    story_text: '',
-    story_art: '',
-    story_name: '',
-    audio: '',
+    story_text: "",
+    story_art: "",
+    story_name: "",
+    audio: "",
     showStory: false,
     index: 0,
   };
@@ -21,7 +21,7 @@ export default class Story extends Component {
   static contextType = BlackBurnContext;
 
   timer() {
-    let split = this.state.story_text.split('.').length;
+    let split = this.state.story_text.split(".").length;
     this.t1 = setInterval(() => {
       let newState = this.state.index;
       newState++;
@@ -70,15 +70,15 @@ export default class Story extends Component {
             <Spring
               delay={25000}
               from={{ opacity: 0, height: 0 }}
-              to={{ opacity: 1, height: 'auto' }}
+              to={{ opacity: 1, height: "auto" }}
             >
               {(props) => (
                 <Link
                   style={props}
                   className="start-challenge"
-                  to={'/challenge'}
+                  to={"/challenge"}
                 >
-                  {' '}
+                  {" "}
                   Start The Challenge &#x2192;
                 </Link>
               )}
@@ -87,12 +87,15 @@ export default class Story extends Component {
         </div>
       );
     } else if (this.state.story_text && this.state.story_text.length < 599) {
-      let split = this.state.story_text.split('.');
+      let split = this.state.story_text.split(".");
       split = split.map((x, index) => {
         return { text: x, key: index };
       });
       const animatedTextDiv = split.map((text) => (style) => (
-        <animated.div style={{ ...style }}>{text.text}</animated.div>
+        <animated.div
+          style={{ ...style }}
+          dangerouslySetInnerHTML={{ __html: text.text }}
+        ></animated.div>
       ));
       let arrLength = animatedTextDiv.length;
       return (
@@ -102,15 +105,15 @@ export default class Story extends Component {
               {
                 <Spring
                   from={{ opacity: 0, height: 0 }}
-                  to={{ opacity: 1, height: 'auto' }}
+                  to={{ opacity: 1, height: "auto" }}
                 >
                   {(props) => (
                     <Link
                       style={props}
                       className="start-challenge"
-                      to={'/challenge'}
+                      to={"/challenge"}
                     >
-                      {' '}
+                      {" "}
                       Start The Challenge &#x2192;
                     </Link>
                   )}
@@ -118,11 +121,15 @@ export default class Story extends Component {
               }
               <Spring
                 from={{ opacity: 0, height: 0 }}
-                to={{ opacity: 1, height: 'auto' }}
+                to={{ opacity: 1, height: "auto" }}
               >
                 {(props) => (
-                  <div style={props} className="story">
-                    {this.state.story_text}
+                  <div
+                    style={props}
+                    className="story"
+                    dangerouslySetInnerHTML={{ __html: this.state.story_text }}
+                  >
+                    {}
                   </div>
                 )}
               </Spring>
@@ -147,13 +154,18 @@ export default class Story extends Component {
   }
 
   render() {
-    let split = this.state.story_text.split('.');
+    let split = this.state.story_text.split(".");
     split = split.map((x, index) => {
       return { text: x, key: index };
     });
 
     const animatedTextDiv = split.map((text) => (style) => (
-      <animated.div style={{ ...style }}>{text.text}</animated.div>
+      <animated.div
+        style={{ ...style }}
+        dangerouslySetInnerHTML={{ __html: text.text }}
+      >
+        {}
+      </animated.div>
     ));
     let arrLength = animatedTextDiv.length;
 
@@ -163,7 +175,7 @@ export default class Story extends Component {
           <>
             <div className="skip">
               {this.state.index !== arrLength && (
-                <Link to={'/challenge'}> Skip Story &#x2192;</Link>
+                <Link to={"/challenge"}> Skip Story &#x2192;</Link>
               )}
             </div>
             <h2 className="story-name">{this.state.story_name}</h2>
@@ -176,7 +188,7 @@ export default class Story extends Component {
             <div className="story">{this.renderTyping()}</div>
           </>
         ) : (
-          <Redirect to={'/start'} />
+          <Redirect to={"/start"} />
         )}
       </div>
     );
