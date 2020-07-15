@@ -1,8 +1,8 @@
-import React from "react";
-import { VictoryChart, VictoryLine, VictoryBar, VictoryScatter } from "victory";
-import BlackBurnContext from "../../../Context/BlackburnContext";
-import "./LineChart.css";
-import scoreboardService from "../../../Services/scoreboard-api-service";
+import React from 'react';
+import { VictoryChart, VictoryLine, VictoryScatter } from 'victory';
+import BlackBurnContext from '../../../Context/BlackburnContext';
+import './LineChart.css';
+import scoreboardService from '../../../Services/scoreboard-api-service';
 
 export default class LineChart extends React.Component {
   static contextType = BlackBurnContext;
@@ -11,13 +11,13 @@ export default class LineChart extends React.Component {
     this.state = {
       sortedScores: [],
       sortedWPM: [],
-      error: "",
+      error: '',
     };
   }
 
   componentDidMount() {
     scoreboardService
-      .getSortedScores(this.context.user.id, "sortdate")
+      .getSortedScores(this.context.user.id, 'sortdate')
       .then((res) =>
         this.setState({ sortedScores: res.score, sortedWPM: res.wpm })
       )
@@ -26,17 +26,17 @@ export default class LineChart extends React.Component {
 
   render() {
     const formatScoreDate = this.state.sortedScores.map((data) => {
-      const options = { year: "numeric", month: "long", day: "numeric" };
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const newDate = new Date(data.date_trunc).toLocaleDateString(
-        "en-US",
+        'en-US',
         options
       );
       return { date_trunc: newDate, max: parseInt(data.max) };
     });
     const formatWPMDate = this.state.sortedWPM.map((data) => {
-      const options = { year: "numeric", month: "long", day: "numeric" };
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const newDate = new Date(data.date_trunc).toLocaleDateString(
-        "en-US",
+        'en-US',
         options
       );
       return { date_trunc: newDate, max: data.max };
@@ -65,8 +65,8 @@ export default class LineChart extends React.Component {
               <VictoryScatter
                 interpolation="natural"
                 style={{
-                  data: { stroke: "#c43a31", strokeWidth: 5 },
-                  parent: { border: "2px solid #ccc" },
+                  data: { stroke: '#c43a31', strokeWidth: 5 },
+                  parent: { border: '2px solid #ccc' },
                 }}
                 data={scoreData}
               />
@@ -83,8 +83,8 @@ export default class LineChart extends React.Component {
               <VictoryLine
                 interpolation="natural"
                 style={{
-                  data: { stroke: "#c43a31", strokeWidth: 5 },
-                  parent: { border: "2px solid #ccc" },
+                  data: { stroke: '#c43a31', strokeWidth: 5 },
+                  parent: { border: '2px solid #ccc' },
                 }}
                 data={scoreData}
               />
@@ -105,8 +105,8 @@ export default class LineChart extends React.Component {
               <VictoryScatter
                 interpolation="natural"
                 style={{
-                  data: { stroke: "#c43a31", strokeWidth: 5 },
-                  parent: { border: "2px solid #ccc" },
+                  data: { stroke: '#c43a31', strokeWidth: 5 },
+                  parent: { border: '2px solid #ccc' },
                 }}
                 data={wpmData}
               />
@@ -123,8 +123,8 @@ export default class LineChart extends React.Component {
               <VictoryLine
                 interpolation="natural"
                 style={{
-                  data: { stroke: "#c43a31", strokeWidth: 5 },
-                  parent: { border: "2px solid #ccc" },
+                  data: { stroke: '#c43a31', strokeWidth: 5 },
+                  parent: { border: '2px solid #ccc' },
                 }}
                 data={wpmData}
               />

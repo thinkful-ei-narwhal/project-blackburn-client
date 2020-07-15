@@ -3,7 +3,6 @@ import Button from '../../Components/Button/Button';
 import storyService from '../../Services/story-api-service';
 import BlackburnContext from '../../Context/BlackburnContext';
 import { Link, Redirect } from 'react-router-dom';
-import { Input, Label } from './../../Components/Form/Form';
 import './StartRoute.css';
 
 class StartRoute extends Component {
@@ -48,20 +47,24 @@ class StartRoute extends Component {
       //change img on line 37 to back ground of line 36 if we wish
       <div className="story-list">
         {this.state.stories.map((story) => (
-          <label key={story.id} className="story-label" htmlFor={`${story.id}`}>
+          <label
+            key={story.id}
+            className="story-label"
+            htmlFor={`${story.story_name}`}
+          >
+            <input
+              className="inputform"
+              type="radio"
+              name="story_select"
+              id={story.story_name}
+              value={story.id}
+              onChange={this.handleInputSelect}
+              selected={this.state.story_id === `${story.id}`}
+            />
             <div className="story_panel" id={`story_panel ${story.id}`}>
               <img src={story.story_thumbnail} width="75px" alt="Story Art" />
               <h2>{story.story_name}</h2>
               <p>{story.story_synopsis}</p>
-              <input
-                className="inputform"
-                type="radio"
-                name="story_select"
-                id={story.story_name}
-                value={story.id}
-                onChange={this.handleInputSelect}
-                selected={this.state.story_id === `${story.id}`}
-              />
             </div>
           </label>
         ))}

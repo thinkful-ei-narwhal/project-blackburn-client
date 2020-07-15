@@ -141,7 +141,6 @@ class RegistrationForm extends Component {
 
   comparePassword = (e) => {
     if (this.state.password === e.target.value) {
-      console.log('match');
       this.setState({ error: '' });
     } else this.setState({ error: 'Passwords do not match' });
   };

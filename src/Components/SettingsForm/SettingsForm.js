@@ -30,13 +30,11 @@ class SettingsForm extends Component {
         );
       })
       .catch((err) => this.setState(err));
-    console.log(this.context.user);
     this.props.accept();
   };
 
   render() {
     const { user } = this.context;
-    console.log(user);
     return (
       <div className="set-form-container">
         <form className="set-form" onSubmit={(e) => this.handleSubmit(e)}>
