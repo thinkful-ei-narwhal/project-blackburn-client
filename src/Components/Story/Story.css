@@ -4,8 +4,8 @@
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(to bottom right, #D9C1AA, #DFA36B);
-    /* background-color: #D9C1AA; */
     position: static;
+    overflow: scroll;
     bottom: 0;
     top: 0;
     right: 0;
@@ -14,41 +14,45 @@
 }
 .story-name {
     align-self: center;
-
 }
 
 .story-type-text {
-    justify-self: left;
     text-align: left;
     line-height: 30px;
-    /* margin: 2em; */
-    height: 100vh;
+    height: auto;
+    width: 350px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(217, 193, 170, 1);
+}
+
+a {
+    text-decoration: none;
+    color: black
 }
 
 .skip {
     text-align: center;
     justify-self: center;
     align-self: center;
-    /* margin: 50px; */
     padding: 30px;
-    border-bottom: 1px solid gray;
 }
 .story-img {
     margin-bottom: 50px;
 }
 
 .story-text {
-    margin: 50px;
+    margin: 100px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: flex-start;
+
 }
 
 .story {
     text-align: center ;
     margin: 50px;
-    width: 50vh;
     height: 100vh;
 }
 
@@ -62,10 +66,10 @@
 }
 
 .after-timer {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     text-align: center;
 }

@@ -410,8 +410,8 @@ class ChallengeRoute extends Component {
               {' '}
               {!this.state.levelEnded && (
                 <Spring
-                  from={{ width: '100%', background: 'gray' }}
-                  to={{ width: '0%', background: 'white' }}
+                  from={{ width: "100%", background: "rgba(217, 193, 170, 1)" }}
+                  to={{ width: "0%", background: "white" }}
                   config={{ duration: this.levelTimerStaticTotal * 1000 }}
                 >
                   {(props) => (
@@ -535,6 +535,7 @@ class ChallengeRoute extends Component {
   }
 
   render() {
+    console.log(this.state.timer)
     return (
       <div
         className="game-container"
