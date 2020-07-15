@@ -69,14 +69,9 @@ export default class Story extends Component {
     if (this.state.story_text && this.state.story_text.length > 600) {
       return (
         <div className="story-type-text">
-          <Typist avgTypingDelay={10}>
-            {lines.map((line) => (
-              <div key={line.key}>{line.text}</div>
-            ))}
-          </Typist>
-          <div className="after-timer">
+           <div className="after-timer">
             <Spring
-              delay={25000}
+              delay={10000}
               from={{ opacity: 0, height: 0 }}
               to={{ opacity: 1, height: "auto" }}
             >
@@ -92,6 +87,11 @@ export default class Story extends Component {
               )}
             </Spring>
           </div>
+          <Typist avgTypingDelay={10}>
+            {lines.map((line) => (
+              <div key={line.key}>{line.text}</div>
+            ))}
+          </Typist>
         </div>
       );
     } else if (this.state.story_text && this.state.story_text.length < 599) {

@@ -4,7 +4,7 @@
   padding: 5px;
   background-color: #d9c1aa;
   box-shadow: 3px 3px 3px lightgray;
-  width: 40%;
+  width: 75%;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -12,10 +12,9 @@
 
 .game-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: scroll;
 
 }
 
