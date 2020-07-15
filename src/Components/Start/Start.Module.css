@@ -11,46 +11,42 @@
 }
 
 .start-buttons {
-    padding: 20px;
-    height: 100%;
-    width: 20vh;
-    margin-top: 25px;
-    margin-right: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid #D9C1AA;
-    padding: 20px;
-    color: #302B28;
-    border-radius: 6px;
-    cursor: pointer;
+  padding: 20px;
+  height: 100%;
+  width: 20vh;
+  margin-top: 25px;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #d9c1aa;
+  padding: 20px;
+  color: #302b28;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .start-buttons:hover {
-    background-color: #AE9172;
+  background-color: #ae9172;
 }
 
 .start-btn {
-
-    border: none;
+  border: none;
 }
 
-.start-btn:hover{
-    color: #AE9172;
-    border: none;
+.start-btn:hover {
+  color: #ae9172;
+  border: none;
 }
 
 .tutorial-text {
-    margin-left: 10px;
-    margin-right: 10px
-
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-
 @media screen and (min-width: 1000px) {
-    .tutorial-text {
-        margin-left: 300px;
-        margin-right: 300px;
-
-    }
+  .tutorial-text {
+    margin-left: 300px;
+    margin-right: 300px;
+  }
 }

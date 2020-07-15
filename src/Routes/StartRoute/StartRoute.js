@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Button from "../../Components/Button/Button";
-import storyService from "../../Services/story-api-service";
-import BlackburnContext from "../../Context/BlackburnContext";
-import { Link, Redirect } from "react-router-dom";
-import { Input, Label } from "./../../Components/Form/Form";
-import "./StartRoute.css";
+import React, { Component } from 'react';
+import Button from '../../Components/Button/Button';
+import storyService from '../../Services/story-api-service';
+import BlackburnContext from '../../Context/BlackburnContext';
+import { Link, Redirect } from 'react-router-dom';
+import { Input, Label } from './../../Components/Form/Form';
+import './StartRoute.css';
 
 class StartRoute extends Component {
   static contextType = BlackburnContext;
@@ -12,7 +12,7 @@ class StartRoute extends Component {
     super(props);
     this.state = {
       story_id: null,
-      difficulty_setting: "medium",
+      difficulty_setting: 'medium',
       stories: [],
       redirect: false,
     };
@@ -50,8 +50,8 @@ class StartRoute extends Component {
         {this.state.stories.map((story) => (
           <label key={story.id} className="story-label" htmlFor={`${story.id}`}>
             <div className="story_panel" id={`story_panel ${story.id}`}>
-              <img src={story.story_thumbnail} width="75px" />
-              <h4>{story.story_name}</h4>
+              <img src={story.story_thumbnail} width="75px" alt="Story Art" />
+              <h2>{story.story_name}</h2>
               <p>{story.story_synopsis}</p>
               <input
                 className="inputform"
@@ -72,13 +72,13 @@ class StartRoute extends Component {
     return (
       <div className="start-container">
         {this.state.redirect ? (
-          <Redirect to={"/storypage"} />
+          <Redirect to={'/storypage'} />
         ) : (
           <>
-            <Link to="/dashboard">
+            <Link to="/dashboard" className="dashboard-lnk">
               <Button className="back-btn"> &#8592; </Button>
             </Link>
-            <h2 className="start-header">Select a Story</h2>
+            <h1 className="start-header">Select a Story</h1>
             <div className="startpage-main">
               <form
                 className="start-page-form"

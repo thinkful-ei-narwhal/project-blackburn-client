@@ -25,34 +25,35 @@ export default class Settings extends React.Component {
 
   render() {
     const { user } = this.context;
-    console.log(user);
     return (
       <div className="accountInfo">
-        <h3 className="setting-header">Personal Info</h3>
-        {this.state.edit === false ? (
-          <div className="settings-container">
-            <p>
-              <span className="option-setting">Username</span> <br /> <br />{' '}
-              {user.username}
-            </p>
-            <p>
-              <span className="option-setting">Avatar</span> <br /> <br />{' '}
-              <img src={user.avatar}></img>
-            </p>
+        <h1 className="setting-header">Personal Info</h1>
+        <div className="settings-container">
+          {this.state.edit === false ? (
+            <>
+              <p>
+                <span className="option-setting">Username</span> <br /> <br />{' '}
+                {user.username}
+              </p>
+              <p>
+                <span className="option-setting">Avatar</span> <br /> <br />{' '}
+                <img src={user.avatar} alt="User avatar"></img>
+              </p>
 
-            <Button
-              className="set-btn edit"
-              onClick={(e) => this.handleEdit(e)}
-            >
-              Edit
-            </Button>
-          </div>
-        ) : (
-          <SettingsForm
-            cancel={this.handleCancel}
-            accept={this.acceptChanges}
-          />
-        )}
+              <Button
+                className="set-btn edit"
+                onClick={(e) => this.handleEdit(e)}
+              >
+                Edit
+              </Button>
+            </>
+          ) : (
+            <SettingsForm
+              cancel={this.handleCancel}
+              accept={this.acceptChanges}
+            />
+          )}
+        </div>
       </div>
     );
   }

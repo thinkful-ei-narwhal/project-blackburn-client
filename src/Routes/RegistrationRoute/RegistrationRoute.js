@@ -7,10 +7,12 @@ class RegistrationRoute extends Component {
   render() {
     return (
       <div className="Registration">
-        <Link className="title" to="/">
-          {' '}
-          Project <br /> Blackburn{' '}
-        </Link>
+        <h1>
+          <Link className="reg-title" to="/">
+            {' '}
+            Project <br /> Blackburn{' '}
+          </Link>
+        </h1>
         <RegistrationForm {...this.props} />
       </div>
     );

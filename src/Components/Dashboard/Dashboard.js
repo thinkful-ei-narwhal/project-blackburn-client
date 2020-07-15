@@ -171,9 +171,12 @@ export default class Dashboard extends React.Component {
                     <FaTimes />{' '}
                   </div>
                 )}
-                  <h1 
-                    style = {{fontSize: '2vh', textAlign: 'center'}}
-                    className="title">Project Blackburn</h1>
+                <h1
+                  style={{ fontSize: '2vh', textAlign: 'center' }}
+                  className="title"
+                >
+                  Project Blackburn
+                </h1>
                 <nav className="navLinks">
                   <div
                     className={this.state.showHome ? 'links-selected' : 'links'}
@@ -209,6 +212,7 @@ export default class Dashboard extends React.Component {
                     className="links"
                     onClick={(e) => this.handleLogout(e)}
                     to="/"
+                    aria-label="logout"
                   >
                     <GiExitDoor />
                   </Link>

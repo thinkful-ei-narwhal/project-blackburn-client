@@ -1,40 +1,47 @@
-.Settings {
+.accountInfo {
+  text-align: center;
 }
-
 .settings-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: white;
-  box-shadow: 4px 4px 4px 4px lightgray;
-  width: 20vh;
+  width: 30vh;
   padding: 5px;
+  box-shadow: 4px 4px 4px 4px lightgray;
 }
 
 .set-label {
-  display: flex;
   margin: 10px;
   padding: 10px;
+}
+.set-input {
+  border: 1px solid #d9c1aa;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.btn-container {
+  margin: 20px;
 }
 .set-btn {
   margin-top: 25px;
   margin-right: 10px;
   text-decoration: none;
   border: none;
-  border-bottom: 3px solid #D9C2AC;
+  border-bottom: 3px solid #d9c2ac;
   padding: 10px;
   padding-right: 15px;
   padding-left: 15px;
-
   color: #74665a;
   border-radius: 6px;
 }
 
 .set-btn:hover {
-  background-color: #AE9172;
+  background-color: #ae9172;
   opacity: 75%;
-  color: #D9C1AA
+  color: #d9c1aa;
 }
 
 .error {
@@ -43,7 +50,6 @@
   font-weight: normal;
 }
 
-
 .option-setting {
   padding-top: 50px;
   text-align: center;
@@ -51,15 +57,14 @@
   border-bottom: 1px solid lightgray;
 }
 
-
 .setting-header {
   border-bottom: 2px solid lightgray;
-  padding: 25px; 
+  padding: 25px;
 }
-
 
 @media screen and (min-width: 800px) {
   .settings-container {
     padding: 50px;
+    width: 25vw;
   }
 }

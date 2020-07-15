@@ -166,7 +166,7 @@ export default class Story extends Component {
                 <Link to={'/challenge'}> Skip Story &#x2192;</Link>
               )}
             </div>
-            <h2 className="story-name">{this.state.story_name}</h2>
+            <h1 className="story-name">{this.state.story_name}</h1>
             <img
               src={this.state.story_art}
               alt="Art for the story"

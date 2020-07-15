@@ -33,20 +33,22 @@ class LoginForm extends Component {
         <h2>Login:</h2>
         <form className="log-form" onSubmit={(e) => this.handleSubmit(e)}>
           {error !== '' && <h3 className="error">{error}</h3>}
-          <Label htmlFor="log-input">Username:</Label>
+          <Label htmlFor="log-input username">Username:</Label>
           <Input
             className="log-input"
             name="username"
             onChange={(e) => this.setState({ username: e.target.value })}
             value={this.state.username}
+            aria-label="Username"
             required
           />
 
-          <Label htmlFor="log-input">Password:</Label>
+          <Label htmlFor="password">Password:</Label>
           <Input
             className="log-input"
             name="password"
             type="password"
+            aria-label="Password"
             required
           />
           <Button className="log-btn" type="submit">

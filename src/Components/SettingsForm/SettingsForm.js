@@ -38,10 +38,10 @@ class SettingsForm extends Component {
     const { user } = this.context;
     console.log(user);
     return (
-      <div className="settings-container">
+      <div className="set-form-container">
         <form className="set-form" onSubmit={(e) => this.handleSubmit(e)}>
           {this.state.error !== '' && (
-            <h4 className="error">{this.state.error}</h4>
+            <h2 className="error">{this.state.error}</h2>
           )}
           <Label className="set-label username" htmlFor="set-input username">
             Username
@@ -50,6 +50,7 @@ class SettingsForm extends Component {
             className="set-input username"
             name="username"
             defaultValue={user.username}
+            aria-label="Username"
             required
           />
           <div className="avatar-container">

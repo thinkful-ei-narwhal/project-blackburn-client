@@ -150,7 +150,7 @@ export class BlackburnProvider extends Component {
   };
 
   setCheckpointIds = (checkpointArray) => {
-    localStorage.setItem("checkpointArray", JSON.stringify(checkpointArray));
+    localStorage.setItem('checkpointArray', JSON.stringify(checkpointArray));
     return new Promise((resolve) =>
       this.setState(
         {
@@ -175,6 +175,7 @@ export class BlackburnProvider extends Component {
           username: data.username,
           score: data.total_score,
           storyId: data.story_data,
+          avatar: data.avatar,
         };
       });
       return this.setState({ topTenScores: outputArr });
@@ -190,7 +191,7 @@ export class BlackburnProvider extends Component {
             score: data.total_score,
             wpm: data.avg_wpm,
             date: data.date_created,
-            accuracy: data.total_accuracy
+            accuracy: data.total_accuracy,
           };
         });
         return this.setState({ myScores: outputArr });
@@ -203,17 +204,17 @@ export class BlackburnProvider extends Component {
   };
 
   setMyBestScore = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores')
-      .then((res) => {
-          const outputArr = res.map((data) => {
-            return data.total_score;
-          });
-  
-          let bestScore = outputArr[0];
-          outputArr.forEach(
-            (score) => (bestScore = score > bestScore ? score : bestScore)
-          );
-          return this.setState({ bestScore }); 
+    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
+      (res) => {
+        const outputArr = res.map((data) => {
+          return data.total_score;
+        });
+
+        let bestScore = outputArr[0];
+        outputArr.forEach(
+          (score) => (bestScore = score > bestScore ? score : bestScore)
+        );
+        return this.setState({ bestScore });
       }
     );
   };

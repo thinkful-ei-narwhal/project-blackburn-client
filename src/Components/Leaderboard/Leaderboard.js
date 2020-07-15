@@ -1,8 +1,8 @@
-import React from 'react'
-import './Leaderboard.Module.css'
-import { Trail } from 'react-spring/renderprops.cjs'
-import BlackBurnContext from '../../Context/BlackburnContext'
-import { FaCrown } from 'react-icons/fa'
+import React from 'react';
+import './Leaderboard.Module.css';
+import { Trail } from 'react-spring/renderprops.cjs';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import { FaCrown } from 'react-icons/fa';
 
 export default class Leaderboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -12,7 +12,7 @@ export default class Leaderboard extends React.Component {
     this.state = {
       overall: true,
       byStory: false,
-      story: "monsters",
+      story: 'monsters',
       width: 0,
       height: 0,
     };
@@ -36,11 +36,11 @@ export default class Leaderboard extends React.Component {
     this.context.getMyScores();
 
     this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowDimensions);
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
   updateWindowDimensions() {
@@ -54,7 +54,7 @@ export default class Leaderboard extends React.Component {
         .slice(0, 10)
         .map((score, index) => {
           return (
-            <li key = {index}>
+            <li key={index}>
               <Trail
                 items={score}
                 from={{ opacity: 0 }}
@@ -62,40 +62,37 @@ export default class Leaderboard extends React.Component {
                 key={index}
               >
                 {(score) => (props) => (
-                    <div
-                      className="leaderboard-list"
-                      style={{
-                        ...props,
-                      }}
+                  <div
+                    className="leaderboard-list"
+                    style={{
+                      ...props,
+                    }}
+                  >
+                    <span className="username">
+                      {index + 1}
+                      {index + 1 === 1 ? (
+                        <FaCrown style={{ margin: 6 }} />
+                      ) : null}
+                    </span>
+                    {this.state.width > 800 && (
+                      <div className="avatar">
+                        {' '}
+                        <img src={score.avatar} alt={`User avatar`} />{' '}
+                      </div>
+                    )}
+                    <span
+                      className="username"
+                      style={
+                        this.context.user.username === score.username
+                          ? { color: 'red' }
+                          : { color: 'black' }
+                      }
                     >
-                      <span className="username">
-                        {index + 1}
-                        {index + 1 === 1 ? (
-                          <FaCrown style={{ margin: 6 }} />
-                        ) : null}
-                      </span>
-                      {this.state.width > 800 && (
-                        <div className="avatar">
-                          {" "}
-                          <img
-                            src={this.context.user.avatar}
-                            alt={`Avatar ${this.context.user.avatar}`}
-                          />{" "}
-                        </div>
-                      )}
-                      <span
-                        className="username"
-                        style={
-                          this.context.user.username === score.username
-                            ? { color: "red" }
-                            : { color: "black" }
-                        }
-                      >
-                        {score.username}
-                      </span>
-                      {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
-                      <span className="score"> {score.score} </span>
-                    </div>
+                      {score.username}
+                    </span>
+                    {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
+                    <span className="score"> {score.score} </span>
+                  </div>
                 )}
               </Trail>
             </li>
@@ -113,7 +110,7 @@ export default class Leaderboard extends React.Component {
   render() {
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
-    console.log(maxMyScore)
+    console.log(maxMyScore);
     return (
       <div className="leaderboard">
         <div className="leaderboard-header">
@@ -121,20 +118,23 @@ export default class Leaderboard extends React.Component {
         </div>
         <ul className="list-container">
           <li
-            key={"topscore"}
+            key={'topscore'}
             className="leaderboard-list"
-            style={{ marginBottom: "10px" }}
+            style={{ marginBottom: '10px' }}
           >
             <span className="username"> Your Top Score </span>
             {this.state.width > 800 && (
               <div className="avatar">
-                {" "}
-                <img src={this.context.user.avatar} alt = {this.context.user.id} />{" "}
+                {' '}
+                <img
+                  src={this.context.user.avatar}
+                  alt={this.context.user.id}
+                />{' '}
               </div>
             )}
             <span className="username"> {this.context.user.username} </span>
             <span className="score">
-              {maxMyScore === -Infinity ? 'No Scores': maxMyScore}
+              {maxMyScore === -Infinity ? 'No Scores' : maxMyScore}
             </span>
           </li>
           {this.renderLeaderBoard()}
