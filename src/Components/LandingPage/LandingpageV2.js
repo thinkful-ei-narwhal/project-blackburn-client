@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
-import { Spring } from 'react-spring/renderprops';
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons.cjs';
+import { Spring } from 'react-spring/renderprops.cjs';
 import './LandingPage.css';
 import LeaderBoard from '../../Assets/Icons/Untitled.png';
 
@@ -44,19 +44,19 @@ export default class App extends React.Component {
         ></ParallaxLayer>
         <ParallaxLayer offset={0.2} speed={0.4} style={{ opacity: 0.6 }}>
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '15%' }}
           />
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '65%' }}
           />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '55%' }}
           />
@@ -64,7 +64,7 @@ export default class App extends React.Component {
 
         <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '15%' }}
           />
@@ -72,7 +72,7 @@ export default class App extends React.Component {
 
         <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '10%' }}
           />
@@ -80,17 +80,17 @@ export default class App extends React.Component {
 
         <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '85%' }}
           />
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '5%' }}
           />
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '30%' }}
           />
@@ -98,12 +98,12 @@ export default class App extends React.Component {
 
         <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '75%' }}
           />
           <img
-            src="https://img.icons8.com/metro/26/000000/fraud.png"
+            src="https://img.icons8.com/metro/260/000000/fraud.png"
             alt="fraud main"
             style={{ display: 'block', width: '10%', marginLeft: '65%' }}
           />

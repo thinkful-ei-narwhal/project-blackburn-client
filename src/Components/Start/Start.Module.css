@@ -28,20 +28,14 @@
 
 .start-buttons:hover {
   background-color: #ae9172;
-  padding: 20px;
-  height: 100%;
-  width: 100%;
-  margin-top: 25px;
-  margin-right: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #302b28;
-  text-decoration: none;
-  width: 100%;
 }
 
 .start-btn {
+  border: none;
+}
+
+.start-btn:hover {
+  color: #ae9172;
   border: none;
 }
 

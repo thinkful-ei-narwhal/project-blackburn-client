@@ -8,13 +8,23 @@ const scoreboardService = {
       {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       }
-    ).then((res) => res.json());
+    ).then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      else return 
+    });
   },
 
   getAllScores(request) {
     return fetch(`${config.API_ENDPOINT}/scoreboard?request=${request}`, {
       authorization: `Bearer ${TokenService.getAuthToken()}`,
-    }).then((res) => res.json());
+    }).then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      else return 
+    });
     // .then(res => console.log('res', res))
   },
 
@@ -24,15 +34,26 @@ const scoreboardService = {
       {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       }
-    ).then((res) => res.json());
+    ).then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      else return 
+    });
   },
+
   getSortedScores(userId, request) {
     return fetch(
       `${config.API_ENDPOINT}/scoreboard?userid=${userId}&request=${request}`,
       {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       }
-    ).then((res) => res.json());
+    ).then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      else return 
+    });
   },
   postScore(data) {
     return fetch(`${config.API_ENDPOINT}/scoreboard`, {
@@ -42,7 +63,12 @@ const scoreboardService = {
         'content-type': 'application/json',
       },
       body: JSON.stringify( data ),
-    }).then((res) => res.json());
+    }).then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      else return 
+    });
   },
 };
 

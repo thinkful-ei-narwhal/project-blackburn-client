@@ -7,7 +7,7 @@ import Settings from '../Settings/Settings';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import UserHeader from '../UserHeader/UserHeader';
 import './Dashboard.Module.css';
-import { Spring, animated, Transition } from 'react-spring/renderprops';
+import { Spring, animated, Transition } from 'react-spring/renderprops.cjs';
 import {
   FaBars,
   FaTimes,
@@ -225,12 +225,10 @@ export default class Dashboard extends React.Component {
           <Transition
             native
             reset
-            unique
             items={this.state.page}
-            from={{ opacity: 0, height: 0 }}
-            enter={{ opacity: 1, height: 'auto' }}
-            leave={{ opacity: 0, height: 0 }}
-          >
+            from={{  overflow: 'hidden', height: 0  }}
+            enter={[{ height: 'auto' }]}
+            leave={{ opacity: 0, height: 0 }}>
             {(index) => pages[index]}
           </Transition>
         </div>

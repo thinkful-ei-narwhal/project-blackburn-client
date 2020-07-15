@@ -1,9 +1,8 @@
 import React from 'react';
-import { VictoryChart, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
-import BlackBurnContext from '../../Context/BlackburnContext';
+import { VictoryChart, VictoryLine, VictoryBar, VictoryScatter } from 'victory';
+import BlackBurnContext from '../../../Context/BlackburnContext';
 import './LineChart.css';
-import scoreboardService from '../../Services/scoreboard-api-service';
-import { ContinuousColorLegend } from 'react-vis';
+import scoreboardService from '../../../Services/scoreboard-api-service';
 
 export default class LineChart extends React.Component {
   static contextType = BlackBurnContext;
@@ -60,13 +59,13 @@ export default class LineChart extends React.Component {
     const scoreData = formatScoreDate.map((data) => {
       return { x: data.date_trunc, y: Math.floor(data.max) };
     });
+
     return (
       <div className="graphs">
         {this.state.error && <div className="error">{this.state.error}</div>}
         <div className="score-graph" aria-label="Score graph">
           <h3> Score Over Time </h3>
           <VictoryChart
-            className="VictoryChart"
             minDomain={{ y: 0 }}
             domainPadding={20}
             height={500}
@@ -75,7 +74,7 @@ export default class LineChart extends React.Component {
             <VictoryLine
               interpolation="natural"
               style={{
-                data: { stroke: '#c43a31', strokeWidth: 6 },
+                data: { stroke: '#c43a31', strokeWidth: 5 },
                 parent: { border: '2px solid #ccc' },
               }}
               data={scoreData}
@@ -93,12 +92,8 @@ export default class LineChart extends React.Component {
             <VictoryLine
               interpolation="natural"
               style={{
-                data: { stroke: '#c43a31', strokeWidth: 6 },
+                data: { stroke: '#c43a31', strokeWidth: 5 },
                 parent: { border: '2px solid #ccc' },
-              }}
-              animate={{
-                duration: 2000,
-                onLoad: { duration: 1000 },
               }}
               data={wpmData}
             />

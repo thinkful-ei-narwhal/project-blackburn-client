@@ -1,6 +1,6 @@
 import React from 'react';
 import './Leaderboard.Module.css';
-import { Trail } from 'react-spring/renderprops';
+import { Trail } from 'react-spring/renderprops.cjs';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import { FaCrown } from 'react-icons/fa';
 
@@ -77,10 +77,7 @@ export default class Leaderboard extends React.Component {
                     {this.state.width > 800 && (
                       <div className="avatar">
                         {' '}
-                        <img
-                          src={this.context.user.avatar}
-                          alt={`Avatar ${this.context.user.avatar}`}
-                        />{' '}
+                        <img src={score.avatar} alt={`User avatar`} />{' '}
                       </div>
                     )}
                     <span
@@ -111,7 +108,6 @@ export default class Leaderboard extends React.Component {
   };
 
   render() {
-    console.log(this.state.width);
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
     return (
@@ -136,7 +132,7 @@ export default class Leaderboard extends React.Component {
           <li
             key={'topscore'}
             className="leaderboard-list"
-            style={{ margiBottom: '10px' }}
+            style={{ marginBottom: '10px' }}
           >
             <span className="username"> Your Top Score </span>
             {this.state.width > 800 && (
@@ -147,8 +143,7 @@ export default class Leaderboard extends React.Component {
             )}
             <span className="username"> {this.context.user.username} </span>
             <span className="score">
-              {' '}
-              {maxMyScore === '-Infinity' ? maxMyScore : 'No Scores'}{' '}
+              {maxMyScore === '-Infinity' ? maxMyScore : 'No Scores'}
             </span>
           </li>
           {this.renderLeaderBoard()}

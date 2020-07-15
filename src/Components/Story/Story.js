@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { animated, Transition, Spring } from 'react-spring/renderprops';
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
-import StoryApiService from '../../Services/story-api-service';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import { Link, Redirect } from 'react-router-dom';
-import Typist from 'react-typist';
-import './Story.css';
+import React, { Component } from "react";
+import { animated, Transition, Spring } from "react-spring/renderprops.cjs";
+import StoryApiService from "../../Services/story-api-service";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import { Link, Redirect } from "react-router-dom";
+import Typist from "react-typist";
+import "./Story.css";
 
 //component did mount -> if(context is null redirect to dashboard)
 
@@ -66,7 +65,7 @@ export default class Story extends Component {
     if (this.state.story_text && this.state.story_text.length > 600) {
       return (
         <div className="story-type-text">
-          <Typist avgTypingDelay={35}>{this.state.story_text}</Typist>
+          <Typist avgTypingDelay={10}>{this.state.story_text}</Typist>
           <div className="after-timer">
             <Spring
               delay={25000}

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders win lose page to dom without crashing renders checkpoint win crashing 1`] = `null`;
+
+exports[`Renders win lose page to dom without crashing renders level lose crashing 1`] = `null`;
+
+exports[`Renders win lose page to dom without crashing renders level win crashing 1`] = `null`;
+
+exports[`Renders win lose page to dom without crashing renders without crashing 1`] = `null`;
