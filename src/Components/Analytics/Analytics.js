@@ -10,26 +10,24 @@ export default class Analytics extends React.Component {
     this.context.getTopTenScores();
   }
 
-  //for average scores show max score if only 1 score NOT zero like it does now
   render() {
     let arrWPM;
-    let avgWPM
-    let roundedWPM
-    let scoreArr1
-    let avgScore
-    let bestScore
-    let roundedScore
-    let accuracyArr
-    let avgAccuracy
-    let roundedAccuracy
+    let avgWPM;
+    let roundedWPM;
+    let scoreArr1;
+    let avgScore;
+    let bestScore;
+    let roundedScore;
+    let accuracyArr;
+    let avgAccuracy;
+    let roundedAccuracy;
 
     if (this.context.myScores.length === 0) {
-      roundedWPM = 'No Scores Yet'
-      roundedScore = 'No Scores Yet'
-      roundedAccuracy = 'No Scores Yet'
-      bestScore = 'No Scores Yet'
-    }
-    else {
+      roundedWPM = "No Scores Yet";
+      roundedScore = "No Scores Yet";
+      roundedAccuracy = "No Scores Yet";
+      bestScore = "No Scores Yet";
+    } else {
       arrWPM = this.context.myScores.map((data) => {
         return data.wpm;
       });
@@ -45,10 +43,9 @@ export default class Analytics extends React.Component {
       accuracyArr = this.context.myScores.map((data) => {
         return data.accuracy;
       });
-      avgAccuracy =
-        accuracyArr.reduce((a, b) => a + b, 0) / accuracyArr.length;
+      avgAccuracy = accuracyArr.reduce((a, b) => a + b, 0) / accuracyArr.length;
       roundedAccuracy =
-        accuracyArr.length === 0 ? avgAccuracy.toFixed(2)  : accuracyArr[0];
+        accuracyArr.length === 0 ? avgAccuracy.toFixed(2) : accuracyArr[0];
     }
 
     return (
