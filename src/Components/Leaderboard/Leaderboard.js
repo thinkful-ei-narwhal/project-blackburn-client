@@ -113,21 +113,9 @@ export default class Leaderboard extends React.Component {
   render() {
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
+    console.log(maxMyScore)
     return (
       <div className="leaderboard">
-        {/* <div className = 'leaderboard-buttons'>
-                    <Button onClick = {() => this.handleOverallState()}> Overall </Button>
-                    <Button onClick = {() => this.handleByStoryState()}> By Story </Button>
-                </div> */}
-        {/* {(this.state.byStory) 
-                    ? <div className = 'select-story'>
-                        <Label htmlFor = 'stories' > Select a Story   </Label>
-                        <select name = 'stories' onChange = {(e) => this.handleOption(e)}>
-                            <option value = 'monsters'>Monsters</option>
-                            <option value = 'detective'>Detective</option>
-                        </select>
-                    </div> 
-                    : <></>} */}
         <div className="leaderboard-header">
           <h2> Leader Board </h2>
         </div>
@@ -141,12 +129,12 @@ export default class Leaderboard extends React.Component {
             {this.state.width > 800 && (
               <div className="avatar">
                 {" "}
-                <img src={this.context.user.avatar} />{" "}
+                <img src={this.context.user.avatar} alt = {this.context.user.id} />{" "}
               </div>
             )}
             <span className="username"> {this.context.user.username} </span>
             <span className="score">
-              {maxMyScore === "-Infinity" ? maxMyScore : "No Scores"}
+              {maxMyScore === -Infinity ? 'No Scores': maxMyScore}
             </span>
           </li>
           {this.renderLeaderBoard()}

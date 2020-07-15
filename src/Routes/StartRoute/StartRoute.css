@@ -4,7 +4,6 @@
     padding: 10px;
     width: 25vh;
     height: 35vh;
-    
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -39,9 +38,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    /* width: 100vh;
-    height: 35vh; */
-    /* overflow-y: scroll; */
+    width: 100vh;
+    height: 35vh; 
 
 }
 

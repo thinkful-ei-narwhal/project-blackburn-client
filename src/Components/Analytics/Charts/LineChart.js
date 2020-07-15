@@ -13,7 +13,6 @@ export default class LineChart extends React.Component {
       sortedWPM: [],
       error: '',
     };
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
   
   componentDidMount() {
@@ -23,17 +22,6 @@ export default class LineChart extends React.Component {
         this.setState({ sortedScores: res.score, sortedWPM: res.wpm })
       )
       .catch((err) => this.setState({ error: err.error }));
-
-      this.updateWindowDimensions();
-      window.addEventListener('resize', this.updateWindowDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
-  
-  updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
   render() {
@@ -60,42 +48,82 @@ export default class LineChart extends React.Component {
       return { x: data.date_trunc, y: Math.floor(data.max) };
     });
 
+    //if score data .length is < 1 return a scatter plot with 1 point 
+    //so it doesnt just show an empty graph on first score
     return (
       <div className="graphs">
         {this.state.error && <div className="error">{this.state.error}</div>}
         <div className="score-graph">
           <h3> Score Over Time </h3>
-          <VictoryChart 
-            minDomain={{y: 0}} domainPadding={20} 
-            height =  {500}
-            width =  {500}
-            >
-            <VictoryLine
-              interpolation = 'natural'
-                style={{
-                  data: { stroke: '#c43a31', strokeWidth: 5} ,
-                  parent: { border: '2px solid #ccc' },
-                }}
-                
-              data={scoreData}
-            />
-          </VictoryChart>
+          {scoreData.length === 1 
+            ? (<VictoryChart 
+              minDomain={{y: 0}} domainPadding={20} 
+              height =  {350}
+              width =  {400}
+              >
+              <VictoryScatter
+                interpolation = 'natural'
+                  style={{
+                    data: { stroke: '#c43a31', strokeWidth: 5} ,
+                    parent: { border: '2px solid #ccc' },
+                  }}
+                  
+                data={scoreData}
+              />
+            </VictoryChart>)
+            : (<VictoryChart 
+              minDomain={{y: 0}} domainPadding={20} 
+              height =  {350}
+              width =  {400}
+              >
+              <VictoryLine
+                interpolation = 'natural'
+                  style={{
+                    data: { stroke: '#c43a31', strokeWidth: 5} ,
+                    parent: { border: '2px solid #ccc' },
+                  }}
+                  
+                data={scoreData}
+              />
+            </VictoryChart>) 
+          }
+          
         </div>
         <div className="wpm-graph">
           <h3> WPM Over Time </h3>
-          <VictoryChart minDomain={{y: 0}} domainPadding={30}
-             height =  {500}
-             width =  {500}
-          >
-            <VictoryLine
-            interpolation = 'natural'
-              style={{
-                data: { stroke: '#c43a31', strokeWidth: 5 },
-                parent: { border: '2px solid #ccc' },
-              }}
-              data={wpmData}
-            />
-          </VictoryChart>
+          {(wpmData.length === 1) 
+          ? (
+            <VictoryChart minDomain={{y: 0}} domainPadding={30}
+                height =  {350}
+                width =  {400}
+            >
+              <VictoryScatter
+              interpolation = 'natural'
+                style={{
+                  data: { stroke: '#c43a31', strokeWidth: 5 },
+                  parent: { border: '2px solid #ccc' },
+                }}
+                data={wpmData}
+              />
+            </VictoryChart>
+          )
+          : (
+            <VictoryChart minDomain={{y: 0}} domainPadding={30}
+            height =  {350}
+            width =  {400}
+         >
+           <VictoryLine
+           interpolation = 'natural'
+             style={{
+               data: { stroke: '#c43a31', strokeWidth: 5 },
+               parent: { border: '2px solid #ccc' },
+             }}
+             data={wpmData}
+           />
+         </VictoryChart>
+          )
+          
+          }
         </div>
       </div>
 
