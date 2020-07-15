@@ -23,6 +23,11 @@ const dictMapper = {
   drone: drone,
 };
 
+const audioPromiseContainer = {
+  hit: null,
+  correct: null,
+};
+
 class ChallengeRoute extends Component {
   static contextType = BlackBurnContext;
   constructor(props) {
@@ -40,14 +45,14 @@ class ChallengeRoute extends Component {
       levelTimer: 0,
       levelTimerTotal: 0,
       wpm: 0,
-      value: '',
-      color: 'green',
+      value: "",
+      color: "green",
       isWin: null,
       levelEnded: false,
       initialized: false,
-      audio: '',
+      audio: "",
       timer: false,
-      gameplay_art: '',
+      gameplay_art: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -161,6 +166,7 @@ class ChallengeRoute extends Component {
           }); //           expiredBuffer,
           this.manageWords();
           let hit = new Audio(healthLoss);
+          audioPromiseContainer.hit = hit;
           hit.play();
         }, word_expiration_timer),
         endTime: word_expiration_timer + new Date().getTime(),
@@ -179,8 +185,8 @@ class ChallengeRoute extends Component {
     event.preventDefault();
     const userInput = event.target.typeInput.value;
 
-    event.target.typeInput.value = '';
-    this.setState({ value: '' });
+    event.target.typeInput.value = "";
+    this.setState({ value: "" });
 
     const newWords = state.words;
     let playerHealth = state.playerHealth;
@@ -210,6 +216,7 @@ class ChallengeRoute extends Component {
           typedWords++;
           clearTimeout(wordObj.timeout);
           let correct = new Audio(bellTone);
+          audioPromiseContainer.correct = correct;
           correct.play();
         }
         return;
@@ -252,8 +259,8 @@ class ChallengeRoute extends Component {
     });
 
     isMatching
-      ? this.setState({ color: 'green' })
-      : this.setState({ color: 'red' });
+      ? this.setState({ color: "green" })
+      : this.setState({ color: "red" });
   }
 
   startTimer = () => {
@@ -262,7 +269,7 @@ class ChallengeRoute extends Component {
 
   async componentDidMount() {
     if (this.context.checkpoint_ids.checkpointArray.length === 0) {
-      const backupArray = JSON.parse(localStorage.getItem('checkpointArray'));
+      const backupArray = JSON.parse(localStorage.getItem("checkpointArray"));
       await this.context.setCheckpointIds(backupArray);
     }
     const contextObj = this.context.getCheckpointIds();
@@ -275,67 +282,75 @@ class ChallengeRoute extends Component {
     await this.startTimer()
       .then(() => this.setState({ timer: false }))
       .then(() => {
-        this.createAudio();
-        const contextObj = this.context.getCheckpointIds();
-        let storyCheckpoints = contextObj.checkpointArray;
-        let i = contextObj.currentIndex || 0;
-        this.winText = storyCheckpoints[i].win_text;
-        this.loseText = storyCheckpoints[i].lose_text;
-        const playerScore = this.context.getScore();
-        const playerBestStored = this.context.getMyBestScore();
-        const checkpointData =
-          contextObj.checkpointArray[contextObj.currentIndex];
-        this.levelTimerStaticTotal = checkpointData.level_timer;
-        this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
-        this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
-        this.calcRuntimeStats = setInterval(() => {
-          this.calcWPM();
-          this.calcAccuracy();
-          return;
-        }, 200);
-        this.intervalGenerator = setInterval(
-          () => {
-            this.generateWord(
-              checkpointData.word_expiration_timer * 1000,
-              checkpointData.max_screen_words,
-              checkpointData.dictionary_string
-            );
-            return;
-          },
-          Math.random() * (3000 - 500) + 500 //random spawn between 500 and 3000
-        );
-        this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
-        this.setState({
-          levelTimer: checkpointData.level_timer,
-          levelTimerTotal: checkpointData.level_timer,
-          playerScore: playerScore,
-          playerBest: playerBestStored,
-          playerBestStored: playerBestStored,
-          initialized: true,
-        });
-        this.generateWordOnEmpty = setInterval(
-          () => {
-            if (this.state.words.length === 0) {
-              this.generateWord(
-                checkpointData.word_expiration_timer * 1000,
-                checkpointData.max_screen_words,
-                checkpointData.dictionary_string
-              );
-            }
-            return;
-          },
-          100 //random spawn between 1000 and 5000
-        );
-      })
+                    this.createAudio();
+                    const contextObj = this.context.getCheckpointIds();
+                    let storyCheckpoints = contextObj.checkpointArray;
+                    let i = contextObj.currentIndex || 0;
+                    this.winText = storyCheckpoints[i].win_text;
+                    this.loseText = storyCheckpoints[i].lose_text;
+                    const playerScore = this.context.getScore();
+                    const playerBestStored = this.context.getMyBestScore();
+                    const checkpointData =
+                      contextObj.checkpointArray[contextObj.currentIndex];
+                    this.levelTimerStaticTotal = checkpointData.level_timer;
+                    this.levelTimeout = setInterval(
+                      () => this.updateLevelTimer(),
+                      1000
+                    );
+                    this.checkWinInterval = setInterval(
+                      () => this.triggerLevelEnd(),
+                      250
+                    );
+                    this.calcRuntimeStats = setInterval(() => {
+                      this.calcWPM();
+                      this.calcAccuracy();
+                      return;
+                    }, 200);
+                    this.intervalGenerator = setInterval(
+                      () => {
+                        this.generateWord(
+                          checkpointData.word_expiration_timer * 1000,
+                          checkpointData.max_screen_words,
+                          checkpointData.dictionary_string
+                        );
+                        return;
+                      },
+                      Math.random() * (3000 - 500) + 500 //random spawn between 500 and 3000
+                    );
+                    this.staticWordTimer =
+                      checkpointData.word_expiration_timer * 1000;
+                    this.setState({
+                      levelTimer: checkpointData.level_timer,
+                      levelTimerTotal: checkpointData.level_timer,
+                      playerScore: playerScore,
+                      playerBest: playerBestStored,
+                      playerBestStored: playerBestStored,
+                      initialized: true,
+                    });
+                    this.generateWordOnEmpty = setInterval(
+                      () => {
+                        if (this.state.words.length === 0) {
+                          this.generateWord(
+                            checkpointData.word_expiration_timer * 1000,
+                            checkpointData.max_screen_words,
+                            checkpointData.dictionary_string
+                          );
+                        }
+                        return;
+                      },
+                      100 //random spawn between 1000 and 5000
+                    );
+                    this.state.audio.play();
+                  })
       .catch((error) => this.context.setError(error));
     this.state.audio.play();
   }
 
   renderTimer = () => {
     const hintsArray = [
-      'Remember to hit enter after your type a word',
-      'You lose more health mistyping a word than letting it go by!',
-      'Remember to look at the word timers! They go by quick!',
+      "Remember to hit enter after your type a word",
+      "You lose more health mistyping a word than letting it go by!",
+      "Remember to look at the word timers! They go by quick!",
     ];
     const getRandomHint =
       hintsArray[Math.floor(Math.random() * hintsArray.length)];
@@ -350,14 +365,14 @@ class ChallengeRoute extends Component {
             <>
               <animated.div
                 style={{
-                  fontSize: '20vh',
-                  height: '100vh',
-                  width: '100vh',
+                  fontSize: "20vh",
+                  height: "100vh",
+                  width: "100vh",
                   ...props,
                 }}
               >
-                {' '}
-                {Math.floor(props.value)}{' '}
+                {" "}
+                {Math.floor(props.value)}{" "}
               </animated.div>
               <div className="hint-container">
                 <div className="hint">
@@ -384,12 +399,13 @@ class ChallengeRoute extends Component {
   renderGameplay() {
     //for animation and music
     const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green'];
+
     return (
       <>
         <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
           {(props) => (
             <div className="challenge-div" style={props}>
-              {' '}
+              {" "}
               {!this.state.levelEnded && (
                 <Spring
                   from={{ width: '100%', background: 'rgba(217, 193, 170, 1)' }}
@@ -399,7 +415,7 @@ class ChallengeRoute extends Component {
                   {(props) => (
                     <animated.div className="bg" style={props}>
                       <UIStats
-                        textBefore={'Time Remaining'}
+                        textBefore={"Time Remaining"}
                         metric={
                           this.state.levelTimer >= 0 ? this.state.levelTimer : 0
                         }
@@ -414,27 +430,27 @@ class ChallengeRoute extends Component {
               <div className="stats-container">
                 <div className="stat">
                   <UIStats
-                    textBefore={'Personal best:'}
+                    textBefore={"Personal best:"}
                     metric={this.state.playerBest}
                   />
                 </div>
                 <div className="stat">
                   <UIStats
-                    textBefore={'Score:'}
+                    textBefore={"Score:"}
                     metric={this.state.playerScore}
                   />
                 </div>
                 <div className="stat">
                   <UIStats
-                    textBefore={'Words Per Minute:'}
+                    textBefore={"Words Per Minute:"}
                     metric={this.state.wpm}
                   />
                 </div>
                 <div className="stat">
                   <UIStats
-                    textBefore={'Accuracy:'}
+                    textBefore={"Accuracy:"}
                     metric={this.state.accuracy}
-                    textAfter={'%'}
+                    textAfter={"%"}
                   />
                 </div>
               </div>
@@ -479,10 +495,10 @@ class ChallengeRoute extends Component {
                 this.state.levelTimer <= 0 &&
                 this.context.getCurrentCheckpointIndex() !== null && (
                   <div className="winlose-div">
-                    {this.state.audio.pause()}{' '}
+                    {this.state.audio.pause()}{" "}
                     <WinLosePage
                       text={this.winText}
-                      condition={'checkpoint'}
+                      condition={"checkpoint"}
                       autoSave={false}
                     />
                   </div>
@@ -491,20 +507,20 @@ class ChallengeRoute extends Component {
                 this.state.levelTimer <= 0 &&
                 this.context.getCurrentCheckpointIndex() === null && (
                   <div className="winlose-div">
-                    {this.state.audio.pause()}{' '}
+                    {this.state.audio.pause()}{" "}
                     <WinLosePage
                       text={this.winText}
-                      condition={'level_beaten'}
+                      condition={"level_beaten"}
                       autoSave={true}
                     />
                   </div>
                 )}
               {this.state.levelEnded && this.state.playerHealth <= 0 && (
                 <div className="winlose-div">
-                  {this.state.audio.pause()}{' '}
+                  {this.state.audio.pause()}{" "}
                   <WinLosePage
                     text={this.loseText}
-                    condition={'lose'}
+                    condition={"lose"}
                     autoSave={true}
                   />
                 </div>
@@ -517,14 +533,13 @@ class ChallengeRoute extends Component {
   }
 
   render() {
-    console.log(this.state.timer);
     return (
       <div
         className="game-container"
         style={{
           backgroundImage: `url(${this.state.gameplay_art})`,
-          backgroundSize: 'cover',
-          position: 'fixed',
+          backgroundSize: "cover",
+          position: "fixed",
         }}
       >
         {this.context.error === null ? (
@@ -534,7 +549,7 @@ class ChallengeRoute extends Component {
               : this.renderTimer()}
           </>
         ) : (
-          <Redirect to={'/start'} />
+          <Redirect to={"/start"} />
         )}
       </div>
     );

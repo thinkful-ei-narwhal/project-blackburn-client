@@ -66,7 +66,6 @@ export default class Story extends Component {
     let lines = split.map((x, index) => {
       return { text: x, key: index };
     });
-    console.log(lines);
     if (this.state.story_text && this.state.story_text.length > 600) {
       return (
         <div className="story-type-text">
