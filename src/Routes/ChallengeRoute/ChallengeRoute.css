@@ -40,7 +40,7 @@
 .bg {
   background-color: black;
   height: 40px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 
@@ -110,32 +110,15 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 40em;
-    height: 30em;
+    width: 700px;
+    height: 450px;
     text-align: center;
     box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .6);;
   }
   .bg {
     background-color: black;
     height: 40px;
-    margin-top: 40px;
+    margin-top: 60px;
   }
   
-}
-
-@media screen and (min-width: 1000px) {
-  .word-ul {
-    /* border: 1px solid grey; */
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 50em;
-    height: 30em;
-    text-align: center;
-    background-color: lightgrey;
-    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .6);;
-  }
 }
