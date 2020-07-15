@@ -1,68 +1,73 @@
 .story_panel {
-    box-shadow: 4px 4px 4px 4px lightgray;
-    margin: 20px;
-    padding: 10px;
-    width: 25vh;
-    height: 35vh;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-
+  box-shadow: 4px 4px 4px 4px lightgray;
+  margin: 20px;
+  padding: 10px;
+  width: 25vh;
+  height: 35vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
 }
 .story_panel:hover {
-    border: 1px solid blue;
+  border: 1px solid black;
+  cursor: pointer;
 }
 
 .inputform {
-    width: 5vh;
-    height: 5vh;
+  position: fixed;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+
+.inputform:checked + .story_panel {
+  border: 2px solid black;
 }
 
 .story_panel:hover {
-    box-shadow: 8px 8px 8px 8px lightgray;
+  box-shadow: 8px 8px 8px 8px lightgray;
 }
 
 .select-difficulty {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 10vh 3vh 3vh 3vh;
-    padding: 1vh;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10vh 3vh 3vh 3vh;
+  padding: 1vh;
 }
 
 .story-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100vh;
-    height: 35vh; 
-
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vh;
+  height: 35vh;
 }
-
 
 .start-header {
-    text-align: center;
+  text-align: center;
 }
 
-
 .back-btn {
-    margin-top: 10px;
-    margin-right: 10px;
-    text-decoration: none;
-    border: 1px solid #D9C1AA;
-    padding: 15px;
-    color: #D9C1AA;
-    border-radius: 6px;
-    cursor: pointer;
-    /* background-color: black; */
+  margin-top: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  border: 1px solid #d9c1aa;
+  padding: 15px;
+  color: #d9c1aa;
+  border-radius: 6px;
+  cursor: pointer;
+  /* background-color: black; */
 }
 
 .back-btn:hover {
-    background-color: #AE9172;
-    opacity: 75%;
-    color: #D9C1AA
+  background-color: #ae9172;
+  opacity: 75%;
+  color: #d9c1aa;
 }
