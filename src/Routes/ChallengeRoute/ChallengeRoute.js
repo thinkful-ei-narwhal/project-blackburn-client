@@ -138,7 +138,7 @@ class ChallengeRoute extends Component {
   generateWord(word_expiration_timer, max_screen_words, dictionary_string) {
     if (this.state.words.length < max_screen_words) {
       const randomWord = uniqueNamesGenerator({
-        dictionaries: [dictMapper[dictionary_string]],
+        dictionaries: [dictMapper.drone],
         length: 1,
       });
 

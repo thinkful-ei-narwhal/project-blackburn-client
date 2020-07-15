@@ -10,24 +10,46 @@ export default class Analytics extends React.Component {
     this.context.getTopTenScores();
   }
 
+  //for average scores show max score if only 1 score NOT zero like it does now
   render() {
-    let arrWPM = this.context.myScores.map((data) => {
-      return data.wpm;
-    });
-    let avgWPM = arrWPM.reduce((a, b) => a + b, 0) / arrWPM.length;
-    let roundedWPM = arrWPM.length === 0 ? avgWPM.toFixed(2) : 0;
-    let scoreArr1 = this.context.myScores.map((data) => {
-      return data.score;
-    });
-    let avgScore = scoreArr1.reduce((a, b) => a + b, 0) / scoreArr1.length;
-    let bestScore = scoreArr1.length === 0 ? 0 : Math.max(...scoreArr1);
-    let roundedScore = scoreArr1.length === 0 ? avgScore.toFixed(2) : 0;
-    let accuracyArr = this.context.myScores.map((data) => {
-      return data.accuracy;
-    });
-    let avgAccuracy =
-      accuracyArr.reduce((a, b) => a + b, 0) / accuracyArr.length;
-    let roundedAccuracy = accuracyArr.length === 0 ? avgAccuracy.toFixed(2) : 0;
+    let arrWPM;
+    let avgWPM
+    let roundedWPM
+    let scoreArr1
+    let avgScore
+    let bestScore
+    let roundedScore
+    let accuracyArr
+    let avgAccuracy
+    let roundedAccuracy
+
+    if (this.context.myScores.length === 0) {
+      roundedWPM = 'No Scores Yet'
+      roundedScore = 'No Scores Yet'
+      roundedAccuracy = 'No Scores Yet'
+      bestScore = 'No Scores Yet'
+    }
+    else {
+      arrWPM = this.context.myScores.map((data) => {
+        return data.wpm;
+      });
+      avgWPM = arrWPM.reduce((a, b) => a + b, 0) / arrWPM.length;
+      roundedWPM = arrWPM.length === 0 ? avgWPM.toFixed(2) : arrWPM[0];
+      scoreArr1 = this.context.myScores.map((data) => {
+        return data.score;
+      });
+      avgScore = scoreArr1.reduce((a, b) => a + b, 0) / scoreArr1.length;
+      bestScore = scoreArr1.length === 0 ? 0 : Math.max(...scoreArr1);
+      roundedScore =
+        scoreArr1.length === 0 ? avgScore.toFixed(2) : scoreArr1[0];
+      accuracyArr = this.context.myScores.map((data) => {
+        return data.accuracy;
+      });
+      avgAccuracy =
+        accuracyArr.reduce((a, b) => a + b, 0) / accuracyArr.length;
+      roundedAccuracy =
+        accuracyArr.length === 0 ? avgAccuracy.toFixed(2)  : accuracyArr[0];
+    }
 
     return (
       <div className="analytics-container">

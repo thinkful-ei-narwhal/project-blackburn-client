@@ -3,29 +3,23 @@ import TokenService from './token-service';
 
 const scoreboardService = {
   getScoresByUser(userId) {
-    fetch(
-      `${config.API_ENDPOINT}/scoreboard?request=myscores&userid=${userId}`,
-      {
-        authorization: `Bearer ${TokenService.getAuthToken()}`,
+    fetch(`${config.API_ENDPOINT}/scoreboard?request=myscores&userid=${userId}`, {
+        authorization: `Bearer ${TokenService.getAuthToken()}`, 
       }
     ).then((res) => {
-      if(res.ok) {
-        return res.json()
-      }
-      else return 
+      if(!res.ok) return res.json().then(e => Promise.reject(e))
+      return res.json()
     });
   },
 
   getAllScores(request) {
     return fetch(`${config.API_ENDPOINT}/scoreboard?request=${request}`, {
       authorization: `Bearer ${TokenService.getAuthToken()}`,
-    }).then((res) => {
-      if(res.ok) {
-        return res.json()
-      }
-      else return 
+    })
+    .then((res) => {
+      if(!res.ok) return res.json().then(e => Promise.reject(e))
+      return res.json()
     });
-    // .then(res => console.log('res', res))
   },
 
   getMyScores(userId, request) {
@@ -35,10 +29,8 @@ const scoreboardService = {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       }
     ).then((res) => {
-      if(res.ok) {
-        return res.json()
-      }
-      else return 
+      if(!res.ok) return res.json().then(e => Promise.reject(e))
+      return res.json() 
     });
   },
 
@@ -49,10 +41,8 @@ const scoreboardService = {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       }
     ).then((res) => {
-      if(res.ok) {
-        return res.json()
-      }
-      else return 
+      if(!res.ok) return res.json().then(e => Promise.reject(e))
+      return res.json()
     });
   },
   postScore(data) {
@@ -64,10 +54,8 @@ const scoreboardService = {
       },
       body: JSON.stringify( data ),
     }).then((res) => {
-      if(res.ok) {
-        return res.json()
-      }
-      else return 
+      if(!res.ok) return res.json().then(e => Promise.reject(e))
+      return res.json()
     });
   },
 };

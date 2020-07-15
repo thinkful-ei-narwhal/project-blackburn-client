@@ -206,18 +206,15 @@ export class BlackburnProvider extends Component {
   setMyBestScore = () => {
     ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
-        // console.log('TESTING ', res);
-        if (res.ok) {
-          const outputArr = res.map((data) => {
-            return data.total_score;
-          });
+        const outputArr = res.map((data) => {
+          return data.total_score;
+        });
 
-          let bestScore = outputArr[0];
-          outputArr.forEach(
-            (score) => (bestScore = score > bestScore ? score : bestScore)
-          );
-          return this.setState({ bestScore });
-        } else return;
+        let bestScore = outputArr[0];
+        outputArr.forEach(
+          (score) => (bestScore = score > bestScore ? score : bestScore)
+        );
+        return this.setState({ bestScore });
       }
     );
   };

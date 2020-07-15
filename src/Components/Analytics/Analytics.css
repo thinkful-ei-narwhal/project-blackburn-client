@@ -1,52 +1,53 @@
 .graphs-container {
-    margin: 20px;
-    padding: 10px;
-    box-shadow: 2px 2px 2px 2px lightgray;
-    background-color: white;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  background-color: white;
 }
 
-
 .averages {
-    margin: 20px;
-    background-color: white;
-    box-shadow: 2px 2px 2px 2px lightgray;
-    padding: 20px;
-    width: 20vh;
-    height: 30vh;
+  margin: 20px;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  padding: 20px;
+  width: 20vh;
+  height: auto;
 }
 
 .analytics-container {
-    margin-top: 2vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .averages-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 @media screen and (min-width: 400px) {
-    .analytics-container {
-        margin-top: 2vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
+  .analytics-container {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .averages-container {
+    flex-direction: row;
+  }
 }
 
-
 @media screen and (min-width: 1000px) {
-    .analytics-container {
-        margin-top: 2vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
+  .analytics-container {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 }

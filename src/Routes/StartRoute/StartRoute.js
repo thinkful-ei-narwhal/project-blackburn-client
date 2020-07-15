@@ -85,7 +85,6 @@ class StartRoute extends Component {
                 id="story_form"
                 onSubmit={(e) => this.handleStorySubmit(e)}
               >
-                {this.renderStories()}
                 <label className="difficulty-label" htmlFor="select_difficulty">
                   Difficulty
                 </label>
@@ -111,6 +110,7 @@ class StartRoute extends Component {
                 >
                   Start
                 </Button>
+                {this.renderStories()}
               </form>
             </div>
           </>
