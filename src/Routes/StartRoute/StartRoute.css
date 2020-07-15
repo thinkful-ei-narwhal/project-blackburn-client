@@ -2,8 +2,8 @@
   box-shadow: 4px 4px 4px 4px lightgray;
   margin: 20px;
   padding: 10px;
-  width: 25vh;
-  height: 35vh;
+  width: 200px;
+  height: 350px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -46,8 +46,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100vh;
-  height: 35vh;
 }
 
 .start-header {

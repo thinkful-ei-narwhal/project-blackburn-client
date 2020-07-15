@@ -40,7 +40,7 @@ class ChallengeRoute extends Component {
     super(props);
     this.state = {
       words: [],
-      expiredBuffer: [],
+      // expiredBuffer: [],
       playerHealth: 5,
       playerScore: 0,
       playerBest: 0,
@@ -142,13 +142,13 @@ class ChallengeRoute extends Component {
       (wordObj) => wordObj.expired === false
     );
 
-    const expiredBuffer = this.state.expiredBuffer.filter(
-      (expiredWordObj) => expiredWordObj.bufferExpired === false
-    );
+    // const expiredBuffer = this.state.expiredBuffer.filter(
+    //   (expiredWordObj) => expiredWordObj.bufferExpired === false
+    // );
 
     //adds a new word if it's updated
     if (addWordObj !== null) newWordArray.push(addWordObj);
-    this.setState({ words: newWordArray, expiredBuffer });
+    this.setState({ words: newWordArray }); //, expiredBuffer
   }
 
   generateWord(word_expiration_timer, max_screen_words, dictionary_string) {
@@ -164,23 +164,23 @@ class ChallengeRoute extends Component {
         expired: false,
         timeout: setTimeout(() => {
           newWord.expired = true;
-          const expiredBuffer = this.state.expiredBuffer;
+          // const expiredBuffer = this.state.expiredBuffer;
 
-          const expiredWord = {
-            word: randomWord,
-            bufferExpired: false,
-            timeout: setTimeout(() => {
-              expiredWord.bufferExpired = true;
-              clearTimeout(expiredWord.timeout);
-              return;
-            }, 1000),
-          };
+          // const expiredWord = {
+          //   word: randomWord,
+          //   bufferExpired: false,
+          //   timeout: setTimeout(() => {
+          //     expiredWord.bufferExpired = true;
+          //     clearTimeout(expiredWord.timeout);
+          //     return;
+          //   }, 1000),
+          // };
 
-          expiredBuffer.push(expiredWord);
+          // expiredBuffer.push(expiredWord);
+
           this.setState({
-            expiredBuffer,
             playerHealth: this.state.playerHealth - 0.5,
-          });
+          }); //           expiredBuffer,
           this.manageWords();
           let hit = new Audio(healthLoss);
           hit.play();
@@ -212,16 +212,16 @@ class ChallengeRoute extends Component {
     let typedWords = state.typedWords;
     let typedWordsTotal = state.typedWordsTotal;
 
-    const expiredBufferWords = state.expiredBuffer;
+    // const expiredBufferWords = state.expiredBuffer;
 
     let takeDamage = true;
-    expiredBufferWords.forEach((expiredWord) => {
-      if (expiredWord.word.toLowerCase() === userInput.toLowerCase()) {
-        takeDamage = false;
-        typedWords++;
-      }
-      return;
-    });
+    // expiredBufferWords.forEach((expiredWord) => {
+    //   if (expiredWord.word.toLowerCase() === userInput.toLowerCase()) {
+    //     takeDamage = false;
+    //     typedWords++;
+    //   }
+    //   return;
+    // });
 
     if (takeDamage === true) {
       newWords.forEach((wordObj) => {
@@ -294,7 +294,7 @@ class ChallengeRoute extends Component {
     this.setState({
       gameplay_art: this.gameplay_art,
     });
-    await this.startTimer(this.setState({ timer: true }))
+    await this.startTimer()
       .then(() => this.setState({ timer: false }))
       .then(() => {
         this.createAudio();
@@ -324,7 +324,7 @@ class ChallengeRoute extends Component {
             );
             return;
           },
-          Math.random() * (3000 - 1000) + 1000 //random spawn between 1000 and 5000
+          Math.random() * (3000 - 500) + 500 //random spawn between 500 and 3000
         );
         this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
         this.setState({
@@ -336,12 +336,16 @@ class ChallengeRoute extends Component {
           initialized: true,
         });
         this.generateWordOnEmpty = setInterval(
-          () =>
-            this.generateWord(
-              checkpointData.word_expiration_timer * 1000,
-              checkpointData.max_screen_words,
-              checkpointData.dictionary_string
-            ),
+          () => {
+            if (this.state.words.length === 0) {
+              this.generateWord(
+                checkpointData.word_expiration_timer * 1000,
+                checkpointData.max_screen_words,
+                checkpointData.dictionary_string
+              );
+            }
+            return;
+          },
           100 //random spawn between 1000 and 5000
         );
       })
@@ -410,8 +414,8 @@ class ChallengeRoute extends Component {
               {' '}
               {!this.state.levelEnded && (
                 <Spring
-                  from={{ width: '100%', background: 'gray' }}
-                  to={{ width: '0%', background: 'white' }}
+                  from={{ width: "100%", background: "rgba(217, 193, 170, 1)" }}
+                  to={{ width: "0%", background: "white" }}
                   config={{ duration: this.levelTimerStaticTotal * 1000 }}
                 >
                   {(props) => (
@@ -535,6 +539,7 @@ class ChallengeRoute extends Component {
   }
 
   render() {
+    console.log(this.state.timer)
     return (
       <div
         className="game-container"
