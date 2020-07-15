@@ -110,7 +110,7 @@ export default class Story extends Component {
       ));
       let arrLength = animatedTextDiv.length;
       return (
-        <div>
+        <div className="story-type-text">
           {this.state.index === arrLength && (
             <div className="after-timer">
               {
@@ -184,12 +184,12 @@ export default class Story extends Component {
       <div className="story-container">
         {this.context.error === null ? (
           <>
-            <div className="skip">
-              {this.state.index !== arrLength && (
+            {this.state.index !== arrLength && (
+              <div className="skip">
                 <Link to={"/challenge"}> Skip Story &#x2192;</Link>
-              )}
-            </div>
-            <h1 className="story-name">{this.state.story_name}</h1>
+              </div>
+            )}
+            <h2 className="story-name">{this.state.story_name}</h2>
             <img
               src={this.state.story_art}
               alt="Art for the story"
