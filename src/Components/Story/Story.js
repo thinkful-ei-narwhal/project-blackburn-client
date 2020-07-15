@@ -95,7 +95,11 @@ export default class Story extends Component {
         </div>
       );
     } else if (this.state.story_text && this.state.story_text.length < 599) {
-      let split = this.state.story_text.split(".");
+      let presplit = this.state.story_text.split(".");
+      let split = presplit.map((sentence) =>
+        sentence.replace("<br /><br />", "")
+      );
+      console.log(split);
       split = split.map((x, index) => {
         return { text: x, key: index };
       });

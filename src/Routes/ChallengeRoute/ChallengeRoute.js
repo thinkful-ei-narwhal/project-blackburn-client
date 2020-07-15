@@ -106,8 +106,6 @@ class ChallengeRoute extends Component {
 
   triggerLevelEnd() {
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
-      if (this.state.levelEnded === false && this.state.isWin === true)
-        this.context.incrementCheckpointIndex();
       this.clearTimers();
       this.setState({ words: [] });
       this.context.setScore(this.state.playerScore);
@@ -118,6 +116,9 @@ class ChallengeRoute extends Component {
       this.state.levelTimer <= 0
         ? this.setState({ isWin: true, levelEnded: true })
         : this.setState({ isWin: false, levelEnded: true });
+      if (this.state.levelEnded === true && this.state.isWin === true) {
+        this.context.incrementCheckpointIndex();
+      }
     }
   }
 
@@ -304,66 +305,59 @@ class ChallengeRoute extends Component {
     await this.startTimer()
       .then(() => this.setState({ timer: false }))
       .then(() => {
-                    this.createAudio();
-                    const contextObj = this.context.getCheckpointIds();
-                    let storyCheckpoints = contextObj.checkpointArray;
-                    let i = contextObj.currentIndex || 0;
-                    this.winText = storyCheckpoints[i].win_text;
-                    this.loseText = storyCheckpoints[i].lose_text;
-                    const playerScore = this.context.getScore();
-                    const playerBestStored = this.context.getMyBestScore();
-                    const checkpointData =
-                      contextObj.checkpointArray[contextObj.currentIndex];
-                    this.levelTimerStaticTotal = checkpointData.level_timer;
-                    this.levelTimeout = setInterval(
-                      () => this.updateLevelTimer(),
-                      1000
-                    );
-                    this.checkWinInterval = setInterval(
-                      () => this.triggerLevelEnd(),
-                      250
-                    );
-                    this.calcRuntimeStats = setInterval(() => {
-                      this.calcWPM();
-                      this.calcAccuracy();
-                      return;
-                    }, 200);
-                    this.intervalGenerator = setInterval(
-                      () => {
-                        this.generateWord(
-                          checkpointData.word_expiration_timer * 1000,
-                          checkpointData.max_screen_words,
-                          checkpointData.dictionary_string
-                        );
-                        return;
-                      },
-                      Math.random() * (3000 - 500) + 500 //random spawn between 500 and 3000
-                    );
-                    this.staticWordTimer =
-                      checkpointData.word_expiration_timer * 1000;
-                    this.setState({
-                      levelTimer: checkpointData.level_timer,
-                      levelTimerTotal: checkpointData.level_timer,
-                      playerScore: playerScore,
-                      playerBest: playerBestStored,
-                      playerBestStored: playerBestStored,
-                      initialized: true,
-                    });
-                    this.generateWordOnEmpty = setInterval(
-                      () => {
-                        if (this.state.words.length === 0) {
-                          this.generateWord(
-                            checkpointData.word_expiration_timer * 1000,
-                            checkpointData.max_screen_words,
-                            checkpointData.dictionary_string
-                          );
-                        }
-                        return;
-                      },
-                      100 //random spawn between 1000 and 5000
-                    );
-                    this.state.audio.play();
-                  })
+        this.createAudio();
+        const contextObj = this.context.getCheckpointIds();
+        let storyCheckpoints = contextObj.checkpointArray;
+        let i = contextObj.currentIndex || 0;
+        this.winText = storyCheckpoints[i].win_text;
+        this.loseText = storyCheckpoints[i].lose_text;
+        const playerScore = this.context.getScore();
+        const playerBestStored = this.context.getMyBestScore();
+        const checkpointData =
+          contextObj.checkpointArray[contextObj.currentIndex];
+        this.levelTimerStaticTotal = checkpointData.level_timer;
+        this.levelTimeout = setInterval(() => this.updateLevelTimer(), 1000);
+        this.checkWinInterval = setInterval(() => this.triggerLevelEnd(), 250);
+        this.calcRuntimeStats = setInterval(() => {
+          this.calcWPM();
+          this.calcAccuracy();
+          return;
+        }, 200);
+        this.intervalGenerator = setInterval(
+          () => {
+            this.generateWord(
+              checkpointData.word_expiration_timer * 1000,
+              checkpointData.max_screen_words,
+              checkpointData.dictionary_string
+            );
+            return;
+          },
+          Math.random() * (3000 - 500) + 500 //random spawn between 500 and 3000
+        );
+        this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
+        this.setState({
+          levelTimer: 5, // checkpointData.level_timer,
+          levelTimerTotal: 5, // checkpointData.level_timer,
+          playerScore: playerScore,
+          playerBest: playerBestStored,
+          playerBestStored: playerBestStored,
+          initialized: true,
+        });
+        this.generateWordOnEmpty = setInterval(
+          () => {
+            if (this.state.words.length === 0) {
+              this.generateWord(
+                checkpointData.word_expiration_timer * 1000,
+                checkpointData.max_screen_words,
+                checkpointData.dictionary_string
+              );
+            }
+            return;
+          },
+          100 //random spawn between 1000 and 5000
+        );
+        this.state.audio.play();
+      })
       .catch((error) => this.context.setError(error));
   }
 
