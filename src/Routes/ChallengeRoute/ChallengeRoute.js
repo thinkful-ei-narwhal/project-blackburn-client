@@ -299,12 +299,14 @@ class ChallengeRoute extends Component {
           return;
         }, 200);
         this.intervalGenerator = setInterval(
-          () =>
+          () => {
             this.generateWord(
               checkpointData.word_expiration_timer * 1000,
               checkpointData.max_screen_words,
               checkpointData.dictionary_string
-            ),
+            );
+            return;
+          },
           Math.random() * (3000 - 1000) + 1000 //random spawn between 1000 and 5000
         );
         this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
@@ -317,14 +319,12 @@ class ChallengeRoute extends Component {
           initialized: true,
         });
         this.generateWordOnEmpty = setInterval(
-          () => {
-            if (this.state.words.length === 0) {
-              this.generateWord(
-                checkpointData.word_expiration_timer * 1000,
-                checkpointData.max_screen_words
-              );
-            }
-          },
+          () =>
+            this.generateWord(
+              checkpointData.word_expiration_timer * 1000,
+              checkpointData.max_screen_words,
+              checkpointData.dictionary_string
+            ),
           100 //random spawn between 1000 and 5000
         );
       })
@@ -333,11 +333,12 @@ class ChallengeRoute extends Component {
 
   renderTimer = () => {
     const hintsArray = [
-      'Remember to hit enter after your type a word',
-      'You lose more health mistyping a word than letting it go by!',
-      'Remember to look at the word timers! They go by quick!'
-    ]
-    const getRandomHint = hintsArray[Math.floor(Math.random() * hintsArray.length)]
+      "Remember to hit enter after your type a word",
+      "You lose more health mistyping a word than letting it go by!",
+      "Remember to look at the word timers! They go by quick!",
+    ];
+    const getRandomHint =
+      hintsArray[Math.floor(Math.random() * hintsArray.length)];
 
     return (
       <div
@@ -347,25 +348,28 @@ class ChallengeRoute extends Component {
         <TimerContent>
           {(props) => (
             <>
-            <animated.div
-              style={{
-                fontSize: "20vh",
-                height: "100vh",
-                width: "100vh",
-                ...props,
-              }}
-            >
-              {" "}
-              {Math.floor(props.value)}{" "}
-            </animated.div>
-            <div className = 'hint-container'>
-              <div className = 'hint'>Barbara Blackburn Says:<br /> {getRandomHint}</div>
-            </div>
+              <animated.div
+                style={{
+                  fontSize: "20vh",
+                  height: "100vh",
+                  width: "100vh",
+                  ...props,
+                }}
+              >
+                {" "}
+                {Math.floor(props.value)}{" "}
+              </animated.div>
+              <div className="hint-container">
+                <div className="hint">
+                  Barbara Blackburn Says:
+                  <br /> {getRandomHint}
+                </div>
+              </div>
             </>
           )}
         </TimerContent>
       </div>
-    ); 
+    );
   };
 
   getRandomInt = (min, max) => {
@@ -451,10 +455,10 @@ class ChallengeRoute extends Component {
                     <li className="word-li" key={index}>
                       <Spring
                         from={{
-                          opacity: 0
+                          opacity: 0,
                         }}
                         to={{
-                          opacity: 1
+                          opacity: 1,
                         }}
                       >
                         {(props) => (
@@ -463,11 +467,11 @@ class ChallengeRoute extends Component {
                           </animated.div>
                         )}
                       </Spring>
-                          <div className="timer">
-                            {wordObj.getTimeRemaining() >= 0
-                              ? wordObj.getTimeRemaining()
-                              : 0}
-                          </div>
+                      <div className="timer">
+                        {wordObj.getTimeRemaining() >= 0
+                          ? wordObj.getTimeRemaining()
+                          : 0}
+                      </div>
                     </li>
                   ))}
                 </ul>
