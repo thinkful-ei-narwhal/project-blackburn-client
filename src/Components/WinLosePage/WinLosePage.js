@@ -57,6 +57,7 @@ class WinLosePage extends Component {
   playWintone = () => {
     let winTone = new Audio(winSound);
     winTone.play();
+    winTone.volume = 0.2;
   };
 
   renderWin() {
@@ -82,6 +83,7 @@ class WinLosePage extends Component {
   playLoseTone = () => {
     let loseTone = new Audio(loseSound);
     loseTone.play();
+    loseTone.volume = 0.2;
   };
 
   renderLose() {
