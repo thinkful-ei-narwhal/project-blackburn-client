@@ -3,7 +3,6 @@ import Button from '../../Components/Button/Button';
 import storyService from '../../Services/story-api-service';
 import BlackburnContext from '../../Context/BlackburnContext';
 import { Link, Redirect } from 'react-router-dom';
-import { Input, Label } from './../../Components/Form/Form';
 import './StartRoute.css';
 
 class StartRoute extends Component {

@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 .story_panel:hover {
-  border: 1px solid black;
+  border: 1px solid #ae9172;
   cursor: pointer;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .inputform:checked + .story_panel {
-  border: 2px solid black;
+  border: 2px solid #ae9172;
 }
 
 .story_panel:hover {

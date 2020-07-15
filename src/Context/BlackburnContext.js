@@ -185,7 +185,6 @@ export class BlackburnProvider extends Component {
   getMyScores = () => {
     ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
-        console.log('res', res);
         const outputArr = res.map((data) => {
           return {
             score: data.total_score,

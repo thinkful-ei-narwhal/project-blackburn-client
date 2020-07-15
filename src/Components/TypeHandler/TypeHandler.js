@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Label } from './../Form/Form';
-import Button from './../Button/Button';
+import { Input } from './../Form/Form';
 import './TypeHandler.css';
 
 class TypeHandler extends Component {

@@ -14,17 +14,6 @@ import { Spring, animated, Trail } from 'react-spring/renderprops.cjs';
 import './ChallengeRoute.css';
 import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
 import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
-import duel from '../../Assets/Sounds/bensound-theduel.mp3';
-import bad from '../../Assets/Sounds/bensound-badass.mp3';
-import eni from '../../Assets/Sounds/bensound-enigmatic.mp3';
-import fun from '../../Assets/Sounds/bensound-funkysuspense.mp3';
-import ofe from '../../Assets/Sounds/bensound-ofeliasdream.mp3';
-import dub from '../../Assets/Sounds/bensound-dubstep.mp3';
-import sci from '../../Assets/Sounds/bensound-scifi.mp3';
-import inst from '../../Assets/Sounds/bensound-instinct.mp3';
-import evo from '../../Assets/Sounds/bensound-evolution.mp3';
-import deep from '../../Assets/Sounds/bensound-deepblue.mp3';
-import hous from '../../Assets/Sounds/bensound-house.mp3';
 import TimerContent from '../../Components/TimerContent/TimerContent';
 
 const dictMapper = {
@@ -64,18 +53,7 @@ class ChallengeRoute extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   createAudio() {
-    const theduel = duel;
-    const enigmatic = eni;
-    const badass = bad;
-    const funky = fun;
-    const house = hous;
-    const scifi = sci;
-    const evolution = evo;
-    const instinct = inst;
-    const dubstep = dub;
-    const deepblue = deep;
-    const ofelia = ofe;
-    this.setState({ audio: new Audio(eval(this.context.audio)) });
+    this.setState({ audio: new Audio(this.context.audio) });
   }
 
   calcWPM() {
@@ -350,6 +328,7 @@ class ChallengeRoute extends Component {
         );
       })
       .catch((error) => this.context.setError(error));
+    this.state.audio.play();
   }
 
   renderTimer = () => {
@@ -405,7 +384,6 @@ class ChallengeRoute extends Component {
   renderGameplay() {
     //for animation and music
     const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green'];
-    this.state.audio.play();
     return (
       <>
         <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
@@ -414,8 +392,8 @@ class ChallengeRoute extends Component {
               {' '}
               {!this.state.levelEnded && (
                 <Spring
-                  from={{ width: "100%", background: "rgba(217, 193, 170, 1)" }}
-                  to={{ width: "0%", background: "white" }}
+                  from={{ width: '100%', background: 'rgba(217, 193, 170, 1)' }}
+                  to={{ width: '0%', background: 'white' }}
                   config={{ duration: this.levelTimerStaticTotal * 1000 }}
                 >
                   {(props) => (
@@ -539,7 +517,7 @@ class ChallengeRoute extends Component {
   }
 
   render() {
-    console.log(this.state.timer)
+    console.log(this.state.timer);
     return (
       <div
         className="game-container"
