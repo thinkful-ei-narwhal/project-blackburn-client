@@ -11,14 +11,15 @@
     background-color: white;
     box-shadow: 2px 2px 2px 2px lightgray;
     padding: 20px;
-    width: 10vh;
+    width: 20vh;
+    height: 30vh;
 }
 
 .analytics-container {
     margin-top: 2vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
 }
 

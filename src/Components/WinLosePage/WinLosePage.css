@@ -41,5 +41,7 @@
 } */
 
 .leaderboard-container {
-  height: 50vh;
+  height: 30vh;
+  width: auto;
+  align-self: center;
 }

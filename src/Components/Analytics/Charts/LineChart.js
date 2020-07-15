@@ -59,6 +59,7 @@ export default class LineChart extends React.Component {
     const scoreData = formatScoreDate.map((data) => {
       return { x: data.date_trunc, y: Math.floor(data.max) };
     });
+
     return (
       <div className="graphs">
         {this.state.error && <div className="error">{this.state.error}</div>}
@@ -97,6 +98,7 @@ export default class LineChart extends React.Component {
           </VictoryChart>
         </div>
       </div>
+
     );
   }
 }

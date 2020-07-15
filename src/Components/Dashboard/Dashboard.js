@@ -175,7 +175,7 @@ export default class Dashboard extends React.Component {
                     style = {{fontSize: '2vh', textAlign: 'center'}}
                     className="title">Project Blackburn</h1>
                 <nav className="navLinks">
-                  <div id = 'home-icon'
+                  <div
                     className={this.state.showHome ? 'links-selected' : 'links'}
                     onClick={() => this.handleShowHome()}
                   >
@@ -221,12 +221,10 @@ export default class Dashboard extends React.Component {
           <Transition
             native
             reset
-            unique
             items={this.state.page}
-            from={{ opacity: 0, transform: 'translate3d(100vh,0,0)'  }}
-            enter={[{ opacity: 1, transform: 'translate3d(0,0,0)' }]}
-            leave={{ opacity: 0, transform: 'translate3d(-50vh,0,0)' }}
-          >
+            from={{  overflow: 'hidden', height: 0  }}
+            enter={[{ height: 'auto' }]}
+            leave={{ opacity: 0, height: 0 }}>
             {(index) => pages[index]}
           </Transition>
         </div>
