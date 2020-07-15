@@ -51,7 +51,7 @@ class StartRoute extends Component {
           <label key={story.id} className="story-label" htmlFor={`${story.id}`}>
             <div className="story_panel" id={`story_panel ${story.id}`}>
               <img src={story.story_thumbnail} width="75px" alt="Story Art" />
-              <h3>{story.story_name}</h3>
+              <h2>{story.story_name}</h2>
               <p>{story.story_synopsis}</p>
               <input
                 className="inputform"
@@ -78,7 +78,7 @@ class StartRoute extends Component {
             <Link to="/dashboard" className="dashboard-lnk">
               <Button className="back-btn"> &#8592; </Button>
             </Link>
-            <h2 className="start-header">Select a Story</h2>
+            <h1 className="start-header">Select a Story</h1>
             <div className="startpage-main">
               <form
                 className="start-page-form"

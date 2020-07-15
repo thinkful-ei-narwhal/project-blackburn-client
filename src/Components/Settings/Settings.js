@@ -25,10 +25,9 @@ export default class Settings extends React.Component {
 
   render() {
     const { user } = this.context;
-    console.log(user);
     return (
       <div className="accountInfo">
-        <h2 className="setting-header">Personal Info</h2>
+        <h1 className="setting-header">Personal Info</h1>
         {this.state.edit === false ? (
           <div className="settings-container">
             <p>

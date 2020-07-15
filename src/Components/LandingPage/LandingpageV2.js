@@ -136,6 +136,7 @@ export default class App extends React.Component {
           </h1>
           <br />
           <div
+            className="about-container"
             onClick={() => this.parallax.scrollTo(1)}
             style={{
               cursor: 'pointer',
@@ -144,7 +145,9 @@ export default class App extends React.Component {
               borderBottom: '1px solid grey',
             }}
           >
-            Click Here To Read More About The Game
+            <h2 className="about-txt">
+              Click Here To Read More About The Game
+            </h2>
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={0.6} speed={0.2}>
@@ -233,10 +236,10 @@ export default class App extends React.Component {
           }}
           onClick={() => this.parallax.scrollTo(0)}
         >
-          <h2 style={{ color: 'white' }}>
+          {/* <h3>
             {' '}
             Compete with others around the World!
-          </h2>
+          </h3> */}
         </ParallaxLayer>
       </Parallax>
     );
