@@ -18,7 +18,6 @@ export default class Story extends Component {
     index: 0,
     typingDone: false,
     initialized: false,
-
   };
 
   static contextType = BlackBurnContext;
@@ -76,14 +75,10 @@ export default class Story extends Component {
       return (
         <div className="story-type-text">
           <div className="after-timer">
-            <Spring
-              delay={5000}
-              from={{ opacity: 0, height: 0 }}
-              to={{ opacity: 1, height: "auto" }}
-            >
+            <Spring delay={5000} from={{ opacity: 0 }} to={{ opacity: 1 }}>
               {(props) => (
                 <Link
-                  style={{margin: 20, ...props}}
+                  style={{ margin: 20, ...props }}
                   className="start-challenge"
                   to={"/challenge"}
                 >
@@ -91,12 +86,12 @@ export default class Story extends Component {
                 </Link>
               )}
             </Spring>
+            <Typist avgTypingDelay={10}>
+              {lines.map((line) => (
+                <div key={line.key}>{line.text}</div>
+              ))}
+            </Typist>
           </div>
-          <Typist avgTypingDelay={10}>
-            {lines.map((line) => (
-              <div key={line.key}>{line.text}</div>
-            ))}
-          </Typist>
         </div>
       );
     } else if (this.state.story_text && this.state.story_text.length < 499) {
@@ -109,6 +104,7 @@ export default class Story extends Component {
       });
       const animatedTextDiv = split.map((text) => (style) => (
         <animated.div
+          className="spring"
           style={{ ...style }}
           dangerouslySetInnerHTML={{ __html: text.text }}
         >
@@ -118,13 +114,13 @@ export default class Story extends Component {
       let arrLength = animatedTextDiv.length;
       return (
         <div className="story-type-text">
-          {this.state.index === (arrLength) && (
-            <div className="after-timer">
+          {this.state.index === arrLength && (
+            <div
+              className="after-timer"
+              style={{ height: `${this.state.story_text.length * 1.25}px` }}
+            >
               {
-                <Spring
-                  from={{ opacity: 0, }}
-                  to={{ opacity: 1,  }}
-                >
+                <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
                   {(props) => (
                     <Link
                       style={props}
@@ -154,6 +150,7 @@ export default class Story extends Component {
             </div>
           )}
           <Transition
+            className="spring"
             items={this.state.index}
             keys={(item) => item.key}
             from={{ opacity: 0 }}
@@ -179,6 +176,7 @@ export default class Story extends Component {
 
     const animatedTextDiv = split.map((text) => (style) => (
       <animated.div
+        className="spring"
         style={{ ...style }}
         dangerouslySetInnerHTML={{ __html: text.text }}
       >
@@ -197,12 +195,7 @@ export default class Story extends Component {
                 </div>
               )}
               <h2 className="story-name">{this.state.story_name}</h2>
-              <img
-                src={this.state.story_art}
-                alt="Art for the story"
-                width="300"
-                height="200"
-              />
+              <img src={this.state.story_art} alt="Art for the story" />
               <div className="story">{this.renderTyping()}</div>
             </>
           ) : (

@@ -22,7 +22,6 @@
 }
 
 .word-ul {
-  /* border: 1px solid grey; */
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -60,7 +59,7 @@
   width: 350px;
   padding: 5px;
   box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
-  background-color: #a9cfd9;
+  background-color: #a9cfd9d0;
   border-radius: 10px;
   font-size: larger;
 }
@@ -90,7 +89,7 @@
   position: fixed;
   top: 50%;
   bottom: 50%;
-  background-color: rgba(100, 0, 100, 1);
+  background-color: #51808ca1;
   height: 200px;
   width: 300px;
   border-radius: 10px;
@@ -117,6 +116,6 @@
   .bg {
     background-color: black;
     height: 40px;
-    margin-top: 60px;
+    margin-top: 80px;
   }
 }

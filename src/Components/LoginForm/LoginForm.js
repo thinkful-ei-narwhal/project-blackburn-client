@@ -30,10 +30,10 @@ class LoginForm extends Component {
     const { error } = this.state;
     return (
       <div className="login-container">
-        <h2>Login:</h2>
+        <h2>Login</h2>
         <form className="log-form" onSubmit={(e) => this.handleSubmit(e)}>
           {error !== '' && <h3 className="error">{error}</h3>}
-          <Label htmlFor="log-input username">Username:</Label>
+          <Label htmlFor="log-input username">Username</Label>
           <Input
             className="log-input"
             name="username"
@@ -43,7 +43,7 @@ class LoginForm extends Component {
             required
           />
 
-          <Label htmlFor="password">Password:</Label>
+          <Label htmlFor="password">Password</Label>
           <Input
             className="log-input"
             name="password"
