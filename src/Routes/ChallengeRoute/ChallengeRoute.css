@@ -1,4 +1,5 @@
 .game-container {
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;
