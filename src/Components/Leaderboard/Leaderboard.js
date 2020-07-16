@@ -39,7 +39,7 @@ export default class Leaderboard extends React.Component {
     ]).then(() => {
       this.updateWindowDimensions();
       window.addEventListener("resize", this.updateWindowDimensions);
-      this.setState({ initialized: true });
+      return this.setState({ initialized: true });
     });
   }
 
