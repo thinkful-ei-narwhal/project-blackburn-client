@@ -184,7 +184,6 @@ export default class Story extends Component {
       </animated.div>
     ));
     let arrLength = animatedTextDiv.length;
-    console.log(this.state.typingDone);
     return (
       this.state.initialized === true && (
         <div className="story-container">
