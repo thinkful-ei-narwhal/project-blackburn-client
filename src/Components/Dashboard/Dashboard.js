@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Leaderboard from '../Leaderboard/Leaderboard';
-import Start from '../Start/Start';
-import Analytics from '../Analytics/Analytics';
-import Settings from '../Settings/Settings';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import UserHeader from '../UserHeader/UserHeader';
-import './Dashboard.Module.css';
-import { Spring, animated, Transition } from 'react-spring/renderprops.cjs';
+import React from "react";
+import { Link } from "react-router-dom";
+import Leaderboard from "../Leaderboard/Leaderboard";
+import Start from "../Start/Start";
+import Analytics from "../Analytics/Analytics";
+import Settings from "../Settings/Settings";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import UserHeader from "../UserHeader/UserHeader";
+import "./Dashboard.Module.css";
+import { Spring, animated, Transition } from "react-spring/renderprops.cjs";
 import {
   FaBars,
   FaTimes,
@@ -15,9 +15,9 @@ import {
   FaChessKing,
   FaHome,
   FaCog,
-} from 'react-icons/fa';
-import { GiExitDoor } from 'react-icons/gi';
-import ApiService from '../../Services/auth-api-service';
+} from "react-icons/fa";
+import { GiExitDoor } from "react-icons/gi";
+import ApiService from "../../Services/auth-api-service";
 
 const pages = [
   (style) => (
@@ -138,7 +138,7 @@ export default class Dashboard extends React.Component {
       <>
         <header
           className={
-            this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
+            this.state.menuOpen ? "dashboard-header-open" : "dashboard-header"
           }
         >
           {!this.state.menuOpen && (
@@ -146,47 +146,46 @@ export default class Dashboard extends React.Component {
               <FaBars />
             </div>
           )}
-          <h2 className="user-welcome">Welcome {user.username}</h2>
+          <h1
+            className="title"
+          >
+            Project Blackburn
+          </h1>
           <div className="user-header">
             <UserHeader />
+            <h2 className="user-welcome">Welcome {user.username}</h2>
           </div>
         </header>
         {this.state.menuOpen && (
           <Spring
             from={{
-              opacity: 0,
+              width: 0,
             }}
             to={{
-              opacity: 1,
+              width: '100%'
             }}
           >
             {(props) => (
               <div
                 style={props}
-                className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}
+                className={this.state.menuOpen ? "sidenav-open" : "sidenav"}
               >
                 {this.state.menuOpen && (
                   <div className="x" onClick={() => this.handleMenuButton()}>
-                    {' '}
-                    <FaTimes />{' '}
+                    {" "}
+                    <FaTimes />{" "}
                   </div>
                 )}
-                <h1
-                  style={{ fontSize: '2vh', textAlign: 'center' }}
-                  className="title"
-                >
-                  Project Blackburn
-                </h1>
                 <nav className="navLinks">
                   <div
-                    className={this.state.showHome ? 'links-selected' : 'links'}
+                    className={this.state.showHome ? "links-selected" : "links"}
                     onClick={() => this.handleShowHome()}
                   >
                     <FaHome />
                   </div>
                   <div
                     className={
-                      this.state.showLeaderboard ? 'links-selected' : 'links'
+                      this.state.showLeaderboard ? "links-selected" : "links"
                     }
                     onClick={() => this.handleShowLeaderboard()}
                   >
@@ -194,7 +193,7 @@ export default class Dashboard extends React.Component {
                   </div>
                   <div
                     className={
-                      this.state.showAnalytics ? 'links-selected' : 'links'
+                      this.state.showAnalytics ? "links-selected" : "links"
                     }
                     onClick={() => this.handleShowAnalytics()}
                   >
@@ -202,7 +201,7 @@ export default class Dashboard extends React.Component {
                   </div>
                   <div
                     className={
-                      this.state.showSettings ? 'links-selected' : 'links'
+                      this.state.showSettings ? "links-selected" : "links"
                     }
                     onClick={() => this.handleShowSettings()}
                   >
@@ -221,14 +220,15 @@ export default class Dashboard extends React.Component {
             )}
           </Spring>
         )}
-        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
+        <div className={this.state.menuOpen ? "content-open" : "content"}>
           <Transition
             native
             reset
             items={this.state.page}
-            from={{  overflow: 'hidden', height: 0  }}
-            enter={[{ height: 'auto' }]}
-            leave={{ opacity: 0, height: 0 }}>
+            from={{ overflow: "hidden", height: 'auto' }}
+            enter={[{ height: "auto" }]}
+            leave={{ opacity: 0, height: 0 }}
+          >
             {(index) => pages[index]}
           </Transition>
         </div>

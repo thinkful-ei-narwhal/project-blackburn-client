@@ -83,6 +83,7 @@ class ChallengeRoute extends Component {
   }
 
   triggerLevelEnd() {
+    console.log(this.state.playerHealth, this.state.levelTimer, this.state.levelEnded, this.state.isWin)
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
       this.setState({ words: [] });
@@ -345,6 +346,8 @@ class ChallengeRoute extends Component {
       "Remember to hit enter after your type a word",
       "You lose more health mistyping a word than letting it go by!",
       "Remember to look at the word timers! They go by quick!",
+      "Try and beat the highscore! You'll be the best typer in the world!",
+      "Don't forget to stretch!"
     ];
     const getRandomHint =
       hintsArray[Math.floor(Math.random() * hintsArray.length)];
@@ -463,12 +466,8 @@ class ChallengeRoute extends Component {
                   {this.state.words.map((wordObj, index) => (
                     <li className="word-li" key={index}>
                       <Spring
-                        from={{
-                          opacity: 0,
-                        }}
-                        to={{
-                          opacity: 1,
-                        }}
+                        from={{  overflow: 'hidden', height: 0, width: 0  }}
+                        to={{ height: 'auto', width: 'auto' }}
                       >
                         {(props) => (
                           <animated.div className="wordTimer" style={props}>

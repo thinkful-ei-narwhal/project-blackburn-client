@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@1,900&family=Open+Sans&display=swap");
+
 body {
   background-color: rgba(217, 193, 170, .3);
   position: absolute;
@@ -5,11 +7,12 @@ body {
   bottom: 0;
   left: 0;
   right:0 ;
+  font-family: 'Crimson Pro', serif;
 }
 
 .dashboard-header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   border-bottom: 2px solid black;
   box-shadow: 0 4px 0 0px lightgrey;
@@ -20,12 +23,13 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-left: 22%;
+    margin-left: 10%;
     width: 100%;
     /* padding: 5px; */
     border-bottom: 2px solid black;
     box-shadow: 0 4px 0 0px lightgrey;
     background-color: white;
+    font-family: 'Crimson Pro', serif;
 
 }
 
@@ -119,7 +123,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 24%;
+  margin-left: 28%;
+}
+
+
+.user-header {
+  display: none;
 }
 
 
@@ -130,10 +139,11 @@ body {
 
    .dashboard-header-open {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    margin-left: 15%;
+    margin-left: 40px;
   } 
+
 }
 
 @media screen and (min-width: 600px) {
@@ -143,10 +153,19 @@ body {
 
    .dashboard-header-open {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    margin-left: 100px;
+    margin-left: 60px;
   } 
+
+  .user-header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 50px;
+  }
 }
 
 @media screen and (min-width: 800px) {
@@ -158,14 +177,14 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-left: 175px;
+    margin-left: 100px;
   }
   .content-open {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left: 32%;
+    margin-left: 25%;
   }
 }
 

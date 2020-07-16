@@ -10,18 +10,11 @@
   padding: 20px;
 }
 
-<<<<<<< Updated upstream
-.graphs {
-  display: flex;
-  flex-direction: column;
-}
-=======
  .graphs {
     display: flex;
     flex-direction: column;  
  }
 
->>>>>>> Stashed changes
 
 @media screen and (min-width: 800px) {
   .graphs {

@@ -61,7 +61,7 @@ export default class LineChart extends React.Component {
               height={300}
               width={350}
             >
-              <title id="scoreGraph"> Score over time </title>
+              {/* <title id="scoreGraph"> Score over time </title> */}
               <VictoryScatter
                 interpolation="natural"
                 style={{
@@ -76,10 +76,11 @@ export default class LineChart extends React.Component {
               aria-labelledby="scoreGraph"
               minDomain={{ y: 0 }}
               domainPadding={20}
-              height={350}
-              width={400}
+              height={300}
+              width={300}
+
             >
-              <title id="scoreGraph"> Score over time </title>
+              {/* <title id="scoreGraph" standalone = 'false'> Score over time </title> */}
               <VictoryLine
                 interpolation="natural"
                 style={{
@@ -98,10 +99,11 @@ export default class LineChart extends React.Component {
               aria-labelledby="wpmGraph"
               minDomain={{ y: 0 }}
               domainPadding={30}
-              height={350}
-              width={400}
+              height={300}
+              width={300}
+
             >
-              <title id="wpmGraph"> WPM over time </title>
+              {/* <title id="wpmGraph"> WPM over time </title> */}
               <VictoryScatter
                 interpolation="natural"
                 style={{
@@ -116,10 +118,11 @@ export default class LineChart extends React.Component {
               aria-labelledby="wpmGraph"
               minDomain={{ y: 0 }}
               domainPadding={30}
-              height={350}
-              width={400}
+              height={300}
+              width={300}
+
             >
-              <title id="wpmGraph"> WPM over time </title>
+              {/* <title id="wpmGraph"> WPM over time </title> */}
               <VictoryLine
                 interpolation="natural"
                 style={{
