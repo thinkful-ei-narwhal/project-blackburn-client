@@ -21,7 +21,6 @@
 }
 
 .word-ul {
-  /* border: 1px solid grey; */
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -120,6 +119,6 @@
   .bg {
     background-color: black;
     height: 40px;
-    margin-top: 60px;
+    margin-top: 80px;
   }
 }
