@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import TypeHandler from './../../Components/TypeHandler/TypeHandler';
-import Healthbar from './../../Components/Healthbar/Healthbar';
-import UIStats from '../../Components/UIStats/UIStats';
-import Word from './../../Components/Word/Word';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import { uniqueNamesGenerator, animals } from 'unique-names-generator';
-import detective from './../../Dictionaries/detective';
-import monster from './../../Dictionaries/monster';
-import drone from './../../Dictionaries/drone';
-import WinLosePage from '../../Components/WinLosePage/WinLosePage';
-import { Spring, animated, Trail } from 'react-spring/renderprops.cjs';
-import './ChallengeRoute.css';
-import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
-import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
-import TimerContent from '../../Components/TimerContent/TimerContent';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
+import Healthbar from "./../../Components/Healthbar/Healthbar";
+import UIStats from "../../Components/UIStats/UIStats";
+import Word from "./../../Components/Word/Word";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import { uniqueNamesGenerator, animals } from "unique-names-generator";
+import detective from "./../../Dictionaries/detective";
+import monster from "./../../Dictionaries/monster";
+import drone from "./../../Dictionaries/drone";
+import WinLosePage from "../../Components/WinLosePage/WinLosePage";
+import { Spring, animated, Trail } from "react-spring/renderprops.cjs";
+import "./ChallengeRoute.css";
+import bellTone from "../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3";
+import healthLoss from "../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3";
+import TimerContent from "../../Components/TimerContent/TimerContent";
 
 const dictMapper = {
   animals: animals,
@@ -77,13 +77,14 @@ class ChallengeRoute extends Component {
     );
     if (Number.isNaN(accuracy)) {
       this.setState({ accuracy: 100 });
+    } else if (this.state.typedWordsTotal === 0) {
+      this.setState({ accuracy: 100 });
     } else {
       this.setState({ accuracy });
     }
   }
 
   triggerLevelEnd() {
-    console.log(this.state.playerHealth, this.state.levelTimer, this.state.levelEnded, this.state.isWin)
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
       this.setState({ words: [] });
@@ -347,7 +348,7 @@ class ChallengeRoute extends Component {
       "You lose more health mistyping a word than letting it go by!",
       "Remember to look at the word timers! They go by quick!",
       "Try and beat the highscore! You'll be the best typer in the world!",
-      "Don't forget to stretch!"
+      "Don't forget to stretch!",
     ];
     const getRandomHint =
       hintsArray[Math.floor(Math.random() * hintsArray.length)];
@@ -395,7 +396,7 @@ class ChallengeRoute extends Component {
 
   renderGameplay() {
     //for animation and music
-    const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green'];
+    const colors = ["blue", "red", "orange", "violet", "black", "green"];
 
     return (
       <>
@@ -405,8 +406,8 @@ class ChallengeRoute extends Component {
               {" "}
               {!this.state.levelEnded && (
                 <Spring
-                  from={{ width: '100%', background: 'rgba(217, 193, 170, 1)' }}
-                  to={{ width: '0%', background: 'white' }}
+                  from={{ width: "100%", background: "rgba(217, 193, 170, 1)" }}
+                  to={{ width: "0%", background: "white" }}
                   config={{ duration: this.levelTimerStaticTotal * 1000 }}
                 >
                   {(props) => (
@@ -466,8 +467,8 @@ class ChallengeRoute extends Component {
                   {this.state.words.map((wordObj, index) => (
                     <li className="word-li" key={index}>
                       <Spring
-                        from={{  overflow: 'hidden', height: 0, width: 0  }}
-                        to={{ height: 'auto', width: 'auto' }}
+                        from={{ overflow: "hidden", height: 0, width: 0 }}
+                        to={{ height: "auto", width: "auto" }}
                       >
                         {(props) => (
                           <animated.div className="wordTimer" style={props}>
