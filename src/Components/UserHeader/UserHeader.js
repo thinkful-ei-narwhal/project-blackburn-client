@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BlackBurnContext from '../../Context/BlackburnContext';
+import config from '../../config';
 
 class UserHeader extends Component {
   static contextType = BlackBurnContext;
@@ -12,7 +13,7 @@ class UserHeader extends Component {
           height={30}
           width={30}
           className="user-info"
-          src={user.avatar}
+          src={config.PUBLIC_URL + user.avatar}
           alt="user avatar"
         ></img>
       </div>

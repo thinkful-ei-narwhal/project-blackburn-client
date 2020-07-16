@@ -8,8 +8,8 @@ import Dashboard from '../Dashboard/Dashboard';
 import LandingPageV2 from '../LandingPage/LandingpageV2';
 import StartRoute from '../../Routes/StartRoute/StartRoute';
 import Story from '../Story/Story';
-import PrivateRoute from '../../Utilities/PrivateRoute'
-import PublicOnlyRoute from '../../Utilities/PublicOnlyRoute'
+import PrivateRoute from '../../Utilities/PrivateRoute';
+import PublicOnlyRoute from '../../Utilities/PublicOnlyRoute';
 class App extends Component {
   render() {
     return (
@@ -20,7 +20,11 @@ class App extends Component {
             <Route exact path={'/registration'} component={RegistrationRoute} />
             <Route exact path={'/login'} component={LoginRoute} />
             <PrivateRoute exact path={'/dashboard'} component={Dashboard} />
-            <PrivateRoute exact path={'/challenge'} component={ChallengeRoute} />
+            <PrivateRoute
+              exact
+              path={'/challenge'}
+              component={ChallengeRoute}
+            />
             <PrivateRoute exact path={'/storypage'} component={Story} />
             <PrivateRoute exact path={'/start'} component={StartRoute} />
           </Switch>

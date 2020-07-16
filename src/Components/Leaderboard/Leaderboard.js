@@ -1,8 +1,9 @@
-import React from "react";
-import "./Leaderboard.Module.css";
-import { Trail } from "react-spring/renderprops.cjs";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import { FaCrown } from "react-icons/fa";
+import React from 'react';
+import './Leaderboard.Module.css';
+import { Trail } from 'react-spring/renderprops.cjs';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import { FaCrown } from 'react-icons/fa';
+import config from '../../config';
 
 export default class Leaderboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -12,7 +13,7 @@ export default class Leaderboard extends React.Component {
     this.state = {
       overall: true,
       byStory: false,
-      story: "monsters",
+      story: 'monsters',
       width: 0,
       height: 0,
     };
@@ -36,11 +37,11 @@ export default class Leaderboard extends React.Component {
     this.context.getMyScores();
 
     this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowDimensions);
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
   updateWindowDimensions() {
@@ -76,16 +77,19 @@ export default class Leaderboard extends React.Component {
                     </span>
                     {this.state.width > 800 && (
                       <div className="avatar">
-                        {" "}
-                        <img src={score.avatar} alt={`User avatar`} />{" "}
+                        {' '}
+                        <img
+                          src={process.env.PUBLIC_URL + score.avatar}
+                          alt={`User avatar`}
+                        />{' '}
                       </div>
                     )}
                     <span
                       className="username"
                       style={
                         this.context.user.username === score.username
-                          ? { color: "red" }
-                          : { color: "black" }
+                          ? { color: 'red' }
+                          : { color: 'black' }
                       }
                     >
                       {score.username}
@@ -117,23 +121,23 @@ export default class Leaderboard extends React.Component {
         </div>
         <ul className="list-container">
           <li
-            key={"topscore"}
+            key={'topscore'}
             className="leaderboard-list"
-            style={{ marginBottom: "10px" }}
+            style={{ marginBottom: '10px' }}
           >
             <span className="username"> Your Top Score </span>
             {this.state.width > 800 && (
               <div className="avatar">
-                {" "}
+                {' '}
                 <img
-                  src={this.context.user.avatar}
+                  src={config.PUBLIC_URL + this.context.user.avatar}
                   alt={this.context.user.id}
-                />{" "}
+                />{' '}
               </div>
             )}
             <span className="username"> {this.context.user.username} </span>
             <span className="score">
-              {maxMyScore === -Infinity ? "No Scores" : maxMyScore}
+              {maxMyScore === -Infinity ? 'No Scores' : maxMyScore}
             </span>
           </li>
           {this.renderLeaderBoard()}
