@@ -9,6 +9,7 @@ class UserHeader extends Component {
     return (
       <div className="user-info">
         <img
+          style = {{margin: 10}}
           height={30}
           width={30}
           className="user-info"

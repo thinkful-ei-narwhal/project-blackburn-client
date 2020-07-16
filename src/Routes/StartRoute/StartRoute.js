@@ -3,7 +3,7 @@ import Button from "../../Components/Button/Button";
 import storyService from "../../Services/story-api-service";
 import BlackburnContext from "../../Context/BlackburnContext";
 import { Link, Redirect } from "react-router-dom";
-import { Spring } from "react-spring/renderprops";
+import { animated, Spring } from "react-spring/renderprops";
 import "./StartRoute.css";
 
 class StartRoute extends Component {
@@ -41,14 +41,17 @@ class StartRoute extends Component {
     );
     this.setState({ redirect: true });
   };
-
   renderStories() {
     return (
       //youre figuring out how to select a radio button
       //change img on line 37 to back ground of line 36 if we wish
       <div className="story-list">
         {this.state.stories.map((story) => (
-          <Spring from={{overflow: 'hidden', height: 0}} to={{height: 'auto'}}>
+          <Spring
+            config = {{tension: 160, friction: 14}}
+            from={{ overflow: "hidden", height: 0 }}
+            to={{ height: "auto" }}
+          >
             {(props) => (
               <label
                 style={props}
@@ -65,7 +68,8 @@ class StartRoute extends Component {
                   onChange={this.handleInputSelect}
                   selected={this.state.story_id === `${story.id}`}
                 />
-                <div className="story_panel" id={`story_panel ${story.id}`}>
+                <animated.div 
+                  className="story_panel" id={`story_panel ${story.id}`}>
                   <img
                     src={story.story_thumbnail}
                     width="75px"
@@ -73,7 +77,7 @@ class StartRoute extends Component {
                   />
                   <h2>{story.story_name}</h2>
                   <p>{story.story_synopsis}</p>
-                </div>
+                </animated.div>
               </label>
             )}
           </Spring>

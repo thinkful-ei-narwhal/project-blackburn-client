@@ -46,7 +46,6 @@ class WinLosePage extends Component {
         >
           {}
         </div>
-        <LeaderBoard />
         <Link to={"/start"}>
           <Button
             className="btn-results next-btn"
