@@ -198,12 +198,7 @@ export default class Story extends Component {
                 </div>
               )}
               <h2 className="story-name">{this.state.story_name}</h2>
-              <img
-                src={this.state.story_art}
-                alt="Art for the story"
-                width="300"
-                height="200"
-              />
+              <img src={this.state.story_art} alt="Art for the story" />
               <div className="story">{this.renderTyping()}</div>
             </>
           ) : (
