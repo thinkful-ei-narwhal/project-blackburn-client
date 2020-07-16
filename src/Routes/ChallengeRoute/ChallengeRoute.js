@@ -79,18 +79,14 @@ class ChallengeRoute extends Component {
     );
     if (Number.isNaN(accuracy)) {
       this.setState({ accuracy: 100 });
+    } else if (this.state.typedWordsTotal === 0) {
+      this.setState({ accuracy: 100 });
     } else {
       this.setState({ accuracy });
     }
   }
 
   triggerLevelEnd() {
-    console.log(
-      this.state.playerHealth,
-      this.state.levelTimer,
-      this.state.levelEnded,
-      this.state.isWin
-    );
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
       this.setState({ words: [] });

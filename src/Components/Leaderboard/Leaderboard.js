@@ -16,6 +16,7 @@ export default class Leaderboard extends React.Component {
       story: 'monsters',
       width: 0,
       height: 0,
+      initialized: false,
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
@@ -33,11 +34,14 @@ export default class Leaderboard extends React.Component {
   };
 
   componentDidMount() {
-    this.context.getTopTenScores();
-    this.context.getMyScores();
-
-    this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
+    Promise.all([
+      this.context.getTopTenScores(),
+      this.context.getMyScores(),
+    ]).then(() => {
+      this.updateWindowDimensions();
+      window.addEventListener('resize', this.updateWindowDimensions);
+      return this.setState({ initialized: true });
+    });
   }
 
   componentWillUnmount() {
@@ -115,34 +119,36 @@ export default class Leaderboard extends React.Component {
     const myScoreArr = this.context.myScores.map((score) => score.score);
     const maxMyScore = Math.max(...myScoreArr);
     return (
-      <div className="leaderboard">
-        <div className="leaderboard-header">
-          <h2> Leader Board </h2>
+      this.state.initialized === true && (
+        <div className="leaderboard">
+          <div className="leaderboard-header">
+            <h2> Leader Board </h2>
+          </div>
+          <ul className="list-container">
+            <li
+              key={'topscore'}
+              className="leaderboard-list"
+              style={{ marginBottom: '10px' }}
+            >
+              <span className="username"> Your Top Score </span>
+              {this.state.width > 800 && (
+                <div className="avatar">
+                  {' '}
+                  <img
+                    src={this.context.user.avatar}
+                    alt={this.context.user.id}
+                  />{' '}
+                </div>
+              )}
+              <span className="username"> {this.context.user.username} </span>
+              <span className="score">
+                {maxMyScore === -Infinity ? 'No Scores' : maxMyScore}
+              </span>
+            </li>
+            {this.renderLeaderBoard()}
+          </ul>
         </div>
-        <ul className="list-container">
-          <li
-            key={'topscore'}
-            className="leaderboard-list"
-            style={{ marginBottom: '10px' }}
-          >
-            <span className="username"> Your Top Score </span>
-            {this.state.width > 800 && (
-              <div className="avatar">
-                {' '}
-                <img
-                  src={config.PUBLIC_URL + this.context.user.avatar}
-                  alt={this.context.user.id}
-                />{' '}
-              </div>
-            )}
-            <span className="username"> {this.context.user.username} </span>
-            <span className="score">
-              {maxMyScore === -Infinity ? 'No Scores' : maxMyScore}
-            </span>
-          </li>
-          {this.renderLeaderBoard()}
-        </ul>
-      </div>
+      )
     );
   }
 }
