@@ -77,9 +77,6 @@
   align-items: flex-start;
   justify-content: center;
   text-align: left;
-  margin-bottom: 2vh;
-  margin-left: 100px;
-  margin-right: 100px;
   height: auto;
   width: auto;
   padding: 20px;
@@ -93,8 +90,3 @@
   background-color: white;
 }
 
-@media screen and (min-width: 1000px) {
-  .landingText {
-    margin: 500px;
-  }
-}
