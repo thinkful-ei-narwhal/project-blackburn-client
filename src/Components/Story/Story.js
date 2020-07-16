@@ -74,7 +74,10 @@ export default class Story extends Component {
     if (this.state.story_text && this.state.story_text.length > 500) {
       return (
         <div className="story-type-text">
-          <div className="after-timer">
+          <div
+            className="after-timer"
+            style={{ height: `${this.state.story_text.length * 1.15}px` }}
+          >
             <Spring
               delay={5000}
               from={{ opacity: 0, height: 0 }}
@@ -108,6 +111,7 @@ export default class Story extends Component {
       });
       const animatedTextDiv = split.map((text) => (style) => (
         <animated.div
+          className="spring"
           style={{ ...style }}
           dangerouslySetInnerHTML={{ __html: text.text }}
         >
@@ -118,7 +122,10 @@ export default class Story extends Component {
       return (
         <div className="story-type-text">
           {this.state.index === arrLength && (
-            <div className="after-timer">
+            <div
+              className="after-timer"
+              style={{ height: `${this.state.story_text.length * 1.15}px` }}
+            >
               {
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
                   {(props) => (
@@ -150,6 +157,7 @@ export default class Story extends Component {
             </div>
           )}
           <Transition
+            className="spring"
             items={this.state.index}
             keys={(item) => item.key}
             from={{ opacity: 0 }}
@@ -175,6 +183,7 @@ export default class Story extends Component {
 
     const animatedTextDiv = split.map((text) => (style) => (
       <animated.div
+        className="spring"
         style={{ ...style }}
         dangerouslySetInnerHTML={{ __html: text.text }}
       >
