@@ -107,6 +107,20 @@ body {
   margin-right: 10px;
   padding: 5px;
 }
+.credits-container {
+  position: fixed;
+  padding: 5px;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+.credits-container a {
+  color: blue;
+}
+.credits {
+  font-size: 10px;
+  margin: 10px;
+}
 
 .content {
   display: flex;
@@ -179,6 +193,9 @@ body {
     justify-content: center;
     align-items: center;
     margin-left: 25%;
+  }
+  .credits {
+    font-size: 15px;
   }
 }
 
