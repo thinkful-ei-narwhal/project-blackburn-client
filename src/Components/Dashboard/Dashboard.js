@@ -157,17 +157,7 @@ export default class Dashboard extends React.Component {
           </div>
         </header>
         {this.state.menuOpen && (
-          <Spring
-            from={{
-              width: 0,
-            }}
-            to={{
-              width: '100%'
-            }}
-          >
-            {(props) => (
               <div
-                style={props}
                 className={this.state.menuOpen ? "sidenav-open" : "sidenav"}
               >
                 {this.state.menuOpen && (
@@ -217,8 +207,7 @@ export default class Dashboard extends React.Component {
                   </Link>
                 </nav>
               </div>
-            )}
-          </Spring>
+            
         )}
         <div className={this.state.menuOpen ? "content-open" : "content"}>
           <Transition

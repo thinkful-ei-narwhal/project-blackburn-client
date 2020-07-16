@@ -5,8 +5,6 @@
   align-items: center;
   text-align: center;
   width: auto;
-  /* background-color: #d3d3d3; */
-  /* background-image: url('../../Images/DetectiveAtDesk.jpg'); */
   position: static;
   bottom: 0;
   right: 0;
@@ -113,7 +111,9 @@
     width: 700px;
     height: 450px;
     text-align: center;
-    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .6);;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .6);
+    margin-bottom: 80px;
+    transition: all .2s ease-in-out;
   }
   .bg {
     background-color: black;

@@ -16,6 +16,7 @@ export default class Story extends Component {
     audio: "",
     showStory: false,
     index: 0,
+    typingDone: false
   };
 
   static contextType = BlackBurnContext;
@@ -66,22 +67,21 @@ export default class Story extends Component {
     let lines = split.map((x, index) => {
       return { text: x, key: index };
     });
-    if (this.state.story_text && this.state.story_text.length > 600) {
+    if (this.state.story_text && this.state.story_text.length > 500) {
       return (
         <div className="story-type-text">
            <div className="after-timer">
             <Spring
-              delay={10000}
+              delay={5000}
               from={{ opacity: 0, height: 0 }}
               to={{ opacity: 1, height: "auto" }}
             >
               {(props) => (
                 <Link
-                  style={props}
+                  style={{margin: 20, ...props}}
                   className="start-challenge"
                   to={"/challenge"}
                 >
-                  {" "}
                   Start The Challenge &#x2192;
                 </Link>
               )}
@@ -94,12 +94,11 @@ export default class Story extends Component {
           </Typist>
         </div>
       );
-    } else if (this.state.story_text && this.state.story_text.length < 599) {
+    } else if (this.state.story_text && this.state.story_text.length < 499) {
       let presplit = this.state.story_text.split(".");
       let split = presplit.map((sentence) =>
         sentence.replace("<br /><br />", "")
       );
-      console.log(split);
       split = split.map((x, index) => {
         return { text: x, key: index };
       });
@@ -114,12 +113,12 @@ export default class Story extends Component {
       let arrLength = animatedTextDiv.length;
       return (
         <div className="story-type-text">
-          {this.state.index === arrLength && (
+          {this.state.index === (arrLength) && (
             <div className="after-timer">
               {
                 <Spring
-                  from={{ opacity: 0, height: 0 }}
-                  to={{ opacity: 1, height: "auto" }}
+                  from={{ opacity: 0, }}
+                  to={{ opacity: 1,  }}
                 >
                   {(props) => (
                     <Link
@@ -135,7 +134,7 @@ export default class Story extends Component {
               }
               <Spring
                 from={{ opacity: 0, height: 0 }}
-                to={{ opacity: 1, height: "auto" }}
+                to={{ opacity: 1, height: "100%" }}
               >
                 {(props) => (
                   <div
@@ -182,12 +181,12 @@ export default class Story extends Component {
       </animated.div>
     ));
     let arrLength = animatedTextDiv.length;
-
+      console.log(this.state.typingDone)
     return (
       <div className="story-container">
         {this.context.error === null ? (
           <>
-            {this.state.index !== arrLength && (
+            {(this.state.index !== arrLength || this.state.typingDone === false) && (
               <div className="skip">
                 <Link to={"/challenge"}> Skip Story &#x2192;</Link>
               </div>

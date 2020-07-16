@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import TypeHandler from './../../Components/TypeHandler/TypeHandler';
-import Healthbar from './../../Components/Healthbar/Healthbar';
-import UIStats from '../../Components/UIStats/UIStats';
-import Word from './../../Components/Word/Word';
-import BlackBurnContext from '../../Context/BlackburnContext';
-import { uniqueNamesGenerator, animals } from 'unique-names-generator';
-import detective from './../../Dictionaries/detective';
-import monster from './../../Dictionaries/monster';
-import drone from './../../Dictionaries/drone';
-import WinLosePage from '../../Components/WinLosePage/WinLosePage';
-import { Spring, animated, Trail } from 'react-spring/renderprops.cjs';
-import './ChallengeRoute.css';
-import bellTone from '../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3';
-import healthLoss from '../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3';
-import TimerContent from '../../Components/TimerContent/TimerContent';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import TypeHandler from "./../../Components/TypeHandler/TypeHandler";
+import Healthbar from "./../../Components/Healthbar/Healthbar";
+import UIStats from "../../Components/UIStats/UIStats";
+import Word from "./../../Components/Word/Word";
+import BlackBurnContext from "../../Context/BlackburnContext";
+import { uniqueNamesGenerator, animals } from "unique-names-generator";
+import detective from "./../../Dictionaries/detective";
+import monster from "./../../Dictionaries/monster";
+import drone from "./../../Dictionaries/drone";
+import WinLosePage from "../../Components/WinLosePage/WinLosePage";
+import { Spring, animated, Trail } from "react-spring/renderprops.cjs";
+import "./ChallengeRoute.css";
+import bellTone from "../../Assets/Sounds/zapsplat_bell_small_hand_single_ring_ping_very_high_pitched_49175.mp3";
+import healthLoss from "../../Assets/Sounds/leisure_retro_arcade_game_incorrect_error_tone.mp3";
+import TimerContent from "../../Components/TimerContent/TimerContent";
 
 const dictMapper = {
   animals: animals,
@@ -83,7 +83,12 @@ class ChallengeRoute extends Component {
   }
 
   triggerLevelEnd() {
-    console.log(this.state.playerHealth, this.state.levelTimer, this.state.levelEnded, this.state.isWin)
+    console.log(
+      this.state.playerHealth,
+      this.state.levelTimer,
+      this.state.levelEnded,
+      this.state.isWin
+    );
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
       this.setState({ words: [] });
@@ -315,8 +320,8 @@ class ChallengeRoute extends Component {
         );
         this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
         this.setState({
-          levelTimer: 5, // checkpointData.level_timer,
-          levelTimerTotal: 5, // checkpointData.level_timer,
+          levelTimer: 15,//checkpointData.level_timer,
+          levelTimerTotal: 15, //checkpointData.level_timer,
           playerScore: playerScore,
           playerBest: playerBestStored,
           playerBestStored: playerBestStored,
@@ -347,7 +352,7 @@ class ChallengeRoute extends Component {
       "You lose more health mistyping a word than letting it go by!",
       "Remember to look at the word timers! They go by quick!",
       "Try and beat the highscore! You'll be the best typer in the world!",
-      "Don't forget to stretch!"
+      "Don't forget to stretch!",
     ];
     const getRandomHint =
       hintsArray[Math.floor(Math.random() * hintsArray.length)];
@@ -362,14 +367,15 @@ class ChallengeRoute extends Component {
             <>
               <animated.div
                 style={{
-                  fontSize: "20vh",
-                  height: "100vh",
-                  width: "100vh",
+                  fontSize: "100px",
+                  height: "auto",
+                  width: 'auto',
+                  position: 'absolute',
+                  top: 100,
                   ...props,
                 }}
               >
-                {" "}
-                {Math.floor(props.value)}{" "}
+                {Math.floor(props.value)}
               </animated.div>
               <div className="hint-container">
                 <div className="hint">
@@ -395,7 +401,7 @@ class ChallengeRoute extends Component {
 
   renderGameplay() {
     //for animation and music
-    const colors = ['blue', 'red', 'orange', 'violet', 'black', 'green'];
+    const colors = ["blue", "red", "orange", "violet", "black", "green"];
 
     return (
       <>
@@ -405,8 +411,8 @@ class ChallengeRoute extends Component {
               {" "}
               {!this.state.levelEnded && (
                 <Spring
-                  from={{ width: '100%', background: 'rgba(217, 193, 170, 1)' }}
-                  to={{ width: '0%', background: 'white' }}
+                  from={{ width: "100%", background: "rgba(217, 193, 170, 1)" }}
+                  to={{ width: "0%", background: "white" }}
                   config={{ duration: this.levelTimerStaticTotal * 1000 }}
                 >
                   {(props) => (
@@ -465,16 +471,26 @@ class ChallengeRoute extends Component {
                 <ul className="word-ul">
                   {this.state.words.map((wordObj, index) => (
                     <li className="word-li" key={index}>
-                      <Spring
-                        from={{  overflow: 'hidden', height: 0, width: 0  }}
-                        to={{ height: 'auto', width: 'auto' }}
+                      {this.state.levelTimer < 10 && <Spring
+                        from={{ color: colors[Math.floor(Math.random() * colors.length)], overflow: "hidden", height: 0, width: 0 }}
+                        to={{  color: colors[Math.floor(Math.random() * colors.length)], height: "auto", width: "auto" }}
                       >
                         {(props) => (
                           <animated.div className="wordTimer" style={props}>
                             <Word word={wordObj.word} />
                           </animated.div>
                         )}
-                      </Spring>
+                      </Spring>}
+                      {this.state.levelTimer >= 10 && <Spring
+                        from={{ overflow: "hidden", height: 0, width: 0 }}
+                        to={{  height: "auto", width: "auto" }}
+                      >
+                        {(props) => (
+                          <animated.div className="wordTimer" style={props}>
+                            <Word word={wordObj.word} />
+                          </animated.div>
+                        )}
+                      </Spring>}
                       <div className="timer">
                         {wordObj.getTimeRemaining() >= 0
                           ? wordObj.getTimeRemaining()
