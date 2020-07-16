@@ -46,8 +46,9 @@ class StartRoute extends Component {
       //youre figuring out how to select a radio button
       //change img on line 37 to back ground of line 36 if we wish
       <div className="story-list">
-        {this.state.stories.map((story) => (
+        {this.state.stories.map((story, i) => (
           <Spring
+            key = {i}
             config = {{tension: 160, friction: 14}}
             from={{ overflow: "hidden", height: 0 }}
             to={{ height: "auto" }}
