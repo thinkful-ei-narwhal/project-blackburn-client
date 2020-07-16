@@ -4,3 +4,4 @@ export default {
     'http://localhost:8000/api',
   API_KEY: process.env.REACT_APP_API_KEY,
 };
+console.log('public url:', process.env.PUBLIC_URL);

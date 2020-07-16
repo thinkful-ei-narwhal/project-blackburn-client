@@ -5,7 +5,8 @@
   "jest": {
     "transformIgnorePatterns": [
       "node_modules/?!(react-spring)"
-    ]
+    ],
+    "homepage": "https://project-blackburn-client.vercel.app"
   },
   "dependencies": {
     "@opd/g2plot-react": "^1.7.2",
@@ -15,6 +16,7 @@
     "@testing-library/user-event": "^7.2.1",
     "classnames": "^2.2.6",
     "delay": "^4.3.0",
+    "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",

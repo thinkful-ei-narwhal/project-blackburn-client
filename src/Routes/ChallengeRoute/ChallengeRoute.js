@@ -59,7 +59,7 @@ class ChallengeRoute extends Component {
   }
   createAudio() {
     this.setState({
-      audio: new Audio(process.env.PUBLIC_URL + this.context.audio),
+      audio: new Audio(this.context.audio),
     });
   }
 

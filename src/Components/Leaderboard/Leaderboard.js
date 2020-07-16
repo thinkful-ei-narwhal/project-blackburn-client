@@ -3,7 +3,6 @@ import './Leaderboard.Module.css';
 import { Trail } from 'react-spring/renderprops.cjs';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import { FaCrown } from 'react-icons/fa';
-import config from '../../config';
 
 export default class Leaderboard extends React.Component {
   static contextType = BlackBurnContext;
@@ -82,10 +81,7 @@ export default class Leaderboard extends React.Component {
                     {this.state.width > 800 && (
                       <div className="avatar">
                         {' '}
-                        <img
-                          src={process.env.PUBLIC_URL + score.avatar}
-                          alt={`User avatar`}
-                        />{' '}
+                        <img src={score.avatar} alt={`User avatar`} />{' '}
                       </div>
                     )}
                     <span

@@ -4,7 +4,6 @@ import Button from '../Button/Button';
 import { Input, Required, Label } from '../Form/Form';
 import ApiService from '../../Services/auth-api-service';
 import BlackBurnContext from '../../Context/BlackburnContext';
-import config from '../../config';
 
 class RegistrationForm extends Component {
   static contextType = BlackBurnContext;
@@ -71,11 +70,7 @@ class RegistrationForm extends Component {
               value="/images/man.png"
               onChange={(e) => this.setState({ avatar: e.target.value })}
             />
-            <img
-              className="avatar-img"
-              src={process.env.PUBLIC_URL + '/images/man.png'}
-              alt="man"
-            ></img>
+            <img className="avatar-img" src="/images/man.png" alt="man"></img>
           </Label>
           <Label htmlFor="spy">
             <input
@@ -86,7 +81,7 @@ class RegistrationForm extends Component {
               value="/images/spy.png"
               onChange={(e) => this.setState({ avatar: e.target.value })}
             />
-            <img className="avatar-img" src="images/spy.png" alt="spy"></img>
+            <img className="avatar-img" src="/images/spy.png" alt="spy"></img>
           </Label>
           <Label htmlFor="serial-killer">
             <input
@@ -99,7 +94,7 @@ class RegistrationForm extends Component {
             />
             <img
               className="avatar-img"
-              src={process.env.PUBLIC_URL + '/images/serial-killer.png'}
+              src="/images/serial-killer.png"
               alt="serial-killer"
             ></img>
           </Label>
