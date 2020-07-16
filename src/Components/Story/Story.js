@@ -17,6 +17,8 @@ export default class Story extends Component {
     showStory: false,
     index: 0,
     typingDone: false
+    initialized: false,
+
   };
 
   static contextType = BlackBurnContext;
@@ -38,6 +40,7 @@ export default class Story extends Component {
     this.context.setMyBestScore();
     const story_id = this.context.story_id;
     const difficulty_setting = this.context.difficulty_setting;
+
     await StoryApiService.getStory(story_id, difficulty_setting)
       .then((res) => {
         const checkpoints = res.map((checkpoint) => checkpoint);
@@ -47,12 +50,14 @@ export default class Story extends Component {
         this.context.setAudio(
           res[this.context.getCurrentCheckpointIndex()].music
         );
+
         return this.setState({
           story_text: res[this.context.getCurrentCheckpointIndex()].story_text,
           story_name: res[this.context.getCurrentCheckpointIndex()].story_name,
           story_art: res[this.context.getCurrentCheckpointIndex()].story_art,
           dictionary:
             res[this.context.getCurrentCheckpointIndex()].dictionary_string,
+          initialized: true,
         });
       })
       .catch((err) => this.context.setError(err));
@@ -70,7 +75,7 @@ export default class Story extends Component {
     if (this.state.story_text && this.state.story_text.length > 500) {
       return (
         <div className="story-type-text">
-           <div className="after-timer">
+          <div className="after-timer">
             <Spring
               delay={5000}
               from={{ opacity: 0, height: 0 }}
@@ -97,7 +102,7 @@ export default class Story extends Component {
     } else if (this.state.story_text && this.state.story_text.length < 499) {
       let presplit = this.state.story_text.split(".");
       let split = presplit.map((sentence) =>
-        sentence.replace("<br /><br />", "")
+        sentence.replace("<br/><br/>", "")
       );
       split = split.map((x, index) => {
         return { text: x, key: index };
@@ -183,27 +188,29 @@ export default class Story extends Component {
     let arrLength = animatedTextDiv.length;
       console.log(this.state.typingDone)
     return (
-      <div className="story-container">
-        {this.context.error === null ? (
-          <>
-            {(this.state.index !== arrLength || this.state.typingDone === false) && (
-              <div className="skip">
-                <Link to={"/challenge"}> Skip Story &#x2192;</Link>
-              </div>
-            )}
-            <h2 className="story-name">{this.state.story_name}</h2>
-            <img
-              src={this.state.story_art}
-              alt="Art for the story"
-              width="300"
-              height="200"
-            />
-            <div className="story">{this.renderTyping()}</div>
-          </>
-        ) : (
-          <Redirect to={"/start"} />
-        )}
-      </div>
+      this.state.initialized === true && (
+        <div className="story-container">
+          {this.context.error === null ? (
+            <>
+              {this.state.index !== arrLength && (
+                <div className="skip">
+                  <Link to={"/challenge"}> Skip Story &#x2192;</Link>
+                </div>
+              )}
+              <h2 className="story-name">{this.state.story_name}</h2>
+              <img
+                src={this.state.story_art}
+                alt="Art for the story"
+                width="300"
+                height="200"
+              />
+              <div className="story">{this.renderTyping()}</div>
+            </>
+          ) : (
+            <Redirect to={"/start"} />
+          )}
+        </div>
+      )
     );
   }
 }
