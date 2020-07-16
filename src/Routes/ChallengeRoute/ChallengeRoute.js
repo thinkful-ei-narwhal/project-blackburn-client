@@ -323,8 +323,8 @@ class ChallengeRoute extends Component {
         );
         this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
         this.setState({
-          levelTimer: 15,//checkpointData.level_timer,
-          levelTimerTotal: 15, //checkpointData.level_timer,
+          levelTimer: 2,//checkpointData.level_timer,
+          levelTimerTotal: 2, //checkpointData.level_timer,
           playerScore: playerScore,
           playerBest: playerBestStored,
           playerBestStored: playerBestStored,
@@ -421,6 +421,7 @@ class ChallengeRoute extends Component {
                   {(props) => (
                     <animated.div className="bg" style={props}>
                       <UIStats
+                        style = {{marginTop: 5}}
                         textBefore={"Time Remaining"}
                         metric={
                           this.state.levelTimer >= 0 ? this.state.levelTimer : 0

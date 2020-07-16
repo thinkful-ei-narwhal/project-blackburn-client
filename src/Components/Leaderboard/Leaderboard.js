@@ -101,7 +101,7 @@ export default class Leaderboard extends React.Component {
     const maxMyScore = Math.max(...myScoreArr);
     return (
       this.state.initialized === true && (
-        <div className="leaderboard">
+        <div className="leaderboard" style = {{maxheight: this.props.maxHeight}}>
           <div className="leaderboard-header">
             <h2> Leader Board </h2>
           </div>
