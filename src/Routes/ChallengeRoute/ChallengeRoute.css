@@ -5,8 +5,6 @@
   align-items: center;
   text-align: center;
   width: auto;
-  /* background-color: #d3d3d3; */
-  /* background-image: url('../../Images/DetectiveAtDesk.jpg'); */
   position: static;
   bottom: 0;
   right: 0;
@@ -33,7 +31,7 @@
   width: 300px;
   height: 400px;
   text-align: center;
-  background-color: rgba(217, 193, 170, .8);
+  background-color: rgba(217, 193, 170,1);
   box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .6);
 }
 
@@ -61,8 +59,10 @@
   justify-content: center;
   align-items: baseline;
   width: 350px;
+  padding: 5px;
   box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .2);;
-  background-color: rgba(217, 193, 170, 1);
+  background-color: #A9CFD9;
+  border-radius: 10px;
   font-size: larger;
 }
 
@@ -93,7 +93,7 @@
   position: fixed;
   top: 50%;
   bottom: 50%;
-  background-color: rgba(100, 0, 100, .7);
+  background-color: rgba(100, 0, 100, 1);
   height: 200px;
   width: 300px;
   border-radius: 10px;
@@ -113,12 +113,13 @@
     width: 700px;
     height: 450px;
     text-align: center;
-    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .6);;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
+    margin-bottom: 80px;
+    transition: all .2s ease-in-out;
   }
   .bg {
     background-color: black;
     height: 40px;
     margin-top: 60px;
   }
-  
 }

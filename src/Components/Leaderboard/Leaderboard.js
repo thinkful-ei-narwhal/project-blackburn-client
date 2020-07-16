@@ -59,46 +59,30 @@ export default class Leaderboard extends React.Component {
         .map((score, index) => {
           return (
             <li key={index}>
-              <Trail
-                items={score}
-                from={{ opacity: 0 }}
-                to={{ opacity: 1 }}
-                key={index}
-              >
-                {(score) => (props) => (
-                  <div
-                    className="leaderboard-list"
-                    style={{
-                      ...props,
-                    }}
-                  >
-                    <span className="username">
-                      {index + 1}
-                      {index + 1 === 1 ? (
-                        <FaCrown style={{ margin: 6 }} />
-                      ) : null}
-                    </span>
-                    {this.state.width > 800 && (
-                      <div className="avatar">
-                        {' '}
-                        <img src={score.avatar} alt={`User avatar`} />{' '}
-                      </div>
-                    )}
-                    <span
-                      className="username"
-                      style={
-                        this.context.user.username === score.username
-                          ? { color: 'red' }
-                          : { color: 'black' }
-                      }
-                    >
-                      {score.username}
-                    </span>
-                    {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
-                    <span className="score"> {score.score} </span>
+              <div className="leaderboard-list">
+                <span className="username">
+                  {index + 1}
+                  {index + 1 === 1 ? <FaCrown style={{ margin: 6 }} /> : null}
+                </span>
+                {this.state.width > 800 && (
+                  <div className="avatar">
+                    {' '}
+                    <img src={score.avatar} alt={`User avatar`} />{' '}
                   </div>
                 )}
-              </Trail>
+                <span
+                  className="username"
+                  style={
+                    this.context.user.username === score.username
+                      ? { color: 'red' }
+                      : { color: 'black' }
+                  }
+                >
+                  {score.username}
+                </span>
+                {/* <span className = 'score'> {(this.context.user.username === score.username) ? <FaCrown /> : null }</span> */}
+                <span className="score"> {score.score} </span>
+              </div>
             </li>
           );
         });
@@ -116,7 +100,10 @@ export default class Leaderboard extends React.Component {
     const maxMyScore = Math.max(...myScoreArr);
     return (
       this.state.initialized === true && (
-        <div className="leaderboard">
+        <div
+          className="leaderboard"
+          style={{ maxheight: this.props.maxHeight }}
+        >
           <div className="leaderboard-header">
             <h2> Leader Board </h2>
           </div>

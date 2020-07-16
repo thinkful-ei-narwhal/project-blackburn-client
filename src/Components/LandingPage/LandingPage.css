@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans&display=swap');
 
 /* body {
   font-family: 'Crimson Pro', serif;
@@ -6,7 +6,7 @@
 
 .landingHeader {
   font-family: 'Crimson Pro', serif;
-  font-weight: 700 ;
+  font-weight: 700;
 }
 
 .landing-page-nav {
@@ -19,7 +19,7 @@
   border-radius: 10px;
   padding: 10px;
   box-shadow: 2px 2px 2px 2px lightgray;
-  background-color: white;
+  background-color: #a9cfd9;
 }
 .about-txt {
   color: black;
@@ -30,7 +30,9 @@
   width: 10vh;
   text-decoration: none;
   padding: 15px;
-  color: RED;
+  color: black;
+  background-color: #dfcab7;
+  border: 1px solid #d9c1aa;
   border-radius: 6px;
   margin-bottom: 10vh;
   font-size: larger;
@@ -38,16 +40,14 @@
 }
 
 .login-signup:hover {
-  background-color: #f1f1f1;
-  opacity: 75%;
-  color: white;
+  background-color: #ae9172;
+  color: black;
 }
 
 .landing-page-h1 {
   color: #d9c1aa;
   font-size: 56px;
   text-align: center;
-  
 }
 
 .more-info {
@@ -77,24 +77,15 @@
   align-items: flex-start;
   justify-content: center;
   text-align: left;
-  margin-bottom: 2vh;
-  margin-left: 100px;
-  margin-right: 100px;
   height: auto;
   width: auto;
   padding: 20px;
-
+  margin: 15px;
   border-radius: 6px;
   font-family: 'Open Sans', serif;
   color: black;
   font-weight: 400;
   line-height: 30px;
   box-shadow: 2px 2px 2px 2px lightgray;
-  background-color: white;
-}
-
-@media screen and (min-width: 1000px) {
-  .landingText {
-    margin: 500px;
-  }
+  background-color: #a9cfd9;
 }

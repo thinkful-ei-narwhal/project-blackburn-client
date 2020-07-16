@@ -49,7 +49,7 @@ class RegistrationForm extends Component {
         <Label htmlFor="username">
           {' '}
           <Required />
-          Create Username:
+          Create Username
         </Label>
         <Input
           aria-label="username"
@@ -105,7 +105,7 @@ class RegistrationForm extends Component {
   renderPassword = () => {
     return (
       <div className="reg-account">
-        <h2>Create New Account:</h2>
+        <h2>Create New Account</h2>
         {this.state.error !== '' && (
           <h3 className="error">{this.state.error}</h3>
         )}
@@ -124,7 +124,7 @@ class RegistrationForm extends Component {
         />
         <Label htmlFor="reg-input">
           <Required />
-          Re-enter Password:
+          Re-enter Password
         </Label>
         <Input
           aria-label="reenter password"

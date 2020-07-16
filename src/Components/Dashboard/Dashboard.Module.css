@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@1,900&family=Open+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@1,900&family=Open+Sans&display=swap');
 
 body {
-  background-color: rgba(217, 193, 170, .3);
+  background-color: rgba(217, 193, 170, 0.3);
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  right:0 ;
+  right: 0;
   font-family: 'Crimson Pro', serif;
 }
 
@@ -16,21 +16,20 @@ body {
   align-items: center;
   border-bottom: 2px solid black;
   box-shadow: 0 4px 0 0px lightgrey;
-  background-color: white;
+  background-color: #a9cfd9;
 }
 
 .dashboard-header-open {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-left: 10%;
-    width: 100%;
-    /* padding: 5px; */
-    border-bottom: 2px solid black;
-    box-shadow: 0 4px 0 0px lightgrey;
-    background-color: white;
-    font-family: 'Crimson Pro', serif;
-
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 10%;
+  width: 100%;
+  /* padding: 5px; */
+  border-bottom: 2px solid black;
+  box-shadow: 0 4px 0 0px lightgrey;
+  background-color: #a9cfd9;
+  font-family: 'Crimson Pro', serif;
 }
 
 .links {
@@ -45,19 +44,18 @@ body {
 .links:hover {
   text-decoration: none;
   font-size: 24px;
-  color: #f1f1f1;
+  color: #51808c;
   cursor: pointer;
 }
 
 .links-selected {
-  color: #f1f1f1;
+  color: #51808c;
   text-decoration: none;
   text-align: center;
   font-size: 24px;
   padding: 15px;
   margin-top: 7vh;
 }
-
 
 .sidenav {
   height: 100%;
@@ -66,7 +64,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #d9c1aa;
+  background-image: linear-gradient(to bottom right, #d9c1aa, #dfa36b);
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -79,7 +77,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #d9c1aa;
+  background-image: linear-gradient(to bottom right, #d9c1aa, #dfa36b);
   overflow-x: hidden;
   transition: 0.5s;
   display: flex;
@@ -108,7 +106,6 @@ body {
   margin-top: 7px;
   margin-right: 10px;
   padding: 5px;
-
 }
 
 .content {
@@ -123,27 +120,24 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 28%;
+  margin-left: 24%;
 }
-
 
 .user-header {
   display: none;
 }
-
 
 @media screen and (min-width: 400px) {
   .sidenav-open {
     width: 90px;
   }
 
-   .dashboard-header-open {
+  .dashboard-header-open {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 40px;
-  } 
-
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -151,12 +145,12 @@ body {
     width: 100px;
   }
 
-   .dashboard-header-open {
+  .dashboard-header-open {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 60px;
-  } 
+  }
 
   .user-header {
     display: flex;

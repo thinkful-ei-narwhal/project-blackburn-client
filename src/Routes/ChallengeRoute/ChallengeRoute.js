@@ -87,6 +87,13 @@ class ChallengeRoute extends Component {
   }
 
   triggerLevelEnd() {
+    console.log(
+      this.state.playerHealth,
+      this.state.levelTimer,
+      this.state.levelEnded,
+      this.state.isWin
+    );
+
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
       this.setState({ words: [] });
@@ -318,8 +325,8 @@ class ChallengeRoute extends Component {
         );
         this.staticWordTimer = checkpointData.word_expiration_timer * 1000;
         this.setState({
-          levelTimer: 5, // checkpointData.level_timer,
-          levelTimerTotal: 5, // checkpointData.level_timer,
+          levelTimer: 2, //checkpointData.level_timer,
+          levelTimerTotal: 2, //checkpointData.level_timer,
           playerScore: playerScore,
           playerBest: playerBestStored,
           playerBestStored: playerBestStored,
@@ -365,14 +372,15 @@ class ChallengeRoute extends Component {
             <>
               <animated.div
                 style={{
-                  fontSize: '20vh',
-                  height: '100vh',
-                  width: '100vh',
+                  fontSize: '100px',
+                  height: 'auto',
+                  width: 'auto',
+                  position: 'absolute',
+                  top: 100,
                   ...props,
                 }}
               >
-                {' '}
-                {Math.floor(props.value)}{' '}
+                {Math.floor(props.value)}
               </animated.div>
               <div className="hint-container">
                 <div className="hint">
@@ -415,6 +423,7 @@ class ChallengeRoute extends Component {
                   {(props) => (
                     <animated.div className="bg" style={props}>
                       <UIStats
+                        style={{ marginTop: 5 }}
                         textBefore={'Time Remaining'}
                         metric={
                           this.state.levelTimer >= 0 ? this.state.levelTimer : 0
@@ -468,16 +477,41 @@ class ChallengeRoute extends Component {
                 <ul className="word-ul">
                   {this.state.words.map((wordObj, index) => (
                     <li className="word-li" key={index}>
-                      <Spring
-                        from={{ overflow: 'hidden', height: 0, width: 0 }}
-                        to={{ height: 'auto', width: 'auto' }}
-                      >
-                        {(props) => (
-                          <animated.div className="wordTimer" style={props}>
-                            <Word word={wordObj.word} />
-                          </animated.div>
-                        )}
-                      </Spring>
+                      {this.state.levelTimer < 10 && (
+                        <Spring
+                          from={{
+                            color:
+                              colors[Math.floor(Math.random() * colors.length)],
+                            overflow: 'hidden',
+                            height: 0,
+                            width: 0,
+                          }}
+                          to={{
+                            color:
+                              colors[Math.floor(Math.random() * colors.length)],
+                            height: 'auto',
+                            width: 'auto',
+                          }}
+                        >
+                          {(props) => (
+                            <animated.div className="wordTimer" style={props}>
+                              <Word word={wordObj.word} />
+                            </animated.div>
+                          )}
+                        </Spring>
+                      )}
+                      {this.state.levelTimer >= 10 && (
+                        <Spring
+                          from={{ overflow: 'hidden', height: 0, width: 0 }}
+                          to={{ height: 'auto', width: 'auto' }}
+                        >
+                          {(props) => (
+                            <animated.div className="wordTimer" style={props}>
+                              <Word word={wordObj.word} />
+                            </animated.div>
+                          )}
+                        </Spring>
+                      )}
                       <div className="timer">
                         {wordObj.getTimeRemaining() >= 0
                           ? wordObj.getTimeRemaining()

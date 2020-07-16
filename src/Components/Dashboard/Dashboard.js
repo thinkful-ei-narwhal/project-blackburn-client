@@ -27,7 +27,7 @@ const pages = [
   ),
   (style) => (
     <animated.div style={{ ...style }}>
-      <Leaderboard />
+      <Leaderboard maxHeight = {1} />
     </animated.div>
   ),
   (style) => (
@@ -48,7 +48,7 @@ export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false,
+      menuOpen: true,
       showHome: true,
       showLeaderboard: false,
       showAnalytics: false,
@@ -65,9 +65,12 @@ export default class Dashboard extends React.Component {
       })
     );
   }
+
+
   handleLogout = (e) => {
     this.context.processLogout(e);
   };
+
   handleShowHome = () => {
     if (!this.state.showHome) {
       this.setState({
@@ -146,86 +149,75 @@ export default class Dashboard extends React.Component {
               <FaBars />
             </div>
           )}
-          <h1
-            className="title"
-          >
-            Project Blackburn
-          </h1>
-          <div className="user-header">
-            <UserHeader />
-            <h2 className="user-welcome">Welcome {user.username}</h2>
-          </div>
-        </header>
-        {this.state.menuOpen && (
-          <Spring
-            from={{
-              width: 0,
-            }}
-            to={{
-              width: '100%'
-            }}
-          >
+          <Spring from={{ overflow: 'hidden', width: 0, height: '100%' }} to={{ width: "auto", height: '100%' }}>
             {(props) => (
-              <div
-                style={props}
-                className={this.state.menuOpen ? "sidenav-open" : "sidenav"}
-              >
-                {this.state.menuOpen && (
-                  <div className="x" onClick={() => this.handleMenuButton()}>
-                    {" "}
-                    <FaTimes />{" "}
-                  </div>
-                )}
-                <nav className="navLinks">
-                  <div
-                    className={this.state.showHome ? "links-selected" : "links"}
-                    onClick={() => this.handleShowHome()}
-                  >
-                    <FaHome />
-                  </div>
-                  <div
-                    className={
-                      this.state.showLeaderboard ? "links-selected" : "links"
-                    }
-                    onClick={() => this.handleShowLeaderboard()}
-                  >
-                    <FaChessKing />
-                  </div>
-                  <div
-                    className={
-                      this.state.showAnalytics ? "links-selected" : "links"
-                    }
-                    onClick={() => this.handleShowAnalytics()}
-                  >
-                    <FaChartLine />
-                  </div>
-                  <div
-                    className={
-                      this.state.showSettings ? "links-selected" : "links"
-                    }
-                    onClick={() => this.handleShowSettings()}
-                  >
-                    <FaCog />
-                  </div>
-                  <Link
-                    className="links"
-                    onClick={(e) => this.handleLogout(e)}
-                    to="/"
-                    aria-label="logout"
-                  >
-                    <GiExitDoor />
-                  </Link>
-                </nav>
-              </div>
+              <h1 style={props} className="title">
+                Project <br /> Blackburn
+              </h1>
             )}
           </Spring>
+          <Spring delay = {300} from={{ overflow: 'hidden', width: 0, height: '100%', marginLeft: 100 }} to={{ width: "auto", height: '100%', marginLeft: 0 }}>
+           { props => <div style = {props} className="user-header">
+              <UserHeader />
+              <h2 className="user-welcome">Welcome <br /> {user.username}</h2>
+            </div>
+            }
+          </Spring>
+        </header>
+        {this.state.menuOpen && (
+          <div className={this.state.menuOpen ? "sidenav-open" : "sidenav"}>
+            {this.state.menuOpen && (
+              <div className="x" onClick={() => this.handleMenuButton()}>
+                {" "}
+                <FaTimes />{" "}
+              </div>
+            )}
+            <nav className="navLinks">
+              <div
+                className={this.state.showHome ? "links-selected" : "links"}
+                onClick={() => this.handleShowHome()}
+              >
+                <FaHome />
+              </div>
+              <div
+                className={
+                  this.state.showLeaderboard ? "links-selected" : "links"
+                }
+                onClick={() => this.handleShowLeaderboard()}
+              >
+                <FaChessKing />
+              </div>
+              <div
+                className={
+                  this.state.showAnalytics ? "links-selected" : "links"
+                }
+                onClick={() => this.handleShowAnalytics()}
+              >
+                <FaChartLine />
+              </div>
+              <div
+                className={this.state.showSettings ? "links-selected" : "links"}
+                onClick={() => this.handleShowSettings()}
+              >
+                <FaCog />
+              </div>
+              <Link
+                className="links"
+                onClick={(e) => this.handleLogout(e)}
+                to="/"
+                aria-label="logout"
+              >
+                <GiExitDoor />
+              </Link>
+            </nav>
+          </div>
         )}
         <div className={this.state.menuOpen ? "content-open" : "content"}>
           <Transition
             native
             reset
             items={this.state.page}
-            from={{ overflow: "hidden", height: 'auto' }}
+            from={{ overflow: "hidden", height: "auto" }}
             enter={[{ height: "auto" }]}
             leave={{ opacity: 0, height: 0 }}
           >
