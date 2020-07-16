@@ -118,6 +118,7 @@ a {
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
+    height: auto;
   }
 
   .story-container h2 {
@@ -130,5 +131,9 @@ a {
     position: absolute;
     top: 120px;
     font-size: 20px;
+  }
+
+  .Typist {
+    text-align: left;
   }
 }

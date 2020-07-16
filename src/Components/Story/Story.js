@@ -74,15 +74,8 @@ export default class Story extends Component {
     if (this.state.story_text && this.state.story_text.length > 500) {
       return (
         <div className="story-type-text">
-          <div
-            className="after-timer"
-            style={{ height: `${this.state.story_text.length * 1.15}px` }}
-          >
-            <Spring
-              delay={5000}
-              from={{ opacity: 0, height: 0 }}
-              to={{ opacity: 1, height: "auto" }}
-            >
+          <div className="after-timer">
+            <Spring delay={5000} from={{ opacity: 0 }} to={{ opacity: 1 }}>
               {(props) => (
                 <Link
                   style={{ margin: 20, ...props }}
@@ -93,12 +86,12 @@ export default class Story extends Component {
                 </Link>
               )}
             </Spring>
+            <Typist avgTypingDelay={10}>
+              {lines.map((line) => (
+                <div key={line.key}>{line.text}</div>
+              ))}
+            </Typist>
           </div>
-          <Typist avgTypingDelay={10}>
-            {lines.map((line) => (
-              <div key={line.key}>{line.text}</div>
-            ))}
-          </Typist>
         </div>
       );
     } else if (this.state.story_text && this.state.story_text.length < 499) {
