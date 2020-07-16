@@ -117,7 +117,7 @@ export default class Story extends Component {
           {this.state.index === arrLength && (
             <div
               className="after-timer"
-              style={{ height: `${this.state.story_text.length * 1.15}px` }}
+              style={{ height: `${this.state.story_text.length * 1.25}px` }}
             >
               {
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>

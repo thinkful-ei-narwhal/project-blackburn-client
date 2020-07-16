@@ -63,6 +63,7 @@ a {
 }
 
 .start-challenge {
+  padding-top: 50px;
   position: relative;
   text-align: center;
   font-weight: 600;
@@ -80,7 +81,7 @@ a {
   text-align: center;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 980px) {
   .story-container {
     display: flex;
     flex-direction: row;
