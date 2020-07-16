@@ -69,7 +69,7 @@ export default class Story extends Component {
     if (this.state.story_text && this.state.story_text.length > 600) {
       return (
         <div className="story-type-text">
-           <div className="after-timer">
+          <div className="after-timer">
             <Spring
               delay={10000}
               from={{ opacity: 0, height: 0 }}
@@ -97,7 +97,7 @@ export default class Story extends Component {
     } else if (this.state.story_text && this.state.story_text.length < 599) {
       let presplit = this.state.story_text.split(".");
       let split = presplit.map((sentence) =>
-        sentence.replace("<br /><br />", "")
+        sentence.replace("<br/><br/>", "")
       );
       console.log(split);
       split = split.map((x, index) => {
