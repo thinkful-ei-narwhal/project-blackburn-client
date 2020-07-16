@@ -15,11 +15,11 @@
 }
 
 .analytics-container {
-  margin-top: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
 }
 
 .averages-container {
@@ -31,7 +31,18 @@
 
 @media screen and (min-width: 400px) {
   .analytics-container {
-    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .averages-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .analytics-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -42,12 +53,16 @@
   }
 }
 
+
+
 @media screen and (min-width: 1000px) {
   .analytics-container {
-    margin-top: 2vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+  }
+  .averages-container {
+    flex-direction: row;
   }
 }

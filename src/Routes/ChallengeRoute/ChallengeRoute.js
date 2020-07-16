@@ -321,8 +321,8 @@ class ChallengeRoute extends Component {
                     this.staticWordTimer =
                       checkpointData.word_expiration_timer * 1000;
                     this.setState({
-                      levelTimer: 5, //checkpointData.level_timer,
-                      levelTimerTotal: 5,//checkpointData.level_timer,
+                      levelTimer: checkpointData.level_timer,
+                      levelTimerTotal: checkpointData.level_timer,
                       playerScore: playerScore,
                       playerBest: playerBestStored,
                       playerBestStored: playerBestStored,
@@ -472,8 +472,8 @@ class ChallengeRoute extends Component {
                   {this.state.words.map((wordObj, index) => (
                     <li className="word-li" key={index}>
                       <Spring
-                        from={{  overflow: 'hidden', height: 0  }}
-                        to={{ height: 'auto' }}
+                        from={{  overflow: 'hidden', height: 0, width: 0  }}
+                        to={{ height: 'auto', width: 'auto' }}
                       >
                         {(props) => (
                           <animated.div className="wordTimer" style={props}>

@@ -9,6 +9,7 @@ import LeaderBoard from '../../Assets/Icons/Untitled.png';
 export default class App extends React.Component {
   render() {
     return (
+      <div className = 'landing-page-contianer'>
       <Parallax ref={(ref) => (this.parallax = ref)} pages={3}>
         <ParallaxLayer
           offset={1}
@@ -130,8 +131,9 @@ export default class App extends React.Component {
             justifyContent: 'center',
           }}
         >
-          <h1 style={{ color: '#51808C', fontSize: '10vh' }}>
-            {' '}
+          <h1 className = 'landingHeader' style={{ color: '#51808C', fontSize: '10vh',
+              fontFamily: 'Crimson Pro, serif', fontWeight: '700'
+        }}>
             Project <br /> Blackburn
           </h1>
           <br />
@@ -242,6 +244,7 @@ export default class App extends React.Component {
           </h3> */}
         </ParallaxLayer>
       </Parallax>
+      </div>
     );
   }
 }
