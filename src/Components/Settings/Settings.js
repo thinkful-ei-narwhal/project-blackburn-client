@@ -37,7 +37,10 @@ export default class Settings extends React.Component {
               </p>
               <p>
                 <span className="option-setting">Avatar</span> <br /> <br />{' '}
-                <img src={user.avatar} alt="User avatar"></img>
+                <img
+                  src={process.env.PUBLIC_URL + user.avatar}
+                  alt="User avatar"
+                ></img>
               </p>
 
               <Button

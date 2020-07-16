@@ -30,8 +30,8 @@
   width: 300px;
   height: 400px;
   text-align: center;
-  background-color: rgba(217, 193, 170,1);
-  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .6);
+  background-color: rgba(217, 193, 170, 1);
+  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.6);
 }
 
 .bg {
@@ -40,7 +40,6 @@
   margin-top: 30px;
 }
 
-
 .time-ui {
   display: flex;
   flex-direction: column;
@@ -48,8 +47,7 @@
   align-items: center;
   width: 100%;
   border: 1px solid gray;
-  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .2);
-
+  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
 }
 
 .stats-container {
@@ -59,8 +57,8 @@
   align-items: baseline;
   width: 350px;
   padding: 5px;
-  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, .2);;
-  background-color: #A9CFD9;
+  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
+  background-color: #a9cfd9d0;
   border-radius: 10px;
   font-size: larger;
 }
@@ -81,18 +79,16 @@
   /* width: 50px; */
 }
 
-
 .hint {
   margin: 10px;
   font-size: 2.5vh;
-
 }
 
 .hint-container {
   position: fixed;
   top: 50%;
   bottom: 50%;
-  background-color: rgba(100, 0, 100, 1);
+  background-color: #51808ca1;
   height: 200px;
   width: 300px;
   border-radius: 10px;
@@ -114,7 +110,7 @@
     text-align: center;
     box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
     margin-bottom: 80px;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
   .bg {
     background-color: black;
