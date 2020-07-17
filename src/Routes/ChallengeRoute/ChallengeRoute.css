@@ -4,12 +4,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  border: 1px solid grey;
-  width: 100%;
-  /* background-color: #d3d3d3; */
-  /* background-image: url('../../Images/DetectiveAtDesk.jpg'); */
-  background-size: cover;
-  position: absolute;
+  width: auto;
+  position: static;
   bottom: 0;
   right: 0;
   left: 0;
@@ -25,63 +21,53 @@
 }
 
 .word-ul {
-  /* border: 1px solid grey; */
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 45vh;
-  height: 30em;
-  background-color: lightgrey;
-  box-shadow: 6px 6px 6px 6px lightgray;
+  width: 300px;
+  height: 400px;
+  text-align: center;
+  background-color: rgba(217, 193, 170, 1);
+  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.6);
+  transition: all 0.2s ease-in-out;
 }
 
 .bg {
   background-color: black;
   height: 40px;
+  margin-top: 30px;
 }
-
-.word-li {
-  /* margin: 10px */
-}
-
-/* .wordTimer {
-    float: left;
-} */
 
 .time-ui {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 100%;
+  width: 100%;
   border: 1px solid gray;
-  box-shadow: 4px 4px 4px 4px lightgray;
-  /* padding: 20px; */
-  /* margin: 15px; */
+  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
 }
 
 .stats-container {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: column;
   justify-content: center;
-  justify-self: center;
-  align-items: center;
-  align-self: center;
-  text-align: center;
-  border: 1px solid gray;
-  max-width: 46vh;
-  box-shadow: 4px 4px 4px 4px black;
-  background-color: lightgrey;
-  font-size: larger;
+  align-items: baseline;
+  width: 350px;
+  padding: 5px;
+  box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
+  background-color: #a9cfd9d0;
+  border-radius: 10px;
+  font-size: larger; */
+  display: none;
 }
 
 .stat {
   text-align: center;
   margin: 10px;
-  border-bottom: 1px solid lightgray;
 }
 
 .type-input {
@@ -93,4 +79,93 @@
   border-radius: 50px;
   background-color: black;
   /* width: 50px; */
+}
+
+.hint {
+  margin: 10px;
+  font-size: 2.5vh;
+}
+
+.hint-container {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  background-color: #51808ca1;
+  height: 200px;
+  width: 300px;
+  border-radius: 10px;
+  color: white;
+  font-size: 2.5vh;
+}
+
+@media screen and (min-width: 600px) {
+  .word-ul {
+    /* border: 1px solid grey; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 350px;
+    text-align: center;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
+    margin-bottom: 50px;
+    transition: all 0.2s ease-in-out;
+  }
+  .bg {
+    background-color: black;
+    height: 40px;
+    margin-top: 80px;
+  }
+
+  .stats-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    width: 350px;
+    padding: 5px;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
+    background-color: #a9cfd9d0;
+    border-radius: 10px;
+    font-size: larger;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .word-ul {
+    /* border: 1px solid grey; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 750px;
+    height: 350px;
+    text-align: center;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
+    margin-bottom: 50px;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .word-ul {
+    /* border: 1px solid grey; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 850px;
+    height: 450px;
+    text-align: center;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
+    margin-bottom: 50px;
+    transition: all 0.2s ease-in-out;
+  }
 }

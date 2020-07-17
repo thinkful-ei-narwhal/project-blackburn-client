@@ -46,42 +46,77 @@ class RegistrationForm extends Component {
         {this.state.error !== '' && (
           <h3 className="error">{this.state.error}</h3>
         )}
-        <Label htmlFor="reg-input">
+        <Label htmlFor="username">
           {' '}
           <Required />
-          Create Username:
+          Create Username
         </Label>
         <Input
+          aria-label="username"
           className="reg-input"
           onChange={(e) => this.setState({ username: e.target.value })}
           value={this.state.username}
           required
         />
-        <Label htmlFor="reg-select">Choose Avatar:</Label>
-        <select
-          className="reg-select"
-          onChange={(e) => this.setState({ avatar: e.target.value })}
-          value={this.state.avatar}
-        >
-          <option value="" defaultValue />
-          <option>Red Mage</option>
-          <option>Blue Mage</option>
-        </select>
+
+        <div className="avatar-container">
+          <p>Choose Avatar:</p>
+          <Label htmlFor="man">
+            <input
+              type="radio"
+              name="reg-select"
+              id="man"
+              className="avatar-select"
+              value="/images/man.png"
+              onChange={(e) => this.setState({ avatar: e.target.value })}
+              selected
+            />
+            <img className="avatar-img" src="/images/man.png" alt="man"></img>
+          </Label>
+          <Label htmlFor="spy">
+            <input
+              type="radio"
+              name="reg-select"
+              id="spy"
+              className="avatar-select"
+              value="/images/spy.png"
+              onChange={(e) => this.setState({ avatar: e.target.value })}
+            />
+            <img className="avatar-img" src="/images/spy.png" alt="spy"></img>
+          </Label>
+          <Label htmlFor="serial-killer">
+            <input
+              type="radio"
+              name="reg-select"
+              id="serial-killer"
+              className="avatar-select"
+              value="/images/serial-killer.png"
+              onChange={(e) => this.setState({ avatar: e.target.value })}
+            />
+            <img
+              className="avatar-img"
+              src="/images/serial-killer.png"
+              alt="serial-killer"
+            ></img>
+          </Label>
+        </div>
       </div>
     );
   };
   renderPassword = () => {
     return (
       <div className="reg-account">
-        <h2>Create New Account:</h2>
+        <h2>Create New Account</h2>
         {this.state.error !== '' && (
           <h3 className="error">{this.state.error}</h3>
         )}
-        <Label htmlFor="reg-input">
+        <Label htmlFor="password">
           <Required />
           Password:
         </Label>
         <Input
+          aria-label="password"
+          autoFocus={true}
           className="reg-input"
           onChange={(e) => this.setState({ password: e.target.value })}
           value={this.state.password}
@@ -90,9 +125,10 @@ class RegistrationForm extends Component {
         />
         <Label htmlFor="reg-input">
           <Required />
-          Re-enter Password:
+          Re-enter Password
         </Label>
         <Input
+          aria-label="reenter password"
           className="reg-input"
           onChange={(e) => {
             this.comparePassword(e);
@@ -106,7 +142,6 @@ class RegistrationForm extends Component {
 
   comparePassword = (e) => {
     if (this.state.password === e.target.value) {
-      console.log('match');
       this.setState({ error: '' });
     } else this.setState({ error: 'Passwords do not match' });
   };
@@ -131,14 +166,14 @@ class RegistrationForm extends Component {
             </Button>
           ) : (
             <div className="btn-container">
+              <Button className="reg-btn" type="submit">
+                Create Account
+              </Button>
               <Button
                 className="reg-btn back"
                 onClick={(e) => this.handleBack(e)}
               >
                 Back
-              </Button>
-              <Button className="reg-btn" type="submit">
-                Create Account
               </Button>
             </div>
           )}

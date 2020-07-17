@@ -1,47 +1,53 @@
-
-a {
-    color: #302B28;
-    text-decoration: none;
-    width: 100%;
-}
-
-
 .start-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #302b28;
+  text-decoration: none;
+  width: 100%;
+  margin-top: 50px;
 
-    margin-top: 50px;
 }
 
 .start-buttons {
-    /* border: 1px solid black; */
-    padding: 20px;
-    height: 100%;
-    width: 100%;
-    margin-top: 25px;
-    margin-right: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  padding: 20px;
+  height: 100%;
+  width: 20vh;
+  margin-top: 25px;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #d9c1aa;
+  padding: 20px;
+  color: #302b28;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
+.start-buttons:hover {
+  background-color: #ae9172;
+}
 
 .start-btn {
-    margin-top: 10px;
-    margin-right: 10px;
-    text-decoration: none;
-    border: 1px solid #D9C1AA;
-    padding: 20px;
-    color: #302B28;
-    border-radius: 6px;
-    cursor: pointer;
-
+  border: none;
 }
 
 .start-btn:hover {
-    background-color: #AE9172;
-    color: #D9C1AA
+  color: #ae9172;
+  border: none;
+}
+
+.tutorial-text {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+  .tutorial-text {
+    margin-left: 300px;
+    margin-right: 300px;
+  }
 }

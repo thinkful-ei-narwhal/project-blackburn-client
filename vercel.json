@@ -6,8 +6,24 @@
       "dest": "/static/$1"
     },
     {
+      "src": "^/audio/(.*)",
+      "dest": "/audio/$1"
+    },
+    {
+      "src": "^/images/(.*)",
+      "dest": "/images/$1"
+    },
+    {
       "src": "^/favicon.ico$",
       "dest": "/favicon.ico"
+    },
+    {
+      "src": "^/favicon192.png$",
+      "dest": "/favicon192.png"
+    },
+    {
+      "src": "^/favicon512.png$",
+      "dest": "/favicon512.png"
     },
     {
       "src": "^/manifest.json$",

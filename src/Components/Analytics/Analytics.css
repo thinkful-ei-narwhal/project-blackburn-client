@@ -1,11 +1,66 @@
-.averages {
-    margin: 10px;
-    margin-top: 100px;
-    box-shadow: 5px 5px 5px 5px lightgray;
-    padding: 20px;
+.graphs-container {
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  background-color: white;
 }
 
-.averages:hover {
-    box-shadow: 20px 20px 20px 20px lightgray;
-    
+.averages {
+  margin: 20px;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  padding: 20px;
+  width: 20vh;
+  height: auto;
+}
+
+.analytics-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+.averages-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@media screen and (min-width: 400px) {
+  .analytics-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .averages-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .analytics-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .averages-container {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .analytics-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .averages-container {
+    flex-direction: row;
+  }
 }

@@ -1,22 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./LandingPage.css";
-import { Spring, Parallax, ParallaxLayer } from "react-spring/renderprops";
+// import "./LandingPageV2.css";
+import { Spring } from "react-spring/renderprops.cjs";
 export default class LandingPage extends React.Component {
   render() {
     return (
       <>
       <div className="landing-page-container">
         <div className="landing-header">
-
-            <Parallax pages = {2} ref={ref => (this.parallax = ref)}>
-              <ParallaxLayer offset = {1}>
-                  <h1 className="landing-page-h1">
-                    Project <br /> Blackburn
-                  </h1>
-              </ParallaxLayer>
-            </Parallax>
-
           <Spring
           delay={1000}
           trail={1000}

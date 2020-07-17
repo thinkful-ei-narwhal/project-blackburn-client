@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Button from "../Button/Button";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import ScoreboardApiService from "../../Services/scoreboard-api-service";
-import LeaderBoard from "./../Leaderboard/Leaderboard";
-import loseSound from "../../Assets/Sounds/arcade_game_fall_tone_001.mp3";
-import winSound from "../../Assets/Sounds/arcade-climb_tone_001.mp3";
-import "./WinLosePage.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../Button/Button';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import ScoreboardApiService from '../../Services/scoreboard-api-service';
+import LeaderBoard from './../Leaderboard/Leaderboard';
+import loseSound from '../../Assets/Sounds/arcade_game_fall_tone_001.mp3';
+import winSound from '../../Assets/Sounds/arcade-climb_tone_001.mp3';
+import './WinLosePage.css';
 
 class WinLosePage extends Component {
   static contextType = BlackBurnContext;
@@ -26,12 +26,15 @@ class WinLosePage extends Component {
       avg_wpm: this.context.wpm,
       total_accuracy: this.context.accuracy,
     };
-    console.log("postScore() with data", data);
-    await ScoreboardApiService.postScore(data);
-
-    this.setState({ autoSave: false });
-    console.log(this.state.autoSave);
+    await ScoreboardApiService.postScore(data).then(
+      this.setState({ autoSave: false })
+    );
   }
+
+  handleQuit = () => {
+    this.autoSave();
+    this.handleReturnToStartClick();
+  };
 
   handleReturnToStartClick = () => {
     this.context.resetGameData();
@@ -40,9 +43,13 @@ class WinLosePage extends Component {
   renderLevelWin() {
     return (
       <div className="results victory">
-        <div className="results header">{this.props.text}</div>
-        <LeaderBoard />
-        <Link to={"/start"}>
+        <div
+          className="results header"
+          dangerouslySetInnerHTML={{ __html: this.props.text }}
+        >
+          {}
+        </div>
+        <Link to={'/start'}>
           <Button
             className="btn-results next-btn"
             onClick={this.handleReturnToStartClick}
@@ -57,20 +64,26 @@ class WinLosePage extends Component {
   playWintone = () => {
     let winTone = new Audio(winSound);
     winTone.play();
+    winTone.volume = 0.2;
   };
 
   renderWin() {
+    this.playWintone();
     return (
       <div className="results-victory">
-        {this.playWintone()}
-        <div className="results header">{this.props.text}</div>
+        <div
+          className="results header"
+          dangerouslySetInnerHTML={{ __html: this.props.text }}
+        >
+          {}
+        </div>
         <Link to="/storypage">
           <Button className="btn-results next-btn">Next</Button>
         </Link>
         <Link to="/dashboard">
           <Button
             className="btn-results dashboard-btn"
-            onClick={this.handleReturnToStartClick}
+            onClick={this.handleQuit}
           >
             Quit Run
           </Button>
@@ -82,14 +95,19 @@ class WinLosePage extends Component {
   playLoseTone = () => {
     let loseTone = new Audio(loseSound);
     loseTone.play();
+    loseTone.volume = 0.2;
   };
 
   renderLose() {
+    this.playLoseTone();
     return (
       <div className="results defeat">
-        {this.playLoseTone()}
-        <div className="results header">{this.props.text}</div>
-        <LeaderBoard />
+        <div
+          className="results header"
+          dangerouslySetInnerHTML={{ __html: this.props.text }}
+        >
+          {}
+        </div>
         <Link to="/start">
           <Button
             className="btn-results retry-btn"
@@ -98,6 +116,9 @@ class WinLosePage extends Component {
             Return to Start
           </Button>
         </Link>
+        <div className="leaderboard-container">
+          <LeaderBoard />
+        </div>
       </div>
     );
   }
@@ -109,13 +130,13 @@ class WinLosePage extends Component {
   render() {
     return (
       <div className="results-div">
-        {this.state.condition === "lose" &&
+        {this.state.condition === 'lose' &&
           !this.state.autoSave &&
           this.renderLose()}
-        {this.state.condition === "checkpoint" &&
+        {this.state.condition === 'checkpoint' &&
           !this.state.autoSave &&
           this.renderWin()}
-        {this.state.condition === "level_beaten" &&
+        {this.state.condition === 'level_beaten' &&
           !this.state.autoSave &&
           this.renderLevelWin()}
       </div>

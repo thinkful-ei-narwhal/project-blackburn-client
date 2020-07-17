@@ -2,12 +2,16 @@
   font-size: larger;
   margin: 20px;
   padding: 5px;
-  background-color: #d9c1aa;
+  background-color: rgba(217, 193, 170, 1);
   box-shadow: 3px 3px 3px lightgray;
-  width: 40%;
-  text-align: center;
+  width: 75%;
+  text-align: left;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 6px;
+  padding: 11px;
+  line-height: 1.3;
+  color: #594F46
 }
 
 .game-container {
@@ -15,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  overflow-y: scroll;
 }
 
 .btn-results {
@@ -34,10 +38,22 @@
   color: #d9c1aa;
 }
 
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.leaderboard-container {
+  height: 200px;
+  width: 400px;
+  margin-bottom: 70px;
+}
+
 
 .results-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
 }

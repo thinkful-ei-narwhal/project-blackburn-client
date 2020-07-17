@@ -1,0 +1,23 @@
+.score-graph {
+  margin: 10px;
+  box-shadow: 5px 5px 5px 5px lightgray;
+  padding: 20px;
+}
+
+.wpm-graph {
+  margin: 10px;
+  box-shadow: 5px 5px 5px 5px lightgray;
+  padding: 20px;
+}
+
+ .graphs {
+    display: flex;
+    flex-direction: column;  
+ }
+
+
+@media screen and (min-width: 800px) {
+  .graphs {
+    flex-direction: row;
+  }
+}

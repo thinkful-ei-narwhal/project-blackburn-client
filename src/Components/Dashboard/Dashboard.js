@@ -7,7 +7,7 @@ import Settings from '../Settings/Settings';
 import BlackBurnContext from '../../Context/BlackburnContext';
 import UserHeader from '../UserHeader/UserHeader';
 import './Dashboard.Module.css';
-import { Spring, animated, Transition } from 'react-spring/renderprops';
+import { Spring, animated, Transition } from 'react-spring/renderprops.cjs';
 import {
   FaBars,
   FaTimes,
@@ -17,6 +17,7 @@ import {
   FaCog,
 } from 'react-icons/fa';
 import { GiExitDoor } from 'react-icons/gi';
+import ApiService from '../../Services/auth-api-service';
 
 const pages = [
   (style) => (
@@ -26,7 +27,7 @@ const pages = [
   ),
   (style) => (
     <animated.div style={{ ...style }}>
-      <Leaderboard />
+      <Leaderboard maxHeight={1} />
     </animated.div>
   ),
   (style) => (
@@ -47,7 +48,7 @@ export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false,
+      menuOpen: true,
       showHome: true,
       showLeaderboard: false,
       showAnalytics: false,
@@ -55,10 +56,20 @@ export default class Dashboard extends React.Component {
       page: 0,
     };
   }
+  componentDidMount() {
+    ApiService.getUser(this.context.user.id).then((res) =>
+      this.context.setUser({
+        id: res.id,
+        username: res.username,
+        avatar: res.avatar,
+      })
+    );
+  }
 
   handleLogout = (e) => {
     this.context.processLogout(e);
   };
+
   handleShowHome = () => {
     if (!this.state.showHome) {
       this.setState({
@@ -127,96 +138,101 @@ export default class Dashboard extends React.Component {
     const { user } = this.context;
     return (
       <>
-        {!this.state.menuOpen && (
-          <div className="x-closed" onClick={() => this.handleMenuButton()}>
-            <FaBars />
-          </div>
-        )}
         <header
           className={
             this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
           }
         >
-          <h2 className="user-welcome">Welcome {user.username}</h2>
-          <div className="user-header">
-            <UserHeader />
-          </div>
-        </header>
-        {this.state.menuOpen && (
+          {!this.state.menuOpen && (
+            <div className="x-closed" onClick={() => this.handleMenuButton()}>
+              <FaBars />
+            </div>
+          )}
           <Spring
-            from={{
-              opacity: 0,
-            }}
-            to={{
-              opacity: 1,
-            }}
+            from={{ overflow: 'hidden', width: 0, height: '100%' }}
+            to={{ width: 'auto', height: '100%' }}
           >
             {(props) => (
-              <div
-                style={props}
-                className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}
-              >
-                {this.state.menuOpen && (
-                  <div className="x" onClick={() => this.handleMenuButton()}>
-                    {' '}
-                    <FaTimes />{' '}
-                  </div>
-                )}
-
-                <nav className="navLinks">
-                  <h1 className="title">
-                    Project Blackburn
-                  </h1>
-                  <div
-                    className={this.state.showHome ? 'links-selected' : 'links'}
-                    onClick={() => this.handleShowHome()}
-                  >
-                    <FaHome />
-                  </div>
-                  <div
-                    className={
-                      this.state.showLeaderboard ? 'links-selected' : 'links'
-                    }
-                    onClick={() => this.handleShowLeaderboard()}
-                  >
-                    <FaChessKing />
-                  </div>
-                  <div
-                    className={
-                      this.state.showAnalytics ? 'links-selected' : 'links'
-                    }
-                    onClick={() => this.handleShowAnalytics()}
-                  >
-                    <FaChartLine />
-                  </div>
-                  <div
-                    className={
-                      this.state.showSettings ? 'links-selected' : 'links'
-                    }
-                    onClick={() => this.handleShowSettings()}
-                  >
-                    <FaCog />
-                  </div>
-                  <Link
-                    className="links"
-                    onClick={(e) => this.handleLogout(e)}
-                    to="/"
-                  >
-                    <GiExitDoor />
-                  </Link>
-                </nav>
+              <h1 style={props} className="title">
+                Project <br /> Blackburn
+              </h1>
+            )}
+          </Spring>
+          <Spring
+            delay={300}
+            from={{
+              overflow: 'hidden',
+              width: 0,
+              height: '100%',
+              marginLeft: 100,
+            }}
+            to={{ width: 'auto', height: '100%', marginLeft: 0 }}
+          >
+            {(props) => (
+              <div style={props} className="user-header">
+                <UserHeader />
+                <h2 className="user-welcome">
+                  Welcome <br /> {user.username}
+                </h2>
               </div>
             )}
           </Spring>
+        </header>
+        {this.state.menuOpen && (
+          <div className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
+            {this.state.menuOpen && (
+              <div className="x" onClick={() => this.handleMenuButton()}>
+                {' '}
+                <FaTimes />{' '}
+              </div>
+            )}
+            <nav className="navLinks">
+              <div
+                className={this.state.showHome ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowHome()}
+              >
+                <FaHome />
+              </div>
+              <div
+                className={
+                  this.state.showLeaderboard ? 'links-selected' : 'links'
+                }
+                onClick={() => this.handleShowLeaderboard()}
+              >
+                <FaChessKing />
+              </div>
+              <div
+                className={
+                  this.state.showAnalytics ? 'links-selected' : 'links'
+                }
+                onClick={() => this.handleShowAnalytics()}
+              >
+                <FaChartLine />
+              </div>
+              <div
+                className={this.state.showSettings ? 'links-selected' : 'links'}
+                onClick={() => this.handleShowSettings()}
+              >
+                <FaCog />
+              </div>
+              <Link
+                className="links"
+                onClick={(e) => this.handleLogout(e)}
+                to="/"
+                aria-label="logout"
+              >
+                <GiExitDoor />
+              </Link>
+            </nav>
+          </div>
         )}
         <div className={this.state.menuOpen ? 'content-open' : 'content'}>
           <Transition
             native
             reset
-            unique
             items={this.state.page}
-            from={{ opacity: 0, height: 0 }}
-            enter={{ opacity: 1, height: 'auto' }}
+            from={{ overflow: 'hidden', height: 'auto' }}
+            enter={[{ height: 'auto' }]}
             leave={{ opacity: 0, height: 0 }}
           >
             {(index) => pages[index]}

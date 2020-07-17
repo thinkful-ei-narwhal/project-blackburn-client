@@ -1,18 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans&display=swap');
+
 .Registration {
-  background-color: #302b28;
+  background-color: rgba(217, 193, 170, 0.3);
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  font-family: 'Crimson Pro', serif;
+}
+.reg-title {
+  color: #51808c;
+  position: absolute;
+  padding: 20px;
+  top: 10px;
+  left: 45%;
+  text-decoration: none;
+  font-family: 'Crimson Pro', serif;
+  font-weight: 700;
 }
 .reg-container {
-  margin: 25vh;
+  position: absolute;
+  top: 25vh;
+  right: 10vw;
   padding: 20px;
   text-align: center;
   border-radius: 10px;
-  background-color: #d9c1aa;
-  box-shadow: 3px 3px 3px lightgray;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  background-color: white;
 }
 .reg-account {
   display: flex;
@@ -28,6 +43,7 @@
   margin: 10px;
   padding: 5px;
   border: none;
+  border: 1px solid #d9c1aa;
   border-radius: 10px;
 }
 .reg-input:focus,
@@ -40,14 +56,14 @@
   margin-left: 10px;
   margin-right: 10px;
   padding: 20px;
-  border: 1px solid #302b28;
+  border: 1px solid #d9c1aa;
   border-radius: 6px;
-  background-color: #d9c1aa;
+  background-color: rgba(217, 193, 170, 0.3);
   color: #302b28;
 }
 .reg-btn:hover {
-  background-color: #302b28;
-  color: #d9c1aa;
+  background-color: #ae9172;
+  color: #302b28;
 }
 .reg-btn:disabled {
   display: none;
@@ -58,4 +74,60 @@
   color: red;
   font-size: 15px;
   font-weight: normal;
+}
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.avatar-img {
+  margin: 10px;
+}
+
+.avatar-select {
+  position: fixed;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.avatar-select + .avatar-img {
+  cursor: pointer;
+}
+
+.avatar-select:checked + .avatar-img {
+  outline: 2px solid black;
+}
+
+@media screen and (min-width: 400px) {
+  .reg-container {
+    position: absolute;
+    top: 25vh;
+    right: 30vw;
+    left: 30vw;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .reg-container {
+    position: absolute;
+    top: 25vh;
+    right: 30vw;
+    left: 30vw;
+  }
+  .avatar-container {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .reg-container {
+    position: absolute;
+    top: 25vh;
+    right: 35vw;
+  }
+  .avatar-container {
+    display: flex;
+    flex-direction: row;
+  }
 }
