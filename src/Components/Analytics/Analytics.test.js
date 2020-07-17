@@ -6,7 +6,7 @@ import  BlackburnContext  from '../../Context/BlackburnContext'
 import Analytics from './Analytics';
 import BlackBurnContext from '../../Context/BlackburnContext';
 
-describe(`Adds header to dom without crashing`, () => {
+describe(`Adds analytics to dom without crashing`, () => {
     it('renders without crashing', () => {
         const wrapper = shallow(
         <BlackBurnContext.Provider>
