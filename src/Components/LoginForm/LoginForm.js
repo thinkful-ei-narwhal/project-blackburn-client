@@ -18,11 +18,9 @@ class LoginForm extends Component {
       .then((res) => {
         password.value = '';
         this.context.processLogin(res.authToken);
-        console.log(this.context);
         this.props.history.push(`/dashboard`);
       })
       .catch((err) => {
-        console.log(err);
         this.setState({ error: err.error });
       });
   };

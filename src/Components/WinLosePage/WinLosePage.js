@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Button from "../Button/Button";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import ScoreboardApiService from "../../Services/scoreboard-api-service";
-import LeaderBoard from "./../Leaderboard/Leaderboard";
-import loseSound from "../../Assets/Sounds/arcade_game_fall_tone_001.mp3";
-import winSound from "../../Assets/Sounds/arcade-climb_tone_001.mp3";
-import "./WinLosePage.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../Button/Button';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import ScoreboardApiService from '../../Services/scoreboard-api-service';
+import LeaderBoard from './../Leaderboard/Leaderboard';
+import loseSound from '../../Assets/Sounds/arcade_game_fall_tone_001.mp3';
+import winSound from '../../Assets/Sounds/arcade-climb_tone_001.mp3';
+import './WinLosePage.css';
 
 class WinLosePage extends Component {
   static contextType = BlackBurnContext;
@@ -26,11 +26,9 @@ class WinLosePage extends Component {
       avg_wpm: this.context.wpm,
       total_accuracy: this.context.accuracy,
     };
-    console.log("postScore() with data", data);
     await ScoreboardApiService.postScore(data).then(
       this.setState({ autoSave: false })
     );
-    console.log(this.state.autoSave);
   }
 
   handleQuit = () => {
@@ -51,7 +49,7 @@ class WinLosePage extends Component {
         >
           {}
         </div>
-        <Link to={"/start"}>
+        <Link to={'/start'}>
           <Button
             className="btn-results next-btn"
             onClick={this.handleReturnToStartClick}
@@ -130,16 +128,15 @@ class WinLosePage extends Component {
   }
 
   render() {
-    console.log(this.state.score);
     return (
       <div className="results-div">
-        {this.state.condition === "lose" &&
+        {this.state.condition === 'lose' &&
           !this.state.autoSave &&
           this.renderLose()}
-        {this.state.condition === "checkpoint" &&
+        {this.state.condition === 'checkpoint' &&
           !this.state.autoSave &&
           this.renderWin()}
-        {this.state.condition === "level_beaten" &&
+        {this.state.condition === 'level_beaten' &&
           !this.state.autoSave &&
           this.renderLevelWin()}
       </div>

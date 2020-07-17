@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import TokenService from "../Services/token-service";
-import ScoreboardApiService from "../Services/scoreboard-api-service";
+import React, { Component } from 'react';
+import TokenService from '../Services/token-service';
+import ScoreboardApiService from '../Services/scoreboard-api-service';
 
 const BlackBurnContext = React.createContext({
   user: {},
@@ -14,7 +14,7 @@ const BlackBurnContext = React.createContext({
   accuracy: 0,
   topTenScores: [],
   myScores: [],
-  audio: "",
+  audio: '',
   setError: () => {},
   clearError: () => {},
   resetGameData: () => {},
@@ -54,7 +54,7 @@ export class BlackburnProvider extends Component {
       accuracy: 0,
       topTenScores: [],
       myScores: [],
-      audio: "",
+      audio: '',
     };
     // const payload = TokenService.parseAuthToken();
     // if (payload)
@@ -66,7 +66,6 @@ export class BlackburnProvider extends Component {
   }
 
   setError = (error) => {
-    console.error(error);
     this.setState({ error });
   };
 
@@ -150,7 +149,7 @@ export class BlackburnProvider extends Component {
   };
 
   setCheckpointIds = (checkpointArray) => {
-    localStorage.setItem("checkpointArray", JSON.stringify(checkpointArray));
+    localStorage.setItem('checkpointArray', JSON.stringify(checkpointArray));
     return new Promise((resolve) =>
       this.setState(
         {
@@ -169,7 +168,7 @@ export class BlackburnProvider extends Component {
   };
 
   getTopTenScores = () => {
-    ScoreboardApiService.getAllScores("all").then((res) => {
+    ScoreboardApiService.getAllScores('all').then((res) => {
       const outputArr = res.map((data) => {
         return {
           username: data.username,
@@ -183,7 +182,7 @@ export class BlackburnProvider extends Component {
   };
 
   getMyScores = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
         const outputArr = res.map((data) => {
           return {
@@ -203,7 +202,7 @@ export class BlackburnProvider extends Component {
   };
 
   setMyBestScore = () => {
-    ScoreboardApiService.getMyScores(this.state.user.id, "myscores").then(
+    ScoreboardApiService.getMyScores(this.state.user.id, 'myscores').then(
       (res) => {
         const outputArr = res.map((data) => {
           return data.total_score;

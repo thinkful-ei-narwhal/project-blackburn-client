@@ -86,13 +86,6 @@ class ChallengeRoute extends Component {
   }
 
   triggerLevelEnd() {
-    console.log(
-      this.state.playerHealth,
-      this.state.levelTimer,
-      this.state.levelEnded,
-      this.state.isWin
-    );
-
     if (this.state.playerHealth <= 0 || this.state.levelTimer === 0) {
       this.clearTimers();
       this.setState({ words: [] });

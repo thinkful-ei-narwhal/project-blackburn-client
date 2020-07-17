@@ -47,7 +47,6 @@ export default class Analytics extends React.Component {
       roundedAccuracy =
         accuracyArr.length === 1 ? accuracyArr[0] : avgAccuracy.toFixed(2);
     }
-    console.log(scoreArr1);
     return (
       <div className="analytics-container">
         <div className="graphs-container">
