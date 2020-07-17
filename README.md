@@ -1,3 +1,13 @@
+# Project Blackburn Client
+
+A game meant to be competitive and help increase your typing speed. Named after Barbara Blackburn, the fastest typist in the world (150 wpm for 50 minutes!)
+
+Live Link: https://project-blackburn-client.vercel.app/
+Front-End Repo: https://github.com/thinkful-ei-narwhal/project-blackburn-client
+Server Repo: https://github.com/thinkful-ei-narwhal/project-blackburn-server
+
+Created By: Nicholas Evelson, Jacob Flaxman, Ren Finn, and Tyler Sharp.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
