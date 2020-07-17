@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './LandingPage.css';
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons.cjs';
-import { Spring } from 'react-spring/renderprops.cjs';
-import './LandingPage.css';
-import GameScreenShot from '../../Assets/Icons/learntotype.png';
-import statsScreen from '../../Assets/Icons/statsScreen.png';
-import leaderScreen from '../../Assets/Icons/leaderScreen.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./LandingPage.css";
+import { Parallax, ParallaxLayer } from "react-spring/renderprops-addons.cjs";
+import { Spring } from "react-spring/renderprops.cjs";
+import "./LandingPage.css";
+import GameScreenShot from "../../Assets/Icons/learntotype.png";
+import statsScreen from "../../Assets/Icons/statsScreen.png";
+import leaderScreen from "../../Assets/Icons/leaderScreen.png";
 
 export default class App extends React.Component {
   render() {
@@ -18,7 +18,7 @@ export default class App extends React.Component {
             speed={1}
             style={{
               backroundImage:
-                'linear-gradient(to bottom right, #D9C1AA, #DFA36B)',
+                "linear-gradient(to bottom right, #D9C1AA, #DFA36B)",
             }}
           />
           <ParallaxLayer
@@ -27,7 +27,7 @@ export default class App extends React.Component {
             factor={2}
             style={{
               backgroundImage:
-                'linear-gradient(to bottom right, #D9C1AA, #DFA36B)',
+                "linear-gradient(to bottom right, #C9BEE6, #DFA36B)",
             }}
           />
           <ParallaxLayer
@@ -36,32 +36,32 @@ export default class App extends React.Component {
             factor={3}
             style={{
               backgroundImage:
-                'linear-gradient(to bottom right, #D9C1AA, #DFA36B)',
+                "linear-gradient(to bottom right, #D9C1AA, #DFA36B)",
             }}
           />
 
           <ParallaxLayer
             offset={1.3}
             speed={-0.3}
-            style={{ pointerEvents: 'none' }}
+            style={{ pointerEvents: "none" }}
           ></ParallaxLayer>
           <ParallaxLayer offset={0.2} speed={0.4} style={{ opacity: 0.6 }}>
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '15%' }}
+              style={{ display: "block", width: "10%", marginLeft: "15%" }}
             />
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '65%' }}
+              style={{ display: "block", width: "10%", marginLeft: "65%" }}
             />
           </ParallaxLayer>
           <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '55%' }}
+              style={{ display: "block", width: "10%", marginLeft: "55%" }}
             />
           </ParallaxLayer>
 
@@ -69,7 +69,7 @@ export default class App extends React.Component {
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '15%' }}
+              style={{ display: "block", width: "10%", marginLeft: "15%" }}
             />
           </ParallaxLayer>
 
@@ -77,7 +77,7 @@ export default class App extends React.Component {
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '10%' }}
+              style={{ display: "block", width: "10%", marginLeft: "10%" }}
             />
           </ParallaxLayer>
 
@@ -85,17 +85,17 @@ export default class App extends React.Component {
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '85%' }}
+              style={{ display: "block", width: "10%", marginLeft: "85%" }}
             />
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '5%' }}
+              style={{ display: "block", width: "10%", marginLeft: "5%" }}
             />
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '30%' }}
+              style={{ display: "block", width: "10%", marginLeft: "30%" }}
             />
           </ParallaxLayer>
 
@@ -103,12 +103,12 @@ export default class App extends React.Component {
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '75%' }}
+              style={{ display: "block", width: "10%", marginLeft: "75%" }}
             />
             <img
               src="https://img.icons8.com/metro/260/000000/fraud.png"
               alt="fraud main"
-              style={{ display: 'block', width: '10%', marginLeft: '65%' }}
+              style={{ display: "block", width: "10%", marginLeft: "65%" }}
             />
           </ParallaxLayer>
 
@@ -116,10 +116,10 @@ export default class App extends React.Component {
             offset={2.5}
             speed={-0.4}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              pointerEvents: 'none',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              pointerEvents: "none",
             }}
           ></ParallaxLayer>
 
@@ -127,15 +127,15 @@ export default class App extends React.Component {
             offset={-0.1}
             speed={0.1}
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <h1
               className="landingHeader"
-              style={{ color: '#51808C', fontSize: '10vh' }}
+              style={{ color: "#51808C", fontSize: "10vh" }}
             >
               Project <br /> Blackburn
             </h1>
@@ -144,10 +144,10 @@ export default class App extends React.Component {
               className="about-container"
               onClick={() => this.parallax.scrollTo(1)}
               style={{
-                cursor: 'pointer',
+                cursor: "pointer",
                 fontSize: 20,
                 margin: 5,
-                borderBottom: '1px solid grey',
+                borderBottom: "1px solid grey",
               }}
             >
               <h2 className="about-txt">
@@ -157,10 +157,24 @@ export default class App extends React.Component {
           </ParallaxLayer>
           <ParallaxLayer offset={0.6} speed={0.2}>
             <nav className="landing-page-nav">
-              <Link to={'/login'} className="login-signup">
+              <Link
+                to={"/login"}
+                className="login-signup"
+                style={{
+                  color: "black",
+                  backgroundColor: "#AE9172",
+                }}
+              >
                 Login
               </Link>
-              <Link to={'/registration'} className="login-signup">
+              <Link
+                style={{
+                  color: "black",
+                  backgroundColor: "#AE9172",
+                }}
+                to={"/registration"}
+                className="login-signup"
+              >
                 Sign Up
               </Link>
             </nav>
@@ -170,9 +184,9 @@ export default class App extends React.Component {
             speed={0.1}
             onClick={() => this.parallax.scrollTo(2)}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <p className="landingText">
@@ -187,7 +201,7 @@ export default class App extends React.Component {
               typing skill. Each campaign can be played on multiple difficulty
               settings, and your runs are recorded to track your progress over
               time. Project Blackburn also has a leaderboard so you can compete
-              to be the fastest typer!{' '}
+              to be the fastest typer!{" "}
             </p>
           </ParallaxLayer>
 
@@ -195,9 +209,9 @@ export default class App extends React.Component {
             offset={1.55}
             speed={0}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
             onClick={() => this.parallax.scrollTo(0)}
           ></ParallaxLayer>

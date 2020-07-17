@@ -33,6 +33,8 @@
   text-align: center;
   background-color: rgba(217, 193, 170, 1);
   box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.6);
+  transition: all 0.2s ease-in-out;
+
 }
 
 .bg {
@@ -52,7 +54,7 @@
 }
 
 .stats-container {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: baseline;
@@ -61,7 +63,8 @@
   box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
   background-color: #a9cfd9d0;
   border-radius: 10px;
-  font-size: larger;
+  font-size: larger; */
+  display: none;
 }
 
 .stat {
@@ -97,25 +100,78 @@
   font-size: 2.5vh;
 }
 
+
+
 @media screen and (min-width: 600px) {
   .word-ul {
     /* border: 1px solid grey; */
     padding: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
-    width: 700px;
-    height: 450px;
+    width: 600px;
+    height: 350px;
     text-align: center;
     box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     transition: all 0.2s ease-in-out;
   }
   .bg {
     background-color: black;
     height: 40px;
     margin-top: 80px;
+  }
+
+  .stats-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    width: 350px;
+    padding: 5px;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.2);
+    background-color: #a9cfd9d0;
+    border-radius: 10px;
+    font-size: larger;
+  }
+}
+
+
+@media screen and (min-width: 800px) {
+  .word-ul {
+    /* border: 1px solid grey; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 750px;
+    height: 350px;
+    text-align: center;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
+    margin-bottom: 50px;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+
+@media screen and (min-width: 1000px) {
+  .word-ul {
+    /* border: 1px solid grey; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 850px;
+    height: 450px;
+    text-align: center;
+    box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
+    margin-bottom: 50px;
+    transition: all 0.2s ease-in-out;
   }
 }

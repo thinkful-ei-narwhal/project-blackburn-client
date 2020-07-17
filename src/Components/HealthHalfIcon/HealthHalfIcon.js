@@ -7,8 +7,8 @@ class HealthHalfIcon extends Component {
     return (
       <img
         src={healthHalfIcon}
-        height="50"
-        width="50"
+        height="40"
+        width="40"
         alt="Health Half Heart"
       />
     );

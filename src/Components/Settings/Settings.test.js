@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json'
 import Settings from './Settings';
 import BlackBurnContext from '../../Context/BlackburnContext';
 
-describe(`Adds dashboard to dom without crashing`, () => {
+describe(`Adds account info to dom without crashing`, () => {
     it('renders without crashing', () => {
         const wrapper = shallow(
         <BlackBurnContext.Provider>
