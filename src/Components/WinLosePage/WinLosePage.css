@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
 }
 
 .btn-results {
@@ -49,6 +49,7 @@
 .leaderboard-container {
   height: 200px;
   width: 400px;
+  margin-bottom: 70px;
 }
 
 

@@ -4,7 +4,7 @@ import "./HealthIcon.module.css";
 
 class HealthIcon extends Component {
   render() {
-    return <img src={healthIcon} height="50" width="50" alt="Health Heart" />;
+    return <img src={healthIcon} height="40" width="40" alt="Health Heart" />;
   }
 }
 

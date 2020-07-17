@@ -208,3 +208,14 @@ body {
     margin-left: 20%;
   }
 }
+
+
+@media screen and (min-width: 1400px) {
+  .content-open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+  }
+}
