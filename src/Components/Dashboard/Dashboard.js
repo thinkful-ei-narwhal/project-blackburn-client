@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Leaderboard from "../Leaderboard/Leaderboard";
-import Start from "../Start/Start";
-import Analytics from "../Analytics/Analytics";
-import Settings from "../Settings/Settings";
-import BlackBurnContext from "../../Context/BlackburnContext";
-import UserHeader from "../UserHeader/UserHeader";
-import "./Dashboard.Module.css";
-import { Spring, animated, Transition } from "react-spring/renderprops.cjs";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Leaderboard from '../Leaderboard/Leaderboard';
+import Start from '../Start/Start';
+import Analytics from '../Analytics/Analytics';
+import Settings from '../Settings/Settings';
+import BlackBurnContext from '../../Context/BlackburnContext';
+import UserHeader from '../UserHeader/UserHeader';
+import './Dashboard.Module.css';
+import { Spring, animated, Transition } from 'react-spring/renderprops.cjs';
 import {
   FaBars,
   FaTimes,
@@ -15,9 +15,9 @@ import {
   FaChessKing,
   FaHome,
   FaCog,
-} from "react-icons/fa";
-import { GiExitDoor } from "react-icons/gi";
-import ApiService from "../../Services/auth-api-service";
+} from 'react-icons/fa';
+import { GiExitDoor } from 'react-icons/gi';
+import ApiService from '../../Services/auth-api-service';
 
 const pages = [
   (style) => (
@@ -27,7 +27,7 @@ const pages = [
   ),
   (style) => (
     <animated.div style={{ ...style }}>
-      <Leaderboard maxHeight = {1} />
+      <Leaderboard maxHeight={1} />
     </animated.div>
   ),
   (style) => (
@@ -65,7 +65,6 @@ export default class Dashboard extends React.Component {
       })
     );
   }
-
 
   handleLogout = (e) => {
     this.context.processLogout(e);
@@ -141,7 +140,7 @@ export default class Dashboard extends React.Component {
       <>
         <header
           className={
-            this.state.menuOpen ? "dashboard-header-open" : "dashboard-header"
+            this.state.menuOpen ? 'dashboard-header-open' : 'dashboard-header'
           }
         >
           {!this.state.menuOpen && (
@@ -149,39 +148,54 @@ export default class Dashboard extends React.Component {
               <FaBars />
             </div>
           )}
-          <Spring from={{ overflow: 'hidden', width: 0, height: '100%' }} to={{ width: "auto", height: '100%' }}>
+          <Spring
+            from={{ overflow: 'hidden', width: 0, height: '100%' }}
+            to={{ width: 'auto', height: '100%' }}
+          >
             {(props) => (
               <h1 style={props} className="title">
                 Project <br /> Blackburn
               </h1>
             )}
           </Spring>
-          <Spring delay = {300} from={{ overflow: 'hidden', width: 0, height: '100%', marginLeft: 100 }} to={{ width: "auto", height: '100%', marginLeft: 0 }}>
-           { props => <div style = {props} className="user-header">
-              <UserHeader />
-              <h2 className="user-welcome">Welcome <br /> {user.username}</h2>
-            </div>
-            }
+          <Spring
+            delay={300}
+            from={{
+              overflow: 'hidden',
+              width: 0,
+              height: '100%',
+              marginLeft: 100,
+            }}
+            to={{ width: 'auto', height: '100%', marginLeft: 0 }}
+          >
+            {(props) => (
+              <div style={props} className="user-header">
+                <UserHeader />
+                <h2 className="user-welcome">
+                  Welcome <br /> {user.username}
+                </h2>
+              </div>
+            )}
           </Spring>
         </header>
         {this.state.menuOpen && (
-          <div className={this.state.menuOpen ? "sidenav-open" : "sidenav"}>
+          <div className={this.state.menuOpen ? 'sidenav-open' : 'sidenav'}>
             {this.state.menuOpen && (
               <div className="x" onClick={() => this.handleMenuButton()}>
-                {" "}
-                <FaTimes />{" "}
+                {' '}
+                <FaTimes />{' '}
               </div>
             )}
             <nav className="navLinks">
               <div
-                className={this.state.showHome ? "links-selected" : "links"}
+                className={this.state.showHome ? 'links-selected' : 'links'}
                 onClick={() => this.handleShowHome()}
               >
                 <FaHome />
               </div>
               <div
                 className={
-                  this.state.showLeaderboard ? "links-selected" : "links"
+                  this.state.showLeaderboard ? 'links-selected' : 'links'
                 }
                 onClick={() => this.handleShowLeaderboard()}
               >
@@ -189,14 +203,14 @@ export default class Dashboard extends React.Component {
               </div>
               <div
                 className={
-                  this.state.showAnalytics ? "links-selected" : "links"
+                  this.state.showAnalytics ? 'links-selected' : 'links'
                 }
                 onClick={() => this.handleShowAnalytics()}
               >
                 <FaChartLine />
               </div>
               <div
-                className={this.state.showSettings ? "links-selected" : "links"}
+                className={this.state.showSettings ? 'links-selected' : 'links'}
                 onClick={() => this.handleShowSettings()}
               >
                 <FaCog />
@@ -212,13 +226,13 @@ export default class Dashboard extends React.Component {
             </nav>
           </div>
         )}
-        <div className={this.state.menuOpen ? "content-open" : "content"}>
+        <div className={this.state.menuOpen ? 'content-open' : 'content'}>
           <Transition
             native
             reset
             items={this.state.page}
-            from={{ overflow: "hidden", height: "auto" }}
-            enter={[{ height: "auto" }]}
+            from={{ overflow: 'hidden', height: 'auto' }}
+            enter={[{ height: 'auto' }]}
             leave={{ opacity: 0, height: 0 }}
           >
             {(index) => pages[index]}

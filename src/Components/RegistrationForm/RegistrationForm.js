@@ -69,6 +69,7 @@ class RegistrationForm extends Component {
               className="avatar-select"
               value="/images/man.png"
               onChange={(e) => this.setState({ avatar: e.target.value })}
+              selected
             />
             <img className="avatar-img" src="/images/man.png" alt="man"></img>
           </Label>

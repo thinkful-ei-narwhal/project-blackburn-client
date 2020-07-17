@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans&display=swap');
 
 .Registration {
   background-color: rgba(217, 193, 170, 0.3);
@@ -15,13 +14,15 @@
   position: absolute;
   padding: 20px;
   top: 10px;
+  left: 45%;
   text-decoration: none;
+  font-family: 'Crimson Pro', serif;
+  font-weight: 700;
 }
 .reg-container {
   position: absolute;
   top: 25vh;
-  right: 5vh;
-  left: 5vh;
+  right: 10vw;
   padding: 20px;
   text-align: center;
   border-radius: 10px;
@@ -98,12 +99,21 @@
   outline: 2px solid black;
 }
 
+@media screen and (min-width: 400px) {
+  .reg-container {
+    position: absolute;
+    top: 25vh;
+    right: 30vw;
+    left: 30vw;
+  }
+}
+
 @media screen and (min-width: 800px) {
   .reg-container {
     position: absolute;
     top: 25vh;
-    right: 25vh;
-    left: 25vh;
+    right: 30vw;
+    left: 30vw;
   }
   .avatar-container {
     display: flex;
@@ -114,8 +124,7 @@
   .reg-container {
     position: absolute;
     top: 25vh;
-    right: 50vh;
-    left: 50vh;
+    right: 35vw;
   }
   .avatar-container {
     display: flex;
