@@ -32,22 +32,22 @@ export default class Analytics extends React.Component {
         return data.wpm;
       });
       avgWPM = arrWPM.reduce((a, b) => a + b, 0) / arrWPM.length;
-      roundedWPM = arrWPM.length === 0 ? avgWPM.toFixed(2) : arrWPM[0];
+      roundedWPM = arrWPM.length === 0 ? arrWPM[0]  : avgWPM.toFixed(2);
       scoreArr1 = this.context.myScores.map((data) => {
         return data.score;
       });
       avgScore = scoreArr1.reduce((a, b) => a + b, 0) / scoreArr1.length;
       bestScore = scoreArr1.length === 0 ? 0 : Math.max(...scoreArr1);
       roundedScore =
-        scoreArr1.length === 0 ? avgScore.toFixed(2) : scoreArr1[0];
+        scoreArr1.length === 0 ? scoreArr1[0]  : avgScore.toFixed(2);
       accuracyArr = this.context.myScores.map((data) => {
         return data.accuracy;
       });
       avgAccuracy = accuracyArr.reduce((a, b) => a + b, 0) / accuracyArr.length;
       roundedAccuracy =
-        accuracyArr.length === 0 ? avgAccuracy.toFixed(2) : accuracyArr[0];
+        accuracyArr.length === 0 ? accuracyArr[0] : avgAccuracy.toFixed(2);
     }
-
+    console.log(scoreArr1)
     return (
       <div className="analytics-container">
         <div className="graphs-container">
