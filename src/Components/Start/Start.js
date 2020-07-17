@@ -73,6 +73,17 @@ export default class Start extends React.Component {
                 https://www.zapsplat.com
               </a>
             </p>
+            <p className="credits">
+              All other game art credits{' '}
+              <a
+                href="https://gist.github.com/Redact0r/3f5589fb152ae2328859560d6c9596fa
+
+"
+                title="Gist"
+              >
+                here
+              </a>
+            </p>
           </div>
         </footer>
       </div>
