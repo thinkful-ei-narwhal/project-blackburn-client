@@ -57,35 +57,6 @@ export default class Settings extends React.Component {
             />
           )}
         </div>
-        <footer>
-          <div className="credits-container">
-            <p className="credits">
-              Avatar Icons made by{' '}
-              <a
-                href="https://www.flaticon.com/authors/pixel-perfect"
-                title="Pixel perfect"
-              >
-                Pixel perfect
-              </a>{' '}
-              from{' '}
-              <a href="https://www.flaticon.com/" title="Flaticon">
-                www.flaticon.com
-              </a>
-            </p>
-            <p className="credits">
-              Music by{' '}
-              <a href="www.bensound.com" title="Bensound">
-                www.bensound.com
-              </a>
-            </p>
-            <p className="credits">
-              Sound effects obtained from{' '}
-              <a href="https://www.zapsplat.com" title="Zapsplat">
-                https://www.zapsplat.com
-              </a>
-            </p>
-          </div>
-        </footer>
       </div>
     );
   }
