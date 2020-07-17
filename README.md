@@ -1,78 +1,87 @@
-# Project Blackburn Client
+# Application
+Project Blackburn
 
-A game meant to be competitive and help increase your typing speed. Named after Barbara Blackburn, the fastest typist in the world (150 wpm for 50 minutes!)
+# Teammates
+Tyler Sharp
+Nicholas Evelson
+Ren Finn
+Jacob Flaxman
 
-Live Link: https://project-blackburn-client.vercel.app/
-Front-End Repo: https://github.com/thinkful-ei-narwhal/project-blackburn-client
-Server Repo: https://github.com/thinkful-ei-narwhal/project-blackburn-server
+# Links
+You can find the live site here:
+https://project-blackburn-client.vercel.app/
 
-Created By: Nicholas Evelson, Jacob Flaxman, Ren Finn, and Tyler Sharp.
+The back end can be contacted through this api:
+https://lower-goose-32788.herokuapp.com/api
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# How to use the API
+The api for this project lets you perform GET and POST requests to fetch from and contribute to the users, and story databases
+Here are some examples of how to use the API:
 
-## Available Scripts
+(Unprotected Endpoint)GET /api/auth
+Register: POST /api/users - takes in username, password, avatar  > Returns a bearer authentication token for the user
+	Example request body: 
+	{
+		username: "testuser",
+    password: "testpass01!",
+    avatar: "spy"
+	}
+	
+Scoreboard: /api/scoreboard
 
-In the project directory, you can run:
+GET requests need a request param, scores for individual users need a userid, individual storyids (for all users) need a story id param.
 
-### `npm start`
+Request can be "all", "story", or "myscores". All requires nothing, myscores requires userid and story requires storyid
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Examples:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+GET all scores: /api/scoreboard?request=all
+GET all user scores: /api/scoreboard?request=myscores&userid=123
+GET all scores for a story: /api/scoreboard?request=story&storyid=detective
 
-### `npm test`
+POST requests take in user_id (int), story_id (str), score (int), difficulty_id (str), wpm (int), accuracy (int)
+ 
+# Screen shots
+<img src="Screenshots/frontpage.png" width="500">
+<img src="screenshots/storypage.png" width="500">
+<img src="screenshots/storycheckpoint.png" width="500">
+<img src="screenshots/gameplay.png" width="500">
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Summary
+Whether to increase your typing accuracy or speed, everyone could
+benefit from a typing tutor. The trouble is that practicing typing
+the conventional way is boring, and most typing games forget that
+they should be games first and typing tutors second.
 
-### `npm run build`
+That's why we built Project Blackburn, A typing tutor that knows
+how to make learning fun! Project Blackburn hosts a collection of
+campaigns from your to choose from that help you increase your
+typing skill. Each campaign can be played on multiple difficulty
+settings, and your runs are recorded to track your progress over
+time. Project Blackburn also has a leaderboard so you can compete
+to be the fastest typer!
+ 
+# Technologies used
+This project was completed with the following technologies:
+1. React
+2. Javascript
+3. PostgreSQL
+4. Mocha
+5. Chai
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Development Set up
+Complete the following steps to use this project:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. Clone this repository to your local machine `git clone NEW-PROJECTS-URL NEW-PROJECTS-NAME`
+2. `cd` into the cloned repository
+3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
+4. Install the node dependencies `npm install`
+5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Scripts
+Start the application `npm start`
+Start nodemon for the application `npm run dev`
+Run the tests `npm test`
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Deploying
+When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
