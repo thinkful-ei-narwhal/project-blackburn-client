@@ -33,6 +33,11 @@ class WinLosePage extends Component {
     console.log(this.state.autoSave);
   }
 
+  handleQuit = () => {
+    this.autoSave();
+    this.handleReturnToStartClick();
+  };
+
   handleReturnToStartClick = () => {
     this.context.resetGameData();
   };
@@ -80,7 +85,7 @@ class WinLosePage extends Component {
         <Link to="/dashboard">
           <Button
             className="btn-results dashboard-btn"
-            onClick={this.handleReturnToStartClick}
+            onClick={this.handleQuit}
           >
             Quit Run
           </Button>
