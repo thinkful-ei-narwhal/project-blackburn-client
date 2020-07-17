@@ -1,68 +1,87 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Application
+Project Blackburn
 
-## Available Scripts
+# Teammates
+Tyler Sharp
+Nicholas Evelson
+Ren Finn
+Jacob Flaxman
 
-In the project directory, you can run:
+# Links
+You can find the live site here:
+https://project-blackburn-client.vercel.app/
 
-### `npm start`
+The back end can be contacted through this api:
+https://lower-goose-32788.herokuapp.com/api
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# How to use the API
+The api for this project lets you perform GET and POST requests to fetch from and contribute to the users, and story databases
+Here are some examples of how to use the API:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+(Unprotected Endpoint)GET /api/auth
+Register: POST /api/users - takes in username, password, avatar  > Returns a bearer authentication token for the user
+	Example request body: 
+	{
+		username: "testuser",
+    password: "testpass01!",
+    avatar: "spy"
+	}
+	
+Scoreboard: /api/scoreboard
 
-### `npm test`
+GET requests need a request param, scores for individual users need a userid, individual storyids (for all users) need a story id param.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Request can be "all", "story", or "myscores". All requires nothing, myscores requires userid and story requires storyid
 
-### `npm run build`
+Examples:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+GET all scores: /api/scoreboard?request=all
+GET all user scores: /api/scoreboard?request=myscores&userid=123
+GET all scores for a story: /api/scoreboard?request=story&storyid=detective
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+POST requests take in user_id (int), story_id (str), score (int), difficulty_id (str), wpm (int), accuracy (int)
+ 
+# Screen shots
+<img src="Screenshots/frontpage.png" width="500">
+<img src="screenshots/storypage.png" width="500">
+<img src="screenshots/storycheckpoint.png" width="500">
+<img src="screenshots/gameplay.png" width="500">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Summary
+Whether to increase your typing accuracy or speed, everyone could
+benefit from a typing tutor. The trouble is that practicing typing
+the conventional way is boring, and most typing games forget that
+they should be games first and typing tutors second.
 
-### `npm run eject`
+That's why we built Project Blackburn, A typing tutor that knows
+how to make learning fun! Project Blackburn hosts a collection of
+campaigns from your to choose from that help you increase your
+typing skill. Each campaign can be played on multiple difficulty
+settings, and your runs are recorded to track your progress over
+time. Project Blackburn also has a leaderboard so you can compete
+to be the fastest typer!
+ 
+# Technologies used
+This project was completed with the following technologies:
+1. React
+2. Javascript
+3. PostgreSQL
+4. Mocha
+5. Chai
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Development Set up
+Complete the following steps to use this project:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone this repository to your local machine `git clone NEW-PROJECTS-URL NEW-PROJECTS-NAME`
+2. `cd` into the cloned repository
+3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
+4. Install the node dependencies `npm install`
+5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Scripts
+Start the application `npm start`
+Start nodemon for the application `npm run dev`
+Run the tests `npm test`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Deploying
+When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
