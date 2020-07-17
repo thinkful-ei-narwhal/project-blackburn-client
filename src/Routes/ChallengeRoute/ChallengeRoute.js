@@ -304,20 +304,16 @@ class ChallengeRoute extends Component {
           playerBestStored: playerBestStored,
           initialized: true,
         });
-        this.generateWordOnEmpty = setInterval(
-          () => {
-            if (this.state.words.length === 0) {
-              this.generateWord(
-                checkpointData.word_expiration_timer * 1000,
-                checkpointData.max_screen_words,
-                checkpointData.dictionary_string
-              );
-            }
-            return;
-          },
-          250
-        );
-        this.state.audio.play();
+        this.generateWordOnEmpty = setInterval(() => {
+          if (this.state.words.length === 0) {
+            this.generateWord(
+              checkpointData.word_expiration_timer * 1000,
+              checkpointData.max_screen_words,
+              checkpointData.dictionary_string
+            );
+          }
+          return;
+        }, 250);
       })
       .catch((error) => this.context.setError(error));
     this.state.audio.play();
