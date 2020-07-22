@@ -307,7 +307,6 @@ class ChallengeRoute extends Component {
           }
           return;
         }, 250);
-        // this.state.audio.play();
       })
       .catch((error) => this.context.setError(error));
     this.state.audio.play();

@@ -43,7 +43,6 @@
   background-color: rgba(217, 193, 170, 1);
   box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 0.6);
   transition: all 0.2s ease-in-out;
-
 }
 
 .bg {
@@ -146,7 +145,6 @@
   }
 }
 
-
 @media screen and (min-width: 800px) {
   .word-ul {
     /* border: 1px solid grey; */
@@ -165,7 +163,6 @@
   }
 }
 
-
 @media screen and (min-width: 1000px) {
   .word-ul {
     /* border: 1px solid grey; */
@@ -182,5 +179,4 @@
     margin-bottom: 50px;
     transition: all 0.2s ease-in-out;
   }
-
 }
