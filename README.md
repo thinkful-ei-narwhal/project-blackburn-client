@@ -9,6 +9,21 @@ Nicholas Evelson
 Ren Finn
 Jacob Flaxman
 
+# Summary
+
+Whether to increase your typing accuracy or speed, everyone could
+benefit from a typing tutor. The trouble is that practicing typing
+the conventional way is boring, and most typing games forget that
+they should be games first and typing tutors second.
+
+That's why we built Project Blackburn, A typing tutor that knows
+how to make learning fun! Project Blackburn hosts a collection of
+campaigns from your to choose from that help you increase your
+typing skill. Each campaign can be played on multiple difficulty
+settings, and your runs are recorded to track your progress over
+time. Project Blackburn also has a leaderboard so you can compete
+to be the fastest typer!
+
 # Links
 
 You can find the live site here:
@@ -50,21 +65,6 @@ POST requests take in user_id (int), story_id (str), score (int), difficulty_id 
 <img src="./src/Screenshots/storypage.png" width="500">
 <img src="./src/Screenshots/storycheckpoint.png" width="500">
 <img src="./src/Screenshots/gameplay.png" width="500">
-
-# Summary
-
-Whether to increase your typing accuracy or speed, everyone could
-benefit from a typing tutor. The trouble is that practicing typing
-the conventional way is boring, and most typing games forget that
-they should be games first and typing tutors second.
-
-That's why we built Project Blackburn, A typing tutor that knows
-how to make learning fun! Project Blackburn hosts a collection of
-campaigns from your to choose from that help you increase your
-typing skill. Each campaign can be played on multiple difficulty
-settings, and your runs are recorded to track your progress over
-time. Project Blackburn also has a leaderboard so you can compete
-to be the fastest typer!
 
 # Technologies used
 
