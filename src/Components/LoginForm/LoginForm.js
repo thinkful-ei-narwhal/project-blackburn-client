@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../Button/Button';
-import { Input, Label } from '../Form/Form';
-import ApiService from '../../Services/auth-api-service';
-import BlackBurnContext from '../../Context/BlackburnContext';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Button from "../Button/Button";
+import { Input, Label } from "../Form/Form";
+import ApiService from "../../Services/auth-api-service";
+import BlackBurnContext from "../../Context/BlackburnContext";
 
 class LoginForm extends Component {
   static contextType = BlackBurnContext;
   state = {
-    username: '',
-    error: '',
+    username: "",
+    error: "",
   };
   handleSubmit = (e) => {
     e.preventDefault();
     const { username, password } = e.target;
     ApiService.postLogin({ username: username.value, password: password.value })
       .then((res) => {
-        password.value = '';
+        password.value = "";
         this.context.processLogin(res.authToken);
         this.props.history.push(`/dashboard`);
       })
@@ -30,7 +30,7 @@ class LoginForm extends Component {
       <div className="login-container">
         <h2>Login</h2>
         <form className="log-form" onSubmit={(e) => this.handleSubmit(e)}>
-          {error !== '' && <h3 className="error">{error}</h3>}
+          {error !== "" && <h3 className="error">{error}</h3>}
           <Label htmlFor="log-input username">Username</Label>
           <Input
             className="log-input"
@@ -54,11 +54,14 @@ class LoginForm extends Component {
           </Button>
         </form>
         <p>
-          Not a member? Click{' '}
+          Not a member? Click{" "}
           <Link className="signup-lnk" to="/registration">
             here
-          </Link>{' '}
-          to sign up
+          </Link>{" "}
+          to sign up or use our demo account
+          <br />
+          Username: SirDemo
+          <br /> Password: Password2!
         </p>
       </div>
     );
