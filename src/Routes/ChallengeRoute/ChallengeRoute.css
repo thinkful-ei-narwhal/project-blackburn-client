@@ -1,16 +1,25 @@
 .game-container {
-  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: auto;
-  position: static;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  width: 100%;
+  height: calc(100% + 50px);
+  position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+
+.type-stats-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .challenge-div,
@@ -100,8 +109,6 @@
   font-size: 2.5vh;
 }
 
-
-
 @media screen and (min-width: 600px) {
   .word-ul {
     /* border: 1px solid grey; */
@@ -112,12 +119,13 @@
     align-items: flex-start;
     flex-wrap: wrap;
     width: 600px;
-    height: 350px;
+    height: 250px;
     text-align: center;
     box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
     margin-bottom: 50px;
     transition: all 0.2s ease-in-out;
   }
+
   .bg {
     background-color: black;
     height: 40px;
@@ -168,10 +176,11 @@
     align-items: flex-start;
     flex-wrap: wrap;
     width: 850px;
-    height: 450px;
+    height: 350px;
     text-align: center;
     box-shadow: 3px 3px 3px 3px rgba(217, 193, 170, 1);
     margin-bottom: 50px;
     transition: all 0.2s ease-in-out;
   }
+
 }
